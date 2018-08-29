@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="language" content="pt-br" />
+    
+    @if (!string.IsNullOrEmpty(ViewBag.Description))
+    {
+        <meta name="description" content="@ViewBag.Description" />
+    }
+
+    <meta name="keywords" content="" />
+    <meta name="robots" content="index,follow,noimageindex" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="author" content="Gérison Sabino">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>GP01NS - @ViewBag.Title</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" type="text/css" rel="stylesheet" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800,300italic,400italic,600italic,700italic,800italic&amp;amp;subset=latin" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <header>
+        <h3>Header</h3>
+    </header>
+    <section>
+        @RenderBody()
+    </section>
+    <footer>
+        <h3>Footer</h3>
+    </footer>
+</body>
+</html>

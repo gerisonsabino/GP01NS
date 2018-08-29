@@ -1,0 +1,524 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="nosso_showModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="nosso_showModelStoreContainer">
+          <EntitySet Name="autenticacao" EntityType="nosso_showModel.Store.autenticacao" store:Type="Tables" Schema="nosso_show" />
+          <EntitySet Name="endereco" EntityType="nosso_showModel.Store.endereco" store:Type="Tables" Schema="nosso_show" />
+          <EntitySet Name="estilo_musical" EntityType="nosso_showModel.Store.estilo_musical" store:Type="Tables" Schema="nosso_show" />
+          <EntitySet Name="requisicao" EntityType="nosso_showModel.Store.requisicao" store:Type="Tables" Schema="nosso_show" />
+          <EntitySet Name="requisicao_tipo" EntityType="nosso_showModel.Store.requisicao_tipo" store:Type="Tables" Schema="nosso_show" />
+          <EntitySet Name="usuario" EntityType="nosso_showModel.Store.usuario" store:Type="Tables" Schema="nosso_show" />
+          <EntitySet Name="usuario_tipo" EntityType="nosso_showModel.Store.usuario_tipo" store:Type="Tables" Schema="nosso_show" />
+          <AssociationSet Name="FK_autenticacao_usuario" Association="nosso_showModel.Store.FK_autenticacao_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="autenticacao" EntitySet="autenticacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_endereco_usuario" Association="nosso_showModel.Store.FK_endereco_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="endereco" EntitySet="endereco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisicao_tipo" Association="nosso_showModel.Store.FK_requisicao_tipo">
+            <End Role="requisicao_tipo" EntitySet="requisicao_tipo" />
+            <End Role="requisicao" EntitySet="requisicao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisicao_usuario" Association="nosso_showModel.Store.FK_requisicao_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="requisicao" EntitySet="requisicao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_tipo" Association="nosso_showModel.Store.FK_usuario_tipo">
+            <End Role="usuario_tipo" EntitySet="usuario_tipo" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="autenticacao">
+          <Key>
+            <PropertyRef Name="Data" />
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Data" Type="datetime" Nullable="false" />
+          <Property Name="IP" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="Sessao" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="IDUsuario" Type="int" Nullable="false" />
+          <Property Name="Tipo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="endereco">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="IDMunicipio" />
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="TipoUsuario" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IDMunicipio" Type="int" Nullable="false" />
+          <Property Name="Numero" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="CEP" Type="varchar" Nullable="false" MaxLength="8" />
+          <Property Name="Complemento" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="Logradouro" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Bairro" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Cidade" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Latitude" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="Longitude" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="UF" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="IDUsuario" Type="int" Nullable="false" />
+          <Property Name="TipoUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="estilo_musical">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="varchar" Nullable="false" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="requisicao">
+          <Key>
+            <PropertyRef Name="Data" />
+            <PropertyRef Name="TipoRequisicao" />
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="TipoUsuario" />
+          </Key>
+          <Property Name="Data" Type="datetime" Nullable="false" />
+          <Property Name="Ativa" Type="bit" Nullable="false" />
+          <Property Name="Vencimento" Type="datetime" Nullable="false" />
+          <Property Name="Hash" Type="varchar" Nullable="false" MaxLength="64" />
+          <Property Name="TipoRequisicao" Type="int" Nullable="false" />
+          <Property Name="IDUsuario" Type="int" Nullable="false" />
+          <Property Name="TipoUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="requisicao_tipo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="varchar" Nullable="false" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+          <Property Name="Confirmado" Type="bit" Nullable="false" />
+          <Property Name="Cadastro" Type="datetime" Nullable="false" />
+          <Property Name="Nascimento" Type="datetime" Nullable="false" />
+          <Property Name="Nome" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="75" />
+          <Property Name="Senha" Type="varchar" Nullable="false" MaxLength="128" />
+          <Property Name="Telefone" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="Tipo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario_tipo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="varchar" Nullable="false" MaxLength="45" />
+        </EntityType>
+        <Association Name="FK_autenticacao_usuario">
+          <End Role="usuario" Type="nosso_showModel.Store.usuario" Multiplicity="1" />
+          <End Role="autenticacao" Type="nosso_showModel.Store.autenticacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="autenticacao">
+              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_endereco_usuario">
+          <End Role="usuario" Type="nosso_showModel.Store.usuario" Multiplicity="1" />
+          <End Role="endereco" Type="nosso_showModel.Store.endereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="endereco">
+              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="TipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requisicao_tipo">
+          <End Role="requisicao_tipo" Type="nosso_showModel.Store.requisicao_tipo" Multiplicity="1" />
+          <End Role="requisicao" Type="nosso_showModel.Store.requisicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="requisicao_tipo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="requisicao">
+              <PropertyRef Name="TipoRequisicao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requisicao_usuario">
+          <End Role="usuario" Type="nosso_showModel.Store.usuario" Multiplicity="1" />
+          <End Role="requisicao" Type="nosso_showModel.Store.requisicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="requisicao">
+              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="TipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_tipo">
+          <End Role="usuario_tipo" Type="nosso_showModel.Store.usuario_tipo" Multiplicity="1" />
+          <End Role="usuario" Type="nosso_showModel.Store.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario_tipo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="nosso_showModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="nosso_showEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="autenticacao" EntityType="nosso_showModel.autenticacao" />
+          <EntitySet Name="endereco" EntityType="nosso_showModel.endereco" />
+          <EntitySet Name="estilo_musical" EntityType="nosso_showModel.estilo_musical" />
+          <EntitySet Name="requisicao" EntityType="nosso_showModel.requisicao" />
+          <EntitySet Name="requisicao_tipo" EntityType="nosso_showModel.requisicao_tipo" />
+          <EntitySet Name="usuario" EntityType="nosso_showModel.usuario" />
+          <EntitySet Name="usuario_tipo" EntityType="nosso_showModel.usuario_tipo" />
+          <AssociationSet Name="FK_autenticacao_usuario" Association="nosso_showModel.FK_autenticacao_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="autenticacao" EntitySet="autenticacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_endereco_usuario" Association="nosso_showModel.FK_endereco_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="endereco" EntitySet="endereco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisicao_tipo" Association="nosso_showModel.FK_requisicao_tipo">
+            <End Role="requisicao_tipo" EntitySet="requisicao_tipo" />
+            <End Role="requisicao" EntitySet="requisicao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisicao_usuario" Association="nosso_showModel.FK_requisicao_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="requisicao" EntitySet="requisicao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_tipo" Association="nosso_showModel.FK_usuario_tipo">
+            <End Role="usuario_tipo" EntitySet="usuario_tipo" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="autenticacao">
+          <Key>
+            <PropertyRef Name="Data" />
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Data" Type="DateTime" Nullable="false" />
+          <Property Name="IP" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Sessao" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="IDUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Tipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="usuario" Relationship="nosso_showModel.FK_autenticacao_usuario" FromRole="autenticacao" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="endereco">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="IDMunicipio" />
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="TipoUsuario" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDMunicipio" Type="Int32" Nullable="false" />
+          <Property Name="Numero" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="CEP" Type="String" Nullable="false" MaxLength="8" Unicode="false" FixedLength="false" />
+          <Property Name="Complemento" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Logradouro" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Bairro" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Cidade" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Latitude" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Longitude" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="UF" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="IDUsuario" Type="Int32" Nullable="false" />
+          <Property Name="TipoUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="usuario" Relationship="nosso_showModel.FK_endereco_usuario" FromRole="endereco" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="estilo_musical">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="requisicao">
+          <Key>
+            <PropertyRef Name="Data" />
+            <PropertyRef Name="TipoRequisicao" />
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="TipoUsuario" />
+          </Key>
+          <Property Name="Data" Type="DateTime" Nullable="false" />
+          <Property Name="Ativa" Type="Boolean" Nullable="false" />
+          <Property Name="Vencimento" Type="DateTime" Nullable="false" />
+          <Property Name="Hash" Type="String" Nullable="false" MaxLength="64" Unicode="false" FixedLength="false" />
+          <Property Name="TipoRequisicao" Type="Int32" Nullable="false" />
+          <Property Name="IDUsuario" Type="Int32" Nullable="false" />
+          <Property Name="TipoUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="requisicao_tipo" Relationship="nosso_showModel.FK_requisicao_tipo" FromRole="requisicao" ToRole="requisicao_tipo" />
+          <NavigationProperty Name="usuario" Relationship="nosso_showModel.FK_requisicao_usuario" FromRole="requisicao" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="requisicao_tipo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="requisicao" Relationship="nosso_showModel.FK_requisicao_tipo" FromRole="requisicao_tipo" ToRole="requisicao" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <Property Name="Confirmado" Type="Boolean" Nullable="false" />
+          <Property Name="Cadastro" Type="DateTime" Nullable="false" />
+          <Property Name="Nascimento" Type="DateTime" Nullable="false" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="75" Unicode="false" FixedLength="false" />
+          <Property Name="Senha" Type="String" Nullable="false" MaxLength="128" Unicode="false" FixedLength="false" />
+          <Property Name="Telefone" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="Tipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="autenticacao" Relationship="nosso_showModel.FK_autenticacao_usuario" FromRole="usuario" ToRole="autenticacao" />
+          <NavigationProperty Name="endereco" Relationship="nosso_showModel.FK_endereco_usuario" FromRole="usuario" ToRole="endereco" />
+          <NavigationProperty Name="requisicao" Relationship="nosso_showModel.FK_requisicao_usuario" FromRole="usuario" ToRole="requisicao" />
+          <NavigationProperty Name="usuario_tipo" Relationship="nosso_showModel.FK_usuario_tipo" FromRole="usuario" ToRole="usuario_tipo" />
+        </EntityType>
+        <EntityType Name="usuario_tipo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="usuario" Relationship="nosso_showModel.FK_usuario_tipo" FromRole="usuario_tipo" ToRole="usuario" />
+        </EntityType>
+        <Association Name="FK_autenticacao_usuario">
+          <End Role="usuario" Type="nosso_showModel.usuario" Multiplicity="1" />
+          <End Role="autenticacao" Type="nosso_showModel.autenticacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="autenticacao">
+              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_endereco_usuario">
+          <End Role="usuario" Type="nosso_showModel.usuario" Multiplicity="1" />
+          <End Role="endereco" Type="nosso_showModel.endereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="endereco">
+              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="TipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requisicao_tipo">
+          <End Role="requisicao_tipo" Type="nosso_showModel.requisicao_tipo" Multiplicity="1" />
+          <End Role="requisicao" Type="nosso_showModel.requisicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="requisicao_tipo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="requisicao">
+              <PropertyRef Name="TipoRequisicao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requisicao_usuario">
+          <End Role="usuario" Type="nosso_showModel.usuario" Multiplicity="1" />
+          <End Role="requisicao" Type="nosso_showModel.requisicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="requisicao">
+              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="TipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_tipo">
+          <End Role="usuario_tipo" Type="nosso_showModel.usuario_tipo" Multiplicity="1" />
+          <End Role="usuario" Type="nosso_showModel.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario_tipo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="nosso_showModelStoreContainer" CdmEntityContainer="nosso_showEntities">
+          <EntitySetMapping Name="autenticacao">
+            <EntityTypeMapping TypeName="nosso_showModel.autenticacao">
+              <MappingFragment StoreEntitySet="autenticacao">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="Sessao" ColumnName="Sessao" />
+                <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="endereco">
+            <EntityTypeMapping TypeName="nosso_showModel.endereco">
+              <MappingFragment StoreEntitySet="endereco">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDMunicipio" ColumnName="IDMunicipio" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+                <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+                <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="UF" ColumnName="UF" />
+                <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estilo_musical">
+            <EntityTypeMapping TypeName="nosso_showModel.estilo_musical">
+              <MappingFragment StoreEntitySet="estilo_musical">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="requisicao">
+            <EntityTypeMapping TypeName="nosso_showModel.requisicao">
+              <MappingFragment StoreEntitySet="requisicao">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Ativa" ColumnName="Ativa" />
+                <ScalarProperty Name="Vencimento" ColumnName="Vencimento" />
+                <ScalarProperty Name="Hash" ColumnName="Hash" />
+                <ScalarProperty Name="TipoRequisicao" ColumnName="TipoRequisicao" />
+                <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="requisicao_tipo">
+            <EntityTypeMapping TypeName="nosso_showModel.requisicao_tipo">
+              <MappingFragment StoreEntitySet="requisicao_tipo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="nosso_showModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="Confirmado" ColumnName="Confirmado" />
+                <ScalarProperty Name="Cadastro" ColumnName="Cadastro" />
+                <ScalarProperty Name="Nascimento" ColumnName="Nascimento" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario_tipo">
+            <EntityTypeMapping TypeName="nosso_showModel.usuario_tipo">
+              <MappingFragment StoreEntitySet="usuario_tipo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="nosso_show">
+        <EntityTypeShape EntityType="nosso_showModel.autenticacao" Width="1.5" PointX="5.25" PointY="3.25" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.endereco" Width="1.5" PointX="5.25" PointY="6.125" Height="3.7109993489583317" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.estilo_musical" Width="1.5" PointX="0.75" PointY="0.875" Height="1.4033821614583326" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.requisicao" Width="1.5" PointX="8.25" PointY="5.125" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.requisicao_tipo" Width="1.5" PointX="6" PointY="0.75" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario" Width="1.5" PointX="3" PointY="4.75" Height="3.7109993489583326" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_tipo" Width="1.5" PointX="0.75" PointY="5.75" Height="1.5956835937499996" IsExpanded="true" />
+        <AssociationConnector Association="nosso_showModel.FK_autenticacao_usuario" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="5.0862939453125" />
+          <ConnectorPoint PointX="5.25" PointY="5.0862939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="nosso_showModel.FK_endereco_usuario" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="7.2929996744791659" />
+          <ConnectorPoint PointX="5.25" PointY="7.2929996744791659" />
+        </AssociationConnector>
+        <AssociationConnector Association="nosso_showModel.FK_requisicao_tipo" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.15625" PointY="2.3456835937499996" />
+          <ConnectorPoint PointX="7.15625" PointY="5.7737939453125" />
+          <ConnectorPoint PointX="8.25" PointY="5.7737939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="nosso_showModel.FK_requisicao_usuario" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="5.98064697265625" />
+          <ConnectorPoint PointX="8.25" PointY="5.98064697265625" />
+        </AssociationConnector>
+        <AssociationConnector Association="nosso_showModel.FK_usuario_tipo" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="6.547841796875" />
+          <ConnectorPoint PointX="3" PointY="6.547841796875" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

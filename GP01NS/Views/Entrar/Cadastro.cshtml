@@ -1,0 +1,81 @@
+﻿@model GP01NS.Classes.ViewModels.Autenticacao.CadastroVM
+
+@{
+    ViewBag.Title = "Cadastro";
+    Layout = "~/Views/entrar/Layout.cshtml";
+}
+
+<link href="~/CSS/Views/entrar/cadastro.css" rel="stylesheet" />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 col-xl-3 img"></div>
+        <div class="col-md-9 col-12 col-lg-9 ml-auto mr-auto form">
+            <div class="col-md-7 ml-auto mr-auto">
+                <h5>CADASTRE-SE</h5>
+                @using (Html.BeginForm())
+                {
+                    <div class="form-group box-tipo-usuario">
+                        <div class="tipo-usuario">
+                            <input type="radio" id="tipo-usuario-fa" name="tipo" value="3" checked="checked" />
+                            <label for="tipo-usuario-fa">Fã</label>
+                        </div>
+                        <div class="tipo-usuario">
+                            <input type="radio" id="tipo-usuario-musico" name="tipo" value="4" />
+                            <label for="tipo-usuario-musico">Músico</label>
+                        </div>
+                        <div class="tipo-usuario">
+                            <input type="radio" id="tipo-usuario-local" name="tipo" value="2" />
+                            <label for="tipo-usuario-local">Estabelecimento</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.HiddenFor(x => x.ID)
+                        <label for="nome">Nome</label>
+                        <input type="text" class="form-control" id="Nome" name="Nome" aria-describedby="emailHelp" placeholder="Digite seu nome completo" maxlength="150" required="" />
+                        <div class="invalid-feedback">Informe o Nome!</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">E-mail</label>
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Digite seu email" maxlength="150" required="" />
+                        <div class="invalid-feedback">Informe o E-mail!</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <input type="password" class="form-control" id="senha" name="senha" aria-describedby="emailHelp" placeholder="Digite sua senha" required="" />
+                        <div class="invalid-feedback">Informe a Senha!</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmaSenha">Confirme sua senha</label>
+                        <input type="password" class="form-control" id="confirmacao" name="confirmacao" aria-describedby="emailHelp" placeholder="Defina sua senha" required="" />
+                        <div class="invalid-feedback">As Senhas Não Conferem!</div>
+                    </div>
+
+                    if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+                    {
+                        <div class="alert alert-danger">
+                            <strong>@ViewBag.Mensagem</strong>
+                        </div>
+                    }
+
+                    if (!string.IsNullOrEmpty(ViewBag.Sucesso))
+                    {
+                        <div class="alert alert-success">
+                            <strong>@ViewBag.Sucesso</strong>
+                        </div>
+                    }
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                    <br />
+                    <div class="text-center">
+                        <a href="/entrar/">Voltar</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/Views/entrar/Cadastro/validation_controller.js"></script>
