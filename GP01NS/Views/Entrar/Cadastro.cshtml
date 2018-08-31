@@ -1,4 +1,4 @@
-﻿@model GP01NS.Classes.ViewModels.Autenticacao.CadastroVM
+﻿@model GP01NS.Classes.ViewModels.Entrar.CadastroVM
 
 @{
     ViewBag.Title = "Cadastro";
@@ -41,6 +41,15 @@
                         <div class="invalid-feedback">Informe o E-mail!</div>
                     </div>
                     <div class="form-group">
+                        <label for="Email">Nome de usuário</label>
+                        <div class="input-group md3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">@("@")</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Crie seu nome de usuário" id="Usuario" name="Usuario" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="senha">Senha</label>
                         <input type="password" class="form-control" id="senha" name="senha" aria-describedby="emailHelp" placeholder="Digite sua senha" required="" />
                         <div class="invalid-feedback">Informe a Senha!</div>
@@ -53,16 +62,16 @@
 
                     if (!string.IsNullOrEmpty(ViewBag.Mensagem))
                     {
-                        <div class="alert alert-danger">
-                            <strong>@ViewBag.Mensagem</strong>
-                        </div>
+                    <div class="alert alert-danger">
+                        <strong>@ViewBag.Mensagem</strong>
+                    </div>
                     }
 
                     if (!string.IsNullOrEmpty(ViewBag.Sucesso))
                     {
-                        <div class="alert alert-success">
-                            <strong>@ViewBag.Sucesso</strong>
-                        </div>
+                    <div class="alert alert-success">
+                        <strong>@ViewBag.Sucesso</strong>
+                    </div>
                     }
 
                     <div class="text-center">
@@ -72,9 +81,9 @@
                     <div class="text-center">
                         <a href="/entrar/">Voltar</a>
                     </div>
-                }
+                    }
+                </div>
             </div>
-        </div>
     </div>
 </div>
 

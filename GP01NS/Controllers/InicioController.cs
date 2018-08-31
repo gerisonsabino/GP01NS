@@ -12,9 +12,9 @@ namespace GP01NS.Controllers
     {
         public ActionResult Index()
         {
-            var usuario = (usuario)ViewBag.Conta;
+            var usuario = base.Usuario;
 
-            return View(usuario);
+            return View(Usuario);
         }
     }
 }

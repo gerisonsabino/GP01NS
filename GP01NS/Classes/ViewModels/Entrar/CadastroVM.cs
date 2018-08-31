@@ -13,6 +13,7 @@ namespace GP01NS.Classes.ViewModels.Entrar
         public int ID { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
+        public string Usuario { get; set; }
         public string Senha { get; set; }
         public string Confirmacao { get; set; }
         public int Tipo { get; set; }
@@ -22,6 +23,7 @@ namespace GP01NS.Classes.ViewModels.Entrar
             this.ID = int.MinValue;
             this.Nome = string.Empty;
             this.Email = string.Empty;
+            this.Usuario = string.Empty;
             this.Senha = string.Empty;
             this.Confirmacao = string.Empty;
             this.Tipo = 2; //Fã
@@ -34,6 +36,18 @@ namespace GP01NS.Classes.ViewModels.Entrar
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
                     return !db.usuario.Any(x => x.Email == Email && x.Confirmado);
+                }
+            }
+            catch { return true; }
+        }
+
+        public bool ValidarNomeUsuario()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    return !db.usuario.Any(x => x.Username.ToLower() == this.Usuario.ToLower());
                 }
             }
             catch { return true; }
@@ -58,6 +72,7 @@ namespace GP01NS.Classes.ViewModels.Entrar
                         Confirmado = false,
                         Cadastro = data,
                         Email = this.Email,
+                        Username = this.Usuario,
                         Nascimento = DateTime.MinValue,
                         Nome = this.Nome,
                         Senha = Criptografia.GetHash128(this.Senha),
@@ -68,23 +83,9 @@ namespace GP01NS.Classes.ViewModels.Entrar
                     db.usuario.AddObject(u);
                     db.SaveChanges();
 
-                    var msg = new MensagemEmail();
-
-                    var req = new requisicao
-                    {
-                        Ativa = true,
-                        Data = msg.Data,
-                        Hash = msg.Hash,
-                        usuario = u,
-                        Vencimento = DateTime.MinValue,
-                        TipoRequisicao = 2 // 2 - Confirmação de Conta
-                    };
-
-                    db.requisicao.AddObject(req);
-
-                    msg.MensagemCadastro(req);
-
-                    db.SaveChanges();
+                    var req = new Requisicao(u, 2);
+                    
+                    req.SaveChanges();
 
                     return true;
                 }

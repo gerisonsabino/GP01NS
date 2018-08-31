@@ -4,14 +4,18 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="nosso_showModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="nosso_showModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="nosso_showModelStoreContainer">
           <EntitySet Name="autenticacao" EntityType="nosso_showModel.Store.autenticacao" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="endereco" EntityType="nosso_showModel.Store.endereco" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="estilo_musical" EntityType="nosso_showModel.Store.estilo_musical" store:Type="Tables" Schema="nosso_show" />
+          <EntitySet Name="hab_musical" EntityType="nosso_showModel.Store.hab_musical" store:Type="Tables" Schema="nosso_show" />
+          <EntitySet Name="hab_musical_tipo" EntityType="nosso_showModel.Store.hab_musical_tipo" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="requisicao" EntityType="nosso_showModel.Store.requisicao" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="requisicao_tipo" EntityType="nosso_showModel.Store.requisicao_tipo" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="usuario" EntityType="nosso_showModel.Store.usuario" store:Type="Tables" Schema="nosso_show" />
+          <EntitySet Name="usuario_estabelecimento" EntityType="nosso_showModel.Store.usuario_estabelecimento" store:Type="Tables" Schema="nosso_show" />
+          <EntitySet Name="usuario_musico" EntityType="nosso_showModel.Store.usuario_musico" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="usuario_tipo" EntityType="nosso_showModel.Store.usuario_tipo" store:Type="Tables" Schema="nosso_show" />
           <AssociationSet Name="FK_autenticacao_usuario" Association="nosso_showModel.Store.FK_autenticacao_usuario">
             <End Role="usuario" EntitySet="usuario" />
@@ -21,6 +25,10 @@
             <End Role="usuario" EntitySet="usuario" />
             <End Role="endereco" EntitySet="endereco" />
           </AssociationSet>
+          <AssociationSet Name="FK_hab_musical_tipo" Association="nosso_showModel.Store.FK_hab_musical_tipo">
+            <End Role="hab_musical_tipo" EntitySet="hab_musical_tipo" />
+            <End Role="hab_musical" EntitySet="hab_musical" />
+          </AssociationSet>
           <AssociationSet Name="FK_requisicao_tipo" Association="nosso_showModel.Store.FK_requisicao_tipo">
             <End Role="requisicao_tipo" EntitySet="requisicao_tipo" />
             <End Role="requisicao" EntitySet="requisicao" />
@@ -28,6 +36,14 @@
           <AssociationSet Name="FK_requisicao_usuario" Association="nosso_showModel.Store.FK_requisicao_usuario">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="requisicao" EntitySet="requisicao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_estabelecimento" Association="nosso_showModel.Store.FK_usuario_estabelecimento">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_estabelecimento" EntitySet="usuario_estabelecimento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_musico" Association="nosso_showModel.Store.FK_usuario_musico">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_musico" EntitySet="usuario_musico" />
           </AssociationSet>
           <AssociationSet Name="FK_usuario_tipo" Association="nosso_showModel.Store.FK_usuario_tipo">
             <End Role="usuario_tipo" EntitySet="usuario_tipo" />
@@ -74,6 +90,22 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Descricao" Type="varchar" Nullable="false" MaxLength="45" />
         </EntityType>
+        <EntityType Name="hab_musical">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="TipoHab" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="varchar" Nullable="false" MaxLength="75" />
+          <Property Name="TipoHab" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hab_musical_tipo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="varchar" Nullable="false" MaxLength="45" />
+        </EntityType>
         <EntityType Name="requisicao">
           <Key>
             <PropertyRef Name="Data" />
@@ -106,11 +138,34 @@
           <Property Name="Confirmado" Type="bit" Nullable="false" />
           <Property Name="Cadastro" Type="datetime" Nullable="false" />
           <Property Name="Nascimento" Type="datetime" Nullable="false" />
+          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="45" />
           <Property Name="Nome" Type="varchar" Nullable="false" MaxLength="150" />
-          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="75" />
+          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="150" />
           <Property Name="Senha" Type="varchar" Nullable="false" MaxLength="128" />
           <Property Name="Telefone" Type="varchar" Nullable="false" MaxLength="15" />
           <Property Name="Tipo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario_estabelecimento">
+          <Key>
+            <PropertyRef Name="CNPJ" />
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="TipoUsuario" />
+          </Key>
+          <Property Name="CNPJ" Type="varchar" Nullable="false" MaxLength="14" />
+          <Property Name="Fantasia" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="IDUsuario" Type="int" Nullable="false" />
+          <Property Name="TipoUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario_musico">
+          <Key>
+            <PropertyRef Name="CPF" />
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="TipoUsuario" />
+          </Key>
+          <Property Name="CPF" Type="varchar" Nullable="false" MaxLength="11" />
+          <Property Name="Descricao" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="IDUsuario" Type="int" Nullable="false" />
+          <Property Name="TipoUsuario" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="usuario_tipo">
           <Key>
@@ -147,6 +202,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_hab_musical_tipo">
+          <End Role="hab_musical_tipo" Type="nosso_showModel.Store.hab_musical_tipo" Multiplicity="1" />
+          <End Role="hab_musical" Type="nosso_showModel.Store.hab_musical" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hab_musical_tipo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="hab_musical">
+              <PropertyRef Name="TipoHab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_requisicao_tipo">
           <End Role="requisicao_tipo" Type="nosso_showModel.Store.requisicao_tipo" Multiplicity="1" />
           <End Role="requisicao" Type="nosso_showModel.Store.requisicao" Multiplicity="*" />
@@ -173,6 +240,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_usuario_estabelecimento">
+          <End Role="usuario" Type="nosso_showModel.Store.usuario" Multiplicity="1" />
+          <End Role="usuario_estabelecimento" Type="nosso_showModel.Store.usuario_estabelecimento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="usuario_estabelecimento">
+              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="TipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_musico">
+          <End Role="usuario" Type="nosso_showModel.Store.usuario" Multiplicity="1" />
+          <End Role="usuario_musico" Type="nosso_showModel.Store.usuario_musico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="usuario_musico">
+              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="TipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_usuario_tipo">
           <End Role="usuario_tipo" Type="nosso_showModel.Store.usuario_tipo" Multiplicity="1" />
           <End Role="usuario" Type="nosso_showModel.Store.usuario" Multiplicity="*" />
@@ -185,8 +280,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="nosso_showModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -217,6 +311,22 @@
           <AssociationSet Name="FK_usuario_tipo" Association="nosso_showModel.FK_usuario_tipo">
             <End Role="usuario_tipo" EntitySet="usuario_tipo" />
             <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <EntitySet Name="hab_musical" EntityType="nosso_showModel.hab_musical" />
+          <EntitySet Name="hab_musical_tipo" EntityType="nosso_showModel.hab_musical_tipo" />
+          <AssociationSet Name="FK_hab_musical_tipo" Association="nosso_showModel.FK_hab_musical_tipo">
+            <End Role="hab_musical_tipo" EntitySet="hab_musical_tipo" />
+            <End Role="hab_musical" EntitySet="hab_musical" />
+          </AssociationSet>
+          <EntitySet Name="usuario_estabelecimento" EntityType="nosso_showModel.usuario_estabelecimento" />
+          <EntitySet Name="usuario_musico" EntityType="nosso_showModel.usuario_musico" />
+          <AssociationSet Name="FK_usuario_estabelecimento" Association="nosso_showModel.FK_usuario_estabelecimento">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_estabelecimento" EntitySet="usuario_estabelecimento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_musico" Association="nosso_showModel.FK_usuario_musico">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_musico" EntitySet="usuario_musico" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="autenticacao">
@@ -305,6 +415,9 @@
           <NavigationProperty Name="endereco" Relationship="nosso_showModel.FK_endereco_usuario" FromRole="usuario" ToRole="endereco" />
           <NavigationProperty Name="requisicao" Relationship="nosso_showModel.FK_requisicao_usuario" FromRole="usuario" ToRole="requisicao" />
           <NavigationProperty Name="usuario_tipo" Relationship="nosso_showModel.FK_usuario_tipo" FromRole="usuario" ToRole="usuario_tipo" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="usuario_estabelecimento" Relationship="nosso_showModel.FK_usuario_estabelecimento" FromRole="usuario" ToRole="usuario_estabelecimento" />
+          <NavigationProperty Name="usuario_musico" Relationship="nosso_showModel.FK_usuario_musico" FromRole="usuario" ToRole="usuario_musico" />
         </EntityType>
         <EntityType Name="usuario_tipo">
           <Key>
@@ -380,6 +493,88 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="hab_musical">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="TipoHab" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Descricao" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="TipoHab" Nullable="false" />
+          <NavigationProperty Name="hab_musical_tipo" Relationship="nosso_showModel.FK_hab_musical_tipo" FromRole="hab_musical" ToRole="hab_musical_tipo" />
+        </EntityType>
+        <EntityType Name="hab_musical_tipo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Descricao" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="hab_musical" Relationship="nosso_showModel.FK_hab_musical_tipo" FromRole="hab_musical_tipo" ToRole="hab_musical" />
+        </EntityType>
+        <Association Name="FK_hab_musical_tipo">
+          <End Type="nosso_showModel.hab_musical_tipo" Role="hab_musical_tipo" Multiplicity="1" />
+          <End Type="nosso_showModel.hab_musical" Role="hab_musical" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hab_musical_tipo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="hab_musical">
+              <PropertyRef Name="TipoHab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="usuario_estabelecimento">
+          <Key>
+            <PropertyRef Name="CNPJ" />
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="TipoUsuario" />
+          </Key>
+          <Property Type="String" Name="CNPJ" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Fantasia" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IDUsuario" Nullable="false" />
+          <Property Type="Int32" Name="TipoUsuario" Nullable="false" />
+          <NavigationProperty Name="usuario" Relationship="nosso_showModel.FK_usuario_estabelecimento" FromRole="usuario_estabelecimento" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="usuario_musico">
+          <Key>
+            <PropertyRef Name="CPF" />
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="TipoUsuario" />
+          </Key>
+          <Property Type="String" Name="CPF" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Descricao" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IDUsuario" Nullable="false" />
+          <Property Type="Int32" Name="TipoUsuario" Nullable="false" />
+          <NavigationProperty Name="usuario" Relationship="nosso_showModel.FK_usuario_musico" FromRole="usuario_musico" ToRole="usuario" />
+        </EntityType>
+        <Association Name="FK_usuario_estabelecimento">
+          <End Type="nosso_showModel.usuario" Role="usuario" Multiplicity="1" />
+          <End Type="nosso_showModel.usuario_estabelecimento" Role="usuario_estabelecimento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="usuario_estabelecimento">
+              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="TipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_musico">
+          <End Type="nosso_showModel.usuario" Role="usuario" Multiplicity="1" />
+          <End Type="nosso_showModel.usuario_musico" Role="usuario_musico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="usuario_musico">
+              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="TipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -448,6 +643,7 @@
           <EntitySetMapping Name="usuario">
             <EntityTypeMapping TypeName="nosso_showModel.usuario">
               <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Ativo" ColumnName="Ativo" />
                 <ScalarProperty Name="Confirmado" ColumnName="Confirmado" />
@@ -466,6 +662,43 @@
               <MappingFragment StoreEntitySet="usuario_tipo">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hab_musical">
+            <EntityTypeMapping TypeName="nosso_showModel.hab_musical">
+              <MappingFragment StoreEntitySet="hab_musical">
+                <ScalarProperty Name="TipoHab" ColumnName="TipoHab" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hab_musical_tipo">
+            <EntityTypeMapping TypeName="nosso_showModel.hab_musical_tipo">
+              <MappingFragment StoreEntitySet="hab_musical_tipo">
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario_estabelecimento">
+            <EntityTypeMapping TypeName="nosso_showModel.usuario_estabelecimento">
+              <MappingFragment StoreEntitySet="usuario_estabelecimento">
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+                <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+                <ScalarProperty Name="Fantasia" ColumnName="Fantasia" />
+                <ScalarProperty Name="CNPJ" ColumnName="CNPJ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario_musico">
+            <EntityTypeMapping TypeName="nosso_showModel.usuario_musico">
+              <MappingFragment StoreEntitySet="usuario_musico">
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+                <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="CPF" ColumnName="CPF" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -502,8 +735,8 @@
           <ConnectorPoint PointX="5.25" PointY="5.0862939453125" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_endereco_usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="7.2929996744791659" />
-          <ConnectorPoint PointX="5.25" PointY="7.2929996744791659" />
+          <ConnectorPoint PointX="4.5" PointY="7.5814518229166667" />
+          <ConnectorPoint PointX="5.25" PointY="7.5814518229166667" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_requisicao_tipo" ManuallyRouted="false">
           <ConnectorPoint PointX="7.15625" PointY="2.3456835937499996" />
@@ -517,6 +750,26 @@
         <AssociationConnector Association="nosso_showModel.FK_usuario_tipo" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="6.547841796875" />
           <ConnectorPoint PointX="3" PointY="6.547841796875" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="nosso_showModel.hab_musical" Width="1.5" PointX="10.625" PointY="0.875" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="nosso_showModel.hab_musical_tipo" Width="1.5" PointX="8.375" PointY="1" Height="1.5956835937499996" />
+        <AssociationConnector Association="nosso_showModel.FK_hab_musical_tipo" >
+          <ConnectorPoint PointX="9.875" PointY="1.7978417968749998" />
+          <ConnectorPoint PointX="10.625" PointY="1.7978417968749998" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento" Width="1.5" PointX="5.25" PointY="11.5" Height="1.9802864583333317" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_musico" Width="1.5" PointX="5.25" PointY="14.25" Height="1.9802864583333371" />
+        <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento" >
+          <ConnectorPoint PointX="3.75" PointY="9.0379036458333335" />
+          <ConnectorPoint PointX="3.75" PointY="12.490143229166666" />
+          <ConnectorPoint PointX="4.0729191666666669" PointY="12.490143229166666" />
+          <ConnectorPoint PointX="4.2395858333333329" PointY="12.490143229166666" />
+          <ConnectorPoint PointX="5.25" PointY="12.490143229166666" />
+        </AssociationConnector>
+        <AssociationConnector Association="nosso_showModel.FK_usuario_musico" >
+          <ConnectorPoint PointX="4.1562525" PointY="9.0379036458333335" />
+          <ConnectorPoint PointX="4.1562525" PointY="15.240143229166669" />
+          <ConnectorPoint PointX="5.25" PointY="15.240143229166669" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

@@ -1,7 +1,6 @@
 ﻿@model GP01NS.Models.usuario
 @{
     ViewBag.Title = "Início";
-    Layout = "~/Views/Entrar/Layout.cshtml";
 }
 
 
@@ -12,7 +11,7 @@
                 <div class=" text-center">
                     <h1 class="display-4">@Model.Nome, Seja bem-vindo! =)</h1>
                     <br>
-                    <p class="display-5">@Model.usuario_tipo.Descricao</p>
+                    <p class="display-5">@("@" + Model.Username)</p>
                     <hr>
                     <a class="btn btn-danger" href="/sair/" role="button">SAIR</a>
                 </div>

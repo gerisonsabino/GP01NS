@@ -40,7 +40,7 @@ namespace GP01NS.Classes.Util
         }
 
         #region MENSAGENS DE E-MAIL
-        public void MensagemCadastro(requisicao req)
+        public bool MensagemCadastro(requisicao req)
         {
             string TITULO = "Olá, " + req.usuario.Nome.Split(' ')[0] + "!";
             string SUBTITULO = "Foi solicitada a criação de sua conta no Nosso Show.";
@@ -64,10 +64,18 @@ namespace GP01NS.Classes.Util
             Html = Html.Replace("#SUBTITULO", SUBTITULO);
             Html = Html.Replace("#MENSAGEM", MENSAGEM);
 
-            Email.Enviar(req.usuario.Email, "Confirme sua conta - Nosso Show", Html);
+            try
+            {
+                Email.Enviar(req.usuario.Email, "Confirme sua conta - Nosso Show", Html);
+
+                return true;
+            }
+            catch { }
+
+            return false;
         }
 
-        public void MensagemRedefinirSenha(requisicao req)
+        public bool MensagemRedefinirSenha(requisicao req)
         {
             string TITULO = "Olá, " + req.usuario.Nome.Split(' ')[0] + "!";
             string SUBTITULO = "Foi solicitada uma redefinição de senha para sua conta no Nosso Show.";
@@ -91,7 +99,15 @@ namespace GP01NS.Classes.Util
             Html = Html.Replace("#SUBTITULO", SUBTITULO);
             Html = Html.Replace("#MENSAGEM", MENSAGEM);
 
-            Email.Enviar(req.usuario.Email, "Redefina sua senha - Nosso Show", Html);
+            try
+            {
+                Email.Enviar(req.usuario.Email, "Redefina sua senha - Nosso Show", Html);
+
+                return true;
+            }
+            catch { }
+
+            return false;
         }
         #endregion MENSAGENS DE E-MAIL
     }

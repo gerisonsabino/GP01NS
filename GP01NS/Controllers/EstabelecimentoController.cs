@@ -6,9 +6,14 @@ using System.Web.Mvc;
 
 namespace GP01NS.Controllers
 {
-    public class EstabelecimentoController : Controller
+    public class EstabelecimentoController : BaseController
     {
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult Configuracoes()
         {
             return View();
         }

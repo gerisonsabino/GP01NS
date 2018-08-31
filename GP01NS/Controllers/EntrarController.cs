@@ -21,55 +21,11 @@ namespace GP01NS.Controllers
         [HttpPost]
         public ActionResult Index(string Email, string Senha, string Esqueci)
         {
-            if (!string.IsNullOrEmpty(Esqueci))
+            if (string.IsNullOrEmpty(Esqueci))
             {
                 try
                 {
-                    using (var db = new nosso_showEntities(Conexao.GetString()))
-                    {
-                        var u = new Auth().GetUsuario(Esqueci);
-
-                        if (u != null)
-                        {
-                            var msg = new MensagemEmail();
-
-                            var req = new requisicao
-                            {
-                                Ativa = true,
-                                Data = msg.Data,
-                                Hash = msg.Hash,
-                                IDUsuario = u.ID,
-                                Vencimento = DateTime.Now.AddHours(1),
-                                TipoRequisicao = 1, // 1 - Redefinição de senha
-                                TipoUsuario = u.Tipo
-                            };
-
-                            db.requisicao.AddObject(req);
-
-                            msg.MensagemRedefinirSenha(req);
-
-                            db.SaveChanges();
-
-                            ViewBag.Sucesso = "Enviamos um e-mail para você com instruções de como redefinir sua senha.";
-                        }
-                        else
-                        {
-                            ViewBag.Mensagem = "E-mail não encontrado. Por favor, tente novamente ou entre em contato conosco.";
-                        }
-                    }
-                }
-                catch
-                {
-                    ViewBag.Mensagem = "E-mail não encontrado. Por favor, tente novamente ou entre em contato conosco.";
-                }
-
-                return View();
-            }
-            else
-            {
-                try
-                {
-                    var u = new Auth().GetUsuario(Email, Senha);
+                    var u = Auth.Autenticar(Email, Senha, Session.SessionID);
 
                     if (u != null)
                     {
@@ -79,7 +35,7 @@ namespace GP01NS.Controllers
                         }
                         else
                         {
-                            Autenticar(u);
+                            Session.Add("IDUsuario", Criptografia.Criptografar(u.ID.ToString()));
 
                             var url = Request.QueryString["url"];
 
@@ -98,8 +54,38 @@ namespace GP01NS.Controllers
                 {
                     ViewBag.Mensagem = "Não foi possível estabelecer conexão com o servidor, por favor, tente novamente mais tarde.";
                 }
+            }
+            else
+            {
+                EsqueciMinhaSenha(Esqueci);
+            }
 
-                return View();
+            return View();
+        }
+
+        private void EsqueciMinhaSenha(string email) 
+        {
+            try
+            {
+                var u = Auth.GetUsuarioByEmail(email);
+
+                if (u != null)
+                {
+                    var req = new Requisicao(u, 1);
+
+                    if (req.SaveChanges())
+                        ViewBag.Sucesso = "Enviamos um e-mail para você com instruções de como redefinir sua senha.";
+                    else
+                        ViewBag.Mensagem = "Não foi possível estabelecer conexão com o servidor, por favor, tente novamente mais tarde.";
+                }
+                else
+                {
+                    ViewBag.Mensagem = "Nome de usuário/E-mail não encontrado. Por favor, tente novamente ou entre em contato conosco.";
+                }
+            }
+            catch
+            {
+                ViewBag.Mensagem = "E-mail não encontrado. Por favor, tente novamente ou entre em contato conosco.";
             }
         }
 
@@ -115,16 +101,23 @@ namespace GP01NS.Controllers
             {
                 if (model.ValidarEmail())
                 {
-                    if (model.ValidarSenha())
+                    if (model.ValidarNomeUsuario())
                     {
-                        if (model.SaveChanges())
-                            ViewBag.Sucesso = "Cadastro efetuado, enviamos novas instruções para seu e-mail.";
+                        if (model.ValidarSenha())
+                        {
+                            if (model.SaveChanges())
+                                ViewBag.Sucesso = "Cadastro efetuado, enviamos novas instruções para seu e-mail.";
+                            else
+                                ViewBag.Mensagem = "Não foi possível estabelecer conexão com o servidor, por favor, tente novamente mais tarde.";
+                        }
                         else
-                            ViewBag.Mensagem = "Não foi possível estabelecer conexão com o servidor, por favor, tente novamente mais tarde.";
+                        {
+                            ViewBag.Mensagem = "As senhas informadas não coincidem.";
+                        }
                     }
                     else
                     {
-                        ViewBag.Mensagem = "As senhas informadas não coincidem.";
+                        ViewBag.Mensagem = "O nome de usuário informado já está sendo utilizado.";
                     }
                 }
                 else
@@ -199,7 +192,7 @@ namespace GP01NS.Controllers
         }
 
         [HttpPost]
-        public ActionResult RedefinirSenha(string id, string Senha, string Confirmacao)
+        public ActionResult RedefinirSenha(string id, string Senha, string Confirmacao) 
         {
             if (!string.IsNullOrEmpty(id))
             {
@@ -249,52 +242,6 @@ namespace GP01NS.Controllers
             }
 
             return Redirect("/entrar/");
-        }
-
-        private void Autenticar(usuario usuario) 
-        {
-            var sessao = Criptografia.Criptografar(Session.SessionID);
-            var id = Criptografia.Criptografar(usuario.ID.ToString());
-            var tipo = Criptografia.Criptografar(usuario.Tipo.ToString());
-
-            var ck = new HttpCookie("Sessao");
-            ck.HttpOnly = true;
-            ck.Path = "/";
-            ck.Value = sessao;
-
-            var ck1 = new HttpCookie("ID");
-            ck1.HttpOnly = true;
-            ck1.Path = "/";
-            ck1.Value = id;
-
-            var ck2 = new HttpCookie("Tipo");
-            ck2.HttpOnly = true;
-            ck2.Path = "/";
-            ck2.Value = tipo;
-
-            using (var db = new nosso_showEntities(Conexao.GetString())) 
-            {
-                var logs = db.autenticacao.Where(x => x.IDUsuario == usuario.ID).ToList();
-
-                for (int i = 0; i < logs.Count; i++)
-                    db.autenticacao.DeleteObject(logs[i]);
-
-                var auth = new autenticacao
-                {
-                    Data = DateTime.Now,
-                    IDUsuario = usuario.ID,
-                    IP = Request.ServerVariables["REMOTE_ADDR"].ToString(),
-                    Sessao = Session.SessionID,
-                    Tipo = usuario.Tipo
-                };
-
-                db.autenticacao.AddObject(auth);
-                db.SaveChanges();
-
-                Response.Cookies.Add(ck);
-                Response.Cookies.Add(ck1);
-                Response.Cookies.Add(ck2);
-            }
         }
     }
 }

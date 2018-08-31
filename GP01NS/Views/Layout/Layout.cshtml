@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="language" content="pt-br" />
-    
+
     @if (!string.IsNullOrEmpty(ViewBag.Description))
     {
         <meta name="description" content="@ViewBag.Description" />
@@ -16,10 +16,7 @@
     <meta name="author" content="Gérison Sabino">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>GP01NS - @ViewBag.Title</title>
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" type="text/css" rel="stylesheet" />
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800,300italic,400italic,600italic,700italic,800italic&amp;amp;subset=latin" rel="stylesheet" type="text/css" />
+    <title>@ViewBag.Title | Nosso Show</title>
 </head>
 <body>
     <header>

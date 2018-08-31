@@ -132,6 +132,7 @@
     <Compile Include="Classes\Servicos\Auth.cs" />
     <Compile Include="Classes\Util\Criptografia.cs" />
     <Compile Include="Classes\Util\MensagemEmail.cs" />
+    <Compile Include="Classes\Util\Requisicao.cs" />
     <Compile Include="Classes\Util\UrlHifenizada.cs" />
     <Compile Include="Classes\ViewModels\Entrar\CadastroVM.cs" />
     <Compile Include="Controllers\EntrarController.cs" />
@@ -3141,6 +3142,9 @@
     <Content Include="Views\Entrar\ConfirmarConta.cshtml" />
     <Content Include="Views\Entrar\EsqueciMinhaSenha.cshtml" />
     <Content Include="Views\Entrar\RedefinirSenha.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Estabelecimento\Configuracoes.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

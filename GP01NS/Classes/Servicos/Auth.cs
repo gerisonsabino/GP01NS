@@ -8,29 +8,37 @@ using System.Web;
 
 namespace GP01NS.Classes.Servicos
 {
-    public class Auth
+    public static class Auth
     {
-        public DateTime Data { get; set; }
-        public int IDUsuario { get; set; }
-        public string IP { get; set; }
-        public string Sessao { get; set; }
-        public int TipoUsuario { get; set; }
-
-        public Auth()
+        public static usuario Autenticar(string email, string senha, string sessao) 
         {
+            try
+            {
+                var usuario = GetUsuario(email, senha);
 
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var auth = new autenticacao
+                    {
+                        Data = DateTime.Now,
+                        IDUsuario = usuario.ID,
+                        IP = System.Web.HttpContext.Current.Request.UserHostAddress,
+                        Sessao = sessao,
+                        Tipo = usuario.Tipo
+                    };
+
+                    db.autenticacao.AddObject(auth);
+                    db.SaveChanges();
+                }
+
+                return usuario;
+            }
+            catch { }
+
+            return null;
         }
 
-        public Auth(usuario usuario, string sessionID) 
-        {
-            this.Data = DateTime.Now;
-            this.IDUsuario = usuario.ID;
-            this.IP = System.Web.HttpContext.Current.Request.UserHostAddress;
-            this.Sessao = sessionID;
-            this.TipoUsuario = usuario.Tipo;
-        }
-
-        public usuario GetUsuario(string email)
+        public static usuario GetUsuarioByEmail(string email)
         {
             try
             {
@@ -40,7 +48,7 @@ namespace GP01NS.Classes.Servicos
                     {
                         var u = new usuario();
 
-                        return db.usuario.Single(x => x.Email == email);
+                        return db.usuario.Single(x => x.Email == email || x.Username == email);
                     }
                 }
             }
@@ -49,7 +57,7 @@ namespace GP01NS.Classes.Servicos
             return null;
         }
 
-        public usuario GetUsuario(string email, string senha)
+        private static usuario GetUsuario(string email, string senha) 
         {
             try
             {
@@ -59,42 +67,16 @@ namespace GP01NS.Classes.Servicos
                     {
                         var u = new usuario();
 
-                        u = db.usuario.Single(x => x.Email == email);
+                        u = db.usuario.Single(x => x.Email == email || x.Username == email);
 
                         if (Criptografia.ValidarHash128(senha, u.Senha))
                             return u;
                     }
                 }
             }
-            catch {  }
+            catch { }
 
             return null;
-        }
-
-        public bool SaveChanges() 
-        {
-            try
-            {
-                using (var db = new nosso_showEntities(Conexao.GetString()))
-                {
-                    var log = new autenticacao
-                    {
-                        Data = this.Data,
-                        IDUsuario = this.IDUsuario,
-                        IP = this.IP,
-                        Sessao = this.Sessao,
-                        Tipo = this.TipoUsuario
-                    };
-
-                    db.autenticacao.AddObject(log);
-                    db.SaveChanges();
-
-                    return true;
-                }
-            }
-            catch {  }
-
-            return false;
         }
     }
 }
