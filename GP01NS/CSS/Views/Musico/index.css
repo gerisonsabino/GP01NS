@@ -1,0 +1,58 @@
+body,
+html {
+	height: 100%
+}
+
+.container-fluid {
+	height: 100%;
+}
+
+.row {
+	height: 100%;
+}
+
+.btn {
+	padding: 0.7em 4em;
+	margin-top: 3em;
+}
+
+.form {
+	overflow: auto;
+}
+
+.form > form {
+	margin: 0;
+}
+
+h5 {
+	margin-bottom: 50px;
+}
+
+.img {
+	background-image: url('../../../Imagens/Views/Musico/img-banda.png');
+	background-size: cover;
+	background-position: center;
+	width: 100%;
+}
+
+/* Medium devices (tablets, 768px and up)*/
+@media (max-width: 768px) {
+	.img {
+		display: none;
+	}
+}
+
+/*Small devices (landscape phones, 360px and up)*/
+@media (max-width: 360px) {
+	.btn {
+		padding: 0.7em 4em;
+		margin-top: 0em;
+	}
+}
+
+@media (max-height: 690px), (max-width: 500px) {
+	.form {
+		display: block;
+		padding: 3em 2em;
+	}
+}
