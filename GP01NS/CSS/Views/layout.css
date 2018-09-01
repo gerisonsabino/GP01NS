@@ -3,10 +3,65 @@ html {
     height: 100%
 }
 
+header,
+footer {
+	width: 100%;
+	background: #007bff;
+	min-height: 40px;
+	display: flex;
+	align-items: center;
+	padding: 5px;
+	color: #FFF;
+}
+
+.box-footer {
+	width: 100%;
+	max-width: 1000px;
+	display: flex;
+}
+
+.box-footer .titulo-footer {
+	font-size: 16px;
+	font-weight: 500;
+	margin-top: 20px;
+}
+
+.box-footer ul {
+	padding: 0;
+}
+
+.box-footer ul li {
+	list-style: none;
+	margin-top: 20px;
+}
+
+.box-footer ul li a {
+	color: #FFF;
+	font-size: 14px;
+}
+			main {
+	min-height: calc(100vh - 200px);
+	max-width: 1000px;
+}
+
 .form-group label,
 input[type=button],
 button {
-    font-weight: 600 !important;
-    font-size: 0.9rem;
-    text-transform: uppercase;
+	font-weight: 600 !important;
+	font-size: 0.9rem;
+	text-transform: uppercase;
+}
+
+textarea {
+	resize: none;
+}
+
+header .logo {
+	width: 33px;
+	height: 40px;
+	background: url(../../Imagens/Views/nosso-show.svg) left center / 70px no-repeat;
+}
+
+.was-validated .form-control:invalid + .select2-container--default .select2-selection--multiple {
+	border-color: #dc3545;
 }

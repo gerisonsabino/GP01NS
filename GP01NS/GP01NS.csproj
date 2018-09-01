@@ -43,7 +43,7 @@
   <ItemGroup>
     <Reference Include="GP01NSLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\GP01NSLibrary\GP01NSLibrary\bin\Release\GP01NSLibrary.dll</HintPath>
+      <HintPath>..\GP01NSLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MySql.Data, Version=6.6.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
@@ -52,16 +52,28 @@
     </Reference>
     <Reference Include="MySql.Data.Entity, Version=6.6.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Arquivos de Programas\MySQL\MySQL Connector Net 6.6.7\Assemblies\v4.0\MySql.Data.Entity.dll</HintPath>
+      <HintPath>..\..\dll\MySql.Data.Entity.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Web, Version=6.6.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Arquivos de Programas\MySQL\MySQL Connector Net 6.6.7\Assemblies\v4.0\MySql.Web.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -70,6 +82,30 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -82,50 +118,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -1732,7 +1724,7 @@
     <Content Include="CSS\Views\Entrar\cadastro.css" />
     <Content Include="CSS\Views\Entrar\confirmar-conta.css" />
     <Content Include="CSS\Views\Entrar\index.css" />
-    <Content Include="CSS\Views\Entrar\musico.css" />
+    <Content Include="CSS\Views\Musico\index.css" />
     <Content Include="CSS\Views\layout.css" />
     <Content Include="Global.asax" />
     <Content Include="HTML\email.html" />
@@ -1740,11 +1732,74 @@
     <Content Include="Imagens\Views\Entrar\cadastro-fa.png" />
     <Content Include="Imagens\Views\Entrar\cadastro.png" />
     <Content Include="Imagens\Views\Entrar\index.png" />
+    <Content Include="Imagens\Views\Musico\img-banda.png" />
+    <Content Include="Imagens\Views\nosso-show.svg" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Plugins\Select2\css\select2.css" />
+    <Content Include="Plugins\Select2\css\select2.min.css" />
+    <Content Include="Plugins\Select2\js\i18n\af.js" />
+    <Content Include="Plugins\Select2\js\i18n\ar.js" />
+    <Content Include="Plugins\Select2\js\i18n\az.js" />
+    <Content Include="Plugins\Select2\js\i18n\bg.js" />
+    <Content Include="Plugins\Select2\js\i18n\bs.js" />
+    <Content Include="Plugins\Select2\js\i18n\ca.js" />
+    <Content Include="Plugins\Select2\js\i18n\cs.js" />
+    <Content Include="Plugins\Select2\js\i18n\da.js" />
+    <Content Include="Plugins\Select2\js\i18n\de.js" />
+    <Content Include="Plugins\Select2\js\i18n\dsb.js" />
+    <Content Include="Plugins\Select2\js\i18n\el.js" />
+    <Content Include="Plugins\Select2\js\i18n\en.js" />
+    <Content Include="Plugins\Select2\js\i18n\es.js" />
+    <Content Include="Plugins\Select2\js\i18n\et.js" />
+    <Content Include="Plugins\Select2\js\i18n\eu.js" />
+    <Content Include="Plugins\Select2\js\i18n\fa.js" />
+    <Content Include="Plugins\Select2\js\i18n\fi.js" />
+    <Content Include="Plugins\Select2\js\i18n\fr.js" />
+    <Content Include="Plugins\Select2\js\i18n\gl.js" />
+    <Content Include="Plugins\Select2\js\i18n\he.js" />
+    <Content Include="Plugins\Select2\js\i18n\hi.js" />
+    <Content Include="Plugins\Select2\js\i18n\hr.js" />
+    <Content Include="Plugins\Select2\js\i18n\hsb.js" />
+    <Content Include="Plugins\Select2\js\i18n\hu.js" />
+    <Content Include="Plugins\Select2\js\i18n\hy.js" />
+    <Content Include="Plugins\Select2\js\i18n\id.js" />
+    <Content Include="Plugins\Select2\js\i18n\is.js" />
+    <Content Include="Plugins\Select2\js\i18n\it.js" />
+    <Content Include="Plugins\Select2\js\i18n\ja.js" />
+    <Content Include="Plugins\Select2\js\i18n\km.js" />
+    <Content Include="Plugins\Select2\js\i18n\ko.js" />
+    <Content Include="Plugins\Select2\js\i18n\lt.js" />
+    <Content Include="Plugins\Select2\js\i18n\lv.js" />
+    <Content Include="Plugins\Select2\js\i18n\mk.js" />
+    <Content Include="Plugins\Select2\js\i18n\ms.js" />
+    <Content Include="Plugins\Select2\js\i18n\nb.js" />
+    <Content Include="Plugins\Select2\js\i18n\nl.js" />
+    <Content Include="Plugins\Select2\js\i18n\pl.js" />
+    <Content Include="Plugins\Select2\js\i18n\ps.js" />
+    <Content Include="Plugins\Select2\js\i18n\pt-BR.js" />
+    <Content Include="Plugins\Select2\js\i18n\pt.js" />
+    <Content Include="Plugins\Select2\js\i18n\ro.js" />
+    <Content Include="Plugins\Select2\js\i18n\ru.js" />
+    <Content Include="Plugins\Select2\js\i18n\sk.js" />
+    <Content Include="Plugins\Select2\js\i18n\sl.js" />
+    <Content Include="Plugins\Select2\js\i18n\sr-Cyrl.js" />
+    <Content Include="Plugins\Select2\js\i18n\sr.js" />
+    <Content Include="Plugins\Select2\js\i18n\sv.js" />
+    <Content Include="Plugins\Select2\js\i18n\th.js" />
+    <Content Include="Plugins\Select2\js\i18n\tr.js" />
+    <Content Include="Plugins\Select2\js\i18n\uk.js" />
+    <Content Include="Plugins\Select2\js\i18n\vi.js" />
+    <Content Include="Plugins\Select2\js\i18n\zh-CN.js" />
+    <Content Include="Plugins\Select2\js\i18n\zh-TW.js" />
+    <Content Include="Plugins\Select2\js\select2.full.js" />
+    <Content Include="Plugins\Select2\js\select2.full.min.js" />
+    <Content Include="Plugins\Select2\js\select2.js" />
+    <Content Include="Plugins\Select2\js\select2.min.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\Views\Entrar\Cadastro\inputmask_controller.js" />
     <Content Include="Scripts\Views\Entrar\Cadastro\validation_controller.js" />
+    <Content Include="Scripts\Views\Layout\layout.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1758,7 +1813,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\Views\Layout\" />
     <Folder Include="Views\Layout\Parciais\" />
   </ItemGroup>
   <ItemGroup>
@@ -3145,6 +3199,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Estabelecimento\Configuracoes.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Musico\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
