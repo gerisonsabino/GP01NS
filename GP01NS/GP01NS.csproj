@@ -143,6 +143,7 @@
     <Compile Include="Controllers\EntrarController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EstabelecimentoController.cs" />
+    <Compile Include="Controllers\FaController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\MusicoController.cs" />
     <Compile Include="Controllers\SairController.cs" />
@@ -3200,6 +3201,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Fa\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

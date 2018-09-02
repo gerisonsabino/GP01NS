@@ -10,9 +10,11 @@ function selectCustom() {
 	$('.select-custom').each((idx, el) => {
 		const placeholder = $(el).attr('placeholder') || '';
 
-		$(el).select2({
-			placeholder
-		});
+		setTimeout(function () {
+			$(el).select2({
+				placeholder
+			});
+		}, 10);		
 	});
 }
 
@@ -43,4 +45,7 @@ $(function () {
 	fieldsRequest()
 	selectCustom();
 	textareaAutoresize();
+	$('.field-date').datepicker({
+		language: "pt-BR"
+	});
 });
