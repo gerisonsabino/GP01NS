@@ -12,19 +12,22 @@ $(document).ready(function () {
     $(".datepicker").inputmask({ alias: "datetime", inputFormat: "dd/mm/yyyy", placeholder: "__/__/____" });
     $(".datepicker").datepicker({ language: "pt-BR", format: "dd/mm/yyyy", autoclose: true, endDate: data.getDate().toString() });
     $(".cep").inputmask({ 'mask': '99999-999' });
-    $(".email").attr("pattern", valida_email);
     $(".celular").inputmask({ 'mask': '(99)9999-9999[9]' });
 
     /*Validação dos Campos*/
     $("form").attr("novalidate", " ");
     $("form").addClass("needs-validation");
+
+    //Checa se algum input tem a classe inválido e se tiver mostra a div de alerta
+    if ($("input").hasClass(".is-invalid")) {
+        $(".invalid-feedback").show;
+    }
     //Coloca na variável tudo aquilo que precisar de validação
     $(".needs-validation").on('submit', function (event) {
-        $(".email").focusout(function () {
-            if (valida_email.test($(".email").val()) == true) {
-                $(".email").removeClass("form-control:invalid").addClass("form-control:valid");
-            }
-        });
+        //Limpa o campo E-mail se o email não tiver dentro do Regex
+        if (valida_email.test($(".email").val()) === false) {
+            $(".email").val('');
+        }
         //Limpa o campo Confirme a Senha se os valores forem diferentes
         if ($(".senha").val() != $(".confirmaSenha").val()) {
             $(".confirmaSenha").val('');
@@ -34,10 +37,5 @@ $(document).ready(function () {
             $(".needs-validation").addClass("was-validated");
             event.preventDefault();
         }
-     });
-
-    //Checa se algum input tem a classe inválido e se tiver mostra a div de alerta
-    if ($("input").hasClass(".is-invalid")) {
-        $(".invalid-feedback").show;
-    }
+    });
 });
