@@ -53,7 +53,7 @@ namespace GP01NS.Classes.ViewModels.Entrar
             catch { return true; }
         }
 
-        public bool ValidarSenha()
+        public bool ValidarSenha() 
         {
             return this.Senha == this.Confirmacao;
         }

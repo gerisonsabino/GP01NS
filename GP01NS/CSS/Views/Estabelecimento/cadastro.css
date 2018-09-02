@@ -1,0 +1,125 @@
+body,
+html {
+    height: 100%
+}
+
+.container-fluid {
+    height: 100%;
+}
+
+.row {
+    height: 100%;
+    /*background: linear-gradient(to bottom, #0099cc 0%, #000066 100%);*/
+}
+
+.btn {
+    padding: 0.7em 4em;
+    margin-top: 3em;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    overflow: auto;
+}
+
+.conta {
+    margin-top: 6em;
+}
+
+h5 {
+    margin-bottom: 2em;
+}
+
+.img {
+    background-image: url('../../../Imagens/Views/Estabelecimento/bg-estabelecimento.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+}
+
+.input-campo {
+    position: relative;
+}
+
+.oi {
+    position: absolute;
+    top: 12px;
+    left: 14px;
+}
+
+
+/* Tipo usuário */
+.box-tipo-usuario {
+    display: flex;
+    justify-content: space-between;
+}
+
+.box-tipo-usuario .tipo-usuario {
+    width: calc(33% - 20px)
+}
+
+.box-tipo-usuario .tipo-usuario input {
+    width: 0;
+    height: 0;
+}
+
+.box-tipo-usuario .tipo-usuario input + label {
+    color: #007bff;
+    width: 100%;
+    background: #fff;
+    border: 1px solid currentColor;
+    text-align: center;
+    padding: 7px 0 5px 0;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: .9em;
+    transition: all .3s ease;
+}
+
+.box-tipo-usuario .tipo-usuario input + label:hover {
+    background: #dcedff;
+}
+
+.box-tipo-usuario .tipo-usuario input:checked + label {
+    background: #007bff;
+    color: #FFF;
+}
+
+/* Media */
+@media (max-width: 768px) {
+    .img {
+        display: none;
+    }
+}
+
+@media (max-width: 400px) {
+    .form {
+        display: block;
+        padding: 1.5em;
+    }
+
+    .btn {
+        padding: 0.7em 4em;
+        margin-top: 0em;
+    }
+
+    .conta {
+        margin-top: 3em;
+    }
+
+    .box-tipo-usuario .tipo-usuario {
+        width: 100%
+    }
+
+    .box-tipo-usuario {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-height: 630px) {
+    .form {
+        display: block;
+        padding: 3em 2em;
+    }
+}

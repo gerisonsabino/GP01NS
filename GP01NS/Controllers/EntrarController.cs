@@ -35,14 +35,25 @@ namespace GP01NS.Controllers
                         }
                         else
                         {
-                            Session.Add("IDUsuario", Criptografia.Criptografar(u.ID.ToString()));
+                            string id = string.Empty;
 
-                            var url = Request.QueryString["url"];
+                            try
+                            {
+                                id = Criptografia.Descriptografar(Session["IDUsuario"].ToString());
+                            }
+                            catch { }
 
-                            if (!string.IsNullOrEmpty(url))
-                                return Redirect(url);
-                            else
-                                return Redirect("/inicio/");
+                            if (!string.IsNullOrEmpty(id))
+                            {
+                                base.Session.RemoveAll();
+                                base.Session.Clear();
+                                base.Session.Abandon();
+                                base.Session["IDUsuario"] = string.Empty;
+                            }
+
+                            base.Session.Add("IDUsuario", Criptografia.Criptografar(u.ID.ToString()));
+
+                            return Redirect("/inicio/");
                         }
                     }
                     else

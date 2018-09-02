@@ -67,7 +67,7 @@ namespace GP01NS.Classes.Servicos
                     {
                         var u = new usuario();
 
-                        u = db.usuario.Single(x => x.Email == email || x.Username == email);
+                        u = db.usuario.Single(x => x.Email == email || x.Username == email.Replace("@", string.Empty));
 
                         if (Criptografia.ValidarHash128(senha, u.Senha))
                             return u;

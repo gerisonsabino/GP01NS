@@ -13,7 +13,7 @@ namespace GP01NS.Controllers
 {
     public class BaseController : Controller
     {
-        protected usuario Usuario;
+        protected usuario BaseUsuario;
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext) 
         {
@@ -35,9 +35,10 @@ namespace GP01NS.Controllers
 
             if (((string.IsNullOrEmpty(id)) && (!Session.IsNewSession)) || (Session.IsNewSession))
             {
-                Session.RemoveAll();
-                Session.Clear();
-                Session.Abandon();
+                base.Session.RemoveAll();
+                base.Session.Clear();
+                base.Session.Abandon();
+                base.Session["IDUsuario"] = string.Empty;
 
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "entrar" }, { "action", "index" } });
             }
@@ -45,7 +46,11 @@ namespace GP01NS.Controllers
             {
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
-                    this.Usuario = db.autenticacao.First(x => x.Sessao.Equals(this.Session.SessionID)).usuario;
+                    var auths = db.autenticacao.Where(x => x.Sessao.Equals(this.Session.SessionID)).ToList();
+
+                    var auth = auths.Last();
+
+                    this.BaseUsuario = auth.usuario;
                 }
             }
 

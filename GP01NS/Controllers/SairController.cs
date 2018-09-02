@@ -28,6 +28,19 @@ namespace GP01NS.Controllers
                     base.Session.RemoveAll();
                     base.Session.Clear();
                     base.Session.Abandon();
+                    base.Session["IDUsuario"] = string.Empty;
+
+                    using (var db = new nosso_showEntities(Conexao.GetString()))
+                    {
+                        int idUsuario = int.Parse(Criptografia.Descriptografar(id));
+
+                        var auths = db.autenticacao.Where(x => x.IDUsuario == idUsuario && x.Sessao == Session.SessionID).ToList();
+
+                        for (int i = 0; i < auths.Count; i++)
+                            db.autenticacao.DeleteObject(auths[i]);
+
+                        db.SaveChanges();
+                    }
                 }
 
             }
