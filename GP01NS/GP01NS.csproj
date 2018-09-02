@@ -130,6 +130,7 @@
     <Compile Include="Controllers\EntrarController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EstabelecimentoController.cs" />
+    <Compile Include="Controllers\FaController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\MusicoController.cs" />
     <Compile Include="Controllers\SairController.cs" />
@@ -3202,6 +3203,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Musico\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Fa\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

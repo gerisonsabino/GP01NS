@@ -65,3 +65,7 @@ header .logo {
 .was-validated .form-control:invalid + .select2-container--default .select2-selection--multiple {
 	border-color: #dc3545;
 }
+
+.dropdown-menu {
+	padding: 15px;
+}

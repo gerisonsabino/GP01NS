@@ -1,0 +1,65 @@
+﻿@{
+	ViewBag.Title = "Cadastro de fã";
+	Layout = "~/Views/Layout/Layout.cshtml";
+}
+
+<!--STYLES-->
+<link href="~/CSS/Views/Musico/index.css" rel="stylesheet" />
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="form col-md-12 mx-auto">
+			<h5>CADASTRO DE FÃ</h5>
+			@using (Html.BeginForm())
+			{
+			<div class="row">
+				<div class="form-group col-6">
+					<label for="nascimento">Data de nascimento</label>
+					<input
+						   type="text"
+						   class="form-control field-date"
+						   id="nascimento" aria-describedby="emailHelp"
+						   placeholder="Digite sua data de nascimento"
+						   required>
+				</div>
+				<div class="form-group col-6">
+					<label for="nome">Celullar</label>
+					<input
+						   type="text"
+						   class="form-control"
+						   id="celular"
+						   placeholder="Digite seu nome completo"
+						   required>
+				</div>
+				<div class="form-group col-12">
+					<label for="inputGroupSelect01">Genêros músicais</label>
+					<select id="inputGroupSelect01" class="select-custom form-control" placeholder="Selecione os genêros músicais" multiple required>
+						<optgroup label="Grupo 1">
+							<option value="volvo">Item 1</option>
+							<option value="saab">Item 2</option>
+						</optgroup>
+						<optgroup label="Grupo 2">
+							<option value="volvo">Item 1</option>
+							<option value="saab">Item 2</option>
+						</optgroup>
+					</select>
+				</div>
+				<div class="form-group col-12">
+					<label for="inputGroupSelect02">Ambientes</label>
+					<select id="inputGroupSelect02" class="select-custom form-control" placeholder="Selecione os ambientes" multiple required>
+						<optgroup label="Grupo 1">
+							<option value="volvo">Item 1</option>
+							<option value="saab">Item 2</option>
+						</optgroup>
+						<optgroup label="Grupo 2">
+							<option value="volvo">Item 1</option>
+							<option value="saab">Item 2</option>
+						</optgroup>
+					</select>
+				</div>
+			</div>
+				<div class="text-center"><button type="submit" class="btn btn-primary">SALVAR</button></div>
+			}
+		</div>
+	</div>
+</div>
