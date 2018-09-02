@@ -1737,7 +1737,6 @@
     <Content Include="CSS\Views\Entrar\cadastro.css" />
     <Content Include="CSS\Views\Entrar\confirmar-conta.css" />
     <Content Include="CSS\Views\Entrar\index.css" />
-    <Content Include="CSS\Views\Entrar\musico.css" />
     <Content Include="CSS\Views\Estabelecimento\cadastro.css" />
     <Content Include="CSS\Views\layout.css" />
     <Content Include="Global.asax" />
