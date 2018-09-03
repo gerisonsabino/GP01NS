@@ -52,7 +52,33 @@ namespace GP01NS.Controllers
 
                     this.BaseUsuario = auth.usuario;
                 }
+
+                var rota = string.Empty;
+
+                switch (this.BaseUsuario.Tipo)
+                {
+                    case 1:
+                        rota = "administrador";
+                        break;
+
+                    case 2:
+                        rota = "estabelecimento";
+                        break;
+
+                    case 3:
+                        rota = "fa";
+                        break;
+
+                    case 4:
+                        rota = "musico";
+                        break;
+                }
+
+                if (controller.ToUpper() != rota.ToUpper() || controller.Equals("sair"))
+                    filterContext.Result = RedirectPermanent("/" + rota + "/");
             }
+
+
 
             base.OnActionExecuting(filterContext);
         }

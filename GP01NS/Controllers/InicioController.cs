@@ -22,9 +22,11 @@ namespace GP01NS.Controllers
             {
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
-
                     if (!db.usuario_estabelecimento.Any(x => x.IDUsuario == this.Usuario.ID))
                         return Redirect("/estabelecimento/cadastro/");
+
+                    if (!db.endereco.Any(x => x.IDUsuario == this.Usuario.ID))
+                        return Redirect("/estabelecimento/endereco/");
                 }
             }
 

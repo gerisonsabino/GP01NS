@@ -18,7 +18,19 @@ namespace GP01NS.Controllers
         {
             this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
 
-            return View();
+            if (this.Estabelecimento.TipoUsuario == 2)
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    if (!db.usuario_estabelecimento.Any(x => x.IDUsuario == this.Estabelecimento.ID))
+                        return Redirect("/estabelecimento/cadastro/");
+
+                    if (!db.endereco.Any(x => x.IDUsuario == this.Estabelecimento.ID))
+                        return Redirect("/estabelecimento/endereco/");
+                }
+            }
+
+            return View(Estabelecimento);
         }
 
         public ActionResult Cadastro()
@@ -31,7 +43,7 @@ namespace GP01NS.Controllers
         }
 
         [HttpPost]
-        public ActionResult Cadastro(CadastroVM model)
+        public ActionResult Cadastro(CadastroVM model) 
         {
             this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
 
@@ -61,7 +73,37 @@ namespace GP01NS.Controllers
                 ViewBag.Erro = "Por favor, confira os dados informados e tente novamente.";
             }
 
-            return Redirect("/inicio/");
+            return View(model);
+        }
+
+        public ActionResult Endereco()
+        {
+            this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
+
+            ViewBag.Estabelecimento = this.Estabelecimento;
+
+            var endereco = this.Estabelecimento.Endereco;
+
+            return View(endereco);
+        }
+
+        [HttpPost]
+        public ActionResult Endereco(EnderecoVM model)
+        {
+            this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
+
+            ViewBag.Estabelecimento = this.Estabelecimento;
+
+            if (model.SaveChanges(this.Estabelecimento))
+            {
+                ViewBag.Sucesso = "Os dados de endereço foram salvos.";
+            }
+            else
+            {
+                ViewBag.Erro = "Por favor, confira os dados informados e tente novamente.";
+            }
+
+            return View(model);
         }
     }
 }

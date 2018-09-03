@@ -17,6 +17,5 @@ namespace GP01NS.Controllers
 
             return View();
         }
-
     }
 }

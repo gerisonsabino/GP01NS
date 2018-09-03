@@ -229,38 +229,6 @@ namespace GP01NS.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<usuario_musico> usuario_musico
-        {
-            get
-            {
-                if ((_usuario_musico == null))
-                {
-                    _usuario_musico = base.CreateObjectSet<usuario_musico>("usuario_musico");
-                }
-                return _usuario_musico;
-            }
-        }
-        private ObjectSet<usuario_musico> _usuario_musico;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<usuario_tipo> usuario_tipo
-        {
-            get
-            {
-                if ((_usuario_tipo == null))
-                {
-                    _usuario_tipo = base.CreateObjectSet<usuario_tipo>("usuario_tipo");
-                }
-                return _usuario_tipo;
-            }
-        }
-        private ObjectSet<usuario_tipo> _usuario_tipo;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<usuario_estabelecimento_ambientacao> usuario_estabelecimento_ambientacao
         {
             get
@@ -289,6 +257,38 @@ namespace GP01NS.Models
             }
         }
         private ObjectSet<usuario_estabelecimento_dias> _usuario_estabelecimento_dias;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<usuario_musico> usuario_musico
+        {
+            get
+            {
+                if ((_usuario_musico == null))
+                {
+                    _usuario_musico = base.CreateObjectSet<usuario_musico>("usuario_musico");
+                }
+                return _usuario_musico;
+            }
+        }
+        private ObjectSet<usuario_musico> _usuario_musico;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<usuario_tipo> usuario_tipo
+        {
+            get
+            {
+                if ((_usuario_tipo == null))
+                {
+                    _usuario_tipo = base.CreateObjectSet<usuario_tipo>("usuario_tipo");
+                }
+                return _usuario_tipo;
+            }
+        }
+        private ObjectSet<usuario_tipo> _usuario_tipo;
 
         #endregion
 
@@ -367,22 +367,6 @@ namespace GP01NS.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the usuario_musico EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTousuario_musico(usuario_musico usuario_musico)
-        {
-            base.AddObject("usuario_musico", usuario_musico);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the usuario_tipo EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTousuario_tipo(usuario_tipo usuario_tipo)
-        {
-            base.AddObject("usuario_tipo", usuario_tipo);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the usuario_estabelecimento_ambientacao EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddTousuario_estabelecimento_ambientacao(usuario_estabelecimento_ambientacao usuario_estabelecimento_ambientacao)
@@ -396,6 +380,22 @@ namespace GP01NS.Models
         public void AddTousuario_estabelecimento_dias(usuario_estabelecimento_dias usuario_estabelecimento_dias)
         {
             base.AddObject("usuario_estabelecimento_dias", usuario_estabelecimento_dias);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the usuario_musico EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTousuario_musico(usuario_musico usuario_musico)
+        {
+            base.AddObject("usuario_musico", usuario_musico);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the usuario_tipo EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTousuario_tipo(usuario_tipo usuario_tipo)
+        {
+            base.AddObject("usuario_tipo", usuario_tipo);
         }
 
         #endregion
@@ -2345,28 +2345,28 @@ namespace GP01NS.Models
         /// Create a new usuario_estabelecimento object.
         /// </summary>
         /// <param name="cNPJ">Initial value of the CNPJ property.</param>
-        /// <param name="razao">Initial value of the Razao property.</param>
-        /// <param name="iDUsuario">Initial value of the IDUsuario property.</param>
-        /// <param name="tipoUsuario">Initial value of the TipoUsuario property.</param>
-        /// <param name="descricao">Initial value of the Descricao property.</param>
-        /// <param name="iDAmbientacao">Initial value of the IDAmbientacao property.</param>
         /// <param name="das">Initial value of the Das property.</param>
         /// <param name="as">Initial value of the As property.</param>
+        /// <param name="razao">Initial value of the Razao property.</param>
+        /// <param name="descricao">Initial value of the Descricao property.</param>
         /// <param name="de">Initial value of the De property.</param>
         /// <param name="ate">Initial value of the Ate property.</param>
-        public static usuario_estabelecimento Createusuario_estabelecimento(global::System.String cNPJ, global::System.String razao, global::System.Int32 iDUsuario, global::System.Int32 tipoUsuario, global::System.String descricao, global::System.Int32 iDAmbientacao, global::System.Int32 das, global::System.Int32 @as, global::System.Int32 de, global::System.Int32 ate)
+        /// <param name="iDAmbientacao">Initial value of the IDAmbientacao property.</param>
+        /// <param name="iDUsuario">Initial value of the IDUsuario property.</param>
+        /// <param name="tipoUsuario">Initial value of the TipoUsuario property.</param>
+        public static usuario_estabelecimento Createusuario_estabelecimento(global::System.String cNPJ, global::System.Int32 das, global::System.Int32 @as, global::System.String razao, global::System.String descricao, global::System.Int32 de, global::System.Int32 ate, global::System.Int32 iDAmbientacao, global::System.Int32 iDUsuario, global::System.Int32 tipoUsuario)
         {
             usuario_estabelecimento usuario_estabelecimento = new usuario_estabelecimento();
             usuario_estabelecimento.CNPJ = cNPJ;
-            usuario_estabelecimento.Razao = razao;
-            usuario_estabelecimento.IDUsuario = iDUsuario;
-            usuario_estabelecimento.TipoUsuario = tipoUsuario;
-            usuario_estabelecimento.Descricao = descricao;
-            usuario_estabelecimento.IDAmbientacao = iDAmbientacao;
             usuario_estabelecimento.Das = das;
             usuario_estabelecimento.As = @as;
+            usuario_estabelecimento.Razao = razao;
+            usuario_estabelecimento.Descricao = descricao;
             usuario_estabelecimento.De = de;
             usuario_estabelecimento.Ate = ate;
+            usuario_estabelecimento.IDAmbientacao = iDAmbientacao;
+            usuario_estabelecimento.IDUsuario = iDUsuario;
+            usuario_estabelecimento.TipoUsuario = tipoUsuario;
             return usuario_estabelecimento;
         }
 
@@ -2400,135 +2400,6 @@ namespace GP01NS.Models
         private global::System.String _CNPJ;
         partial void OnCNPJChanging(global::System.String value);
         partial void OnCNPJChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Razao
-        {
-            get
-            {
-                return _Razao;
-            }
-            set
-            {
-                OnRazaoChanging(value);
-                ReportPropertyChanging("Razao");
-                _Razao = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Razao");
-                OnRazaoChanged();
-            }
-        }
-        private global::System.String _Razao;
-        partial void OnRazaoChanging(global::System.String value);
-        partial void OnRazaoChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 IDUsuario
-        {
-            get
-            {
-                return _IDUsuario;
-            }
-            set
-            {
-                if (_IDUsuario != value)
-                {
-                    OnIDUsuarioChanging(value);
-                    ReportPropertyChanging("IDUsuario");
-                    _IDUsuario = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("IDUsuario");
-                    OnIDUsuarioChanged();
-                }
-            }
-        }
-        private global::System.Int32 _IDUsuario;
-        partial void OnIDUsuarioChanging(global::System.Int32 value);
-        partial void OnIDUsuarioChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 TipoUsuario
-        {
-            get
-            {
-                return _TipoUsuario;
-            }
-            set
-            {
-                if (_TipoUsuario != value)
-                {
-                    OnTipoUsuarioChanging(value);
-                    ReportPropertyChanging("TipoUsuario");
-                    _TipoUsuario = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("TipoUsuario");
-                    OnTipoUsuarioChanged();
-                }
-            }
-        }
-        private global::System.Int32 _TipoUsuario;
-        partial void OnTipoUsuarioChanging(global::System.Int32 value);
-        partial void OnTipoUsuarioChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Descricao
-        {
-            get
-            {
-                return _Descricao;
-            }
-            set
-            {
-                OnDescricaoChanging(value);
-                ReportPropertyChanging("Descricao");
-                _Descricao = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Descricao");
-                OnDescricaoChanged();
-            }
-        }
-        private global::System.String _Descricao;
-        partial void OnDescricaoChanging(global::System.String value);
-        partial void OnDescricaoChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 IDAmbientacao
-        {
-            get
-            {
-                return _IDAmbientacao;
-            }
-            set
-            {
-                if (_IDAmbientacao != value)
-                {
-                    OnIDAmbientacaoChanging(value);
-                    ReportPropertyChanging("IDAmbientacao");
-                    _IDAmbientacao = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("IDAmbientacao");
-                    OnIDAmbientacaoChanged();
-                }
-            }
-        }
-        private global::System.Int32 _IDAmbientacao;
-        partial void OnIDAmbientacaoChanging(global::System.Int32 value);
-        partial void OnIDAmbientacaoChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2583,6 +2454,54 @@ namespace GP01NS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.String Razao
+        {
+            get
+            {
+                return _Razao;
+            }
+            set
+            {
+                OnRazaoChanging(value);
+                ReportPropertyChanging("Razao");
+                _Razao = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Razao");
+                OnRazaoChanged();
+            }
+        }
+        private global::System.String _Razao;
+        partial void OnRazaoChanging(global::System.String value);
+        partial void OnRazaoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Descricao
+        {
+            get
+            {
+                return _Descricao;
+            }
+            set
+            {
+                OnDescricaoChanging(value);
+                ReportPropertyChanging("Descricao");
+                _Descricao = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Descricao");
+                OnDescricaoChanged();
+            }
+        }
+        private global::System.String _Descricao;
+        partial void OnDescricaoChanging(global::System.String value);
+        partial void OnDescricaoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Int32 De
         {
             get
@@ -2625,6 +2544,84 @@ namespace GP01NS.Models
         private global::System.Int32 _Ate;
         partial void OnAteChanging(global::System.Int32 value);
         partial void OnAteChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 IDAmbientacao
+        {
+            get
+            {
+                return _IDAmbientacao;
+            }
+            set
+            {
+                OnIDAmbientacaoChanging(value);
+                ReportPropertyChanging("IDAmbientacao");
+                _IDAmbientacao = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IDAmbientacao");
+                OnIDAmbientacaoChanged();
+            }
+        }
+        private global::System.Int32 _IDAmbientacao;
+        partial void OnIDAmbientacaoChanging(global::System.Int32 value);
+        partial void OnIDAmbientacaoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 IDUsuario
+        {
+            get
+            {
+                return _IDUsuario;
+            }
+            set
+            {
+                if (_IDUsuario != value)
+                {
+                    OnIDUsuarioChanging(value);
+                    ReportPropertyChanging("IDUsuario");
+                    _IDUsuario = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("IDUsuario");
+                    OnIDUsuarioChanged();
+                }
+            }
+        }
+        private global::System.Int32 _IDUsuario;
+        partial void OnIDUsuarioChanging(global::System.Int32 value);
+        partial void OnIDUsuarioChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TipoUsuario
+        {
+            get
+            {
+                return _TipoUsuario;
+            }
+            set
+            {
+                if (_TipoUsuario != value)
+                {
+                    OnTipoUsuarioChanging(value);
+                    ReportPropertyChanging("TipoUsuario");
+                    _TipoUsuario = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("TipoUsuario");
+                    OnTipoUsuarioChanged();
+                }
+            }
+        }
+        private global::System.Int32 _TipoUsuario;
+        partial void OnTipoUsuarioChanging(global::System.Int32 value);
+        partial void OnTipoUsuarioChanged();
 
         #endregion
 
@@ -3041,18 +3038,18 @@ namespace GP01NS.Models
         /// Create a new usuario_musico object.
         /// </summary>
         /// <param name="cPF">Initial value of the CPF property.</param>
+        /// <param name="nomeArtistico">Initial value of the NomeArtistico property.</param>
         /// <param name="descricao">Initial value of the Descricao property.</param>
         /// <param name="iDUsuario">Initial value of the IDUsuario property.</param>
         /// <param name="tipoUsuario">Initial value of the TipoUsuario property.</param>
-        /// <param name="nomeArtistico">Initial value of the NomeArtistico property.</param>
-        public static usuario_musico Createusuario_musico(global::System.String cPF, global::System.String descricao, global::System.Int32 iDUsuario, global::System.Int32 tipoUsuario, global::System.String nomeArtistico)
+        public static usuario_musico Createusuario_musico(global::System.String cPF, global::System.String nomeArtistico, global::System.String descricao, global::System.Int32 iDUsuario, global::System.Int32 tipoUsuario)
         {
             usuario_musico usuario_musico = new usuario_musico();
             usuario_musico.CPF = cPF;
+            usuario_musico.NomeArtistico = nomeArtistico;
             usuario_musico.Descricao = descricao;
             usuario_musico.IDUsuario = iDUsuario;
             usuario_musico.TipoUsuario = tipoUsuario;
-            usuario_musico.NomeArtistico = nomeArtistico;
             return usuario_musico;
         }
 
@@ -3086,6 +3083,30 @@ namespace GP01NS.Models
         private global::System.String _CPF;
         partial void OnCPFChanging(global::System.String value);
         partial void OnCPFChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String NomeArtistico
+        {
+            get
+            {
+                return _NomeArtistico;
+            }
+            set
+            {
+                OnNomeArtisticoChanging(value);
+                ReportPropertyChanging("NomeArtistico");
+                _NomeArtistico = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("NomeArtistico");
+                OnNomeArtisticoChanged();
+            }
+        }
+        private global::System.String _NomeArtistico;
+        partial void OnNomeArtisticoChanging(global::System.String value);
+        partial void OnNomeArtisticoChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3164,30 +3185,6 @@ namespace GP01NS.Models
         private global::System.Int32 _TipoUsuario;
         partial void OnTipoUsuarioChanging(global::System.Int32 value);
         partial void OnTipoUsuarioChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String NomeArtistico
-        {
-            get
-            {
-                return _NomeArtistico;
-            }
-            set
-            {
-                OnNomeArtisticoChanging(value);
-                ReportPropertyChanging("NomeArtistico");
-                _NomeArtistico = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("NomeArtistico");
-                OnNomeArtisticoChanged();
-            }
-        }
-        private global::System.String _NomeArtistico;
-        partial void OnNomeArtisticoChanging(global::System.String value);
-        partial void OnNomeArtisticoChanged();
 
         #endregion
 
