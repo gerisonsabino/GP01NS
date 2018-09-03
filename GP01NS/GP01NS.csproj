@@ -143,6 +143,7 @@
     <Compile Include="Controllers\EntrarController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EstabelecimentoController.cs" />
+    <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\FaController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\MusicoController.cs" />
@@ -1739,7 +1740,10 @@
     <Content Include="CSS\Views\Entrar\confirmar-conta.css" />
     <Content Include="CSS\Views\Entrar\index.css" />
     <Content Include="CSS\Views\Estabelecimento\cadastro.css" />
+    <Content Include="CSS\Views\Evento\index.css" />
     <Content Include="CSS\Views\layout.css" />
+    <Content Include="Imagens\Views\menu.svg" />
+    <Content Include="Imagens\Views\user.svg" />
     <Content Include="Global.asax" />
     <Content Include="HTML\email.html" />
     <Content Include="Imagens\Views\Entrar\cadastro-estabelecimento.png" />
@@ -1815,6 +1819,8 @@
     <Content Include="Scripts\Plugins\inputmask-plugin\jquery.inputmask.bundle.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\Views\Entrar\Cadastro\form_main.js" />
+    <Content Include="Scripts\Views\Evento\evento.js" />
+    <Content Include="Scripts\Views\Layout\layout.js" />
     <Content Include="Scripts\Views\Util\inputmask_controller.js" />
     <Content Include="Scripts\Views\Entrar\Cadastro\validation_controller.js" />
     <Content Include="Scripts\Views\Util\viacep-endereco.js" />
@@ -1831,8 +1837,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\Views\Layout\" />
-    <Folder Include="Views\Layout\Parciais\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -3234,6 +3238,27 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\gerisonsabino - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\gerisonsabino - Web Deploy.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Evento\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Evento\Cadastro.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Evento\Parciais\CardMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Perfil\Parciais\CardMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Layout\Parciais\Header.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Layout\Parciais\Footer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Layout\Parciais\Navbar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
