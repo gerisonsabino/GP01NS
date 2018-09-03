@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Meu endereço";
     Layout = "~/Views/Entrar/Layout.cshtml";
+    var Estabelecimento = (GP01NS.Classes.ViewModels.EstabelecimentoVM)ViewBag.Estabelecimento;
 }
 
 <link href="~/CSS/Views/Estabelecimento/cadastro.css" rel="stylesheet" />
@@ -15,42 +16,42 @@
             <div class="col-md-7 ml-auto mr-auto">
                 @using (Html.BeginForm())
                 {
-                    <h5 class="text-uppercase">Endereço do Estabelecimento</h5>
-                        <div class="form-row">
-                            <div class="form-group col-md-2">
-                                <label for="inputCep">CEP</label>
-                                @Html.TextBoxFor(x => x.CEP, new { @class = "form-control cep", placeholder = "CEP", required = "required" })
-                                @Html.HiddenFor(x => x.IDMunicipio)
-                            </div>
-                            <div class="form-group col">
-                                <label for="Logradouro">Logradouro</label>
-                                @Html.TextBoxFor(x => x.Logradouro, new { @class = "form-control", placeholder = "Logradouro", required = "required" })
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="Numero">Número</label>
-                                @Html.TextBoxFor(x => x.Numero, new { @class = "form-control", placeholder = "Número", required = "required" })
-                            </div>
+                    <h5 class="text-uppercase">Endereço de @Estabelecimento.Nome</h5>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="inputCep">CEP</label>
+                            @Html.TextBoxFor(x => x.CEP, new { @class = "form-control cep", placeholder = "CEP", required = "required" })
+                            @Html.HiddenFor(x => x.IDMunicipio)
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col">
-                                <label for="Bairro">Bairro</label>
-                                @Html.TextBoxFor(x => x.Bairro, new { @class = "form-control", placeholder = "Bairro", required = "required" })
-                            </div>
-                            <div class="form-group col">
-                                <label for="Cidade">Cidade</label>
-                                @Html.TextBoxFor(x => x.Cidade, new { @class = "form-control", placeholder = "Cidade", required = "required" })
-                            </div>
+                        <div class="form-group col">
+                            <label for="Logradouro">Logradouro</label>
+                            @Html.TextBoxFor(x => x.Logradouro, new { @class = "form-control", placeholder = "Logradouro", required = "required" })
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col">
-                                <label for="Complemento">Complemento</label>
-                                @Html.TextBoxFor(x => x.Complemento, new { @class = "form-control", placeholder = "Complemento", required = "required" })
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="Cidade">Estado</label>
-                                @Html.DropDownListFor(x => x.UF, Model.GetUFs(), new { @class = "form-control", required = "required" })
-                            </div>
+                        <div class="form-group col-md-2">
+                            <label for="Numero">Número</label>
+                            @Html.TextBoxFor(x => x.Numero, new { @class = "form-control", placeholder = "Número", required = "required" })
                         </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="Bairro">Bairro</label>
+                            @Html.TextBoxFor(x => x.Bairro, new { @class = "form-control", placeholder = "Bairro", required = "required" })
+                        </div>
+                        <div class="form-group col">
+                            <label for="Cidade">Cidade</label>
+                            @Html.TextBoxFor(x => x.Cidade, new { @class = "form-control", placeholder = "Cidade", required = "required" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="Complemento">Complemento</label>
+                            @Html.TextBoxFor(x => x.Complemento, new { @class = "form-control", placeholder = "Complemento", required = "required" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="Cidade">Estado</label>
+                            @Html.DropDownListFor(x => x.UF, Model.GetUFs(), new { @class = "form-control", required = "required" })
+                        </div>
+                    </div>
 
                     if (!string.IsNullOrEmpty(ViewBag.Erro))
                     {
@@ -74,4 +75,5 @@
         </div>
     </div>
 </div>
+<script src="~/Scripts/Views/Entrar/Cadastro/form_main.js"></script>
 <script src="~/Scripts/Views/Util/viacep-endereco.js"></script>

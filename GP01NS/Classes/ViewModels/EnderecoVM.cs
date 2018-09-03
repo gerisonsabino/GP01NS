@@ -102,7 +102,7 @@ namespace GP01NS.Classes.ViewModels
                     return true;
                 }
             }
-            catch (Exception e) { return false; }
+            catch { return false; }
         }
     }
 }
