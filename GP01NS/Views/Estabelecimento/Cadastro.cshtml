@@ -5,6 +5,7 @@
     Layout = "~/Views/Entrar/Layout.cshtml";
 }
 <link href="~/CSS/Views/Estabelecimento/cadastro.css" rel="stylesheet" />
+<link href="~/Scripts/Plugins/datepicker-plugin/css/bootstrap-datepicker.css" rel="stylesheet" />
 
 <div class="container-fluid">
     <div class="row">
@@ -72,7 +73,7 @@
                     <div class="form-row">
                         <div class="form-group col">
                             <label for="Descricao">Descrição</label>
-                            @Html.TextAreaFor(x => x.Descricao, new { @class = "form-control", required = "required", cols="", rows="8" })
+                            @Html.TextAreaFor(x => x.Descricao, new { @class = "form-control", required = "required", cols = "", rows = "8" })
                         </div>
                     </div>
 
@@ -134,4 +135,7 @@
         </div>
     </div>
 </div>
-<script src="~/Scripts/Views/Util/inputmask_controller.js"></script>
+<script src="~/Scripts/form_main.js"></script>
+<script src="~/Scripts/Plugins/inputmask-plugin/jquery.inputmask.bundle.js"></script>
+<script src="~/Scripts/Plugins/datepicker-plugin/js/bootstrap-datepicker.js"></script>
+<script src="~/Scripts/Plugins/datepicker-plugin/js/bootstrap-datepicker.pt-BR.js"></script>

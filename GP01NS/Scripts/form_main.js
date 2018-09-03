@@ -38,4 +38,15 @@ $(document).ready(function () {
             event.preventDefault();
         }
     });
+
+    /* Limpar Campos */
+    $(".recuperar").click(function () {
+        $(".senha").val('');
+        $(".email").val('');
+    });
+
+    /* Validar CPF e CNPJ */
+    function validaCPF() {
+
+    }
 });
