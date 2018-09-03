@@ -43,7 +43,7 @@
   <ItemGroup>
     <Reference Include="GP01NSLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Downloads\GP01NSLibrary.dll</HintPath>
+      <HintPath>..\..\GP01NSLibrary\GP01NSLibrary\bin\Release\GP01NSLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MySql.Data, Version=6.6.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
@@ -143,6 +143,7 @@
     <Compile Include="Controllers\EntrarController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EstabelecimentoController.cs" />
+    <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\FaController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\MusicoController.cs" />
@@ -1739,7 +1740,10 @@
     <Content Include="CSS\Views\Entrar\confirmar-conta.css" />
     <Content Include="CSS\Views\Entrar\index.css" />
     <Content Include="CSS\Views\Estabelecimento\cadastro.css" />
+    <Content Include="CSS\Views\Evento\index.css" />
     <Content Include="CSS\Views\layout.css" />
+    <Content Include="Imagens\Views\menu.svg" />
+    <Content Include="Imagens\Views\user.svg" />
     <Content Include="Global.asax" />
     <Content Include="HTML\email.html" />
     <Content Include="Imagens\Views\Entrar\cadastro-estabelecimento.png" />
@@ -1747,6 +1751,66 @@
     <Content Include="Imagens\Views\Entrar\cadastro-fa.png" />
     <Content Include="Imagens\Views\Entrar\cadastro.png" />
     <Content Include="Imagens\Views\Estabelecimento\bg-estabelecimento.jpg" />
+    <Content Include="Plugins\Select2\css\select2.css" />
+    <Content Include="Plugins\Select2\css\select2.min.css" />
+    <Content Include="Plugins\Select2\js\i18n\af.js" />
+    <Content Include="Plugins\Select2\js\i18n\ar.js" />
+    <Content Include="Plugins\Select2\js\i18n\az.js" />
+    <Content Include="Plugins\Select2\js\i18n\bg.js" />
+    <Content Include="Plugins\Select2\js\i18n\bs.js" />
+    <Content Include="Plugins\Select2\js\i18n\ca.js" />
+    <Content Include="Plugins\Select2\js\i18n\cs.js" />
+    <Content Include="Plugins\Select2\js\i18n\da.js" />
+    <Content Include="Plugins\Select2\js\i18n\de.js" />
+    <Content Include="Plugins\Select2\js\i18n\dsb.js" />
+    <Content Include="Plugins\Select2\js\i18n\el.js" />
+    <Content Include="Plugins\Select2\js\i18n\en.js" />
+    <Content Include="Plugins\Select2\js\i18n\es.js" />
+    <Content Include="Plugins\Select2\js\i18n\et.js" />
+    <Content Include="Plugins\Select2\js\i18n\eu.js" />
+    <Content Include="Plugins\Select2\js\i18n\fa.js" />
+    <Content Include="Plugins\Select2\js\i18n\fi.js" />
+    <Content Include="Plugins\Select2\js\i18n\fr.js" />
+    <Content Include="Plugins\Select2\js\i18n\gl.js" />
+    <Content Include="Plugins\Select2\js\i18n\he.js" />
+    <Content Include="Plugins\Select2\js\i18n\hi.js" />
+    <Content Include="Plugins\Select2\js\i18n\hr.js" />
+    <Content Include="Plugins\Select2\js\i18n\hsb.js" />
+    <Content Include="Plugins\Select2\js\i18n\hu.js" />
+    <Content Include="Plugins\Select2\js\i18n\hy.js" />
+    <Content Include="Plugins\Select2\js\i18n\id.js" />
+    <Content Include="Plugins\Select2\js\i18n\is.js" />
+    <Content Include="Plugins\Select2\js\i18n\it.js" />
+    <Content Include="Plugins\Select2\js\i18n\ja.js" />
+    <Content Include="Plugins\Select2\js\i18n\km.js" />
+    <Content Include="Plugins\Select2\js\i18n\ko.js" />
+    <Content Include="Plugins\Select2\js\i18n\lt.js" />
+    <Content Include="Plugins\Select2\js\i18n\lv.js" />
+    <Content Include="Plugins\Select2\js\i18n\mk.js" />
+    <Content Include="Plugins\Select2\js\i18n\ms.js" />
+    <Content Include="Plugins\Select2\js\i18n\nb.js" />
+    <Content Include="Plugins\Select2\js\i18n\nl.js" />
+    <Content Include="Plugins\Select2\js\i18n\pl.js" />
+    <Content Include="Plugins\Select2\js\i18n\ps.js" />
+    <Content Include="Plugins\Select2\js\i18n\pt-BR.js" />
+    <Content Include="Plugins\Select2\js\i18n\pt.js" />
+    <Content Include="Plugins\Select2\js\i18n\ro.js" />
+    <Content Include="Plugins\Select2\js\i18n\ru.js" />
+    <Content Include="Plugins\Select2\js\i18n\sk.js" />
+    <Content Include="Plugins\Select2\js\i18n\sl.js" />
+    <Content Include="Plugins\Select2\js\i18n\sr-Cyrl.js" />
+    <Content Include="Plugins\Select2\js\i18n\sr.js" />
+    <Content Include="Plugins\Select2\js\i18n\sv.js" />
+    <Content Include="Plugins\Select2\js\i18n\th.js" />
+    <Content Include="Plugins\Select2\js\i18n\tr.js" />
+    <Content Include="Plugins\Select2\js\i18n\uk.js" />
+    <Content Include="Plugins\Select2\js\i18n\vi.js" />
+    <Content Include="Plugins\Select2\js\i18n\zh-CN.js" />
+    <Content Include="Plugins\Select2\js\i18n\zh-TW.js" />
+    <Content Include="Plugins\Select2\js\select2.full.js" />
+    <Content Include="Plugins\Select2\js\select2.full.min.js" />
+    <Content Include="Plugins\Select2\js\select2.js" />
+    <Content Include="Plugins\Select2\js\select2.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\Plugins\datepicker-plugin\css\bootstrap-datepicker.css" />
@@ -1754,7 +1818,9 @@
     <Content Include="Scripts\Plugins\datepicker-plugin\js\bootstrap-datepicker.pt-BR.js" />
     <Content Include="Scripts\Plugins\inputmask-plugin\jquery.inputmask.bundle.js" />
     <Content Include="Scripts\popper.min.js" />
-    <Content Include="Scripts\form_main.js" />
+    <Content Include="Scripts\Views\Entrar\Cadastro\form_main.js" />
+    <Content Include="Scripts\Views\Evento\evento.js" />
+    <Content Include="Scripts\Views\Layout\layout.js" />
     <Content Include="Scripts\Views\Util\inputmask_controller.js" />
     <Content Include="Scripts\Views\Entrar\Cadastro\validation_controller.js" />
     <Content Include="Scripts\Views\Util\viacep-endereco.js" />
@@ -1771,8 +1837,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\Views\Layout\" />
-    <Folder Include="Views\Layout\Parciais\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -3156,20 +3220,41 @@
     <Content Include="Views\Estabelecimento\Cadastro.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\nosso_show.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Fa\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Estabelecimento\Endereco.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\gerisonsabino - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\gerisonsabino - Web Deploy.pubxml" />
+    <Content Include="Views\Musico\Index.cshtml" />
+    <Content Include="Views\Estabelecimento\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\nosso_show.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Evento\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Evento\Cadastro.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Evento\Parciais\CardMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Perfil\Parciais\CardMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Layout\Parciais\Header.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Layout\Parciais\Footer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Layout\Parciais\Navbar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

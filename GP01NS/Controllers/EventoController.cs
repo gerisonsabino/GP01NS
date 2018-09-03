@@ -1,5 +1,4 @@
-﻿using GP01NS.Classes.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,15 +6,22 @@ using System.Web.Mvc;
 
 namespace GP01NS.Controllers
 {
-    public class MusicoController : BaseController
+    public class EventoController : Controller
     {
-        private MusicoVM Musico;
+        //
+        // GET: /Evento/
 
         public ActionResult Index()
         {
-            Musico = new MusicoVM(this.BaseUsuario);
-
             return View();
         }
-    }
+
+		// GET: /Evento/cadastro
+
+		public ActionResult Cadastro()
+		{
+			return View();
+		}
+
+	}
 }

@@ -2,15 +2,14 @@
 
 @{
     ViewBag.Title = "Meu Estabelecimento";
-    Layout = "~/Views/Entrar/Layout.cshtml";
+    Layout = "~/Views/Layout/Layout.cshtml";
 }
 <link href="~/CSS/Views/Estabelecimento/cadastro.css" rel="stylesheet" />
 <link href="~/Scripts/Plugins/datepicker-plugin/css/bootstrap-datepicker.css" rel="stylesheet" />
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-3 col-xl-3 img"></div>
-        <div class="col-md-9 col-12 col-lg-9 ml-auto mr-auto form">
+        <div class="col-12 mx-auto form">
             <div class="col-md-7 ml-auto mr-auto">
                 @using (Html.BeginForm())
                 {

@@ -90,7 +90,7 @@ namespace GP01NS.Classes.ViewModels
                     return true;
                 }
             }
-            catch { return false; }
+            catch (Exception e) { return false; }
         }
 
         private usuario_estabelecimento GetEstabelecimentoByID(int id)

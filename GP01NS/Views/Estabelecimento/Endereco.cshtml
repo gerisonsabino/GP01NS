@@ -3,10 +3,10 @@
 @{
     ViewBag.Title = "Meu endereço";
     Layout = "~/Views/Entrar/Layout.cshtml";
+    var Estabelecimento = (GP01NS.Classes.ViewModels.EstabelecimentoVM)ViewBag.Estabelecimento;
 }
 
 <link href="~/CSS/Views/Estabelecimento/cadastro.css" rel="stylesheet" />
-<link href="~/Scripts/Plugins/datepicker-plugin/css/bootstrap-datepicker.css" rel="stylesheet" />
 
 
 <div class="container-fluid">
@@ -16,7 +16,7 @@
             <div class="col-md-7 ml-auto mr-auto">
                 @using (Html.BeginForm())
                 {
-                    <h5 class="text-uppercase">Endereço do Estabelecimento</h5>
+                    <h5 class="text-uppercase">Endereço de @Estabelecimento.Nome</h5>
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="inputCep">CEP</label>
@@ -75,8 +75,5 @@
         </div>
     </div>
 </div>
+<script src="~/Scripts/Views/Entrar/Cadastro/form_main.js"></script>
 <script src="~/Scripts/Views/Util/viacep-endereco.js"></script>
-<script src="~/Scripts/form_main.js"></script>
-<script src="~/Scripts/Plugins/inputmask-plugin/jquery.inputmask.bundle.js"></script>
-<script src="~/Scripts/Plugins/datepicker-plugin/js/bootstrap-datepicker.js"></script>
-<script src="~/Scripts/Plugins/datepicker-plugin/js/bootstrap-datepicker.pt-BR.js"></script>

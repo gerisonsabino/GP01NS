@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="nosso_showModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+      <Schema Namespace="nosso_showModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="nosso_showModelStoreContainer">
           <EntitySet Name="autenticacao" EntityType="nosso_showModel.Store.autenticacao" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="endereco" EntityType="nosso_showModel.Store.endereco" store:Type="Tables" Schema="nosso_show" />
@@ -169,7 +169,6 @@
             <PropertyRef Name="CNPJ" />
             <PropertyRef Name="IDUsuario" />
             <PropertyRef Name="TipoUsuario" />
-            <PropertyRef Name="IDAmbientacao" />
           </Key>
           <Property Name="CNPJ" Type="varchar" Nullable="false" MaxLength="14" />
           <Property Name="Das" Type="int" Nullable="false" />
@@ -178,9 +177,9 @@
           <Property Name="Descricao" Type="varchar" Nullable="false" MaxLength="1500" />
           <Property Name="De" Type="int" Nullable="false" />
           <Property Name="Ate" Type="int" Nullable="false" />
+          <Property Name="IDAmbientacao" Type="int" Nullable="false" />
           <Property Name="IDUsuario" Type="int" Nullable="false" />
           <Property Name="TipoUsuario" Type="int" Nullable="false" />
-          <Property Name="IDAmbientacao" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="usuario_estabelecimento_ambientacao">
           <Key>
@@ -369,7 +368,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="nosso_showModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -383,6 +383,8 @@
           <EntitySet Name="requisicao_tipo" EntityType="nosso_showModel.requisicao_tipo" />
           <EntitySet Name="usuario" EntityType="nosso_showModel.usuario" />
           <EntitySet Name="usuario_estabelecimento" EntityType="nosso_showModel.usuario_estabelecimento" />
+          <EntitySet Name="usuario_estabelecimento_ambientacao" EntityType="nosso_showModel.usuario_estabelecimento_ambientacao" />
+          <EntitySet Name="usuario_estabelecimento_dias" EntityType="nosso_showModel.usuario_estabelecimento_dias" />
           <EntitySet Name="usuario_musico" EntityType="nosso_showModel.usuario_musico" />
           <EntitySet Name="usuario_tipo" EntityType="nosso_showModel.usuario_tipo" />
           <AssociationSet Name="FK_autenticacao_usuario" Association="nosso_showModel.FK_autenticacao_usuario">
@@ -421,12 +423,10 @@
             <End Role="usuario_tipo" EntitySet="usuario_tipo" />
             <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
-          <EntitySet Name="usuario_estabelecimento_ambientacao" EntityType="nosso_showModel.usuario_estabelecimento_ambientacao" />
           <AssociationSet Name="FK_usuario_estabelecimento_ambientacao" Association="nosso_showModel.FK_usuario_estabelecimento_ambientacao">
             <End Role="usuario_estabelecimento_ambientacao" EntitySet="usuario_estabelecimento_ambientacao" />
             <End Role="usuario_estabelecimento" EntitySet="usuario_estabelecimento" />
           </AssociationSet>
-          <EntitySet Name="usuario_estabelecimento_dias" EntityType="nosso_showModel.usuario_estabelecimento_dias" />
           <AssociationSet Name="FK_usuario_estabelecimento_dia_ate" Association="nosso_showModel.FK_usuario_estabelecimento_dia_ate">
             <End Role="usuario_estabelecimento_dias" EntitySet="usuario_estabelecimento_dias" />
             <End Role="usuario_estabelecimento" EntitySet="usuario_estabelecimento" />
@@ -552,22 +552,38 @@
             <PropertyRef Name="CNPJ" />
             <PropertyRef Name="IDUsuario" />
             <PropertyRef Name="TipoUsuario" />
-            <PropertyRef Name="IDAmbientacao" />
           </Key>
           <Property Name="CNPJ" Type="String" Nullable="false" MaxLength="14" Unicode="false" FixedLength="false" />
+          <Property Name="Das" Type="Int32" Nullable="false" />
+          <Property Name="As" Type="Int32" Nullable="false" />
           <Property Name="Razao" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="1500" Unicode="false" FixedLength="false" />
+          <Property Name="De" Type="Int32" Nullable="false" />
+          <Property Name="Ate" Type="Int32" Nullable="false" />
+          <Property Name="IDAmbientacao" Type="Int32" Nullable="false" />
           <Property Name="IDUsuario" Type="Int32" Nullable="false" />
           <Property Name="TipoUsuario" Type="Int32" Nullable="false" />
           <NavigationProperty Name="usuario" Relationship="nosso_showModel.FK_usuario_estabelecimento" FromRole="usuario_estabelecimento" ToRole="usuario" />
-          <Property Type="String" Name="Descricao" Nullable="false" MaxLength="1500" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IDAmbientacao" Nullable="false" />
           <NavigationProperty Name="usuario_estabelecimento_ambientacao" Relationship="nosso_showModel.FK_usuario_estabelecimento_ambientacao" FromRole="usuario_estabelecimento" ToRole="usuario_estabelecimento_ambientacao" />
-          <Property Type="Int32" Name="Das" Nullable="false" />
-          <Property Type="Int32" Name="As" Nullable="false" />
-          <Property Type="Int32" Name="De" Nullable="false" />
-          <Property Type="Int32" Name="Ate" Nullable="false" />
           <NavigationProperty Name="usuario_estabelecimento_dias" Relationship="nosso_showModel.FK_usuario_estabelecimento_dia_ate" FromRole="usuario_estabelecimento" ToRole="usuario_estabelecimento_dias" />
           <NavigationProperty Name="usuario_estabelecimento_dias1" Relationship="nosso_showModel.FK_usuario_estabelecimento_dia_de" FromRole="usuario_estabelecimento" ToRole="usuario_estabelecimento_dias" />
+        </EntityType>
+        <EntityType Name="usuario_estabelecimento_ambientacao">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="usuario_estabelecimento" Relationship="nosso_showModel.FK_usuario_estabelecimento_ambientacao" FromRole="usuario_estabelecimento_ambientacao" ToRole="usuario_estabelecimento" />
+        </EntityType>
+        <EntityType Name="usuario_estabelecimento_dias">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="usuario_estabelecimento" Relationship="nosso_showModel.FK_usuario_estabelecimento_dia_ate" FromRole="usuario_estabelecimento_dias" ToRole="usuario_estabelecimento" />
+          <NavigationProperty Name="usuario_estabelecimento1" Relationship="nosso_showModel.FK_usuario_estabelecimento_dia_de" FromRole="usuario_estabelecimento_dias" ToRole="usuario_estabelecimento" />
         </EntityType>
         <EntityType Name="usuario_musico">
           <Key>
@@ -576,11 +592,11 @@
             <PropertyRef Name="TipoUsuario" />
           </Key>
           <Property Name="CPF" Type="String" Nullable="false" MaxLength="11" Unicode="false" FixedLength="false" />
+          <Property Name="NomeArtistico" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
           <Property Name="Descricao" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
           <Property Name="IDUsuario" Type="Int32" Nullable="false" />
           <Property Name="TipoUsuario" Type="Int32" Nullable="false" />
           <NavigationProperty Name="usuario" Relationship="nosso_showModel.FK_usuario_musico" FromRole="usuario_musico" ToRole="usuario" />
-          <Property Type="String" Name="NomeArtistico" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="usuario_tipo">
           <Key>
@@ -708,17 +724,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="usuario_estabelecimento_ambientacao">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Descricao" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="usuario_estabelecimento" Relationship="nosso_showModel.FK_usuario_estabelecimento_ambientacao" FromRole="usuario_estabelecimento_ambientacao" ToRole="usuario_estabelecimento" />
-        </EntityType>
         <Association Name="FK_usuario_estabelecimento_ambientacao">
-          <End Type="nosso_showModel.usuario_estabelecimento_ambientacao" Role="usuario_estabelecimento_ambientacao" Multiplicity="1" />
-          <End Type="nosso_showModel.usuario_estabelecimento" Role="usuario_estabelecimento" Multiplicity="*" />
+          <End Role="usuario_estabelecimento_ambientacao" Type="nosso_showModel.usuario_estabelecimento_ambientacao" Multiplicity="1" />
+          <End Role="usuario_estabelecimento" Type="nosso_showModel.usuario_estabelecimento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="usuario_estabelecimento_ambientacao">
               <PropertyRef Name="ID" />
@@ -728,18 +736,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="usuario_estabelecimento_dias">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Descricao" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="usuario_estabelecimento" Relationship="nosso_showModel.FK_usuario_estabelecimento_dia_ate" FromRole="usuario_estabelecimento_dias" ToRole="usuario_estabelecimento" />
-          <NavigationProperty Name="usuario_estabelecimento1" Relationship="nosso_showModel.FK_usuario_estabelecimento_dia_de" FromRole="usuario_estabelecimento_dias" ToRole="usuario_estabelecimento" />
-        </EntityType>
         <Association Name="FK_usuario_estabelecimento_dia_ate">
-          <End Type="nosso_showModel.usuario_estabelecimento_dias" Role="usuario_estabelecimento_dias" Multiplicity="1" />
-          <End Type="nosso_showModel.usuario_estabelecimento" Role="usuario_estabelecimento" Multiplicity="*" />
+          <End Role="usuario_estabelecimento_dias" Type="nosso_showModel.usuario_estabelecimento_dias" Multiplicity="1" />
+          <End Role="usuario_estabelecimento" Type="nosso_showModel.usuario_estabelecimento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="usuario_estabelecimento_dias">
               <PropertyRef Name="ID" />
@@ -750,8 +749,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_usuario_estabelecimento_dia_de">
-          <End Type="nosso_showModel.usuario_estabelecimento_dias" Role="usuario_estabelecimento_dias" Multiplicity="1" />
-          <End Type="nosso_showModel.usuario_estabelecimento" Role="usuario_estabelecimento" Multiplicity="*" />
+          <End Role="usuario_estabelecimento_dias" Type="nosso_showModel.usuario_estabelecimento_dias" Multiplicity="1" />
+          <End Role="usuario_estabelecimento" Type="nosso_showModel.usuario_estabelecimento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="usuario_estabelecimento_dias">
               <PropertyRef Name="ID" />
@@ -863,24 +862,40 @@
           <EntitySetMapping Name="usuario_estabelecimento">
             <EntityTypeMapping TypeName="nosso_showModel.usuario_estabelecimento">
               <MappingFragment StoreEntitySet="usuario_estabelecimento">
-                <ScalarProperty Name="Ate" ColumnName="Ate" />
-                <ScalarProperty Name="De" ColumnName="De" />
-                <ScalarProperty Name="As" ColumnName="As" />
-                <ScalarProperty Name="Das" ColumnName="Das" />
-                <ScalarProperty Name="IDAmbientacao" ColumnName="IDAmbientacao" />
-                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
                 <ScalarProperty Name="CNPJ" ColumnName="CNPJ" />
+                <ScalarProperty Name="Das" ColumnName="Das" />
+                <ScalarProperty Name="As" ColumnName="As" />
                 <ScalarProperty Name="Razao" ColumnName="Razao" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="De" ColumnName="De" />
+                <ScalarProperty Name="Ate" ColumnName="Ate" />
+                <ScalarProperty Name="IDAmbientacao" ColumnName="IDAmbientacao" />
                 <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
                 <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario_estabelecimento_ambientacao">
+            <EntityTypeMapping TypeName="nosso_showModel.usuario_estabelecimento_ambientacao">
+              <MappingFragment StoreEntitySet="usuario_estabelecimento_ambientacao">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario_estabelecimento_dias">
+            <EntityTypeMapping TypeName="nosso_showModel.usuario_estabelecimento_dias">
+              <MappingFragment StoreEntitySet="usuario_estabelecimento_dias">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="usuario_musico">
             <EntityTypeMapping TypeName="nosso_showModel.usuario_musico">
               <MappingFragment StoreEntitySet="usuario_musico">
-                <ScalarProperty Name="NomeArtistico" ColumnName="NomeArtistico" />
                 <ScalarProperty Name="CPF" ColumnName="CPF" />
+                <ScalarProperty Name="NomeArtistico" ColumnName="NomeArtistico" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />
                 <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
                 <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
@@ -892,22 +907,6 @@
               <MappingFragment StoreEntitySet="usuario_tipo">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="usuario_estabelecimento_ambientacao">
-            <EntityTypeMapping TypeName="nosso_showModel.usuario_estabelecimento_ambientacao">
-              <MappingFragment StoreEntitySet="usuario_estabelecimento_ambientacao">
-                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="usuario_estabelecimento_dias">
-            <EntityTypeMapping TypeName="nosso_showModel.usuario_estabelecimento_dias">
-              <MappingFragment StoreEntitySet="usuario_estabelecimento_dias">
-                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -932,79 +931,74 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="nosso_show">
-        <EntityTypeShape EntityType="nosso_showModel.autenticacao" Width="1.5" PointX="5.25" PointY="5.75" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.endereco" Width="1.5" PointX="7.375" PointY="11.25" Height="3.9033007812499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.endereco_uf" Width="1.5" PointX="9.75" PointY="13" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.autenticacao" Width="1.5" PointX="5.25" PointY="8" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.endereco" Width="1.5" PointX="5.25" PointY="11.625" Height="3.9033007812499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.endereco_uf" Width="1.5" PointX="3" PointY="13.75" Height="1.5956835937499996" IsExpanded="true" />
         <EntityTypeShape EntityType="nosso_showModel.hab_musical" Width="1.5" PointX="11" PointY="0.875" Height="1.7879850260416657" IsExpanded="true" />
         <EntityTypeShape EntityType="nosso_showModel.hab_musical_tipo" Width="1.5" PointX="8.75" PointY="1" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.requisicao" Width="1.5" PointX="8.25" PointY="8.125" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.requisicao_tipo" Width="1.5" PointX="6" PointY="2.75" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario" Width="1.5" PointX="3" PointY="7.375" Height="4.2879036458333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento" Width="1.5" PointX="5.25" PointY="16.75" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario_musico" Width="1.5" PointX="4.625" PointY="21.125" Height="2.1725878906250031" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario_tipo" Width="1.5" PointX="0.75" PointY="8.75" Height="1.5956835937500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.requisicao" Width="1.5" PointX="8.25" PointY="9.25" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.requisicao_tipo" Width="1.5" PointX="6" PointY="16.75" Height="1.595683593749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario" Width="1.5" PointX="3" PointY="8.375" Height="4.2879036458333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento" Width="1.5" PointX="8.25" PointY="4.75" Height="3.7109993489583317" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento_ambientacao" Width="1.5" PointX="6" PointY="4.5" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento_dias" Width="1.5" PointX="6" PointY="1.875" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_musico" Width="1.5" PointX="5.25" PointY="23.5" Height="2.1725878906250031" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_tipo" Width="1.5" PointX="0.75" PointY="9.75" Height="1.5956835937500031" IsExpanded="true" />
         <AssociationConnector Association="nosso_showModel.FK_autenticacao_usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="7.6487939453125" />
-          <ConnectorPoint PointX="5.25" PointY="7.6487939453125" />
+          <ConnectorPoint PointX="4.5" PointY="9.2737939453125" />
+          <ConnectorPoint PointX="5.25" PointY="9.2737939453125" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_endereco_uf" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.75" PointY="13.797841796875" />
-          <ConnectorPoint PointX="8.875" PointY="13.797841796875" />
+          <ConnectorPoint PointX="4.5" PointY="14.547841796875" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="14.547841796875" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="14.547841796875" />
+          <ConnectorPoint PointX="5.25" PointY="14.547841796875" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_endereco_usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="11.456451822916666" />
-          <ConnectorPoint PointX="7.375" PointY="11.456451822916666" />
+          <ConnectorPoint PointX="4.5" PointY="12.143951822916666" />
+          <ConnectorPoint PointX="5.25" PointY="12.143951822916666" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_hab_musical_tipo" ManuallyRouted="false">
           <ConnectorPoint PointX="10.25" PointY="1.7978417968749998" />
           <ConnectorPoint PointX="11" PointY="1.7978417968749998" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_requisicao_tipo" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.15625" PointY="4.34568359375" />
-          <ConnectorPoint PointX="7.15625" PointY="8.78125" />
-          <ConnectorPoint PointX="8.25" PointY="8.78125" />
+          <ConnectorPoint PointX="7.15625" PointY="16.75" />
+          <ConnectorPoint PointX="7.15625" PointY="10.8987939453125" />
+          <ConnectorPoint PointX="8.25" PointY="10.8987939453125" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_requisicao_usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="9.89037109375" />
-          <ConnectorPoint PointX="8.25" PointY="9.89037109375" />
+          <ConnectorPoint PointX="4.5" PointY="10.504440917968751" />
+          <ConnectorPoint PointX="8.25" PointY="10.504440917968751" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="11.60636418429487" />
-          <ConnectorPoint PointX="4.96875" PointY="12.07511418429487" />
-          <ConnectorPoint PointX="4.96875" PointY="19.006482407755534" />
-          <ConnectorPoint PointX="5.25" PointY="19.006482407755534" />
+          <ConnectorPoint PointX="3.75" PointY="8.375" />
+          <ConnectorPoint PointX="3.75" PointY="7.047841796875" />
+          <ConnectorPoint PointX="8.25" PointY="7.047841796875" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_musico" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.75" PointY="11.662903645833332" />
-          <ConnectorPoint PointX="3.75" PointY="22.2112939453125" />
-          <ConnectorPoint PointX="4.625" PointY="22.2112939453125" />
+          <ConnectorPoint PointX="4.5" PointY="12.662903645833332" />
+          <ConnectorPoint PointX="4.875" PointY="13.037903645833332" />
+          <ConnectorPoint PointX="4.875" PointY="24.5862939453125" />
+          <ConnectorPoint PointX="5.25" PointY="24.5862939453125" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_tipo" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="9.5478417968750016" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="9.5478417968750016" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="9.5478417968750016" />
-          <ConnectorPoint PointX="3" PointY="9.5478417968750016" />
+          <ConnectorPoint PointX="2.25" PointY="10.547841796875002" />
+          <ConnectorPoint PointX="3" PointY="10.547841796875002" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento_ambientacao" Width="1.5" PointX="0.75" PointY="0.875" Height="1.5956835937500031" />
-        <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento_ambientacao" >
-          <ConnectorPoint PointX="2.25" PointY="2.4706835937500031" />
-          <ConnectorPoint PointX="2.625" PointY="2.8456835937500031" />
-          <ConnectorPoint PointX="2.625" PointY="16.375" />
-          <ConnectorPoint PointX="3.6666666666666665" PointY="16.375" />
-          <ConnectorPoint PointX="3.8333333333333335" PointY="16.375" />
-          <ConnectorPoint PointX="4.8761528461538468" PointY="16.375" />
-          <ConnectorPoint PointX="4.9098244349011217" PointY="16.408671588747278" />
-          <ConnectorPoint PointX="5.0276755650988791" PointY="16.526522718945035" />
-          <ConnectorPoint PointX="5.2511528461538459" PointY="16.75" />
+        <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento_ambientacao" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.5" PointY="5.422841796875" />
+          <ConnectorPoint PointX="8.25" PointY="5.422841796875" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento_dias" Width="1.5" PointX="9" PointY="18.25" Height="1.7879850260416674" />
-        <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento_dia_ate" >
-          <ConnectorPoint PointX="9" PointY="19.143992513020834" />
-          <ConnectorPoint PointX="6.75" PointY="19.143992513020834" />
+        <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento_dia_ate" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.5" PointY="3.1605843098958335" />
+          <ConnectorPoint PointX="8.46875" PointY="3.1605843098958335" />
+          <ConnectorPoint PointX="8.46875" PointY="4.75" />
         </AssociationConnector>
-        <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento_dia_de" >
-          <ConnectorPoint PointX="9" PointY="18.634496256510417" />
-          <ConnectorPoint PointX="6.75" PointY="18.634496256510417" />
+        <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento_dia_de" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.5" PointY="3.4430371679687513" />
+          <ConnectorPoint PointX="8.3281225" PointY="3.4430371679687513" />
+          <ConnectorPoint PointX="8.3281225" PointY="4.75" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

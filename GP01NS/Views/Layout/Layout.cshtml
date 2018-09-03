@@ -35,47 +35,10 @@
 	<title>@ViewBag.Title | Nosso Show</title>
 </head>
 <body>
-    <header>
-        <div class="text-center mx-auto logo"></div>
-    </header>
-    <main class="mx-auto">
-        @RenderBody()
-    </main>
-    <footer>
-		<div class="box-footer mx-auto form-group">
-			<div class="col-3">
-				<div class="titulo-footer">Fãs</div>
-				<ul>
-					<li><a href="#">Denunciar evento</a></li>
-					<li><a href="#">Termos de uso</a></li>
-					<li><a href="#">Responsabilidade</a></li>
-				</ul>
-			</div>
-			<div class="col-3">
-				<div class="titulo-footer">Estabelicimento</div>
-				<ul>
-					<li><a href="#">Denunciar evento</a></li>
-					<li><a href="#">Termos de uso</a></li>
-					<li><a href="#">Responsabilidade</a></li>
-				</ul>
-			</div>
-			<div class="col-3">
-				<div class="titulo-footer">Músicos</div>
-				<ul>
-					<li><a href="#">Crie sua conta</a></li>
-					<li><a href="#">Por que usar o NossoShow</a></li>
-					<li><a href="#">Serviços</a></li>
-				</ul>
-			</div>
-			<div class="col-3">
-				<div class="titulo-footer">Forma de pagamento</div>
-				<ul>
-					<li><a href="#">Por que usar o NossoShow</a></li>
-					<li><a href="#">Termos de uso</a></li>
-					<li><a href="#">Responsabilidade</a></li>
-				</ul>
-			</div>
-		</div>
-    </footer>
+	@RenderPage("Parciais/Header.cshtml")
+	<main class="mx-auto">
+		@RenderBody()
+	</main>
+	@RenderPage("Parciais/Footer.cshtml")
 </body>
 </html>
