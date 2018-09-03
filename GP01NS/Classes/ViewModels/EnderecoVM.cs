@@ -3,6 +3,7 @@ using GP01NSLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -21,6 +22,12 @@ namespace GP01NS.Classes.ViewModels
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public string UF { get; set; }
+        public object Razao { get; private set; }
+
+        public EnderecoVM()
+        {
+
+        }
 
         public EnderecoVM(endereco endereco)
         {
@@ -57,6 +64,45 @@ namespace GP01NS.Classes.ViewModels
             catch { }
 
             return null;
+        }
+
+        public bool SaveChanges(UsuarioVM usuario)
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var e = db.endereco.SingleOrDefault(x => x.IDUsuario == usuario.ID);
+
+                    if (e == null)
+                    {
+                        e = new endereco();
+                        e.IDUsuario = usuario.ID;
+                        e.TipoUsuario = usuario.TipoUsuario;
+                    }
+
+                    e.Bairro = this.Bairro;
+                    e.CEP = Regex.Replace(this.CEP, @"[^0-9]", string.Empty);
+                    e.Cidade = this.Cidade;
+                    e.Complemento = this.Complemento;
+                    e.IDMunicipio = this.IDMunicipio;
+                    e.Latitude = string.Empty;
+                    e.Logradouro = this.Logradouro;
+                    e.Longitude = string.Empty;
+                    e.Numero = this.Numero;
+                    e.UF = this.UF;
+
+                    if (db.endereco.Any(x => x.IDUsuario == usuario.ID))
+                        db.ObjectStateManager.ChangeObjectState(e, System.Data.EntityState.Modified);
+                    else
+                        db.endereco.AddObject(e);
+
+                    db.SaveChanges();
+
+                    return true;
+                }
+            }
+            catch (Exception e) { return false; }
         }
     }
 }

@@ -16,17 +16,17 @@ function getEndereco()  {
             if (!("erro" in json)) {
                 var e = eval(json);
 
-                $("#Endereco_Logradouro").val(e.logradouro);
-                $("#Endereco_Bairro").val(e.bairro);
-                $("#Endereco_Cidade").val(e.localidade);
+                $("#Logradouro").val(e.logradouro);
+                $("#Bairro").val(e.bairro);
+                $("#Cidade").val(e.localidade);
                 $(".UF").val(e.uf);
-                $("#Endereco_UF").val(e.uf);
-                $("#Endereco_IDMunicipio").val(e.ibge);
+                $("#UF").val(e.uf);
+                $("#IDMunicipio").val(e.ibge);
 
-                $("#Endereco_Logradouro").attr("readonly", "readonly");
-                $("#Endereco_Bairro").attr("readonly", "readonly");
-                $("#Endereco_Cidade").attr("readonly", "readonly");
-                $("#Endereco_Cidade").attr("readonly", "readonly");
+                $("#Logradouro").attr("readonly", "readonly");
+                $("#Bairro").attr("readonly", "readonly");
+                $("#Cidade").attr("readonly", "readonly");
+                $("#Cidade").attr("readonly", "readonly");
                 $(".UF").attr("disabled", "disabled");
             }
             else {
@@ -42,15 +42,15 @@ function getEndereco()  {
 }
 
 function limpar() {
-    $("#Endereco_Logradouro").val("");
-    $("#Endereco_Bairro").val("");
-    $("#Endereco_Cidade").val("");
+    $("#Logradouro").val("");
+    $("#Bairro").val("");
+    $("#Cidade").val("");
     $(".UF").val("AC");
-    $("#Endereco_UF").val("");
-    $("#Endereco_IDMunicipio").val("");
+    $("#UF").val("");
+    $("#IDMunicipio").val("");
 
-    $("#Endereco_Logradouro").removeAttr("readonly");
-    $("#Endereco_Bairro").removeAttr("readonly");
-    $("#Endereco_Cidade").removeAttr("readonly");
+    $("#Logradouro").removeAttr("readonly");
+    $("#Bairro").removeAttr("readonly");
+    $("#Cidade").removeAttr("readonly");
     $(".UF").removeAttr("disabled");
 }

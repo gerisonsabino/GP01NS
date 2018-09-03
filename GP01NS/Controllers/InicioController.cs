@@ -25,7 +25,12 @@ namespace GP01NS.Controllers
 
                     if (!db.usuario_estabelecimento.Any(x => x.IDUsuario == this.Usuario.ID))
                         return Redirect("/estabelecimento/cadastro/");
+
+                    if (!db.endereco.Any(x => x.IDUsuario == this.Usuario.ID))
+                        return Redirect("/estabelecimento/endereco/");
                 }
+
+
             }
 
             return View(Usuario);

@@ -31,7 +31,7 @@ namespace GP01NS.Controllers
         }
 
         [HttpPost]
-        public ActionResult Cadastro(CadastroVM model)
+        public ActionResult Cadastro(CadastroVM model) 
         {
             this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
 
@@ -62,6 +62,32 @@ namespace GP01NS.Controllers
             }
 
             return Redirect("/inicio/");
+        }
+
+        public ActionResult Endereco()
+        {
+            this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
+
+            var endereco = this.Estabelecimento.Endereco;
+
+            return View(endereco);
+        }
+
+        [HttpPost]
+        public ActionResult Endereco(EnderecoVM model)
+        {
+            this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
+
+            if (model.SaveChanges(this.Estabelecimento))
+            {
+                ViewBag.Sucesso = "Os dados de endereço foram salvos.";
+            }
+            else
+            {
+                ViewBag.Erro = "Por favor, confira os dados informados e tente novamente.";
+            }
+
+            return View(model);
         }
     }
 }

@@ -6,11 +6,8 @@ using System.Web.Mvc;
 
 namespace GP01NS.Controllers
 {
-    public class FaController : Controller
+    public class FaController : BaseController
     {
-        //
-        // GET: /Fa/
-
         public ActionResult Index()
         {
             return View();
