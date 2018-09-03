@@ -3236,10 +3236,6 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\gerisonsabino - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\gerisonsabino - Web Deploy.pubxml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Evento\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
