@@ -137,17 +137,17 @@
     <Compile Include="Classes\ViewModels\EnderecoVM.cs" />
     <Compile Include="Classes\ViewModels\Entrar\CadastroVM.cs" />
     <Compile Include="Classes\ViewModels\EstabelecimentoVM.cs" />
-    <Compile Include="Classes\ViewModels\Estabelecimento\CadastroVM.cs" />
+    <Compile Include="Classes\ViewModels\Estabelecimento\ContaVM.cs" />
+    <Compile Include="Classes\ViewModels\Fa\ContaVM.cs" />
     <Compile Include="Classes\ViewModels\MusicoVM.cs" />
+    <Compile Include="Classes\ViewModels\Musico\ContaVM.cs" />
     <Compile Include="Classes\ViewModels\UsuarioVM.cs" />
     <Compile Include="Controllers\EntrarController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EstabelecimentoController.cs" />
-    <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\FaController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\MusicoController.cs" />
-    <Compile Include="Controllers\SairController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1739,8 +1739,8 @@
     <Content Include="CSS\Views\Entrar\cadastro.css" />
     <Content Include="CSS\Views\Entrar\confirmar-conta.css" />
     <Content Include="CSS\Views\Entrar\index.css" />
-    <Content Include="CSS\Views\Estabelecimento\cadastro.css" />
-    <Content Include="CSS\Views\Evento\index.css" />
+    <Content Include="CSS\Views\forms.css" />
+    <Content Include="CSS\Views\Estabelecimento\evento.css" />
     <Content Include="CSS\Views\layout.css" />
     <Content Include="Imagens\Views\menu.svg" />
     <Content Include="Imagens\Views\user.svg" />
@@ -3217,10 +3217,10 @@
     <Content Include="Views\Entrar\RedefinirSenha.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Estabelecimento\Cadastro.cshtml" />
+    <Content Include="Views\Estabelecimento\Conta.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Fa\Index.cshtml" />
+    <Content Include="Views\Fa\Conta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Estabelecimento\Endereco.cshtml" />
@@ -3230,19 +3230,13 @@
     <Content Include="Views\Estabelecimento\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\nosso_show.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <Content Include="Views\Estabelecimento\Eventos.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Evento\Index.cshtml" />
+    <Content Include="Views\Estabelecimento\Evento.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Evento\Cadastro.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Evento\Parciais\CardMenu.cshtml" />
+    <Content Include="Views\Estabelecimento\Parciais\CardMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Perfil\Parciais\CardMenu.cshtml" />
@@ -3255,6 +3249,32 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Layout\Parciais\Navbar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Layout\Parciais\Menu\Estabelecimento.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Sair\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Layout\Parciais\Menu\Fa.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Fa\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Layout\Parciais\Menu\Musico.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Musico\Conta.cshtml" />
+    <Content Include="Views\Fa\Endereco.cshtml" />
+    <Content Include="Views\Musico\Endereco.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\nosso_show.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

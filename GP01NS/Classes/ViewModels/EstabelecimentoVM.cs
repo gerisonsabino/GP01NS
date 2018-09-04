@@ -50,7 +50,7 @@ namespace GP01NS.Classes.ViewModels
             }
         }
 
-        public bool SaveChanges()
+        public bool SaveChanges() 
         {
             try
             {
@@ -90,7 +90,7 @@ namespace GP01NS.Classes.ViewModels
                     return true;
                 }
             }
-            catch (Exception e) { return false; }
+            catch { return false; }
         }
 
         private usuario_estabelecimento GetEstabelecimentoByID(int id)

@@ -1,4 +1,5 @@
-﻿using GP01NS.Classes.ViewModels;
+﻿using GP01NS.Classes.Util;
+using GP01NS.Classes.ViewModels;
 using GP01NS.Classes.ViewModels.Estabelecimento;
 using GP01NS.Models;
 using GP01NSLibrary;
@@ -23,7 +24,7 @@ namespace GP01NS.Controllers
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
                     if (!db.usuario_estabelecimento.Any(x => x.IDUsuario == this.Estabelecimento.ID))
-                        return Redirect("/estabelecimento/cadastro/");
+                        return Redirect("/estabelecimento/conta/");
 
                     if (!db.endereco.Any(x => x.IDUsuario == this.Estabelecimento.ID))
                         return Redirect("/estabelecimento/endereco/");
@@ -33,17 +34,17 @@ namespace GP01NS.Controllers
             return View(Estabelecimento);
         }
 
-        public ActionResult Cadastro()
+        public ActionResult Conta()
         {
             this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
 
-            var cadastro = new CadastroVM(this.Estabelecimento);
+            var cadastro = new ContaVM(this.Estabelecimento);
 
             return View(cadastro);
         }
 
         [HttpPost]
-        public ActionResult Cadastro(CadastroVM model) 
+        public ActionResult Conta(ContaVM model) 
         {
             this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
 
@@ -76,6 +77,16 @@ namespace GP01NS.Controllers
             return View(model);
         }
 
+        public ActionResult Eventos()
+        {
+            return View();
+        }
+
+        public ActionResult Evento()
+        {
+            return View();
+        }
+
         public ActionResult Endereco()
         {
             this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
@@ -104,6 +115,44 @@ namespace GP01NS.Controllers
             }
 
             return View(model);
+        }
+
+        public ActionResult Sair()
+        {
+            try
+            {
+                string id = string.Empty;
+
+                try
+                {
+                    id = Criptografia.Descriptografar(base.Session["IDUsuario"].ToString());
+                }
+                catch { }
+
+                if (!string.IsNullOrEmpty(id))
+                {
+                    base.Session.RemoveAll();
+                    base.Session.Clear();
+                    base.Session.Abandon();
+                    base.Session["IDUsuario"] = string.Empty;
+
+                    using (var db = new nosso_showEntities(Conexao.GetString()))
+                    {
+                        int idUsuario = int.Parse(Criptografia.Descriptografar(id));
+
+                        var auths = db.autenticacao.Where(x => x.IDUsuario == idUsuario && x.Sessao == Session.SessionID).ToList();
+
+                        for (int i = 0; i < auths.Count; i++)
+                            db.autenticacao.DeleteObject(auths[i]);
+
+                        db.SaveChanges();
+                    }
+                }
+
+            }
+            catch { }
+
+            return Redirect("/entrar");
         }
     }
 }

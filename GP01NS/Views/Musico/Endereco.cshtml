@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Endereço";
-    var Estabelecimento = (GP01NS.Classes.ViewModels.EstabelecimentoVM)ViewBag.Estabelecimento;
 }
 
 <link href="~/CSS/Views/forms.css" rel="stylesheet" />
@@ -13,7 +12,7 @@
             <div class="col-md-7 ml-auto mr-auto">
                 @using (Html.BeginForm())
                 {
-                    <h5 class="text-uppercase">Endereço de @Estabelecimento.Nome</h5>
+                    <h5 class="text-uppercase">Meu endereço</h5>
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="inputCep">CEP</label>

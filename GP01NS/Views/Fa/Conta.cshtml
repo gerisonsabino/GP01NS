@@ -1,0 +1,103 @@
+﻿@model GP01NS.Classes.ViewModels.Fa.ContaVM
+
+@{
+    ViewBag.Title = "Fã";
+    var Generos = (List<GP01NS.Models.genero_musical>)ViewBag.Generos;
+    var Ambientacoes = (List<GP01NS.Models.ambientacao>)ViewBag.Ambientacoes;
+}
+
+<!--STYLES-->
+<link href="~/CSS/Views/forms.css" rel="stylesheet" />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9 col-12 col-lg-9 ml-auto mr-auto form">
+            <div class="col-md-7 ml-auto mr-auto">
+                @using (Html.BeginForm())
+                {
+                    <h5 class="text-uppercase">Minha Conta</h5>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="Nome">Nome</label>
+                            @Html.TextBoxFor(x => x.Nome, new { @class = "form-control", placeholder = "Nome", required = "required" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="Email">Nome de usuário</label>
+                            <div class="input-group md3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">@("@")</span>
+                                </div>
+                                @Html.TextBoxFor(x => x.Username, new { @class = "form-control", placeholder = "Nome de Usuário", required = "required" })
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label for="Email">Email</label>
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "E-mail", required = "required", type = "email" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="Nascimento">Data de Nascimento</label>
+                            @Html.TextBoxFor(x => x.Nascimento, "{0:dd/MM/yyyy}", new { @class = "form-control data", placeholder = "Data de nascimento", required = "required" })
+                        </div>
+                        <div class="form-group col">
+                            <label for="Telefone">Telefone/Celular</label>
+                            @Html.TextBoxFor(x => x.Telefone, new { @class = "form-control celular", placeholder = "Telefone", required = "required" })
+                        </div>
+                    </div>
+                    <br />
+                    <h5 class="text-uppercase">Preferências</h5>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="Generos">Genêros músicais</label>
+                            <select id="Generos" class="select-custom form-control" placeholder="Selecione os genêros músicais" multiple required>
+                                @for (int i = 0; i < Generos.Count; i++)
+                                {
+                                    <option value="@Generos[i].ID">@Generos[i].Descricao</option>
+                                }
+                            </select>
+                            @Html.HiddenFor(x => x.JsonGeneros)
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="Ambientes">Ambientes</label>
+                            <select id="Ambientes" class="select-custom form-control" placeholder="Selecione os ambientes" multiple required>
+                                @for (int i = 0; i < Ambientacoes.Count; i++)
+                                {
+                                    <option value="@Ambientacoes[i].ID">@Ambientacoes[i].Descricao</option>
+                                }
+                            </select>
+                            @Html.HiddenFor(x => x.JsonAmbientes)
+                        </div>
+                    </div>
+
+                    if (!string.IsNullOrEmpty(ViewBag.Erro))
+                    {
+                        <div class="alert alert-danger">
+                            <strong>@ViewBag.Erro</strong>
+                        </div>
+                    }
+
+                    if (!string.IsNullOrEmpty(ViewBag.Sucesso))
+                    {
+                        <div class="alert alert-success">
+                            <strong>@ViewBag.Sucesso</strong>
+                        </div>
+                    }
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">SALVAR</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#Generos').val(eval($("#JsonGeneros").val())).trigger('change');
+    $('#Ambientes').val(eval($("#JsonAmbientes").val())).trigger('change');
+</script>
+<script src="~/Scripts/Views/Entrar/Cadastro/form_main.js"></script>

@@ -1,0 +1,112 @@
+﻿@model GP01NS.Classes.ViewModels.Musico.ContaVM
+
+@{
+    ViewBag.Title = "Músico";
+    var Generos = (List<GP01NS.Models.genero_musical>)ViewBag.Generos;
+    var TipoHabilidades = (List<GP01NS.Models.hab_musical_tipo>)ViewBag.TipoHabilidades;
+    var Habilidades = (List<GP01NS.Models.hab_musical>)ViewBag.Habilidades;
+}
+
+<link href="~/CSS/Views/forms.css" rel="stylesheet" />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9 col-12 col-lg-9 ml-auto mr-auto form">
+            <div class="col-md-7 ml-auto mr-auto">
+                @using (Html.BeginForm())
+                {
+                    <h5 class="text-uppercase">Minha Conta</h5>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="Nome">Nome</label>
+                            @Html.TextBoxFor(x => x.Nome, new { @class = "form-control", placeholder = "Nome", required = "required" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="Email">Nome de usuário</label>
+                            <div class="input-group md3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">@("@")</span>
+                                </div>
+                                @Html.TextBoxFor(x => x.Username, new { @class = "form-control", placeholder = "Nome de Usuário", required = "required" })
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label for="Email">E-mail</label>
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "E-mail", required = "required", type = "email" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="Nascimento">Data de Nascimento</label>
+                            @Html.TextBoxFor(x => x.Nascimento, "{0:dd/MM/yyyy}", new { @class = "form-control data", placeholder = "Data de nascimento", required = "required" })
+                        </div>
+                        <div class="form-group col">
+                            <label for="Telefone">Telefone/Celular</label>
+                            @Html.TextBoxFor(x => x.Telefone, new { @class = "form-control celular", placeholder = "Telefone", required = "required" })
+                        </div>
+                    </div>
+                    <br />
+                    <h5 class="text-uppercase">Músico</h5>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="CPF">CPF</label>
+                            @Html.TextBoxFor(x => x.CPF, "{0:dd/MM/yyyy}", new { @class = "form-control cpf", placeholder = "CPF", required = "required" })
+                        </div>
+                        <div class="form-group col">
+                            <label for="NomeArtistico">Nome Artístico</label>
+                            @Html.TextBoxFor(x => x.NomeArtistico, new { @class = "form-control", placeholder = "Nome Artístico", required = "required" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="Descricao">Descrição</label>
+                            @Html.TextAreaFor(x => x.Descricao, new { @class = "form-control", placeholder = "Descreva suas habilidades em até 500 caracteres", maxlength = "500", required = "required", cols = "", rows = "7" })
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="Habilidades">Habilidades</label>
+                            <select id="Habilidades" class="select-custom form-control" placeholder="Selecione suas habilidades" multiple required="">
+                                @for (int i = 0; i < TipoHabilidades.Count; i++)
+                                {
+                                    var tipo = TipoHabilidades[i];
+                                    var habs = Habilidades.Where(x => x.TipoHab == tipo.ID).ToList();
+
+                                    <optgroup label="@TipoHabilidades[i].Descricao">
+                                        @for (int j = 0; j < habs.Count; j++)
+                                        {
+                                            <option value="@habs[j].ID">@habs[j].Descricao</option>
+                                        }
+                                    </optgroup>
+                                }
+                            </select>
+                            @Html.HiddenFor(x => x.JsonHabilidades)
+                        </div>
+                    </div>
+
+                    if (!string.IsNullOrEmpty(ViewBag.Erro))
+                    {
+                        <div class="alert alert-danger">
+                            <strong>@ViewBag.Erro</strong>
+                        </div>
+                    }
+
+                    if (!string.IsNullOrEmpty(ViewBag.Sucesso))
+                    {
+                        <div class="alert alert-success">
+                            <strong>@ViewBag.Sucesso</strong>
+                        </div>
+                    }
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">SALVAR</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#Habilidades').val(eval($("#JsonHabilidades").val())).trigger('change');
+</script>
+<script src="~/Scripts/Views/Entrar/Cadastro/form_main.js"></script>

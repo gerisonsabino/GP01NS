@@ -1,0 +1,46 @@
+﻿@{
+    var Conta = (GP01NS.Models.usuario)ViewBag.BaseUsuario;
+}
+
+<nav class="navbar navbar-expand-lg">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <img src="~/Imagens/Views/menu.svg">
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/estabelecimento/">Início</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Evento
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    <li>
+                        <a class="dropdown-item" href="/estabelecimento/eventos/">Meus Eventos</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/estabelecimento/evento/">Cadastro</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="~/Imagens/Views/user.svg" style="width: 25px; height: 25px; margin-right: 5px" /> 
+                    @Conta.Nome
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    <li>
+                        <a class="dropdown-item" href="/estabelecimento/conta/">Conta</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/estabelecimento/endereco/">Endereço</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/estabelecimento/sair/">Sair</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

@@ -44,6 +44,30 @@ namespace GP01NS.Classes.ViewModels
             this.Endereco = new EnderecoVM(this.GetEnderecoByIDUsuario(this.ID));
         }
 
+        public bool ValidarEmail(UsuarioVM usuario)
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    return !db.usuario.Any(x => x.Email == this.Email && x.ID != usuario.ID);
+                }
+            }
+            catch { return true; }
+        }
+
+        public bool ValidarNomeUsuario(UsuarioVM usuario)
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    return !db.usuario.Any(x => x.Username.ToLower() == this.Username.ToLower() && x.ID != usuario.ID);
+                }
+            }
+            catch { return true; }
+        }
+
         private endereco GetEnderecoByIDUsuario(int id)
         {
             try

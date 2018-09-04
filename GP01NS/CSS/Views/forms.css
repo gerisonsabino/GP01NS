@@ -31,13 +31,6 @@ h5 {
     margin-bottom: 2em;
 }
 
-.img {
-    background-image: url('../../../Imagens/Views/Estabelecimento/bg-estabelecimento.jpg');
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-}
-
 .input-campo {
     position: relative;
 }

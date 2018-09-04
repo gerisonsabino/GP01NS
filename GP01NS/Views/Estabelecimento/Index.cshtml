@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Início";
 }
 
 <div class="container">
@@ -8,21 +8,11 @@
             <div class="col-md-7 ml-auto mr-auto text-left">
                 <div class=" text-center">
                     <h1 class="display-4">@Model.Nome, Seja bem-vindo! =)</h1>
-                    <br>
-                    <p class="display-5">@("@" + Model.Username)</p>
-                    <hr>
+                    <br />
+                    <p class="display-5">
+                        @("@" + Model.Username)
+                    </p>
                 </div>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <a href="/estabelecimento/cadastro/">Informações</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="/estabelecimento/endereco/">Endereço</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="btn btn-danger" href="/sair/" role="button">SAIR</a>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>

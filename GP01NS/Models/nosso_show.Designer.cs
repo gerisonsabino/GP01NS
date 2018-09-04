@@ -19,6 +19,7 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
+[assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_estabelecimento_ambientacao", "ambientacao", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.ambientacao), "usuario_estabelecimento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_estabelecimento), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_autenticacao_usuario", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario), "autenticacao", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.autenticacao), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_endereco_uf", "endereco_uf", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.endereco_uf), "endereco", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.endereco), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_endereco_usuario", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario), "endereco", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.endereco), true)]
@@ -28,9 +29,11 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_estabelecimento", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario), "usuario_estabelecimento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_estabelecimento), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_musico", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario), "usuario_musico", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_musico), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_tipo", "usuario_tipo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario_tipo), "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario), true)]
-[assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_estabelecimento_ambientacao", "usuario_estabelecimento_ambientacao", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario_estabelecimento_ambientacao), "usuario_estabelecimento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_estabelecimento), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_estabelecimento_dia_ate", "usuario_estabelecimento_dias", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario_estabelecimento_dias), "usuario_estabelecimento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_estabelecimento), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_estabelecimento_dia_de", "usuario_estabelecimento_dias", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario_estabelecimento_dias), "usuario_estabelecimento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_estabelecimento), true)]
+[assembly: EdmRelationshipAttribute("nosso_showModel", "usuario_ambientacao", "ambientacao", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.ambientacao), "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario))]
+[assembly: EdmRelationshipAttribute("nosso_showModel", "usuario_genero_musical", "genero_musical", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.genero_musical), "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario))]
+[assembly: EdmRelationshipAttribute("nosso_showModel", "usuario_hab_musical", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario), "hab_musical", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.hab_musical))]
 
 #endregion
 
@@ -85,6 +88,22 @@ namespace GP01NS.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<ambientacao> ambientacao
+        {
+            get
+            {
+                if ((_ambientacao == null))
+                {
+                    _ambientacao = base.CreateObjectSet<ambientacao>("ambientacao");
+                }
+                return _ambientacao;
+            }
+        }
+        private ObjectSet<ambientacao> _ambientacao;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<autenticacao> autenticacao
         {
             get
@@ -129,6 +148,22 @@ namespace GP01NS.Models
             }
         }
         private ObjectSet<endereco_uf> _endereco_uf;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<genero_musical> genero_musical
+        {
+            get
+            {
+                if ((_genero_musical == null))
+                {
+                    _genero_musical = base.CreateObjectSet<genero_musical>("genero_musical");
+                }
+                return _genero_musical;
+            }
+        }
+        private ObjectSet<genero_musical> _genero_musical;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -229,22 +264,6 @@ namespace GP01NS.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<usuario_estabelecimento_ambientacao> usuario_estabelecimento_ambientacao
-        {
-            get
-            {
-                if ((_usuario_estabelecimento_ambientacao == null))
-                {
-                    _usuario_estabelecimento_ambientacao = base.CreateObjectSet<usuario_estabelecimento_ambientacao>("usuario_estabelecimento_ambientacao");
-                }
-                return _usuario_estabelecimento_ambientacao;
-            }
-        }
-        private ObjectSet<usuario_estabelecimento_ambientacao> _usuario_estabelecimento_ambientacao;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<usuario_estabelecimento_dias> usuario_estabelecimento_dias
         {
             get
@@ -295,6 +314,14 @@ namespace GP01NS.Models
         #region AddTo Methods
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the ambientacao EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToambientacao(ambientacao ambientacao)
+        {
+            base.AddObject("ambientacao", ambientacao);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the autenticacao EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToautenticacao(autenticacao autenticacao)
@@ -316,6 +343,14 @@ namespace GP01NS.Models
         public void AddToendereco_uf(endereco_uf endereco_uf)
         {
             base.AddObject("endereco_uf", endereco_uf);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the genero_musical EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTogenero_musical(genero_musical genero_musical)
+        {
+            base.AddObject("genero_musical", genero_musical);
         }
     
         /// <summary>
@@ -367,14 +402,6 @@ namespace GP01NS.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the usuario_estabelecimento_ambientacao EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTousuario_estabelecimento_ambientacao(usuario_estabelecimento_ambientacao usuario_estabelecimento_ambientacao)
-        {
-            base.AddObject("usuario_estabelecimento_ambientacao", usuario_estabelecimento_ambientacao);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the usuario_estabelecimento_dias EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddTousuario_estabelecimento_dias(usuario_estabelecimento_dias usuario_estabelecimento_dias)
@@ -405,6 +432,137 @@ namespace GP01NS.Models
     #endregion
 
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="nosso_showModel", Name="ambientacao")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ambientacao : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ambientacao object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="descricao">Initial value of the Descricao property.</param>
+        public static ambientacao Createambientacao(global::System.Int32 id, global::System.String descricao)
+        {
+            ambientacao ambientacao = new ambientacao();
+            ambientacao.ID = id;
+            ambientacao.Descricao = descricao;
+            return ambientacao;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Descricao
+        {
+            get
+            {
+                return _Descricao;
+            }
+            set
+            {
+                OnDescricaoChanging(value);
+                ReportPropertyChanging("Descricao");
+                _Descricao = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Descricao");
+                OnDescricaoChanged();
+            }
+        }
+        private global::System.String _Descricao;
+        partial void OnDescricaoChanging(global::System.String value);
+        partial void OnDescricaoChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "FK_usuario_estabelecimento_ambientacao", "usuario_estabelecimento")]
+        public EntityCollection<usuario_estabelecimento> usuario_estabelecimento
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<usuario_estabelecimento>("nosso_showModel.FK_usuario_estabelecimento_ambientacao", "usuario_estabelecimento");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<usuario_estabelecimento>("nosso_showModel.FK_usuario_estabelecimento_ambientacao", "usuario_estabelecimento", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "usuario_ambientacao", "usuario")]
+        public EntityCollection<usuario> usuario
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<usuario>("nosso_showModel.usuario_ambientacao", "usuario");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<usuario>("nosso_showModel.usuario_ambientacao", "usuario", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -1188,6 +1346,115 @@ namespace GP01NS.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="nosso_showModel", Name="genero_musical")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class genero_musical : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new genero_musical object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="descricao">Initial value of the Descricao property.</param>
+        public static genero_musical Creategenero_musical(global::System.Int32 id, global::System.String descricao)
+        {
+            genero_musical genero_musical = new genero_musical();
+            genero_musical.ID = id;
+            genero_musical.Descricao = descricao;
+            return genero_musical;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Descricao
+        {
+            get
+            {
+                return _Descricao;
+            }
+            set
+            {
+                OnDescricaoChanging(value);
+                ReportPropertyChanging("Descricao");
+                _Descricao = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Descricao");
+                OnDescricaoChanged();
+            }
+        }
+        private global::System.String _Descricao;
+        partial void OnDescricaoChanging(global::System.String value);
+        partial void OnDescricaoChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "usuario_genero_musical", "usuario")]
+        public EntityCollection<usuario> usuario
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<usuario>("nosso_showModel.usuario_genero_musical", "usuario");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<usuario>("nosso_showModel.usuario_genero_musical", "usuario", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="nosso_showModel", Name="hab_musical")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -1331,6 +1598,28 @@ namespace GP01NS.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<hab_musical_tipo>("nosso_showModel.FK_hab_musical_tipo", "hab_musical_tipo", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "usuario_hab_musical", "usuario")]
+        public EntityCollection<usuario> usuario
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<usuario>("nosso_showModel.usuario_hab_musical", "usuario");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<usuario>("nosso_showModel.usuario_hab_musical", "usuario", value);
                 }
             }
         }
@@ -2326,6 +2615,72 @@ namespace GP01NS.Models
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "usuario_ambientacao", "ambientacao")]
+        public EntityCollection<ambientacao> ambientacao
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ambientacao>("nosso_showModel.usuario_ambientacao", "ambientacao");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ambientacao>("nosso_showModel.usuario_ambientacao", "ambientacao", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "usuario_genero_musical", "genero_musical")]
+        public EntityCollection<genero_musical> genero_musical
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<genero_musical>("nosso_showModel.usuario_genero_musical", "genero_musical");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<genero_musical>("nosso_showModel.usuario_genero_musical", "genero_musical", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "usuario_hab_musical", "hab_musical")]
+        public EntityCollection<hab_musical> hab_musical
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<hab_musical>("nosso_showModel.usuario_hab_musical", "hab_musical");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<hab_musical>("nosso_showModel.usuario_hab_musical", "hab_musical", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -2634,6 +2989,44 @@ namespace GP01NS.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "FK_usuario_estabelecimento_ambientacao", "ambientacao")]
+        public ambientacao ambientacao
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ambientacao>("nosso_showModel.FK_usuario_estabelecimento_ambientacao", "ambientacao").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ambientacao>("nosso_showModel.FK_usuario_estabelecimento_ambientacao", "ambientacao").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ambientacao> ambientacaoReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ambientacao>("nosso_showModel.FK_usuario_estabelecimento_ambientacao", "ambientacao");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ambientacao>("nosso_showModel.FK_usuario_estabelecimento_ambientacao", "ambientacao", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "FK_usuario_estabelecimento", "usuario")]
         public usuario usuario
         {
@@ -2662,44 +3055,6 @@ namespace GP01NS.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<usuario>("nosso_showModel.FK_usuario_estabelecimento", "usuario", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "FK_usuario_estabelecimento_ambientacao", "usuario_estabelecimento_ambientacao")]
-        public usuario_estabelecimento_ambientacao usuario_estabelecimento_ambientacao
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario_estabelecimento_ambientacao>("nosso_showModel.FK_usuario_estabelecimento_ambientacao", "usuario_estabelecimento_ambientacao").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario_estabelecimento_ambientacao>("nosso_showModel.FK_usuario_estabelecimento_ambientacao", "usuario_estabelecimento_ambientacao").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<usuario_estabelecimento_ambientacao> usuario_estabelecimento_ambientacaoReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario_estabelecimento_ambientacao>("nosso_showModel.FK_usuario_estabelecimento_ambientacao", "usuario_estabelecimento_ambientacao");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<usuario_estabelecimento_ambientacao>("nosso_showModel.FK_usuario_estabelecimento_ambientacao", "usuario_estabelecimento_ambientacao", value);
                 }
             }
         }
@@ -2776,115 +3131,6 @@ namespace GP01NS.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<usuario_estabelecimento_dias>("nosso_showModel.FK_usuario_estabelecimento_dia_de", "usuario_estabelecimento_dias", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="nosso_showModel", Name="usuario_estabelecimento_ambientacao")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class usuario_estabelecimento_ambientacao : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new usuario_estabelecimento_ambientacao object.
-        /// </summary>
-        /// <param name="id">Initial value of the ID property.</param>
-        /// <param name="descricao">Initial value of the Descricao property.</param>
-        public static usuario_estabelecimento_ambientacao Createusuario_estabelecimento_ambientacao(global::System.Int32 id, global::System.String descricao)
-        {
-            usuario_estabelecimento_ambientacao usuario_estabelecimento_ambientacao = new usuario_estabelecimento_ambientacao();
-            usuario_estabelecimento_ambientacao.ID = id;
-            usuario_estabelecimento_ambientacao.Descricao = descricao;
-            return usuario_estabelecimento_ambientacao;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                if (_ID != value)
-                {
-                    OnIDChanging(value);
-                    ReportPropertyChanging("ID");
-                    _ID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("ID");
-                    OnIDChanged();
-                }
-            }
-        }
-        private global::System.Int32 _ID;
-        partial void OnIDChanging(global::System.Int32 value);
-        partial void OnIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Descricao
-        {
-            get
-            {
-                return _Descricao;
-            }
-            set
-            {
-                OnDescricaoChanging(value);
-                ReportPropertyChanging("Descricao");
-                _Descricao = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Descricao");
-                OnDescricaoChanged();
-            }
-        }
-        private global::System.String _Descricao;
-        partial void OnDescricaoChanging(global::System.String value);
-        partial void OnDescricaoChanged();
-
-        #endregion
-
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "FK_usuario_estabelecimento_ambientacao", "usuario_estabelecimento")]
-        public EntityCollection<usuario_estabelecimento> usuario_estabelecimento
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<usuario_estabelecimento>("nosso_showModel.FK_usuario_estabelecimento_ambientacao", "usuario_estabelecimento");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<usuario_estabelecimento>("nosso_showModel.FK_usuario_estabelecimento_ambientacao", "usuario_estabelecimento", value);
                 }
             }
         }

@@ -1,7 +1,7 @@
 ﻿function fieldsRequest() {
 	$('[required]').each(function () {
 		const textError = $(this).attr('placeholder') || 'Preencha esse campo';
-		$(this).after(`<div class="invalid-feedback">${textError}!</div>`)
+        $(this).after('<div class="invalid-feedback">${textError}!</div>');
 
 	});
 }

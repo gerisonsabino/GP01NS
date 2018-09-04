@@ -9,6 +9,7 @@ namespace GP01NS.Classes.ViewModels
 {
     public class MusicoVM : UsuarioVM
     {
+        public string NomeArtistico { get; set; }
         public string CPF { get; set; }
         public string Descricao { get; set; }
 
@@ -20,11 +21,13 @@ namespace GP01NS.Classes.ViewModels
 
             if (this.Musico != null)
             {
+                this.NomeArtistico = this.Musico.NomeArtistico;
                 this.CPF = this.Musico.CPF;
                 this.Descricao = this.Musico.Descricao;
             }
             else
             {
+                this.NomeArtistico = string.Empty;
                 this.CPF = string.Empty;
                 this.Descricao = string.Empty;
             }

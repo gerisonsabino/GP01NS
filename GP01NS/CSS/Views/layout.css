@@ -23,6 +23,7 @@ header .navbar {
 
 header .navbar .nav-link {
 	color: #FFF;
+    font-weight: 600;
 }
 
 header .logo {
@@ -32,7 +33,7 @@ header .logo {
 }
 
 .dropdown-submenu {
-	position: relative;
+    position: relative;
 }
 
 .dropdown-submenu a::after {

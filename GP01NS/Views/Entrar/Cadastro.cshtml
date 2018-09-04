@@ -50,29 +50,31 @@
                             <div class="invalid-feedback">Crie um nome de usuário!</div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="senha">Senha</label>
-                        <input type="password" class="form-control" id="senha" name="senha" aria-describedby="emailHelp" placeholder="Digite sua senha" required="" />
-                        <div class="invalid-feedback">Informe a Senha!</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmaSenha">Confirme sua senha</label>
-                        <input type="password" class="form-control" id="confirmacao" name="confirmacao" aria-describedby="emailHelp" placeholder="Defina sua senha" required="" />
-                        <div class="invalid-feedback">As Senhas Não Conferem!</div>
+                    <div class="form-row">
+                        <div class="form-group col col-sm-6 col-12">
+                            <label for="senha">Senha</label>
+                            <input type="password" class="form-control" id="senha" name="senha" aria-describedby="emailHelp" placeholder="Digite sua senha" required="" />
+                            <div class="invalid-feedback">Informe a Senha!</div>
+                        </div>
+                        <div class="form-group col col-sm-6 col-12">
+                            <label for="confirmaSenha">Confirme a senha</label>
+                            <input type="password" class="form-control" id="confirmacao" name="confirmacao" aria-describedby="emailHelp" placeholder="Defina sua senha" required="" />
+                            <div class="invalid-feedback">As Senhas Não Conferem!</div>
+                        </div>
                     </div>
 
                     if (!string.IsNullOrEmpty(ViewBag.Mensagem))
                     {
-                    <div class="alert alert-danger">
-                        <strong>@ViewBag.Mensagem</strong>
-                    </div>
+                        <div class="alert alert-danger">
+                            <strong>@ViewBag.Mensagem</strong>
+                        </div>
                     }
 
                     if (!string.IsNullOrEmpty(ViewBag.Sucesso))
                     {
-                    <div class="alert alert-success">
-                        <strong>@ViewBag.Sucesso</strong>
-                    </div>
+                        <div class="alert alert-success">
+                            <strong>@ViewBag.Sucesso</strong>
+                        </div>
                     }
 
                     <div class="text-center">
@@ -82,9 +84,9 @@
                     <div class="text-center">
                         <a href="/entrar/">Voltar</a>
                     </div>
-                    }
-                </div>
-        </div>
+                }
+            </div>
+            </div>
     </div>
 </div>
 

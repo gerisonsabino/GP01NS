@@ -1,4 +1,26 @@
-﻿<header>
-	<div class="text-center logo"></div>
-	@RenderPage("Navbar.cshtml")
+﻿@{ 
+    var Conta = (GP01NS.Models.usuario)ViewBag.BaseUsuario;
+}
+
+<header>
+    <div class="text-center logo"></div>
+
+    @switch (Conta.Tipo)
+    {
+        case 1:
+            @RenderPage("~/Views/Layout/Parciais/Menu/Administrador.cshtml");
+            break;
+
+        case 2:
+            @RenderPage("~/Views/Layout/Parciais/Menu/Estabelecimento.cshtml");
+            break;
+
+        case 3:
+            @RenderPage("~/Views/Layout/Parciais/Menu/Fa.cshtml");
+            break;
+
+        case 4:
+            @RenderPage("~/Views/Layout/Parciais/Menu/Musico.cshtml");
+            break;
+    }
 </header>

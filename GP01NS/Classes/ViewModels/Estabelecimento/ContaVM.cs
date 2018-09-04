@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace GP01NS.Classes.ViewModels.Estabelecimento
 {
-    public class CadastroVM
+    public class ContaVM
     {
         public string Nome { get; set; }
         public string Username { get; set; }
@@ -23,9 +23,9 @@ namespace GP01NS.Classes.ViewModels.Estabelecimento
         public int As { get; set; }
         public int IDAmbientacao { get; set; }
 
-        public CadastroVM() { }
+        public ContaVM() { }
 
-        public CadastroVM(EstabelecimentoVM estabelecimento)
+        public ContaVM(EstabelecimentoVM estabelecimento)
         {
             if (estabelecimento != null)
             {
@@ -88,7 +88,7 @@ namespace GP01NS.Classes.ViewModels.Estabelecimento
             {
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
-                    var ambientacoes = db.usuario_estabelecimento_ambientacao.ToList();
+                    var ambientacoes = db.ambientacao.ToList();
 
                     return new SelectList(ambientacoes, "ID", "Descricao", this.IDAmbientacao);
                 }
@@ -120,10 +120,11 @@ namespace GP01NS.Classes.ViewModels.Estabelecimento
 
             for (int i = 0; i <= 23; i++) 
             {
-                var hr = new Horas();
-
-                hr.ID = i;
-                hr.Hora = i.ToString("D2") + ":00";
+                var hr = new Horas
+                {
+                    ID = i,
+                    Hora = i.ToString("D2") + ":00"
+                };
 
                 horas.Add(hr);
             }

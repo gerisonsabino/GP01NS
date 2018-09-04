@@ -51,6 +51,7 @@ namespace GP01NS.Controllers
                     var auth = auths.Last();
 
                     this.BaseUsuario = auth.usuario;
+                    ViewBag.BaseUsuario = this.BaseUsuario;
                 }
 
                 var rota = string.Empty;
@@ -74,7 +75,7 @@ namespace GP01NS.Controllers
                         break;
                 }
 
-                if (controller.ToUpper() != rota.ToUpper() || controller.Equals("sair"))
+                if (controller.ToUpper() != rota.ToUpper())
                     filterContext.Result = RedirectPermanent("/" + rota + "/");
             }
 

@@ -4,19 +4,23 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="nosso_showModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="nosso_showModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="nosso_showModelStoreContainer">
+          <EntitySet Name="ambientacao" EntityType="nosso_showModel.Store.ambientacao" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="autenticacao" EntityType="nosso_showModel.Store.autenticacao" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="endereco" EntityType="nosso_showModel.Store.endereco" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="endereco_uf" EntityType="nosso_showModel.Store.endereco_uf" store:Type="Tables" Schema="nosso_show" />
+          <EntitySet Name="genero_musical" EntityType="nosso_showModel.Store.genero_musical" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="hab_musical" EntityType="nosso_showModel.Store.hab_musical" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="hab_musical_tipo" EntityType="nosso_showModel.Store.hab_musical_tipo" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="requisicao" EntityType="nosso_showModel.Store.requisicao" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="requisicao_tipo" EntityType="nosso_showModel.Store.requisicao_tipo" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="usuario" EntityType="nosso_showModel.Store.usuario" store:Type="Tables" Schema="nosso_show" />
+          <EntitySet Name="usuario_ambientacao" EntityType="nosso_showModel.Store.usuario_ambientacao" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="usuario_estabelecimento" EntityType="nosso_showModel.Store.usuario_estabelecimento" store:Type="Tables" Schema="nosso_show" />
-          <EntitySet Name="usuario_estabelecimento_ambientacao" EntityType="nosso_showModel.Store.usuario_estabelecimento_ambientacao" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="usuario_estabelecimento_dias" EntityType="nosso_showModel.Store.usuario_estabelecimento_dias" store:Type="Tables" Schema="nosso_show" />
+          <EntitySet Name="usuario_genero_musical" EntityType="nosso_showModel.Store.usuario_genero_musical" store:Type="Tables" Schema="nosso_show" />
+          <EntitySet Name="usuario_hab_musical" EntityType="nosso_showModel.Store.usuario_hab_musical" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="usuario_musico" EntityType="nosso_showModel.Store.usuario_musico" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="usuario_tipo" EntityType="nosso_showModel.Store.usuario_tipo" store:Type="Tables" Schema="nosso_show" />
           <AssociationSet Name="FK_autenticacao_usuario" Association="nosso_showModel.Store.FK_autenticacao_usuario">
@@ -31,9 +35,17 @@
             <End Role="usuario" EntitySet="usuario" />
             <End Role="endereco" EntitySet="endereco" />
           </AssociationSet>
+          <AssociationSet Name="FK_genero_musical" Association="nosso_showModel.Store.FK_genero_musical">
+            <End Role="genero_musical" EntitySet="genero_musical" />
+            <End Role="usuario_genero_musical" EntitySet="usuario_genero_musical" />
+          </AssociationSet>
           <AssociationSet Name="FK_hab_musical_tipo" Association="nosso_showModel.Store.FK_hab_musical_tipo">
             <End Role="hab_musical_tipo" EntitySet="hab_musical_tipo" />
             <End Role="hab_musical" EntitySet="hab_musical" />
+          </AssociationSet>
+          <AssociationSet Name="FK_hab_musical_usuario" Association="nosso_showModel.Store.FK_hab_musical_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_hab_musical" EntitySet="usuario_hab_musical" />
           </AssociationSet>
           <AssociationSet Name="FK_requisicao_tipo" Association="nosso_showModel.Store.FK_requisicao_tipo">
             <End Role="requisicao_tipo" EntitySet="requisicao_tipo" />
@@ -43,12 +55,24 @@
             <End Role="usuario" EntitySet="usuario" />
             <End Role="requisicao" EntitySet="requisicao" />
           </AssociationSet>
+          <AssociationSet Name="FK_usuario" Association="nosso_showModel.Store.FK_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_genero_musical" EntitySet="usuario_genero_musical" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_ambientacao_ambientacao" Association="nosso_showModel.Store.FK_usuario_ambientacao_ambientacao">
+            <End Role="ambientacao" EntitySet="ambientacao" />
+            <End Role="usuario_ambientacao" EntitySet="usuario_ambientacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_ambientacao_usuario" Association="nosso_showModel.Store.FK_usuario_ambientacao_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_ambientacao" EntitySet="usuario_ambientacao" />
+          </AssociationSet>
           <AssociationSet Name="FK_usuario_estabelecimento" Association="nosso_showModel.Store.FK_usuario_estabelecimento">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="usuario_estabelecimento" EntitySet="usuario_estabelecimento" />
           </AssociationSet>
           <AssociationSet Name="FK_usuario_estabelecimento_ambientacao" Association="nosso_showModel.Store.FK_usuario_estabelecimento_ambientacao">
-            <End Role="usuario_estabelecimento_ambientacao" EntitySet="usuario_estabelecimento_ambientacao" />
+            <End Role="ambientacao" EntitySet="ambientacao" />
             <End Role="usuario_estabelecimento" EntitySet="usuario_estabelecimento" />
           </AssociationSet>
           <AssociationSet Name="FK_usuario_estabelecimento_dia_ate" Association="nosso_showModel.Store.FK_usuario_estabelecimento_dia_ate">
@@ -59,6 +83,10 @@
             <End Role="usuario_estabelecimento_dias" EntitySet="usuario_estabelecimento_dias" />
             <End Role="usuario_estabelecimento" EntitySet="usuario_estabelecimento" />
           </AssociationSet>
+          <AssociationSet Name="FK_usuario_hab_musical" Association="nosso_showModel.Store.FK_usuario_hab_musical">
+            <End Role="hab_musical" EntitySet="hab_musical" />
+            <End Role="usuario_hab_musical" EntitySet="usuario_hab_musical" />
+          </AssociationSet>
           <AssociationSet Name="FK_usuario_musico" Association="nosso_showModel.Store.FK_usuario_musico">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="usuario_musico" EntitySet="usuario_musico" />
@@ -68,6 +96,13 @@
             <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ambientacao">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="varchar" Nullable="false" MaxLength="45" />
+        </EntityType>
         <EntityType Name="autenticacao">
           <Key>
             <PropertyRef Name="Data" />
@@ -107,6 +142,13 @@
             <PropertyRef Name="UF" />
           </Key>
           <Property Name="UF" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="Descricao" Type="varchar" Nullable="false" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="genero_musical">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Descricao" Type="varchar" Nullable="false" MaxLength="45" />
         </EntityType>
         <EntityType Name="hab_musical">
@@ -164,6 +206,16 @@
           <Property Name="Telefone" Type="varchar" Nullable="false" MaxLength="15" />
           <Property Name="Tipo" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="usuario_ambientacao">
+          <Key>
+            <PropertyRef Name="IDAmbientacao" />
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="TipoUsuario" />
+          </Key>
+          <Property Name="IDAmbientacao" Type="int" Nullable="false" />
+          <Property Name="IDUsuario" Type="int" Nullable="false" />
+          <Property Name="TipoUsuario" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="usuario_estabelecimento">
           <Key>
             <PropertyRef Name="CNPJ" />
@@ -181,19 +233,34 @@
           <Property Name="IDUsuario" Type="int" Nullable="false" />
           <Property Name="TipoUsuario" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="usuario_estabelecimento_ambientacao">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Descricao" Type="varchar" Nullable="false" MaxLength="45" />
-        </EntityType>
         <EntityType Name="usuario_estabelecimento_dias">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Descricao" Type="varchar" Nullable="false" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="usuario_genero_musical">
+          <Key>
+            <PropertyRef Name="IDGenero" />
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="TipoUsuario" />
+          </Key>
+          <Property Name="IDGenero" Type="int" Nullable="false" />
+          <Property Name="IDUsuario" Type="int" Nullable="false" />
+          <Property Name="TipoUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario_hab_musical">
+          <Key>
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="TipoUsuario" />
+            <PropertyRef Name="IDHabilidade" />
+            <PropertyRef Name="TipoHab" />
+          </Key>
+          <Property Name="IDUsuario" Type="int" Nullable="false" />
+          <Property Name="TipoUsuario" Type="int" Nullable="false" />
+          <Property Name="IDHabilidade" Type="int" Nullable="false" />
+          <Property Name="TipoHab" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="usuario_musico">
           <Key>
@@ -254,6 +321,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_genero_musical">
+          <End Role="genero_musical" Type="nosso_showModel.Store.genero_musical" Multiplicity="1" />
+          <End Role="usuario_genero_musical" Type="nosso_showModel.Store.usuario_genero_musical" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genero_musical">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="usuario_genero_musical">
+              <PropertyRef Name="IDGenero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_hab_musical_tipo">
           <End Role="hab_musical_tipo" Type="nosso_showModel.Store.hab_musical_tipo" Multiplicity="1" />
           <End Role="hab_musical" Type="nosso_showModel.Store.hab_musical" Multiplicity="*" />
@@ -263,6 +342,20 @@
             </Principal>
             <Dependent Role="hab_musical">
               <PropertyRef Name="TipoHab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hab_musical_usuario">
+          <End Role="usuario" Type="nosso_showModel.Store.usuario" Multiplicity="1" />
+          <End Role="usuario_hab_musical" Type="nosso_showModel.Store.usuario_hab_musical" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="usuario_hab_musical">
+              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="TipoUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -292,6 +385,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_usuario">
+          <End Role="usuario" Type="nosso_showModel.Store.usuario" Multiplicity="1" />
+          <End Role="usuario_genero_musical" Type="nosso_showModel.Store.usuario_genero_musical" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="usuario_genero_musical">
+              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="TipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_ambientacao_ambientacao">
+          <End Role="ambientacao" Type="nosso_showModel.Store.ambientacao" Multiplicity="1" />
+          <End Role="usuario_ambientacao" Type="nosso_showModel.Store.usuario_ambientacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ambientacao">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="usuario_ambientacao">
+              <PropertyRef Name="IDAmbientacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_ambientacao_usuario">
+          <End Role="usuario" Type="nosso_showModel.Store.usuario" Multiplicity="1" />
+          <End Role="usuario_ambientacao" Type="nosso_showModel.Store.usuario_ambientacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="usuario_ambientacao">
+              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="TipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_usuario_estabelecimento">
           <End Role="usuario" Type="nosso_showModel.Store.usuario" Multiplicity="1" />
           <End Role="usuario_estabelecimento" Type="nosso_showModel.Store.usuario_estabelecimento" Multiplicity="*" />
@@ -307,10 +440,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_usuario_estabelecimento_ambientacao">
-          <End Role="usuario_estabelecimento_ambientacao" Type="nosso_showModel.Store.usuario_estabelecimento_ambientacao" Multiplicity="1" />
+          <End Role="ambientacao" Type="nosso_showModel.Store.ambientacao" Multiplicity="1" />
           <End Role="usuario_estabelecimento" Type="nosso_showModel.Store.usuario_estabelecimento" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="usuario_estabelecimento_ambientacao">
+            <Principal Role="ambientacao">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="usuario_estabelecimento">
@@ -342,6 +475,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_usuario_hab_musical">
+          <End Role="hab_musical" Type="nosso_showModel.Store.hab_musical" Multiplicity="1" />
+          <End Role="usuario_hab_musical" Type="nosso_showModel.Store.usuario_hab_musical" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hab_musical">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="TipoHab" />
+            </Principal>
+            <Dependent Role="usuario_hab_musical">
+              <PropertyRef Name="IDHabilidade" />
+              <PropertyRef Name="TipoHab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_usuario_musico">
           <End Role="usuario" Type="nosso_showModel.Store.usuario" Multiplicity="1" />
           <End Role="usuario_musico" Type="nosso_showModel.Store.usuario_musico" Multiplicity="*" />
@@ -368,25 +515,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="nosso_showModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="nosso_showEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ambientacao" EntityType="nosso_showModel.ambientacao" />
           <EntitySet Name="autenticacao" EntityType="nosso_showModel.autenticacao" />
           <EntitySet Name="endereco" EntityType="nosso_showModel.endereco" />
           <EntitySet Name="endereco_uf" EntityType="nosso_showModel.endereco_uf" />
+          <EntitySet Name="genero_musical" EntityType="nosso_showModel.genero_musical" />
           <EntitySet Name="hab_musical" EntityType="nosso_showModel.hab_musical" />
           <EntitySet Name="hab_musical_tipo" EntityType="nosso_showModel.hab_musical_tipo" />
           <EntitySet Name="requisicao" EntityType="nosso_showModel.requisicao" />
           <EntitySet Name="requisicao_tipo" EntityType="nosso_showModel.requisicao_tipo" />
           <EntitySet Name="usuario" EntityType="nosso_showModel.usuario" />
           <EntitySet Name="usuario_estabelecimento" EntityType="nosso_showModel.usuario_estabelecimento" />
-          <EntitySet Name="usuario_estabelecimento_ambientacao" EntityType="nosso_showModel.usuario_estabelecimento_ambientacao" />
           <EntitySet Name="usuario_estabelecimento_dias" EntityType="nosso_showModel.usuario_estabelecimento_dias" />
           <EntitySet Name="usuario_musico" EntityType="nosso_showModel.usuario_musico" />
           <EntitySet Name="usuario_tipo" EntityType="nosso_showModel.usuario_tipo" />
+          <AssociationSet Name="FK_usuario_estabelecimento_ambientacao" Association="nosso_showModel.FK_usuario_estabelecimento_ambientacao">
+            <End Role="ambientacao" EntitySet="ambientacao" />
+            <End Role="usuario_estabelecimento" EntitySet="usuario_estabelecimento" />
+          </AssociationSet>
           <AssociationSet Name="FK_autenticacao_usuario" Association="nosso_showModel.FK_autenticacao_usuario">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="autenticacao" EntitySet="autenticacao" />
@@ -423,10 +574,6 @@
             <End Role="usuario_tipo" EntitySet="usuario_tipo" />
             <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
-          <AssociationSet Name="FK_usuario_estabelecimento_ambientacao" Association="nosso_showModel.FK_usuario_estabelecimento_ambientacao">
-            <End Role="usuario_estabelecimento_ambientacao" EntitySet="usuario_estabelecimento_ambientacao" />
-            <End Role="usuario_estabelecimento" EntitySet="usuario_estabelecimento" />
-          </AssociationSet>
           <AssociationSet Name="FK_usuario_estabelecimento_dia_ate" Association="nosso_showModel.FK_usuario_estabelecimento_dia_ate">
             <End Role="usuario_estabelecimento_dias" EntitySet="usuario_estabelecimento_dias" />
             <End Role="usuario_estabelecimento" EntitySet="usuario_estabelecimento" />
@@ -435,7 +582,28 @@
             <End Role="usuario_estabelecimento_dias" EntitySet="usuario_estabelecimento_dias" />
             <End Role="usuario_estabelecimento" EntitySet="usuario_estabelecimento" />
           </AssociationSet>
+          <AssociationSet Name="usuario_ambientacao" Association="nosso_showModel.usuario_ambientacao">
+            <End Role="ambientacao" EntitySet="ambientacao" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="usuario_genero_musical" Association="nosso_showModel.usuario_genero_musical">
+            <End Role="genero_musical" EntitySet="genero_musical" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="usuario_hab_musical" Association="nosso_showModel.usuario_hab_musical">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="hab_musical" EntitySet="hab_musical" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ambientacao">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="usuario_estabelecimento" Relationship="nosso_showModel.FK_usuario_estabelecimento_ambientacao" FromRole="ambientacao" ToRole="usuario_estabelecimento" />
+          <NavigationProperty Name="usuario" Relationship="nosso_showModel.usuario_ambientacao" FromRole="ambientacao" ToRole="usuario" />
+        </EntityType>
         <EntityType Name="autenticacao">
           <Key>
             <PropertyRef Name="Data" />
@@ -481,6 +649,14 @@
           <Property Name="Descricao" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="endereco" Relationship="nosso_showModel.FK_endereco_uf" FromRole="endereco_uf" ToRole="endereco" />
         </EntityType>
+        <EntityType Name="genero_musical">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="usuario" Relationship="nosso_showModel.usuario_genero_musical" FromRole="genero_musical" ToRole="usuario" />
+        </EntityType>
         <EntityType Name="hab_musical">
           <Key>
             <PropertyRef Name="ID" />
@@ -490,6 +666,7 @@
           <Property Name="Descricao" Type="String" Nullable="false" MaxLength="75" Unicode="false" FixedLength="false" />
           <Property Name="TipoHab" Type="Int32" Nullable="false" />
           <NavigationProperty Name="hab_musical_tipo" Relationship="nosso_showModel.FK_hab_musical_tipo" FromRole="hab_musical" ToRole="hab_musical_tipo" />
+          <NavigationProperty Name="usuario" Relationship="nosso_showModel.usuario_hab_musical" FromRole="hab_musical" ToRole="usuario" />
         </EntityType>
         <EntityType Name="hab_musical_tipo">
           <Key>
@@ -546,6 +723,9 @@
           <NavigationProperty Name="usuario_estabelecimento" Relationship="nosso_showModel.FK_usuario_estabelecimento" FromRole="usuario" ToRole="usuario_estabelecimento" />
           <NavigationProperty Name="usuario_musico" Relationship="nosso_showModel.FK_usuario_musico" FromRole="usuario" ToRole="usuario_musico" />
           <NavigationProperty Name="usuario_tipo" Relationship="nosso_showModel.FK_usuario_tipo" FromRole="usuario" ToRole="usuario_tipo" />
+          <NavigationProperty Name="ambientacao" Relationship="nosso_showModel.usuario_ambientacao" FromRole="usuario" ToRole="ambientacao" />
+          <NavigationProperty Name="genero_musical" Relationship="nosso_showModel.usuario_genero_musical" FromRole="usuario" ToRole="genero_musical" />
+          <NavigationProperty Name="hab_musical" Relationship="nosso_showModel.usuario_hab_musical" FromRole="usuario" ToRole="hab_musical" />
         </EntityType>
         <EntityType Name="usuario_estabelecimento">
           <Key>
@@ -563,18 +743,10 @@
           <Property Name="IDAmbientacao" Type="Int32" Nullable="false" />
           <Property Name="IDUsuario" Type="Int32" Nullable="false" />
           <Property Name="TipoUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ambientacao" Relationship="nosso_showModel.FK_usuario_estabelecimento_ambientacao" FromRole="usuario_estabelecimento" ToRole="ambientacao" />
           <NavigationProperty Name="usuario" Relationship="nosso_showModel.FK_usuario_estabelecimento" FromRole="usuario_estabelecimento" ToRole="usuario" />
-          <NavigationProperty Name="usuario_estabelecimento_ambientacao" Relationship="nosso_showModel.FK_usuario_estabelecimento_ambientacao" FromRole="usuario_estabelecimento" ToRole="usuario_estabelecimento_ambientacao" />
           <NavigationProperty Name="usuario_estabelecimento_dias" Relationship="nosso_showModel.FK_usuario_estabelecimento_dia_ate" FromRole="usuario_estabelecimento" ToRole="usuario_estabelecimento_dias" />
           <NavigationProperty Name="usuario_estabelecimento_dias1" Relationship="nosso_showModel.FK_usuario_estabelecimento_dia_de" FromRole="usuario_estabelecimento" ToRole="usuario_estabelecimento_dias" />
-        </EntityType>
-        <EntityType Name="usuario_estabelecimento_ambientacao">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="usuario_estabelecimento" Relationship="nosso_showModel.FK_usuario_estabelecimento_ambientacao" FromRole="usuario_estabelecimento_ambientacao" ToRole="usuario_estabelecimento" />
         </EntityType>
         <EntityType Name="usuario_estabelecimento_dias">
           <Key>
@@ -606,6 +778,18 @@
           <Property Name="Descricao" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="usuario" Relationship="nosso_showModel.FK_usuario_tipo" FromRole="usuario_tipo" ToRole="usuario" />
         </EntityType>
+        <Association Name="FK_usuario_estabelecimento_ambientacao">
+          <End Role="ambientacao" Type="nosso_showModel.ambientacao" Multiplicity="1" />
+          <End Role="usuario_estabelecimento" Type="nosso_showModel.usuario_estabelecimento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ambientacao">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="usuario_estabelecimento">
+              <PropertyRef Name="IDAmbientacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_autenticacao_usuario">
           <End Role="usuario" Type="nosso_showModel.usuario" Multiplicity="1" />
           <End Role="autenticacao" Type="nosso_showModel.autenticacao" Multiplicity="*" />
@@ -724,18 +908,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_usuario_estabelecimento_ambientacao">
-          <End Role="usuario_estabelecimento_ambientacao" Type="nosso_showModel.usuario_estabelecimento_ambientacao" Multiplicity="1" />
-          <End Role="usuario_estabelecimento" Type="nosso_showModel.usuario_estabelecimento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="usuario_estabelecimento_ambientacao">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="usuario_estabelecimento">
-              <PropertyRef Name="IDAmbientacao" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_usuario_estabelecimento_dia_ate">
           <End Role="usuario_estabelecimento_dias" Type="nosso_showModel.usuario_estabelecimento_dias" Multiplicity="1" />
           <End Role="usuario_estabelecimento" Type="nosso_showModel.usuario_estabelecimento" Multiplicity="*" />
@@ -760,12 +932,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="usuario_ambientacao">
+          <End Role="ambientacao" Type="nosso_showModel.ambientacao" Multiplicity="*" />
+          <End Role="usuario" Type="nosso_showModel.usuario" Multiplicity="*" />
+        </Association>
+        <Association Name="usuario_genero_musical">
+          <End Role="genero_musical" Type="nosso_showModel.genero_musical" Multiplicity="*" />
+          <End Role="usuario" Type="nosso_showModel.usuario" Multiplicity="*" />
+        </Association>
+        <Association Name="usuario_hab_musical">
+          <End Type="nosso_showModel.usuario" Role="usuario" Multiplicity="*" />
+          <End Type="nosso_showModel.hab_musical" Role="hab_musical" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="nosso_showModelStoreContainer" CdmEntityContainer="nosso_showEntities">
+          <EntitySetMapping Name="ambientacao">
+            <EntityTypeMapping TypeName="nosso_showModel.ambientacao">
+              <MappingFragment StoreEntitySet="ambientacao">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="autenticacao">
             <EntityTypeMapping TypeName="nosso_showModel.autenticacao">
               <MappingFragment StoreEntitySet="autenticacao">
@@ -800,6 +992,14 @@
             <EntityTypeMapping TypeName="nosso_showModel.endereco_uf">
               <MappingFragment StoreEntitySet="endereco_uf">
                 <ScalarProperty Name="UF" ColumnName="UF" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="genero_musical">
+            <EntityTypeMapping TypeName="nosso_showModel.genero_musical">
+              <MappingFragment StoreEntitySet="genero_musical">
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -875,14 +1075,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="usuario_estabelecimento_ambientacao">
-            <EntityTypeMapping TypeName="nosso_showModel.usuario_estabelecimento_ambientacao">
-              <MappingFragment StoreEntitySet="usuario_estabelecimento_ambientacao">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="usuario_estabelecimento_dias">
             <EntityTypeMapping TypeName="nosso_showModel.usuario_estabelecimento_dias">
               <MappingFragment StoreEntitySet="usuario_estabelecimento_dias">
@@ -910,6 +1102,34 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="usuario_ambientacao" TypeName="nosso_showModel.usuario_ambientacao" StoreEntitySet="usuario_ambientacao">
+            <EndProperty Name="ambientacao">
+              <ScalarProperty Name="ID" ColumnName="IDAmbientacao" />
+            </EndProperty>
+            <EndProperty Name="usuario">
+              <ScalarProperty Name="ID" ColumnName="IDUsuario" />
+              <ScalarProperty Name="Tipo" ColumnName="TipoUsuario" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="usuario_genero_musical" TypeName="nosso_showModel.usuario_genero_musical" StoreEntitySet="usuario_genero_musical">
+            <EndProperty Name="genero_musical">
+              <ScalarProperty Name="ID" ColumnName="IDGenero" />
+            </EndProperty>
+            <EndProperty Name="usuario">
+              <ScalarProperty Name="ID" ColumnName="IDUsuario" />
+              <ScalarProperty Name="Tipo" ColumnName="TipoUsuario" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="usuario_hab_musical" TypeName="nosso_showModel.usuario_hab_musical" StoreEntitySet="usuario_hab_musical">
+            <EndProperty Name="hab_musical">
+              <ScalarProperty Name="TipoHab" ColumnName="TipoHab" />
+              <ScalarProperty Name="ID" ColumnName="IDHabilidade" />
+            </EndProperty>
+            <EndProperty Name="usuario">
+              <ScalarProperty Name="Tipo" ColumnName="TipoUsuario" />
+              <ScalarProperty Name="ID" ColumnName="IDUsuario" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -931,74 +1151,117 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="nosso_show">
-        <EntityTypeShape EntityType="nosso_showModel.autenticacao" Width="1.5" PointX="5.25" PointY="8" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.endereco" Width="1.5" PointX="5.25" PointY="11.625" Height="3.9033007812499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.endereco_uf" Width="1.5" PointX="3" PointY="13.75" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.hab_musical" Width="1.5" PointX="11" PointY="0.875" Height="1.7879850260416657" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.hab_musical_tipo" Width="1.5" PointX="8.75" PointY="1" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.requisicao" Width="1.5" PointX="8.25" PointY="9.25" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.requisicao_tipo" Width="1.5" PointX="6" PointY="16.75" Height="1.595683593749996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario" Width="1.5" PointX="3" PointY="8.375" Height="4.2879036458333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento" Width="1.5" PointX="8.25" PointY="4.75" Height="3.7109993489583317" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento_ambientacao" Width="1.5" PointX="6" PointY="4.5" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento_dias" Width="1.5" PointX="6" PointY="1.875" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario_musico" Width="1.5" PointX="5.25" PointY="23.5" Height="2.1725878906250031" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario_tipo" Width="1.5" PointX="0.75" PointY="9.75" Height="1.5956835937500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.ambientacao" Width="1.5" PointX="0.75" PointY="9.625" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.autenticacao" Width="1.5" PointX="5.25" PointY="5" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.endereco" Width="1.5" PointX="8.25" PointY="8.625" Height="3.9033007812499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.endereco_uf" Width="1.5" PointX="6" PointY="1.75" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.genero_musical" Width="1.5" PointX="0.75" PointY="6.625" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.hab_musical" Width="1.5" PointX="10" PointY="4.875" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.hab_musical_tipo" Width="1.5" PointX="7.75" PointY="5" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.requisicao" Width="1.5" PointX="5.25" PointY="13.25" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.requisicao_tipo" Width="1.5" PointX="3" PointY="13.75" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario" Width="1.5" PointX="3" PointY="8.25" Height="4.6725065104166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento" Width="1.5" PointX="5.25" PointY="8.75" Height="3.7109993489583317" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento_dias" Width="1.5" PointX="3" PointY="5.375" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_musico" Width="1.5" PointX="5.25" PointY="19.125" Height="2.1725878906250031" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_tipo" Width="1.5" PointX="0.75" PointY="13" Height="1.5956835937500031" IsExpanded="true" />
+        <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento_ambientacao" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="10.518992513020834" />
+          <ConnectorPoint PointX="2.75" PointY="10.518992513020834" />
+          <ConnectorPoint PointX="2.75" PointY="8" />
+          <ConnectorPoint PointX="4.6678195128205138" PointY="7.9999999999999991" />
+          <ConnectorPoint PointX="4.83448617948718" PointY="8" />
+          <ConnectorPoint PointX="4.885416666666667" PointY="7.9999999999999991" />
+          <ConnectorPoint PointX="5.145833333333333" PointY="8" />
+          <ConnectorPoint PointX="6" PointY="8" />
+          <ConnectorPoint PointX="6" PointY="8.75" />
+        </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_autenticacao_usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="9.2737939453125" />
-          <ConnectorPoint PointX="5.25" PointY="9.2737939453125" />
+          <ConnectorPoint PointX="4.5" PointY="8.2511528461538468" />
+          <ConnectorPoint PointX="4.875" PointY="7.8761528461538468" />
+          <ConnectorPoint PointX="4.875" PointY="6.0862939453125" />
+          <ConnectorPoint PointX="5.25" PointY="6.0862939453125" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_endereco_uf" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.15625" PointY="3.3456835937499996" />
+          <ConnectorPoint PointX="7.15625" PointY="8.65625" />
+          <ConnectorPoint PointX="8.25" PointY="8.65625" />
+        </AssociationConnector>
+        <AssociationConnector Association="nosso_showModel.FK_endereco_usuario" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="12.726008477224141" />
+          <ConnectorPoint PointX="9" PointY="12.726008477224141" />
+          <ConnectorPoint PointX="9" PointY="12.52830078125" />
+        </AssociationConnector>
+        <AssociationConnector Association="nosso_showModel.FK_hab_musical_tipo" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.25" PointY="5.797841796875" />
+          <ConnectorPoint PointX="10" PointY="5.797841796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="nosso_showModel.FK_requisicao_tipo" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="14.547841796875" />
           <ConnectorPoint PointX="4.791666666666667" PointY="14.547841796875" />
           <ConnectorPoint PointX="4.958333333333333" PointY="14.547841796875" />
           <ConnectorPoint PointX="5.25" PointY="14.547841796875" />
         </AssociationConnector>
-        <AssociationConnector Association="nosso_showModel.FK_endereco_usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="12.143951822916666" />
-          <ConnectorPoint PointX="5.25" PointY="12.143951822916666" />
-        </AssociationConnector>
-        <AssociationConnector Association="nosso_showModel.FK_hab_musical_tipo" ManuallyRouted="false">
-          <ConnectorPoint PointX="10.25" PointY="1.7978417968749998" />
-          <ConnectorPoint PointX="11" PointY="1.7978417968749998" />
-        </AssociationConnector>
-        <AssociationConnector Association="nosso_showModel.FK_requisicao_tipo" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.15625" PointY="16.75" />
-          <ConnectorPoint PointX="7.15625" PointY="10.8987939453125" />
-          <ConnectorPoint PointX="8.25" PointY="10.8987939453125" />
-        </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_requisicao_usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="10.504440917968751" />
-          <ConnectorPoint PointX="8.25" PointY="10.504440917968751" />
+          <ConnectorPoint PointX="4.5" PointY="13.089422327323717" />
+          <ConnectorPoint PointX="5.0625" PointY="13.651922327323717" />
+          <ConnectorPoint PointX="5.0625" PointY="13.061347153846153" />
+          <ConnectorPoint PointX="5.2511528461538459" PointY="13.25" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.75" PointY="8.375" />
-          <ConnectorPoint PointX="3.75" PointY="7.047841796875" />
-          <ConnectorPoint PointX="8.25" PointY="7.047841796875" />
+          <ConnectorPoint PointX="4.5" PointY="11.116248593098961" />
+          <ConnectorPoint PointX="5.25" PointY="11.116248593098961" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_musico" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="12.662903645833332" />
-          <ConnectorPoint PointX="4.875" PointY="13.037903645833332" />
-          <ConnectorPoint PointX="4.875" PointY="24.5862939453125" />
-          <ConnectorPoint PointX="5.25" PointY="24.5862939453125" />
+          <ConnectorPoint PointX="4.4757692307692318" PointY="13.114807942708334" />
+          <ConnectorPoint PointX="4.875" PointY="13.5140387119391" />
+          <ConnectorPoint PointX="4.875" PointY="20.2112939453125" />
+          <ConnectorPoint PointX="5.25" PointY="20.2112939453125" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_tipo" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="10.547841796875002" />
-          <ConnectorPoint PointX="3" PointY="10.547841796875002" />
-        </AssociationConnector>
-        <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento_ambientacao" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.5" PointY="5.422841796875" />
-          <ConnectorPoint PointX="8.25" PointY="5.422841796875" />
+          <ConnectorPoint PointX="2.25" PointY="13.001152846153847" />
+          <ConnectorPoint PointX="2.625" PointY="12.626152846153847" />
+          <ConnectorPoint PointX="2.625" PointY="13.490960788862179" />
+          <ConnectorPoint PointX="3.0011528461538441" PointY="13.114807942708334" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento_dia_ate" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.5" PointY="3.1605843098958335" />
-          <ConnectorPoint PointX="8.46875" PointY="3.1605843098958335" />
-          <ConnectorPoint PointX="8.46875" PointY="4.75" />
+          <ConnectorPoint PointX="4.4757692307692309" PointY="7.1629850260416674" />
+          <ConnectorPoint PointX="4.8160744349011217" PointY="7.5032902301735573" />
+          <ConnectorPoint PointX="4.9339255650988791" PointY="7.6211413603713156" />
+          <ConnectorPoint PointX="5.0625" PointY="7.7497157952724365" />
+          <ConnectorPoint PointX="5.0625" PointY="9.64649783723959" />
+          <ConnectorPoint PointX="5.25" PointY="9.64649783723959" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento_dia_de" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.5" PointY="3.4430371679687513" />
-          <ConnectorPoint PointX="8.3281225" PointY="3.4430371679687513" />
-          <ConnectorPoint PointX="8.3281225" PointY="4.75" />
+          <ConnectorPoint PointX="4.5" PointY="7.1064455645032059" />
+          <ConnectorPoint PointX="4.8160744349011217" PointY="7.4225199994043267" />
+          <ConnectorPoint PointX="4.9339255650988791" PointY="7.540371129602085" />
+          <ConnectorPoint PointX="4.96875" PointY="7.5751955645032059" />
+          <ConnectorPoint PointX="4.96875" PointY="9.64649783723959" />
+          <ConnectorPoint PointX="5.25" PointY="9.64649783723959" />
+        </AssociationConnector>
+        <AssociationConnector Association="nosso_showModel.usuario_ambientacao" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="10.009496256510417" />
+          <ConnectorPoint PointX="2.6666666666666665" PointY="10.009496256510417" />
+          <ConnectorPoint PointX="2.8333333333333335" PointY="10.009496256510417" />
+          <ConnectorPoint PointX="3" PointY="10.009496256510417" />
+        </AssociationConnector>
+        <AssociationConnector Association="nosso_showModel.usuario_genero_musical" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.2499999999999996" PointY="8.22068359375" />
+          <ConnectorPoint PointX="2.625" PointY="8.59568359375" />
+          <ConnectorPoint PointX="2.625" PointY="7.8738471538461541" />
+          <ConnectorPoint PointX="3.0011528461538459" PointY="8.25" />
+        </AssociationConnector>
+        <AssociationConnector Association="nosso_showModel.usuario_hab_musical" >
+          <ConnectorPoint PointX="4.5" PointY="8.4380789230769171" />
+          <ConnectorPoint PointX="4.885416666666667" PointY="8.4380789230769153" />
+          <ConnectorPoint PointX="5.145833333333333" PointY="8.4380789230769171" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="8.4380789230769171" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="8.4380789230769171" />
+          <ConnectorPoint PointX="7.072916666666667" PointY="8.4380789230769171" />
+          <ConnectorPoint PointX="7.239583333333333" PointY="8.4380789230769171" />
+          <ConnectorPoint PointX="10.75" PointY="8.4380789230769171" />
+          <ConnectorPoint PointX="10.75" PointY="6.8552864583333326" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
