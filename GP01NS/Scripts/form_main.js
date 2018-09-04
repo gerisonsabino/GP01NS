@@ -18,16 +18,16 @@ $(document).ready(function () {
     /*Validação dos Campos*/
     $("form").attr("novalidate", " ");
     $("form").addClass("needs-validation");
-
+   
     //Checa se algum input tem a classe inválido e se tiver mostra a div de alerta
     if ($("input").hasClass(".is-invalid")) {
         $(".invalid-feedback").show;
     }
-    //Coloca na variável tudo aquilo que precisar de validação
+     //Coloca na variável tudo aquilo que precisar de validação
     $(".needs-validation").on('submit', function (event) {
-        //Limpa o campo E-mail se o email não tiver dentro do Regex
+        //Limpa o campo E-mail se o email não tiver pelo menos um .com
         if (valida_email.test($(".email").val()) === false) {
-            $(".email").val('');
+            $(".email").val('');   
         }
         //Limpa o campo Confirme a Senha se os valores forem diferentes
         if ($(".senha").val() != $(".confirmaSenha").val()) {
@@ -38,5 +38,19 @@ $(document).ready(function () {
             $(".needs-validation").addClass("was-validated");
             event.preventDefault();
         }
+    });
+
+    /*Limpa os campos caso clique*/
+    $(".linkEsqueceu").click(function () {
+        
+    });
+
+    /*Select2*/
+    $('#Ambientes').change(function () {
+        $("#JsonAmbientes").val("[" + $('#Ambientes').val() + "]")
+    });
+
+    $('#Generos').change(function () {
+        $("#JsonGeneros").val("[" + $('#Generos').val() + "]")
     });
 });
