@@ -1811,6 +1811,7 @@
     <Content Include="Plugins\Select2\js\select2.full.min.js" />
     <Content Include="Plugins\Select2\js\select2.js" />
     <Content Include="Plugins\Select2\js\select2.min.js" />
+    <Content Include="Scripts\form_main.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\Plugins\datepicker-plugin\css\bootstrap-datepicker.css" />
@@ -1818,7 +1819,6 @@
     <Content Include="Scripts\Plugins\datepicker-plugin\js\bootstrap-datepicker.pt-BR.js" />
     <Content Include="Scripts\Plugins\inputmask-plugin\jquery.inputmask.bundle.js" />
     <Content Include="Scripts\popper.min.js" />
-    <Content Include="Scripts\Views\Entrar\Cadastro\form_main.js" />
     <Content Include="Scripts\Views\Evento\evento.js" />
     <Content Include="Scripts\Views\Layout\layout.js" />
     <Content Include="Scripts\Views\Util\inputmask_controller.js" />
