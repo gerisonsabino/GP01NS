@@ -148,6 +148,8 @@ namespace GP01NS.Classes.ViewModels.Musico
                     m.NomeArtistico = this.NomeArtistico;
                     m.TipoUsuario = u.Tipo;
 
+                    this.SetJsonHabilidades(u);
+
                     if (db.usuario_musico.Any(x => x.IDUsuario == u.ID))
                         db.ObjectStateManager.ChangeObjectState(m, System.Data.EntityState.Modified);
                     else
@@ -164,6 +166,38 @@ namespace GP01NS.Classes.ViewModels.Musico
             catch (Exception e) { }
 
             return false;
+        }
+
+        private void SetJsonHabilidades(usuario usuario)
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var u = db.usuario.Single(x => x.ID == usuario.ID);
+
+                    var dbHabs = u.hab_musical.ToList();
+
+                    for (int i = 0; i < dbHabs.Count; i++)
+                    {
+                        var hab = dbHabs[i];
+                        u.hab_musical.Remove(hab);
+                    }
+
+                    var habIds = JsonConvert.DeserializeObject<List<int>>(this.JsonHabilidades);
+
+                    for (int i = 0; i < habIds.Count; i++)
+                    {
+                        var hab = habIds[i];
+                        var dbHab = db.hab_musical.Single(x => x.ID == hab);
+
+                        u.hab_musical.Add(dbHab);
+                    }
+
+                    db.SaveChanges();
+                }
+            }
+            catch { }
         }
     }
 }

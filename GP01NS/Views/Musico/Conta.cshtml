@@ -52,7 +52,14 @@
                     <div class="form-row">
                         <div class="form-group col">
                             <label for="CPF">CPF</label>
-                            @Html.TextBoxFor(x => x.CPF, "{0:dd/MM/yyyy}", new { @class = "form-control cpf", placeholder = "CPF", required = "required" })
+                            @if (!string.IsNullOrEmpty(Model.CPF))
+                            {
+                                @Html.TextBoxFor(x => x.CPF, new { @class = "form-control cpf", placeholder = "CPF", required = "required", @readonly="readonly" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(x => x.CPF, new { @class = "form-control cpf", placeholder = "CPF", required = "required" })
+                            }
                         </div>
                         <div class="form-group col">
                             <label for="NomeArtistico">Nome Artístico</label>
@@ -107,6 +114,14 @@
     </div>
 </div>
 <script type="text/javascript">
+    $(function () {
+        if ($("#Nascimento").val() == "01/01/0001") {
+            $("#Nascimento").val("");
+        }
+    });
     $('#Habilidades').val(eval($("#JsonHabilidades").val())).trigger('change');
+    $('#Habilidades').change(function () {
+        $("#JsonHabilidades").val("[" + $('#Habilidades').val() + "]");
+    });
 </script>
-<script src="~/Scripts/Views/Entrar/Cadastro/form_main.js"></script>
+<script src="~/Scripts/form_main.js"></script>

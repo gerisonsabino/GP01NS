@@ -26,13 +26,13 @@ $(document).ready(function () {
      //Coloca na variável tudo aquilo que precisar de validação
     $(".needs-validation").on('submit', function (event) {
         //Limpa o campo E-mail se o email não tiver pelo menos um .com
-        if (valida_email.test($(".email").val()) === false) {
-            $(".email").val('');   
-        }
-        //Limpa o campo Confirme a Senha se os valores forem diferentes
-        if ($(".senha").val() != $(".confirmaSenha").val()) {
-            $(".confirmaSenha").val('');
-        }
+            //if (valida_email.test($(".email").val()) === false) {
+            //    $(".email").val('');   
+            //}
+            ////Limpa o campo Confirme a Senha se os valores forem diferentes
+            //if ($(".senha").val() != $(".confirmaSenha").val()) {
+            //    $(".confirmaSenha").val('');
+            //}
         //Faz a validação de tudo o que está com required, enquanto estiver, trava o submit
         if ($(".needs-validation")[0].checkValidity() === false) {
             $(".needs-validation").addClass("was-validated");
@@ -42,15 +42,7 @@ $(document).ready(function () {
 
     /*Limpa os campos caso clique*/
     $(".linkEsqueceu").click(function () {
-        
-    });
-
-    /*Select2*/
-    $('#Ambientes').change(function () {
-        $("#JsonAmbientes").val("[" + $('#Ambientes').val() + "]")
-    });
-
-    $('#Generos').change(function () {
-        $("#JsonGeneros").val("[" + $('#Generos').val() + "]")
+        $(".email").val('');
+        $(".senha").val('');
     });
 });

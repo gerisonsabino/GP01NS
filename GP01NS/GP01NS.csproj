@@ -138,6 +138,7 @@
     <Compile Include="Classes\ViewModels\Entrar\CadastroVM.cs" />
     <Compile Include="Classes\ViewModels\EstabelecimentoVM.cs" />
     <Compile Include="Classes\ViewModels\Estabelecimento\ContaVM.cs" />
+    <Compile Include="Classes\ViewModels\Estabelecimento\EventoVM.cs" />
     <Compile Include="Classes\ViewModels\Fa\ContaVM.cs" />
     <Compile Include="Classes\ViewModels\MusicoVM.cs" />
     <Compile Include="Classes\ViewModels\Musico\ContaVM.cs" />
@@ -3239,9 +3240,6 @@
     <Content Include="Views\Estabelecimento\Parciais\CardMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Perfil\Parciais\CardMenu.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Layout\Parciais\Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -3269,6 +3267,9 @@
     <Content Include="Views\Musico\Conta.cshtml" />
     <Content Include="Views\Fa\Endereco.cshtml" />
     <Content Include="Views\Musico\Endereco.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Perfil\Parciais\CardMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\nosso_show.edmx">

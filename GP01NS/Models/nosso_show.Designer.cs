@@ -852,7 +852,7 @@ namespace GP01NS.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 IDMunicipio
         {
@@ -862,14 +862,11 @@ namespace GP01NS.Models
             }
             set
             {
-                if (_IDMunicipio != value)
-                {
-                    OnIDMunicipioChanging(value);
-                    ReportPropertyChanging("IDMunicipio");
-                    _IDMunicipio = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("IDMunicipio");
-                    OnIDMunicipioChanged();
-                }
+                OnIDMunicipioChanging(value);
+                ReportPropertyChanging("IDMunicipio");
+                _IDMunicipio = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IDMunicipio");
+                OnIDMunicipioChanged();
             }
         }
         private global::System.Int32 _IDMunicipio;

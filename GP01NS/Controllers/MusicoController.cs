@@ -17,7 +17,16 @@ namespace GP01NS.Controllers
 
         public ActionResult Index()
         {
-            Musico = new MusicoVM(this.BaseUsuario);
+            this.Musico = new MusicoVM(this.BaseUsuario);
+
+            using (var db = new nosso_showEntities(Conexao.GetString()))
+            {
+                if (db.usuario.Single(x => x.ID == this.Musico.ID).usuario_musico.Count == 0)
+                    return Redirect("/musico/conta/");
+
+                if (!db.endereco.Any(x => x.IDUsuario == this.Musico.ID))
+                    return Redirect("/musico/endereco/");
+            }
 
             return View();
         }

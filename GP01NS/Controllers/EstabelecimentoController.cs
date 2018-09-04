@@ -19,16 +19,13 @@ namespace GP01NS.Controllers
         {
             this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
 
-            if (this.Estabelecimento.TipoUsuario == 2)
+            using (var db = new nosso_showEntities(Conexao.GetString()))
             {
-                using (var db = new nosso_showEntities(Conexao.GetString()))
-                {
-                    if (!db.usuario_estabelecimento.Any(x => x.IDUsuario == this.Estabelecimento.ID))
-                        return Redirect("/estabelecimento/conta/");
+                if (!db.usuario_estabelecimento.Any(x => x.IDUsuario == this.Estabelecimento.ID))
+                    return Redirect("/estabelecimento/conta/");
 
-                    if (!db.endereco.Any(x => x.IDUsuario == this.Estabelecimento.ID))
-                        return Redirect("/estabelecimento/endereco/");
-                }
+                if (!db.endereco.Any(x => x.IDUsuario == this.Estabelecimento.ID))
+                    return Redirect("/estabelecimento/endereco/");
             }
 
             return View(Estabelecimento);
@@ -84,6 +81,10 @@ namespace GP01NS.Controllers
 
         public ActionResult Evento()
         {
+            this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
+
+            ViewBag.Estabelecimento = this.Estabelecimento;
+
             return View();
         }
 

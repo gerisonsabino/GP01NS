@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="form-group col">
-                            <label for="Email">Email</label>
+                            <label for="Email">E-mail</label>
                             @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "E-mail", required = "required", type = "email" })
                         </div>
                     </div>
@@ -97,7 +97,21 @@
     </div>
 </div>
 <script type="text/javascript">
+    $(function () {
+        if ($("#Nascimento").val() == "01/01/0001")
+        {
+            $("#Nascimento").val("");
+        }
+    });
     $('#Generos').val(eval($("#JsonGeneros").val())).trigger('change');
     $('#Ambientes').val(eval($("#JsonAmbientes").val())).trigger('change');
+
+    $('#Ambientes').change(function () {
+        $("#JsonAmbientes").val("[" + $('#Ambientes').val() + "]");
+    });
+
+    $('#Generos').change(function () {
+        $("#JsonGeneros").val("[" + $('#Generos').val() + "]");
+    });
 </script>
-<script src="~/Scripts/Views/Entrar/Cadastro/form_main.js"></script>
+<script src="~/Scripts/form_main.js"></script>

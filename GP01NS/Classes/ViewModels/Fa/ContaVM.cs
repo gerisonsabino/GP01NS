@@ -133,21 +133,8 @@ namespace GP01NS.Classes.ViewModels.Fa
                     u.Telefone = this.Telefone;
                     u.Username = this.Username;
 
-                    var ambs = JsonConvert.DeserializeObject<List<int>>(this.JsonAmbientes);
-
-                    for (int i = 0; i < ambs.Count; i++)
-                    {
-                        var idAmb = ambs[i];
-                        u.ambientacao.Add(db.ambientacao.First(x => x.ID == idAmb));
-                    }
-
-                    var gen = JsonConvert.DeserializeObject<List<int>>(this.JsonGeneros);
-
-                    for (int i = 0; i < gen.Count; i++)
-                    {
-                        var idGen = gen[i];
-                        u.genero_musical.Add(db.genero_musical.First(x => x.ID == idGen));
-                    }
+                    this.SetJsonAmbientes(u);
+                    this.SetJsonGeneros(u);
 
                     db.ObjectStateManager.ChangeObjectState(u, System.Data.EntityState.Modified);
                     db.SaveChanges();
@@ -158,6 +145,70 @@ namespace GP01NS.Classes.ViewModels.Fa
             catch { }
 
             return false;
+        }
+
+        private void SetJsonGeneros(usuario usuario)
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var u = db.usuario.Single(x => x.ID == usuario.ID);
+
+                    var dbGens = u.genero_musical.ToList();
+
+                    for (int i = 0; i < dbGens.Count; i++)
+                    {
+                        var gen = dbGens[i];
+                        u.genero_musical.Remove(gen);
+                    }
+
+                    var genIds = JsonConvert.DeserializeObject<List<int>>(this.JsonGeneros);
+
+                    for (int i = 0; i < genIds.Count; i++)
+                    {
+                        var gen = genIds[i];
+                        var dbGen = db.genero_musical.Single(x => x.ID == gen);
+
+                        u.genero_musical.Add(dbGen);
+                    }
+
+                    db.SaveChanges();
+                }
+            }
+            catch { }
+        }
+
+        private void SetJsonAmbientes(usuario usuario)
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var u = db.usuario.Single(x => x.ID == usuario.ID);
+
+                    var dbAmbs = u.ambientacao.ToList();
+
+                    for (int i = 0; i < dbAmbs.Count; i++)
+                    {
+                        var amb = dbAmbs[i];
+                        u.ambientacao.Remove(amb);
+                    }
+
+                    var ambIds = JsonConvert.DeserializeObject<List<int>>(this.JsonAmbientes);
+
+                    for (int i = 0; i < ambIds.Count; i++)
+                    {
+                        var amb = ambIds[i];
+                        var dbAmb = db.ambientacao.Single(x => x.ID == amb);
+
+                        u.ambientacao.Add(dbAmb);
+                    }
+
+                    db.SaveChanges();
+                }
+            }
+            catch { }
         }
     }
 }

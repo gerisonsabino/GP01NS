@@ -84,7 +84,7 @@ namespace GP01NS.Classes.ViewModels
                     e.Bairro = this.Bairro;
                     e.CEP = Regex.Replace(this.CEP, @"[^0-9]", string.Empty);
                     e.Cidade = this.Cidade;
-                    e.Complemento = this.Complemento;
+                    e.Complemento = !string.IsNullOrEmpty(this.Complemento) ? this.Complemento : string.Empty;
                     e.IDMunicipio = this.IDMunicipio;
                     e.Latitude = string.Empty;
                     e.Logradouro = this.Logradouro;

@@ -64,9 +64,11 @@ namespace GP01NS.Classes.ViewModels
                     u.Username = this.Username;
 
                     if (e == null)
+                    {
                         e = new usuario_estabelecimento();
+                        e.CNPJ = Regex.Replace(this.CNPJ, @"[^0-9]", string.Empty);
+                    }
 
-                    e.CNPJ = Regex.Replace(this.CNPJ, @"[^0-9]", string.Empty);
                     e.De = this.De;
                     e.Ate = this.Ate;
                     e.Das = this.Das;

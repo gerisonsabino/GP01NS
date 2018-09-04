@@ -1,12 +1,15 @@
-﻿@{
+﻿@model GP01NS.Classes.ViewModels.Estabelecimento.EventoVM
+
+@{
 	ViewBag.Title = "Meus Eventos";
 	Layout = "~/Views/Layout/Layout.cshtml";
+
+    var Estabelecimento = (GP01NS.Classes.ViewModels.EstabelecimentoVM)ViewBag.Estabelecimento;
 }
 
-<link href="~/CSS/Views/Estabelecimento/evento.css" rel="stylesheet" />
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@*<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -24,168 +27,65 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div>*@
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-3">
-			@RenderPage("Parciais/CardMenu.cshtml")
-			@RenderPage("~/Views/Perfil/Parciais/CardMenu.cshtml")		
-		</div>
-		<div class="col-md-9">
-			<form action="" method="post">
-				<div class="col-md-12 form">
-					<h3 class="display-5">Criar evento</h3>
-					<div class="form-group">
-						<label for="Titulo">Titulo</label>
-						<input type="text" class="form-control" id="nome" aria-describedby="emailHelp" placeholder="Informe o titulo do evento">
-					</div>
-					<div class="form-group">
-						<label for="exampleFormControlTextarea1">Descrição</label>
-						<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Escreva sobre o evento aqui!"></textarea>
-					</div>
-					<div class="form-row">
-						<div class="form-group col-md-3">
-							<label for="Titulo">Dia</label>
-							<input type="date" class="form-control" id="day" placeholder="Digite seu nome completo">
-						</div>
-						<div class="form-group col-md-3">
-							<label for="Titulo">Hora</label>
-							<select name="" id="" class="form-control">
-								<option value="00">00</option>
-								<option value="01">01</option>
-								<option value="02">02</option>
-								<option value="03">03</option>
-								<option value="04">04</option>
-								<option value="05">05</option>
-								<option value="06">06</option>
-								<option value="07">07</option>
-								<option value="08">08</option>
-								<option value="09">09</option>
-								<option value="10">10</option>
-								<option value="11">11</option>
-								<option value="12">12</option>
-								<option value="13">13</option>
-								<option value="14">14</option>
-								<option value="15">15</option>
-								<option value="16">16</option>
-								<option value="17">17</option>
-								<option value="18">18</option>
-								<option value="19">19</option>
-								<option value="20">20</option>
-								<option value="21">21</option>
-								<option value="22">22</option>
-								<option value="23">23</option>
-								<option value="24">24</option>
-							</select>
-						</div>
-						<div class="form-group col-md-3">
-							<label for="Minuto">Minuto</label>
-							<select name="" id="" class="form-control">
-								<option value="00">00</option>
-								<option value="01">01</option>
-								<option value="02">02</option>
-								<option value="03">03</option>
-								<option value="04">04</option>
-								<option value="05">05</option>
-								<option value="06">06</option>
-								<option value="07">07</option>
-								<option value="08">08</option>
-								<option value="09">09</option>
-								<option value="10">10</option>
-								<option value="11">11</option>
-								<option value="12">12</option>
-								<option value="13">13</option>
-								<option value="14">14</option>
-								<option value="15">15</option>
-								<option value="16">16</option>
-								<option value="17">17</option>
-								<option value="18">18</option>
-								<option value="19">19</option>
-								<option value="20">20</option>
-								<option value="21">21</option>
-								<option value="22">22</option>
-								<option value="23">23</option>
-								<option value="24">24</option>
-								<option value="25">25</option>
-								<option value="26">26</option>
-								<option value="27">27</option>
-								<option value="28">28</option>
-								<option value="29">29</option>
-								<option value="30">30</option>
-								<option value="31">31</option>
-								<option value="32">32</option>
-								<option value="33">33</option>
-								<option value="34">34</option>
-								<option value="35">35</option>
-								<option value="36">36</option>
-								<option value="37">37</option>
-								<option value="38">38</option>
-								<option value="39">39</option>
-								<option value="40">40</option>
-								<option value="41">41</option>
-								<option value="42">42</option>
-								<option value="43">43</option>
-								<option value="44">44</option>
-								<option value="45">45</option>
-								<option value="46">46</option>
-								<option value="47">47</option>
-								<option value="48">48</option>
-								<option value="49">49</option>
-								<option value="50">50</option>
-								<option value="51">51</option>
-								<option value="52">52</option>
-								<option value="53">53</option>
-								<option value="54">54</option>
-								<option value="55">55</option>
-								<option value="56">56</option>
-								<option value="57">57</option>
-								<option value="58">58</option>
-								<option value="59">59</option>
-							</select>
-						</div>
-						<div class="form-group col-md-3">
-							<label for="duration">Duração</label>
-							<input type="text" class="form-control" id="nome">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="endereço">Endereço</label>
-						<input type="text" class="form-control" id="day">
-					</div>
-					<div class="form-row">
-						<div class="form-group col-md-12">
-							<label for="musico">Convidar Músico<br></label>
-							<div class="musico">
-								<input type="text" class="form-control inputMusic" id="exampleFormControlFile1" placeholder="informe o usuário do músico">
-								<a class="btn btn-primary btn-sm btnMusic" id="" style="color: #fff;margin:10px 0 10px 0;">
-									Convidar
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="duration">
-							Fotos do Evento<br>
-							<div style="color:#fff; margin:10px 0 10px 0;">
-								<a class="btn btn-success btn-sm" id="btn1"> + Fotos </a>
-								<a class="btn btn-danger btn-sm" id="btn2" style="margin-left:10px; color: #fff;">
-									-
-									Fotos
-								</a>
-							</div>
-						</label>
-						<div class="form-row" id="mRecebe">
-							<div class="form-group col-md-3"><input type="file" class="form-control-file" id="exampleFormControlFile1"></div>
-						</div>
-					</div>
-					<hr>
-					<div class="form-group text-center">
-						<button type="button" class="btn btn-success btnCriar" data-toggle="modal" data-target="#exampleModal">Cadastrar</button>
-						<button type="button" class="btn btn-danger btnCriar">Cancelar</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-md-3">
+            @RenderPage("Parciais/CardMenu.cshtml")
+        </div>
+        <div class="col-md-7 ml-auto mr-auto">
+            @using (Html.BeginForm())
+            {
+            <div class="col-md-12 form">
+                <h5 class="text-uppercase">Evento de @Estabelecimento.Nome</h5>
+                <br />
+                <div class="form-group">
+                    <label for="Titulo">Título</label>
+                    @Html.TextBoxFor(x => x.Titulo, new { @class = "form-control", placeholder = "Título do evento", required = "required" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Descrição</label>
+                    @Html.TextAreaFor(x => x.Descricao, new { @class = "form-control", placeholder = "Escreva sobre o evento aqui!", required = "required", maxlength = "2000", rows = "8" })
+                </div>
+                
+                <div class="form-group">
+                    <label for="endereço">Endereço</label>
+                    <input type="text" class="form-control" id="day">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="musico">Convidar Músico<br></label>
+                        <div class="musico">
+                            <input type="text" class="form-control inputMusic" id="exampleFormControlFile1" placeholder="informe o usuário do músico">
+                            <a class="btn btn-primary btn-sm btnMusic" id="" style="color: #fff;margin:10px 0 10px 0;">
+                                Convidar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="duration">
+                        Fotos do Evento<br>
+                        <div style="color:#fff; margin:10px 0 10px 0;">
+                            <a class="btn btn-success btn-sm" id="btn1"> + Fotos </a>
+                            <a class="btn btn-danger btn-sm" id="btn2" style="margin-left:10px; color: #fff;">
+                                -
+                                Fotos
+                            </a>
+                        </div>
+                    </label>
+                    <div class="form-row" id="mRecebe">
+                        <div class="form-group col-md-3"><input type="file" class="form-control-file" id="exampleFormControlFile1"></div>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group text-center">
+                    <button type="button" class="btn btn-success btnCriar" data-toggle="modal" data-target="#exampleModal">Cadastrar</button>
+                    <button type="button" class="btn btn-danger btnCriar">Cancelar</button>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
 </div>
 <script src="~/Scripts/Views/Evento/evento.js"></script>
