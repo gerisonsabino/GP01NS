@@ -79,13 +79,23 @@ namespace GP01NS.Controllers
             return View();
         }
 
-        public ActionResult Evento()
+        public ActionResult Evento(string id)
         {
             this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
 
+            var evento = new EventoVM();
+
+            int idEvento = int.MinValue;
+            int.TryParse(id, out idEvento);
+
+            if (idEvento > 0)
+            {
+                //GetEvento
+            }
+
             ViewBag.Estabelecimento = this.Estabelecimento;
 
-            return View();
+            return View(evento);
         }
 
         public ActionResult Endereco()

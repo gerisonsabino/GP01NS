@@ -25,7 +25,7 @@ namespace GP01NS.Controllers
                     return Redirect("/fa/conta/");
 
                 if (!db.endereco.Any(x => x.IDUsuario == this.Usuario.ID))
-                    return Redirect("/estabelecimento/endereco/");
+                    return Redirect("/fa/endereco/");
             }
 
             return View(this.Usuario);

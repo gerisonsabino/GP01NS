@@ -54,7 +54,7 @@
                             <label for="CPF">CPF</label>
                             @if (!string.IsNullOrEmpty(Model.CPF))
                             {
-                                @Html.TextBoxFor(x => x.CPF, new { @class = "form-control cpf", placeholder = "CPF", required = "required", @readonly="readonly" })
+                                @Html.TextBoxFor(x => x.CPF, new { @class = "form-control cpf", placeholder = "CPF", required = "required", @readonly = "readonly" })
                             }
                             else
                             {
@@ -70,6 +70,18 @@
                         <div class="form-group col">
                             <label for="Descricao">Descrição</label>
                             @Html.TextAreaFor(x => x.Descricao, new { @class = "form-control", placeholder = "Descreva suas habilidades em até 500 caracteres", maxlength = "500", required = "required", cols = "", rows = "7" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="Generos">Genêros músicais</label>
+                            <select id="Generos" class="select-custom form-control" placeholder="Selecione os genêros músicais" multiple required>
+                                @for (int i = 0; i < Generos.Count; i++)
+                                {
+                                    <option value="@Generos[i].ID">@Generos[i].Descricao</option>
+                                }
+                            </select>
+                            @Html.HiddenFor(x => x.JsonGeneros)
                         </div>
                         <div class="form-group col-12">
                             <label for="Habilidades">Habilidades</label>
@@ -119,6 +131,13 @@
             $("#Nascimento").val("");
         }
     });
+
+    $('#Generos').val(eval($("#JsonGeneros").val())).trigger('change');
+
+    $('#Generos').change(function () {
+        $("#JsonGeneros").val("[" + $('#Generos').val() + "]");
+    });
+
     $('#Habilidades').val(eval($("#JsonHabilidades").val())).trigger('change');
     $('#Habilidades').change(function () {
         $("#JsonHabilidades").val("[" + $('#Habilidades').val() + "]");

@@ -138,7 +138,7 @@
     <Compile Include="Classes\ViewModels\Entrar\CadastroVM.cs" />
     <Compile Include="Classes\ViewModels\EstabelecimentoVM.cs" />
     <Compile Include="Classes\ViewModels\Estabelecimento\ContaVM.cs" />
-    <Compile Include="Classes\ViewModels\Estabelecimento\EventoVM.cs" />
+    <Compile Include="Classes\ViewModels\EventoVM.cs" />
     <Compile Include="Classes\ViewModels\Fa\ContaVM.cs" />
     <Compile Include="Classes\ViewModels\MusicoVM.cs" />
     <Compile Include="Classes\ViewModels\Musico\ContaVM.cs" />

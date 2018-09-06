@@ -1,4 +1,4 @@
-﻿@model GP01NS.Classes.ViewModels.Estabelecimento.EventoVM
+﻿@model GP01NS.Classes.ViewModels.EventoVM
 
 @{
 	ViewBag.Title = "Meus Eventos";
@@ -28,6 +28,7 @@
 		</div>
 	</div>
 </div>*@
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3">
@@ -47,7 +48,26 @@
                     <label for="exampleFormControlTextarea1">Descrição</label>
                     @Html.TextAreaFor(x => x.Descricao, new { @class = "form-control", placeholder = "Escreva sobre o evento aqui!", required = "required", maxlength = "2000", rows = "8" })
                 </div>
-                
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="inputFuncionamento">De</label>
+                        @Html.TextBoxFor(x => x.DataDe, "{0:dd/MM/yyyy}", new { @class = "form-control datapicker", placeholder = "Data de ínicio do evento", required = "required" })
+                    </div>
+                    <div class="form-group col">
+                        <label>Até</label>
+                        @Html.TextBoxFor(x => x.DataAte, "{0:dd/MM/yyyy}", new { @class = "form-control datapicker", placeholder = "Data de término do evento", required = "required" })
+                    </div>
+                    <div class="form-group col">
+                        <label>Das</label>
+                        @Html.DropDownListFor(x => x.HoraDe, Model.GetHoras(Model.HoraDe), new { @class = "form-control", required = "required" })
+                        @Html.DropDownListFor(x => x.MinutoDe, Model.GetMinutos(Model.MinutoDe), new { @class = "form-control", required = "required" })
+                    </div>
+                    <div class="form-group col">
+                        <label>Às</label>
+                        @Html.DropDownListFor(x => x.HoraAte, Model.GetHoras(Model.HoraAte), new { @class = "form-control", required = "required" })
+                        @Html.DropDownListFor(x => x.MinutoAte, Model.GetMinutos(Model.MinutoAte), new { @class = "form-control", required = "required" })
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="endereço">Endereço</label>
                     <input type="text" class="form-control" id="day">
@@ -89,3 +109,4 @@
     </div>
 </div>
 <script src="~/Scripts/Views/Evento/evento.js"></script>
+<script src="~/Scripts/form_main.js"></script>

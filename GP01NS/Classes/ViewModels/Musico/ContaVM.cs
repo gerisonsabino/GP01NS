@@ -19,6 +19,7 @@ namespace GP01NS.Classes.ViewModels.Musico
         public string NomeArtistico { get; set; }
         public string CPF { get; set; }
         public string Descricao { get; set; }
+        public string JsonGeneros { get; set; }
         public string JsonHabilidades { get; set; }
 
         private MusicoVM Musico;
@@ -37,6 +38,7 @@ namespace GP01NS.Classes.ViewModels.Musico
             this.NomeArtistico = musico.NomeArtistico;
             this.CPF = musico.CPF;
             this.Descricao = musico.Descricao;
+            this.JsonGeneros = this.GetJsonGeneros();
             this.JsonHabilidades = this.GetJsonHabilidades();
         }
 
@@ -71,6 +73,22 @@ namespace GP01NS.Classes.ViewModels.Musico
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
                     return db.genero_musical.ToList();
+                }
+            }
+            catch { }
+
+            return null;
+        }
+
+        private string GetJsonGeneros()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var generos = db.usuario.First(x => x.ID == this.Musico.ID).genero_musical.Select(x => x.ID);
+
+                    return JsonConvert.SerializeObject(generos);
                 }
             }
             catch { }
@@ -148,6 +166,7 @@ namespace GP01NS.Classes.ViewModels.Musico
                     m.NomeArtistico = this.NomeArtistico;
                     m.TipoUsuario = u.Tipo;
 
+                    this.SetJsonGeneros(u);
                     this.SetJsonHabilidades(u);
 
                     if (db.usuario_musico.Any(x => x.IDUsuario == u.ID))
@@ -192,6 +211,38 @@ namespace GP01NS.Classes.ViewModels.Musico
                         var dbHab = db.hab_musical.Single(x => x.ID == hab);
 
                         u.hab_musical.Add(dbHab);
+                    }
+
+                    db.SaveChanges();
+                }
+            }
+            catch { }
+        }
+
+        private void SetJsonGeneros(usuario usuario)
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var u = db.usuario.Single(x => x.ID == usuario.ID);
+
+                    var dbGens = u.genero_musical.ToList();
+
+                    for (int i = 0; i < dbGens.Count; i++)
+                    {
+                        var gen = dbGens[i];
+                        u.genero_musical.Remove(gen);
+                    }
+
+                    var genIds = JsonConvert.DeserializeObject<List<int>>(this.JsonGeneros);
+
+                    for (int i = 0; i < genIds.Count; i++)
+                    {
+                        var gen = genIds[i];
+                        var dbGen = db.genero_musical.Single(x => x.ID == gen);
+
+                        u.genero_musical.Add(dbGen);
                     }
 
                     db.SaveChanges();

@@ -28,7 +28,7 @@ namespace GP01NS.Controllers
                     return Redirect("/musico/endereco/");
             }
 
-            return View();
+            return View(this.Musico);
         }
 
         public ActionResult Conta()
