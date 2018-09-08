@@ -21,10 +21,12 @@ namespace GP01NS.Controllers
 
             using (var db = new nosso_showEntities(Conexao.GetString()))
             {
-                if (db.usuario.Single(x => x.ID == this.Usuario.ID).genero_musical.Count == 0)
+                var u = db.usuario.Single(x => x.ID == this.Usuario.ID);
+
+                if (u.genero_musical.Count == 0)
                     return Redirect("/fa/conta/");
 
-                if (!db.endereco.Any(x => x.IDUsuario == this.Usuario.ID))
+                if (u.endereco.Count == 0)
                     return Redirect("/fa/endereco/");
             }
 

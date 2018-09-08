@@ -3,10 +3,7 @@ using GP01NS.Classes.ViewModels;
 using GP01NS.Classes.ViewModels.Estabelecimento;
 using GP01NS.Models;
 using GP01NSLibrary;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace GP01NS.Controllers
@@ -21,10 +18,12 @@ namespace GP01NS.Controllers
 
             using (var db = new nosso_showEntities(Conexao.GetString()))
             {
-                if (!db.usuario_estabelecimento.Any(x => x.IDUsuario == this.Estabelecimento.ID))
+                var u = db.usuario.Single(x => x.ID == this.Estabelecimento.ID);
+
+                if (u.usuario_estabelecimento.Count == 0)
                     return Redirect("/estabelecimento/conta/");
 
-                if (!db.endereco.Any(x => x.IDUsuario == this.Estabelecimento.ID))
+                if (u.endereco.Count == 0)
                     return Redirect("/estabelecimento/endereco/");
             }
 
@@ -76,6 +75,10 @@ namespace GP01NS.Controllers
 
         public ActionResult Eventos()
         {
+            this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
+
+            ViewBag.JSON = this.Estabelecimento.GetEventosJSON();
+
             return View();
         }
 
@@ -96,6 +99,25 @@ namespace GP01NS.Controllers
             ViewBag.Estabelecimento = this.Estabelecimento;
 
             return View(evento);
+        }
+
+        [HttpPost]
+        public ActionResult Evento(EventoVM model)
+        {
+            this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
+
+            ViewBag.Estabelecimento = this.Estabelecimento;
+
+            if (model.SaveChanges(this.Estabelecimento))
+            {
+                ViewBag.Sucesso = "Os dados de endereço foram salvos.";
+            }
+            else
+            {
+                ViewBag.Erro = "Por favor, confira os dados informados e tente novamente.";
+            }
+
+            return View(model);
         }
 
         public ActionResult Endereco()

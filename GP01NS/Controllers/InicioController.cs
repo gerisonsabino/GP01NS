@@ -16,21 +16,17 @@ namespace GP01NS.Controllers
 
         public ActionResult Index()
         {
-            this.Usuario = new UsuarioVM(this.BaseUsuario);
+            return View();
+        }
 
-            if (this.Usuario.TipoUsuario == 2)
-            {
-                using (var db = new nosso_showEntities(Conexao.GetString()))
-                {
-                    if (!db.usuario_estabelecimento.Any(x => x.IDUsuario == this.Usuario.ID))
-                        return Redirect("/estabelecimento/cadastro/");
+        [HttpPost]
+        public ActionResult Index(HttpPostedFileBase Arquivo)
+        {
+            //var ftp = new Classes.Servicos.FTP();
 
-                    if (!db.endereco.Any(x => x.IDUsuario == this.Usuario.ID))
-                        return Redirect("/estabelecimento/endereco/");
-                }
-            }
+            //var n = ftp.UploadFile(Arquivo);
 
-            return View(Usuario);
+            return View();
         }
     }
 }

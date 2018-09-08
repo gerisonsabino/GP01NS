@@ -1,5 +1,6 @@
 ﻿using GP01NS.Models;
 using GP01NSLibrary;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,28 @@ namespace GP01NS.Classes.ViewModels
                 this.Razao = string.Empty;
                 this.IDAmbientacao = 1;
             }
+        }
+
+        public string GetEventosJSON()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var u = db.usuario_estabelecimento.Single(x => x.IDUsuario == this.Estabelecimento.IDUsuario);
+                    var e = u.evento.ToList();
+
+                    var eventos = new List<EventoJSON>();
+
+                    for (int i = 0; i < e.Count; i++)
+                        eventos.Add(new EventoJSON(e[i]));
+
+                    return JsonConvert.SerializeObject(eventos);
+                }
+            }
+            catch { }
+
+            return string.Empty;
         }
 
         public bool SaveChanges() 
@@ -108,6 +131,22 @@ namespace GP01NS.Classes.ViewModels
             {
                 return null;
             }
+        }
+    }
+
+    internal class EventoJSON 
+    {
+        public int ID { get; set; }
+        public string Titulo { get; set; }
+        public string Data { get; set; }
+        public string Status { get; set; }
+
+        public EventoJSON(evento evento)
+        {
+            this.Data = evento.DataDe.ToShortDateString() + " - " + evento.DataAte.ToShortDateString();
+            this.ID = evento.ID;
+            this.Status = evento.Publicado ? "Publicado" : "Não Publicado";
+            this.Titulo = evento.Titulo;
         }
     }
 }

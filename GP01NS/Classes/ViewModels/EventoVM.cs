@@ -1,4 +1,5 @@
 ﻿using GP01NS.Models;
+using GP01NSLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +43,7 @@ namespace GP01NS.Classes.ViewModels
             this.ID = evento.ID;
             this.MinutoAte = evento.MinutoAte;
             this.MinutoDe = evento.MinutoDe;
-            this.Titulo = this.Titulo;
+            this.Titulo = evento.Titulo;
         }
 
         public SelectList GetHoras(int hora)
@@ -79,6 +80,52 @@ namespace GP01NS.Classes.ViewModels
             }
 
             return new SelectList(minutos, "ID", "Hora", minuto);
+        }
+
+        public bool SaveChanges(EstabelecimentoVM estabelecimento) 
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var u = db.usuario_estabelecimento.Single(x => x.IDUsuario == estabelecimento.ID);
+                    var e = u.evento.SingleOrDefault(x => x.ID == this.ID);
+
+                    if (e == null)
+                    {
+                        e = new evento
+                        {
+                            Ativo = true,
+                            Publicado = false,
+                            IDUsuario = u.IDUsuario,
+                            CNPJ = u.CNPJ,
+                            TipoUsuario = u.TipoUsuario,
+                            Cadastro = DateTime.Now
+                        };
+                    }
+
+                    e.DataAte = this.DataAte;
+                    e.DataDe = this.DataDe;
+                    e.Descricao = this.Descricao;
+                    e.HoraAte = this.HoraAte;
+                    e.HoraDe = this.HoraDe;
+                    e.MinutoAte = this.MinutoAte;
+                    e.MinutoDe = this.MinutoDe;
+                    e.Titulo = this.Titulo;
+
+                    if (e.ID > 0)
+                        db.ObjectStateManager.ChangeObjectState(e, System.Data.EntityState.Modified);
+                    else
+                        u.evento.Add(e);
+
+                    db.SaveChanges();
+
+                    return true;
+                }
+            }
+            catch (Exception e) { }
+
+            return false;
         }
     }
 

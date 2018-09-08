@@ -68,13 +68,25 @@ namespace GP01NS.Classes.ViewModels
             catch { return true; }
         }
 
-        private endereco GetEnderecoByIDUsuario(int id)
+        public string GetImagemPerfil()
         {
             try
             {
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
-                    return db.endereco.FirstOrDefault(x => x.IDUsuario == id);
+                    return "https://gerisonsabino.azurewebsites.net" + db.usuario.First(x => x.ID == this.ID).imagem.Last(x => x.TipoImagem == 1).Diretorio;
+                }
+            }
+            catch { return "#"; }
+        }
+
+        private endereco GetEnderecoByIDUsuario(int id) 
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    return db.usuario.FirstOrDefault(x => x.ID == id).endereco.FirstOrDefault();
                 }
             }
             catch

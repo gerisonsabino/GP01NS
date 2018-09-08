@@ -37,73 +37,74 @@
         <div class="col-md-7 ml-auto mr-auto">
             @using (Html.BeginForm())
             {
-            <div class="col-md-12 form">
-                <h5 class="text-uppercase">Evento de @Estabelecimento.Nome</h5>
-                <br />
-                <div class="form-group">
-                    <label for="Titulo">Título</label>
-                    @Html.TextBoxFor(x => x.Titulo, new { @class = "form-control", placeholder = "Título do evento", required = "required" })
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Descrição</label>
-                    @Html.TextAreaFor(x => x.Descricao, new { @class = "form-control", placeholder = "Escreva sobre o evento aqui!", required = "required", maxlength = "2000", rows = "8" })
-                </div>
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label for="inputFuncionamento">De</label>
-                        @Html.TextBoxFor(x => x.DataDe, "{0:dd/MM/yyyy}", new { @class = "form-control datapicker", placeholder = "Data de ínicio do evento", required = "required" })
+                <div class="col-md-12 form">
+                    <h5 class="text-uppercase">Evento de @Estabelecimento.Nome</h5>
+                    <br />
+                    <div class="form-group">
+                        <label for="Titulo">Título</label>
+                        @Html.TextBoxFor(x => x.Titulo, new { @class = "form-control", placeholder = "Título do evento", required = "required" })
+                        @Html.HiddenFor(x => x.ID)
                     </div>
-                    <div class="form-group col">
-                        <label>Até</label>
-                        @Html.TextBoxFor(x => x.DataAte, "{0:dd/MM/yyyy}", new { @class = "form-control datapicker", placeholder = "Data de término do evento", required = "required" })
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Descrição</label>
+                        @Html.TextAreaFor(x => x.Descricao, new { @class = "form-control", placeholder = "Escreva sobre o evento aqui!", required = "required", maxlength = "2000", rows = "8" })
                     </div>
-                    <div class="form-group col">
-                        <label>Das</label>
-                        @Html.DropDownListFor(x => x.HoraDe, Model.GetHoras(Model.HoraDe), new { @class = "form-control", required = "required" })
-                        @Html.DropDownListFor(x => x.MinutoDe, Model.GetMinutos(Model.MinutoDe), new { @class = "form-control", required = "required" })
-                    </div>
-                    <div class="form-group col">
-                        <label>Às</label>
-                        @Html.DropDownListFor(x => x.HoraAte, Model.GetHoras(Model.HoraAte), new { @class = "form-control", required = "required" })
-                        @Html.DropDownListFor(x => x.MinutoAte, Model.GetMinutos(Model.MinutoAte), new { @class = "form-control", required = "required" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="endereço">Endereço</label>
-                    <input type="text" class="form-control" id="day">
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="musico">Convidar Músico<br></label>
-                        <div class="musico">
-                            <input type="text" class="form-control inputMusic" id="exampleFormControlFile1" placeholder="informe o usuário do músico">
-                            <a class="btn btn-primary btn-sm btnMusic" id="" style="color: #fff;margin:10px 0 10px 0;">
-                                Convidar
-                            </a>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="inputFuncionamento">De</label>
+                            @Html.TextBoxFor(x => x.DataDe, "{0:dd/MM/yyyy}", new { @class = "form-control datapicker", placeholder = "Data de ínicio do evento", required = "required" })
+                        </div>
+                        <div class="form-group col">
+                            <label>Até</label>
+                            @Html.TextBoxFor(x => x.DataAte, "{0:dd/MM/yyyy}", new { @class = "form-control datapicker", placeholder = "Data de término do evento", required = "required" })
+                        </div>
+                        <div class="form-group col">
+                            <label>Das</label>
+                            @Html.DropDownListFor(x => x.HoraDe, Model.GetHoras(Model.HoraDe), new { @class = "form-control", required = "required" })
+                            @Html.DropDownListFor(x => x.MinutoDe, Model.GetMinutos(Model.MinutoDe), new { @class = "form-control", required = "required" })
+                        </div>
+                        <div class="form-group col">
+                            <label>Às</label>
+                            @Html.DropDownListFor(x => x.HoraAte, Model.GetHoras(Model.HoraAte), new { @class = "form-control", required = "required" })
+                            @Html.DropDownListFor(x => x.MinutoAte, Model.GetMinutos(Model.MinutoAte), new { @class = "form-control", required = "required" })
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="duration">
-                        Fotos do Evento<br>
-                        <div style="color:#fff; margin:10px 0 10px 0;">
-                            <a class="btn btn-success btn-sm" id="btn1"> + Fotos </a>
-                            <a class="btn btn-danger btn-sm" id="btn2" style="margin-left:10px; color: #fff;">
-                                -
-                                Fotos
-                            </a>
+                    <div class="form-group">
+                        <label for="endereço">Endereço</label>
+                        <input type="text" class="form-control" id="day">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="musico">Convidar Músico<br></label>
+                            <div class="musico">
+                                <input type="text" class="form-control inputMusic" id="exampleFormControlFile1" placeholder="informe o usuário do músico">
+                                <a class="btn btn-primary btn-sm btnMusic" id="" style="color: #fff;margin:10px 0 10px 0;">
+                                    Convidar
+                                </a>
+                            </div>
                         </div>
-                    </label>
-                    <div class="form-row" id="mRecebe">
-                        <div class="form-group col-md-3"><input type="file" class="form-control-file" id="exampleFormControlFile1"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">
+                            Fotos do Evento<br>
+                            <div style="color:#fff; margin:10px 0 10px 0;">
+                                <a class="btn btn-success btn-sm" id="btn1"> + Fotos </a>
+                                <a class="btn btn-danger btn-sm" id="btn2" style="margin-left:10px; color: #fff;">
+                                    -
+                                    Fotos
+                                </a>
+                            </div>
+                        </label>
+                        <div class="form-row" id="mRecebe">
+                            <div class="form-group col-md-3"><input type="file" class="form-control-file" id="exampleFormControlFile1"></div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group text-center">
+                        <button type="button" class="btn btn-success btnCriar" data-toggle="modal" data-target="#exampleModal">Salvar</button>
+                        <button type="button" class="btn btn-danger btnCriar">Cancelar</button>
                     </div>
                 </div>
-                <hr>
-                <div class="form-group text-center">
-                    <button type="button" class="btn btn-success btnCriar" data-toggle="modal" data-target="#exampleModal">Cadastrar</button>
-                    <button type="button" class="btn btn-danger btnCriar">Cancelar</button>
-                </div>
-            </div>
             }
         </div>
     </div>

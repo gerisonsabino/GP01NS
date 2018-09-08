@@ -1,0 +1,15 @@
+﻿@model GP01NS.Classes.ViewModels.MusicoVM
+
+@{
+    ViewBag.Title = Model.NomeArtistico;
+}
+
+
+<h2>@Model.NomeArtistico</h2>
+
+<img src="@Model.GetImagemPerfil()" alt="profile" />
+
+<form action="/Musico/UploadProfile" enctype="multipart/form-data" method="post">
+    <input type="file" id="Arquivo" name="Arquivo" required="required" />
+    <input type="submit" value="Enviar arquivo" />
+</form>

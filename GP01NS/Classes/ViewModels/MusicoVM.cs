@@ -33,7 +33,7 @@ namespace GP01NS.Classes.ViewModels
             }
         }
 
-        private usuario_musico GetMusicoByID(int id)
+        private usuario_musico GetMusicoByID(int id) 
         {
             try
             {

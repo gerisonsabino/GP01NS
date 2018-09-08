@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Servicos\Auth.cs" />
+    <Compile Include="Classes\Servicos\FTP.cs" />
     <Compile Include="Classes\Util\Criptografia.cs" />
     <Compile Include="Classes\Util\MensagemEmail.cs" />
     <Compile Include="Classes\Util\Requisicao.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Classes\ViewModels\Estabelecimento\ContaVM.cs" />
     <Compile Include="Classes\ViewModels\EventoVM.cs" />
     <Compile Include="Classes\ViewModels\Fa\ContaVM.cs" />
+    <Compile Include="Classes\ViewModels\ImagemVM.cs" />
     <Compile Include="Classes\ViewModels\MusicoVM.cs" />
     <Compile Include="Classes\ViewModels\Musico\ContaVM.cs" />
     <Compile Include="Classes\ViewModels\UsuarioVM.cs" />
@@ -3272,10 +3274,17 @@
     <Content Include="Views\Perfil\Parciais\CardMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Musico\Perfil.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <EntityDeploy Include="Models\nosso_show.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\gerisonsabino - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\gerisonsabino - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
