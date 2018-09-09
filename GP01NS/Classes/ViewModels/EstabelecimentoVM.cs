@@ -118,6 +118,21 @@ namespace GP01NS.Classes.ViewModels
             catch { return false; }
         }
 
+        public evento GetEventoByID(int id)
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    return db.usuario_estabelecimento.FirstOrDefault(x => x.IDUsuario == this.ID).evento.FirstOrDefault(x => x.ID == id);
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         private usuario_estabelecimento GetEstabelecimentoByID(int id)
         {
             try

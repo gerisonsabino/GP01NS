@@ -1745,6 +1745,7 @@
     <Content Include="CSS\Views\Estabelecimento\evento.css" />
     <Content Include="CSS\Views\layout.css" />
     <Content Include="Imagens\Views\menu.svg" />
+    <Content Include="Imagens\Views\nosso-show.svg" />
     <Content Include="Imagens\Views\user.svg" />
     <Content Include="Global.asax" />
     <Content Include="HTML\email.html" />
@@ -1816,12 +1817,13 @@
     <Content Include="Scripts\form_main.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\mapa.js" />
     <Content Include="Scripts\Plugins\datepicker-plugin\css\bootstrap-datepicker.css" />
     <Content Include="Scripts\Plugins\datepicker-plugin\js\bootstrap-datepicker.js" />
     <Content Include="Scripts\Plugins\datepicker-plugin\js\bootstrap-datepicker.pt-BR.js" />
     <Content Include="Scripts\Plugins\inputmask-plugin\jquery.inputmask.bundle.js" />
     <Content Include="Scripts\popper.min.js" />
-    <Content Include="Scripts\Views\Evento\evento.js" />
+    <Content Include="Scripts\Views\Estabelecimento\evento.js" />
     <Content Include="Scripts\Views\Layout\layout.js" />
     <Content Include="Scripts\Views\Util\inputmask_controller.js" />
     <Content Include="Scripts\Views\Entrar\Cadastro\validation_controller.js" />
@@ -3253,9 +3255,6 @@
     <Content Include="Views\Layout\Parciais\Menu\Estabelecimento.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Sair\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Layout\Parciais\Menu\Fa.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -3280,6 +3279,10 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\gerisonsabino - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\gerisonsabino - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

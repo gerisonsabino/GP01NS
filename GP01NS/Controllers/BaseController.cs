@@ -40,7 +40,8 @@ namespace GP01NS.Controllers
                 base.Session.Abandon();
                 base.Session["IDUsuario"] = string.Empty;
 
-                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "entrar" }, { "action", "index" } });
+                if (!controller.Equals("inicio", StringComparison.CurrentCultureIgnoreCase))
+                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "entrar" }, { "action", "index" } });
             }
             else
             {
@@ -56,27 +57,31 @@ namespace GP01NS.Controllers
 
                 var rota = string.Empty;
 
-                switch (this.BaseUsuario.Tipo)
+                if (controller != "inicio")
                 {
-                    case 1:
-                        rota = "administrador";
-                        break;
+                    switch (this.BaseUsuario.Tipo)
+                    {
+                        case 1:
+                            rota = "administrador";
+                            break;
 
-                    case 2:
-                        rota = "estabelecimento";
-                        break;
+                        case 2:
+                            rota = "estabelecimento";
+                            break;
 
-                    case 3:
-                        rota = "fa";
-                        break;
+                        case 3:
+                            rota = "fa";
+                            break;
 
-                    case 4:
-                        rota = "musico";
-                        break;
+                        case 4:
+                            rota = "musico";
+                            break;
+                    }
+
+                    if (controller.ToUpper() != rota.ToUpper())
+                        filterContext.Result = RedirectPermanent("/" + rota + "/");
                 }
 
-                if (controller.ToUpper() != rota.ToUpper())
-                    filterContext.Result = RedirectPermanent("/" + rota + "/");
             }
 
 

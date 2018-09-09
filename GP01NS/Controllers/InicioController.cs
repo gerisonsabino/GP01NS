@@ -14,18 +14,20 @@ namespace GP01NS.Controllers
     {
         private UsuarioVM Usuario;
 
-        public ActionResult Index()
+        public ActionResult Index() 
         {
+            if (this.BaseUsuario != null)
+            {
+                this.Usuario = new UsuarioVM(this.BaseUsuario);
+                ViewBag.Usuario = this.Usuario;
+            }
+
             return View();
         }
 
         [HttpPost]
-        public ActionResult Index(HttpPostedFileBase Arquivo)
+        public ActionResult Index(HttpPostedFileBase Arquivo) 
         {
-            //var ftp = new Classes.Servicos.FTP();
-
-            //var n = ftp.UploadFile(Arquivo);
-
             return View();
         }
     }
