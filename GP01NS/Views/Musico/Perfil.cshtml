@@ -13,3 +13,8 @@
     <input type="file" id="Arquivo" name="Arquivo" required="required" />
     <input type="submit" value="Enviar arquivo" />
 </form>
+
+<p>
+    @Model.Descricao
+</p>
+<p>Nascimento: @Model.Nascimento.ToShortDateString()</p>

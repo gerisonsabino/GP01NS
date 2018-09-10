@@ -20,7 +20,7 @@ namespace GP01NS.Classes.ViewModels
         public int MinutoDe { get; set; }
         public int MinutoAte { get; set; }
 
-        public EventoVM()
+        public EventoVM() 
         {
             this.DataAte = DateTime.MinValue;
             this.DataDe = DateTime.MinValue;
@@ -100,8 +100,10 @@ namespace GP01NS.Classes.ViewModels
                             IDUsuario = u.IDUsuario,
                             CNPJ = u.CNPJ,
                             TipoUsuario = u.TipoUsuario,
-                            Cadastro = DateTime.Now
+                            Cadastro = DateTime.Now,
                         };
+
+                        e.endereco.Add(u.usuario.endereco.First());
                     }
 
                     e.DataAte = this.DataAte;

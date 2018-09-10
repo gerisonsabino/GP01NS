@@ -4,23 +4,43 @@
 
 <header>
     <div class="text-center logo"></div>
-
-    @switch (Conta.Tipo)
+    @if (Conta != null)
     {
-        case 1:
-            @RenderPage("~/Views/Layout/Parciais/Menu/Administrador.cshtml");
-            break;
+        switch (Conta.Tipo)
+        {
+            case 1:
+                @RenderPage("~/Views/Layout/Parciais/Menu/Administrador.cshtml");
+                break;
 
-        case 2:
-            @RenderPage("~/Views/Layout/Parciais/Menu/Estabelecimento.cshtml");
-            break;
+            case 2:
+                @RenderPage("~/Views/Layout/Parciais/Menu/Estabelecimento.cshtml");
+                break;
 
-        case 3:
-            @RenderPage("~/Views/Layout/Parciais/Menu/Fa.cshtml");
-            break;
+            case 3:
+                @RenderPage("~/Views/Layout/Parciais/Menu/Fa.cshtml");
+                break;
 
-        case 4:
-            @RenderPage("~/Views/Layout/Parciais/Menu/Musico.cshtml");
-            break;
+            case 4:
+                @RenderPage("~/Views/Layout/Parciais/Menu/Musico.cshtml");
+                break;
+        }
+    }
+    else
+    {
+        <nav class="navbar navbar-expand-lg">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <img src="~/Imagens/Views/menu.svg">
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/inicio/">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/entrar/">Entrar</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     }
 </header>

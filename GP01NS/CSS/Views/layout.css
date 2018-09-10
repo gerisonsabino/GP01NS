@@ -25,8 +25,9 @@ header .navbar {
 	justify-content: flex-end;
 }
 
-header .navbar .nav-link {
-	color: #FFF;
+header .navbar .nav-link,
+footer a {
+    color: #FFF;
     font-weight: 600;
 }
 
@@ -48,10 +49,13 @@ header .logo {
 }
 
 .dropdown-submenu .dropdown-menu {
-	top: 0;
-	left: 100%;
-	margin-left: .1rem;
-	margin-right: .1rem;
+    top: 0;
+    left: 100%;
+    margin-left: .1rem;
+    margin-right: .1rem;
+}
+.dropdown-item{
+    font-weight: 600 !important;
 }
 
 .navbar .nav-item {
@@ -110,8 +114,13 @@ button.navbar-toggler img {
 	margin-top: 20px;
 }
 
+.titulo-footer {
+    font-weight: 600 !important;
+    text-transform: uppercase;
+}
+
 .box-footer ul {
-	padding: 0;
+    padding: 0;
 }
 
 .box-footer ul li {

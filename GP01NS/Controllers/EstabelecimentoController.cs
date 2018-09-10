@@ -93,7 +93,10 @@ namespace GP01NS.Controllers
 
             if (idEvento > 0)
             {
-                //GetEvento
+                var e = this.Estabelecimento.GetEventoByID(idEvento);
+
+                if (e != null)
+                    evento = new EventoVM(e);
             }
 
             ViewBag.Estabelecimento = this.Estabelecimento;
@@ -185,7 +188,7 @@ namespace GP01NS.Controllers
             }
             catch { }
 
-            return Redirect("/entrar");
+            return Redirect("/inicio/");
         }
     }
 }

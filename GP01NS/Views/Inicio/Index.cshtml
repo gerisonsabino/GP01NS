@@ -1,19 +1,19 @@
 ﻿@model GP01NS.Classes.ViewModels.UsuarioVM
 @{
     ViewBag.Title = "Início";
-    Layout = null;
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-9 col-12 col-lg-9 ml-auto mr-auto mt-10 form" style="margin-top: 5%;">
-            <div class="col-md-7 ml-auto mr-auto text-left">
+<style>
+    main, .container-fluid {
+        margin: 0px !important;
+        padding: 0px !important;
+    }
 
-                <form action="/Musico/UploadProfile" enctype="multipart/form-data" method="post">
-                    <input type="file" id="Arquivo" name="Arquivo" required="required" />
-                    <input type="submit" value="Enviar arquivo" />
-                </form>
-            </div>  
-        </div>
-    </div>
+</style>
+
+<div class="container-fluid fill">
+    <div id="mapa" style="min-height: calc(-200px + 100vh);"></div>
 </div>
+
+<script src="~/Scripts/mapa.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD302LfE2vA-uKZl0y2MFSAJYdnBeQwTNE"></script>

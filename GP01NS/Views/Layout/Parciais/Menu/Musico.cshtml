@@ -1,5 +1,6 @@
 ﻿@{
-    var Conta = (GP01NS.Models.usuario)ViewBag.BaseUsuario;
+    var Conta = new GP01NS.Classes.ViewModels.UsuarioVM((GP01NS.Models.usuario)ViewBag.BaseUsuario);
+    var ImgPerfil = Conta.GetImagemPerfil();
 }
 
 <nav class="navbar navbar-expand-lg">
@@ -9,17 +10,30 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="/musico/">Início</a>
+                <a class="nav-link" href="/inicio/">Início</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/musico/perfil">Meu Perfil</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="~/Imagens/Views/user.svg" style="width: 25px; height: 25px; margin-right: 5px" /> 
-                    @Conta.Nome
+                    Eventos
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <li>
-                        <a class="dropdown-item" href="/musico/perfil/">Perfil</a>
+                        <a class="dropdown-item" href="#">Agenda</a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" href="#">Convites</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="@(ImgPerfil != "#" ? ImgPerfil : "/Imagens/Views/user.svg")" style="width: 25px; height: 25px; margin-right: 5px; border-radius: 25px" />
+                    @Conta.Nome
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <li>
                         <a class="dropdown-item" href="/musico/conta/">Conta</a>
                     </li>

@@ -141,7 +141,7 @@ namespace GP01NS.Controllers
             }
             catch { }
 
-            return Redirect("/entrar");
+            return Redirect("/inicio/");
         }
     }
 }

@@ -66,7 +66,7 @@ namespace GP01NS.Classes.ViewModels
 
         private bool SaveChanges() 
         {
-            try 
+            try  
             {
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
