@@ -6,6 +6,7 @@ $(document).ready(function () {
 
     //Expressão Regular Para Validar os Campos E-mail
     var valida_email = /[a - z0 - 9!#$ %& '*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&' * +/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+   /* var valida_senha = /"^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$"/; Minimo 8 caracteres, 1 letra, 1 numero, 1 caracter especial*/
 
     $(".cpf").inputmask({ 'mask': '999.999.999-99' });
     $(".cnpj").inputmask({ 'mask': '99.999.999/9999-99' });
@@ -16,7 +17,7 @@ $(document).ready(function () {
     $(".celular").inputmask({ 'mask': '(99)9999-9999[9]' });
 
     /*Validação dos Campos*/
-    $("form").attr("novalidate", " ");
+    $("form").attr('novalidate', '');
     $("form").addClass("needs-validation");
    
     //Checa se algum input tem a classe inválido e se tiver mostra a div de alerta
@@ -26,13 +27,15 @@ $(document).ready(function () {
      //Coloca na variável tudo aquilo que precisar de validação
     $(".needs-validation").on('submit', function (event) {
         //Limpa o campo E-mail se o email não tiver pelo menos um .com
-            //if (valida_email.test($(".email").val()) === false) {
-            //    $(".email").val('');   
-            //}
-            ////Limpa o campo Confirme a Senha se os valores forem diferentes
-            //if ($(".senha").val() != $(".confirmaSenha").val()) {
-            //    $(".confirmaSenha").val('');
-            //}
+        if (valida_email.test($(".email").val()) === false) {
+                $(".email").val('');   
+            }
+            //Limpa o campo Confirme a Senha se os valores forem diferentes
+        if ($(".senha").val() != $(".confirmaSenha").val()) {
+            $(".confirmaSenha").val('');
+        } /*else if (valida_senha.test($(".senha").val()) === false) {
+            $(".senha").val('');
+        } */
         //Faz a validação de tudo o que está com required, enquanto estiver, trava o submit
         if ($(".needs-validation")[0].checkValidity() === false) {
             $(".needs-validation").addClass("was-validated");
@@ -44,5 +47,16 @@ $(document).ready(function () {
     $(".linkEsqueceu").click(function () {
         $(".email").val('');
         $(".senha").val('');
+    });
+
+    /*Menu Fixo*/
+    /*Última vez editado 09/09/2018 - Lucas Lima*/
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 55) {
+            $('header').addClass('menu_fixo');
+        }
+        else {
+            $('header').removeClass('menu_fixo');
+        }
     });
 });

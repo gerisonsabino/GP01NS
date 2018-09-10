@@ -89,6 +89,13 @@ button.navbar-toggler img {
 	width: 16px;
 }
 
+.menu_fixo {
+    top: 0;
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+}
+
 /*FOOTER*/
 .box-footer {
 	width: 100%;
