@@ -27,9 +27,9 @@ $(document).ready(function () {
 
     $(".needs-validation").on('submit', function (event) {
         //Limpa o campo E-mail se não for válido
-        if (valida_email.test($(".email").val()) === false) {
-                $(".email").val('');   
-        }
+        //if (valida_email.test($(".email").val()) === false) {
+        //        $(".email").val('');   
+        //}
         //Limpa o campo CNPJ se não for válido
         //if (!validarCNPJ($('.cnpj').val())) {
         //    $(".cnpj").val('');

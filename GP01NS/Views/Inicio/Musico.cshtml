@@ -7,6 +7,8 @@
     var Usuario = (GP01NS.Classes.ViewModels.UsuarioVM)ViewBag.Usuario;
     var Generos = Model.GetGenerosMusicais();
     var Habilidades = Model.GetHabilidades();
+    var Imagens = Model.GetImagens();
+
 }
 
 <link href="~/CSS/Views/Musico/perfil.css" rel="stylesheet" />
@@ -108,33 +110,52 @@
                     <div class="row mb-4 ">
                         <div class="mb-3 text-center col-12">Veja as fotos deste artista</div>
                         <div class="foto-lista flex space-between">
-                            <div class="foto-item">
-                                <label class="foto-imagem" style="background-image: url(https://image.freepik.com/fotos-gratis/menina-feliz-gravando-uma-musica_1149-1032.jpg)">
-                                    <div class="foto-hover"></div>
-                                    <input type="file" name="name" value="" />
-                                </label>
-                            </div>
-                            <div class="foto-item">
-                                <label class="foto-imagem" style="background-image: url(https://image.freepik.com/fotos-gratis/hipster-homem-com-barba-vermelha-com-uma-guitarra-no-campo_58409-2543.jpg)">
-                                    <div class="foto-hover"></div>
-                                    <input type="file" name="name" value="" />
-                                </label>
-                            </div>
-                            <div class="foto-item">
-                                <label class="foto-imagem" style="background-image: url(https://image.freepik.com/fotos-gratis/homem-sentado-e-tocando-sintetizador_23-2147864203.jpg)">
-                                    <div class="foto-hover"></div>
-                                    <input type="file" name="name" value="" />
-                                </label>
-                            </div>
-                            <div class="foto-item">
-                                <label class="foto-imagem" style="background-image: url(https://image.freepik.com/fotos-gratis/menina-com-violao_1157-8508.jpg)">
-                                    <div class="foto-hover"></div>
-                                    <input type="file" name="name" value="" />
-                                </label>
-                            </div>
+                            @for (int i = 0; i < Imagens.Count; i++)
+                            {
+                                <div class="foto-item">
+                                    <label class="foto-imagem" style="background-image: url(@("https://gerisonsabino.azurewebsites.net" + Imagens[i])">
+                                        @if (Usuario != null)
+                                        {
+                                            @*if (Usuario.ID == Model.ID)
+                                            {
+                                                <form action="/Musico/UploadImagem" method="post" enctype="multipart/form-data">
+                                                    <div class="foto-hover"></div>
+                                                    <input type="file" name="Imagem" onchange="javascript:this.form.submit();">
+                                                </form>
+                                            }*@
+                                        }
+                                    </label>
+                                </div>
+                            }
+
+                            @if (Usuario != null)
+                            {
+                                for (int i = 0; i < 4 - Imagens.Count; i++)
+                                {
+                                    <div class="foto-item">
+                                        <label class="foto-imagem">
+                                            @if (Usuario.ID == Model.ID)
+                                            {
+                                                <form action="/Musico/UploadImagem" method="post" enctype="multipart/form-data">
+                                                    <div class="foto-hover"></div>
+                                                    <input type="file" name="Imagem" onchange="javascript:this.form.submit();">
+                                                </form>
+                                            }
+                                        </label>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                for (int i = 0; i < 4 - Imagens.Count; i++)
+                                {
+                                    <div class="foto-item">
+                                        <div class="foto-imagem"></div>
+                                    </div>
+                                }
+                            }
                         </div>
                     </div>
-
                     <div>
                         <div class="mb-3 text-center col-12">Comentários recentes</div>
                         <div class="comentario-lista mb-4">
@@ -209,7 +230,7 @@
         <div class="row card-compartilhar">
             <div class="col-lg-8 col-sm-12 no-padding flex">
                 <div class="col-lg-7 col-sm-12 no-padding social-media">
-                    <span class="display-5">Compartilhe o trabalho de @Model.NomeArtistico nas redes sociais</span>
+                    <strong class="display-5">Compartilhe o trabalho de @Model.NomeArtistico nas redes sociais</strong>
                     <ul class="list-inline">
                         <li class="list-inline-item"><a href="javascript:void(0);"><i class="fab fa-twitter titleCustom" data-placement="top" title="Twitter" style="color: #55acee"></i></a></li>
                         <li class="list-inline-item"><a href="javascript:void(0);"><i class="fab fa-instagram titleCustom" data-placement="top" title="Instagram" style="color: #55acee"></i></a></li>
@@ -218,7 +239,7 @@
                     </ul>
                 </div>
                 <div class="col-lg-5 col-sm-12 no-padding">
-                    <span class="display-5">Avalie este artista</span>
+                    <strong class="display-5">Avalie este artista</strong>
                     <div class="nota-4">
                         <span class="voto-1 oi oi-heart"></span>
                         <span class="voto-2 oi oi-heart"></span>

@@ -51,13 +51,33 @@
                             <div class="form-row">
                                 <div class="form-group col">
                                     <label>Das</label>
-                                    @Html.DropDownListFor(x => x.HoraDe, Model.GetHoras(Model.HoraDe), new { @class = "form-control", required = "required" })
-                                    @Html.DropDownListFor(x => x.MinutoDe, Model.GetMinutos(Model.MinutoDe), new { @class = "form-control", required = "required" })
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">Hrs</div>
+                                        </div>
+                                        @Html.DropDownListFor(x => x.HoraDe, Model.GetHoras(Model.HoraDe), new { @class = "form-control", required = "required" })
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">Min</div>
+                                        </div>
+                                        @Html.DropDownListFor(x => x.MinutoDe, Model.GetMinutos(Model.MinutoDe), new { @class = "form-control", required = "required" })
+                                    </div>
                                 </div>
                                 <div class="form-group col">
                                     <label>Às</label>
-                                    @Html.DropDownListFor(x => x.HoraAte, Model.GetHoras(Model.HoraAte), new { @class = "form-control", required = "required" })
-                                    @Html.DropDownListFor(x => x.MinutoAte, Model.GetMinutos(Model.MinutoAte), new { @class = "form-control", required = "required" })
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">Hrs</div>
+                                        </div>
+                                        @Html.DropDownListFor(x => x.HoraAte, Model.GetHoras(Model.HoraAte), new { @class = "form-control", required = "required" })
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">Min</div>
+                                        </div>
+                                        @Html.DropDownListFor(x => x.MinutoAte, Model.GetMinutos(Model.MinutoAte), new { @class = "form-control", required = "required" })
+                                    </div>
                                 </div>
                             </div>
                             <br />

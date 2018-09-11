@@ -98,7 +98,17 @@ namespace GP01NS.Controllers
 
             new ImagemVM(Arquivo, this.Musico.ID, 1).Upload();
 
-            return Redirect("/musico/perfil/");
+            return Redirect("/inicio/musico/" + this.Musico.Username);
+        }
+
+        [HttpPost]
+        public ActionResult UploadImagem(HttpPostedFileBase Imagem)
+        {
+            this.Musico = new MusicoVM(this.BaseUsuario);
+
+            new ImagemVM(Imagem, this.Musico.ID, 3).Upload();
+
+            return Redirect("/inicio/musico/" + this.Musico.Username);
         }
 
         public ActionResult Endereco()

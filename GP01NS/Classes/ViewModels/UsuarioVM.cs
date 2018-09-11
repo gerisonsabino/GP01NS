@@ -77,6 +77,20 @@ namespace GP01NS.Classes.ViewModels
                 return string.Empty;
         }
 
+        public List<string> GetImagens()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    return db.usuario.First(x => x.ID == this.ID).imagem.Where(x => x.TipoImagem == 3).Select(x => x.Diretorio).Take(4).ToList();
+                }
+            }
+            catch {  }
+            
+            return null;
+        }
+
         public string GetImagemPerfil()
         {
             try

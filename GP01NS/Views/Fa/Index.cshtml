@@ -1,19 +1,29 @@
-﻿@{
+﻿@model GP01NS.Classes.ViewModels.UsuarioVM
+
+@{
     ViewBag.Title = "Início";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-9 col-12 col-lg-9 ml-auto mr-auto mt-10 form" style="margin-top: 15%;">
-            <div class="col-md-7 ml-auto mr-auto text-left">
-                <div class=" text-center">
-                    <h1 class="display-4">@Model.Nome, Seja bem-vindo! =)</h1>
-                    <br />
-                    <p class="display-5">
-                        @("@" + Model.Username)
-                    </p>
-                </div>
-            </div>
+<link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
+<link href="~/CSS/Views/Musico/index.css" rel="stylesheet" />
+
+<section class="resume-section p-3 p-lg-5 d-flex d-column ml-auto mr-auto text-center">
+    <div class="my-auto ml-auto mr-auto">
+        <h1 class="mb-0">
+            <span class="text-primary">@Model.Nome</span>
+        </h1>
+        <div class="subheading mb-5">
+            @Model.GetEnderecoString()
+            <br /><br />
+            <a href="#">@Model.Email</a>
+        </div>
+        <p class="lead mb-5">
+        </p>
+        <div class="social-icons">
+            <a href="/fa/conta/">
+                <i class="fas fa-edit"></i>
+            </a>
         </div>
     </div>
-</div>
+</section>

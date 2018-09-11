@@ -164,6 +164,16 @@ namespace GP01NS.Controllers
             return Redirect("/inicio/estabelecimento/" + this.Estabelecimento.Username);
         }
 
+        [HttpPost]
+        public ActionResult UploadImagem(HttpPostedFileBase Imagem)
+        {
+            this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
+
+            new ImagemVM(Imagem, this.Estabelecimento.ID, 3).Upload();
+
+            return Redirect("/inicio/estabelecimento/" + this.Estabelecimento.Username);
+        }
+
         public ActionResult Sair()
         {
             try

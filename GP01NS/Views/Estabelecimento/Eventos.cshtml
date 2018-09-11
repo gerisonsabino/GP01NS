@@ -8,10 +8,26 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-3">
-			@RenderPage("Parciais/CardMenu.cshtml")
-			@RenderPage("~/Views/Perfil/Parciais/CardMenu.cshtml")
-		</div>
+        <div class="col-md-3">
+            <ul class="nav flex-column form">
+                <li class="nav-item">
+                    <span class="nav-link">Eventos</span>
+                    <ul>
+                        <li class="nav-item"><a class="nav-link" href="/estabelecimento/evento/">Criar evento</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav flex-column form">
+                <li class="nav-item">
+                    <span class="nav-link">Meu Perfil</span>
+                    <ul>
+                        <li class="nav-item"><a class="nav-link" href="#">Alterar dados</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Minha assinatura</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Promover evento</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
 		<div class="col-md-9">
 			<div class="col-md-12 form">
                 @Html.Hidden("JSON")

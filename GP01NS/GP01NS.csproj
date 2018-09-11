@@ -1678,6 +1678,7 @@
     <Content Include="CSS\icons-open-iconic-master\svg\move.svg" />
     <Content Include="CSS\icons-open-iconic-master\svg\musical-note.svg" />
     <Content Include="CSS\icons-open-iconic-master\svg\paperclip.svg" />
+    <Content Include="CSS\icons-open-iconic-master\svg\pencil-white.svg" />
     <Content Include="CSS\icons-open-iconic-master\svg\pencil.svg" />
     <Content Include="CSS\icons-open-iconic-master\svg\people.svg" />
     <Content Include="CSS\icons-open-iconic-master\svg\person.svg" />
@@ -1745,6 +1746,7 @@
     <Content Include="CSS\Views\Estabelecimento\evento.css" />
     <Content Include="CSS\Views\Inicio\estabelecimento.css" />
     <Content Include="CSS\Views\layout.css" />
+    <Content Include="CSS\Views\Musico\index.css" />
     <Content Include="CSS\Views\Musico\perfil.css" />
     <Content Include="Imagens\Views\estrela-azul.svg" />
     <Content Include="Imagens\Views\estrela-cinza .svg" />
@@ -3291,6 +3293,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Imagens\Views\my-icons-collection.zip" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\gerisonsabino - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\gerisonsabino - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

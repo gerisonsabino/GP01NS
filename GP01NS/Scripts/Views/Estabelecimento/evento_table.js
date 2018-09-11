@@ -13,10 +13,8 @@
                 $('<td>').text(item.Data),
                 $('<td>').text(item.Status),
                 //Ia criar uma variável mas não apareceu o btn a partir do segundo registro, acho que pq a primeira já estava em uso
-                $('<td>').append($('<a type="button" class="btn btn-primary" href="/estabelecimento/evento/ID">Editar</a>'))).appendTo('.table');
+                $('<td>').append($("<a class='btn btn-primary' href='/estabelecimento/evento/"+ item.ID + "'>Editar</a>"))).appendTo('.table');
         });
         $('#JSON').remove();
     });
-
-   
 });
