@@ -175,25 +175,24 @@ textarea {
 }
 
 /*NOTA*/
-div[class^=nota] div[class^=estrela] {
-	width: 10px;
-	height: 10px;
+span[class^=voto] {
+	color: var(--cinza);
 }
 
-.nota-1 .estrela-1,
-.nota-2 .estrela-1,
-.nota-3 .estrela-1,
-.nota-4 .estrela-1,
-.nota-5 .estrela-1,
-.nota-2 .estrela-2,
-.nota-3 .estrela-2,
-.nota-4 .estrela-2,
-.nota-5 .estrela-2,
-.nota-3 .estrela-3,
-.nota-4 .estrela-3,
-.nota-5 .estrela-3,
-.nota-4 .estrela-4,
-.nota-5 .estrela-4,
-.nota-5 .estrela-5 {
-	background-image: url(/Imagens/Views/estrela-azul.svg)
+.nota-1 .voto-1,
+.nota-2 .voto-1,
+.nota-3 .voto-1,
+.nota-4 .voto-1,
+.nota-5 .voto-1,
+.nota-2 .voto-2,
+.nota-3 .voto-2,
+.nota-4 .voto-2,
+.nota-5 .voto-2,
+.nota-3 .voto-3,
+.nota-4 .voto-3,
+.nota-5 .voto-3,
+.nota-4 .voto-4,
+.nota-5 .voto-4,
+.nota-5 .voto-5 {
+	color: var(--azul);
 }
