@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Perfil";
+}
+<link href="~/CSS/Views/Musico/perfil.css" rel="stylesheet" />
+
+<div class="card col-lg-9 col-sm-12 mx-auto">
+	<div class="card-body row">
+		<div class="col-8">
+			@RenderPage("Parciais/Descricao.cshtml")
+		</div>
+		<div class="col-4 lado-fotos">
+			@RenderPage("Parciais/fotos.cshtml")
+		</div>
+	</div>
+</div>

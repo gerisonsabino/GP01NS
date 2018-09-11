@@ -1743,7 +1743,16 @@
     <Content Include="CSS\Views\forms.css" />
     <Content Include="CSS\Views\Estabelecimento\evento.css" />
     <Content Include="CSS\Views\layout.css" />
+    <Content Include="CSS\Views\Musico\perfil.css" />
+    <Content Include="CSS\Views\Musico\index.css" />
+    <Content Include="Imagens\Views\estrela-azul.svg" />
+    <Content Include="Imagens\Views\estrela-cinza .svg" />
     <Content Include="Imagens\Views\menu.svg" />
+    <Content Include="Imagens\Views\Musico\deezer.png" />
+    <Content Include="Imagens\Views\Musico\img-banda.png" />
+    <Content Include="Imagens\Views\Musico\soundcloud.svg" />
+    <Content Include="Imagens\Views\Musico\spotify.svg" />
+    <Content Include="Imagens\Views\Musico\youtube.svg" />
     <Content Include="Imagens\Views\user.svg" />
     <Content Include="Global.asax" />
     <Content Include="HTML\email.html" />
@@ -3276,6 +3285,18 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Musico\Perfil.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Musico\Parciais\Descricao.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Imagens\Views\Musico\my-icons-collection.zip" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Musico\Parciais\fotos.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

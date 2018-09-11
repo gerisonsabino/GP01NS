@@ -1,5 +1,15 @@
+/*GERAL*/
+:root {
+	--branco: #FFF;
+	--cinza: #C4CFDA;
+	--cinza-escuro: #212121;
+	--azul: #007bff;
+	--azul-escuro: #04111e;
+}
+
 * {
-    list-style: none;
+	list-style: none;
+	transition: all .3s ease;
 }
 
 body,
@@ -10,13 +20,39 @@ html {
 header,
 footer {
 	width: 100%;
-	background: #007bff;
+	background: var(--azul);
 	min-height: 40px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: 5px 25px;
 	color: #FFF;
+}
+
+.arredondado {
+	border-radius: 50%;
+}
+
+.backgrond-cinza {
+	background: var(--cinza);
+}
+
+.card {
+	box-shadow: -1px 4px 35px -4px #a5a5a5;
+}
+
+.flex {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.space-between {
+	justify-content: space-between;
+}
+
+.no-padding {
+	padding: 0 !important;
+	margin: 0 !important;
 }
 
 /*HEADER*/
@@ -118,7 +154,7 @@ button.navbar-toggler img {
 }
 
 main {
-	min-height: calc(100vh - 200px);
+	min-height: calc(100vh - 269px);
 	padding: 25px 25px 45px 25px;
 }
 
@@ -136,4 +172,28 @@ textarea {
 
 .was-validated .form-control:invalid + .select2-container--default .select2-selection--multiple {
 	border-color: #dc3545;
+}
+
+/*NOTA*/
+div[class^=nota] div[class^=estrela] {
+	width: 10px;
+	height: 10px;
+}
+
+.nota-1 .estrela-1,
+.nota-2 .estrela-1,
+.nota-3 .estrela-1,
+.nota-4 .estrela-1,
+.nota-5 .estrela-1,
+.nota-2 .estrela-2,
+.nota-3 .estrela-2,
+.nota-4 .estrela-2,
+.nota-5 .estrela-2,
+.nota-3 .estrela-3,
+.nota-4 .estrela-3,
+.nota-5 .estrela-3,
+.nota-4 .estrela-4,
+.nota-5 .estrela-4,
+.nota-5 .estrela-5 {
+	background-image: url(/Imagens/Views/estrela-azul.svg)
 }
