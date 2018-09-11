@@ -5,7 +5,7 @@ $(document).ready(function () {
     var data = new Date();
 
     //Expressão Regular Para Validar os Campos E-mail
-    var valida_email = /[a - z0 - 9!#$ %& '*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&' * +/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+    var valida_email = /[a-z0-9!#$ %& '*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&' * +/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
    /* var valida_senha = /"^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$"/; Minimo 8 caracteres, 1 letra, 1 numero, 1 caracter especial*/
 
     $(".cpf").inputmask({ 'mask': '999.999.999-99' });

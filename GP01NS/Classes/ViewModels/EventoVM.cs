@@ -2,6 +2,7 @@
 using GP01NSLibrary;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,6 +20,8 @@ namespace GP01NS.Classes.ViewModels
         public int HoraAte { get; set; }
         public int MinutoDe { get; set; }
         public int MinutoAte { get; set; }
+
+        public EstabelecimentoVM Estabelecimento;
 
         public EventoVM() 
         {
@@ -44,6 +47,8 @@ namespace GP01NS.Classes.ViewModels
             this.MinutoAte = evento.MinutoAte;
             this.MinutoDe = evento.MinutoDe;
             this.Titulo = evento.Titulo;
+
+            this.Estabelecimento = new EstabelecimentoVM(this.GetEstabelecimentoByID(evento.IDUsuario));
         }
 
         public SelectList GetHoras(int hora)
@@ -80,6 +85,24 @@ namespace GP01NS.Classes.ViewModels
             }
 
             return new SelectList(minutos, "ID", "Hora", minuto);
+        }
+
+        public string GetHorarioString()
+        {
+            CultureInfo ci = new CultureInfo("pt-BR");
+            DateTimeFormatInfo f = ci.DateTimeFormat;
+
+            var dia = this.DataDe.Day;
+            var mes = ci.TextInfo.ToTitleCase(f.GetMonthName(this.DataDe.Month));
+            var ano = DateTime.Now.Year;
+            var diasemana = ci.TextInfo.ToTitleCase(f.GetDayName(this.DataDe.DayOfWeek));
+
+            if (this.DataDe == this.DataAte)
+                return this.DataDe.Day + " de " + mes + " de " + this.DataDe.Year + " - das " + this.HoraDe.ToString("D2") + ":" + this.MinutoDe.ToString("D2") + "h às " + this.HoraAte.ToString("D2") + ":" + this.MinutoAte.ToString("D2") + "h";
+            else if (this.DataDe != this.DataAte && this.DataDe.Month == this.DataAte.Month)
+                return this.DataDe.Day.ToString("D2") + " a " + this.DataAte.Day.ToString("D2") + " de " + mes + " de " + this.DataAte.Year + " - das " + this.HoraDe.ToString("D2") + ":" + this.MinutoDe.ToString("D2") + "h às " + this.HoraAte.ToString("D2") + ":" + this.MinutoAte.ToString("D2") + "h";
+            else
+                return "De " + this.DataDe.ToShortDateString() + " até " + this.DataAte.ToShortDateString() + " - das " + this.HoraDe.ToString("D2") + ":" + this.MinutoDe.ToString("D2") + "h às " + this.HoraAte.ToString("D2") + ":" + this.MinutoAte.ToString("D2") + "h";
         }
 
         public bool SaveChanges(EstabelecimentoVM estabelecimento) 
@@ -128,6 +151,21 @@ namespace GP01NS.Classes.ViewModels
             catch (Exception e) { }
 
             return false;
+        }
+
+        private usuario GetEstabelecimentoByID(int id)
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    return db.usuario.FirstOrDefault(x => x.ID == id);
+                }
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 

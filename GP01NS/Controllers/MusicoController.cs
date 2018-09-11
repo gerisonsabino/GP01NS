@@ -99,7 +99,6 @@ namespace GP01NS.Controllers
             new ImagemVM(Arquivo, this.Musico.ID, 1).Upload();
 
             return Redirect("/musico/perfil/");
-
         }
 
         public ActionResult Endereco()

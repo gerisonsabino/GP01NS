@@ -4,6 +4,7 @@ using GP01NS.Classes.ViewModels.Estabelecimento;
 using GP01NS.Models;
 using GP01NSLibrary;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace GP01NS.Controllers
@@ -151,6 +152,16 @@ namespace GP01NS.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult UploadCover(HttpPostedFileBase Arquivo)
+        {
+            this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
+
+            new ImagemVM(Arquivo, this.Estabelecimento.ID, 2).Upload();
+
+            return Redirect("/inicio/estabelecimento/" + this.Estabelecimento.Username);
         }
 
         public ActionResult Sair()

@@ -1743,6 +1743,7 @@
     <Content Include="CSS\Views\Entrar\index.css" />
     <Content Include="CSS\Views\forms.css" />
     <Content Include="CSS\Views\Estabelecimento\evento.css" />
+    <Content Include="CSS\Views\Inicio\estabelecimento.css" />
     <Content Include="CSS\Views\layout.css" />
     <Content Include="Imagens\Views\menu.svg" />
     <Content Include="Imagens\Views\nosso-show.svg" />
@@ -3279,6 +3280,14 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inicio\Estabelecimento.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\gerisonsabino - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\gerisonsabino - Web Deploy.pubxml" />
+    <Content Include="Views\Inicio\Evento.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

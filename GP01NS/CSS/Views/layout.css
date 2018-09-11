@@ -140,10 +140,11 @@ main {
 
 .form-group label,
 input[type=button],
-button {
-	font-weight: 600 !important;
-	font-size: 0.9rem;
-	text-transform: uppercase;
+button,
+a.btn-primary {
+    font-weight: 600 !important;
+    font-size: 0.9rem;
+    text-transform: uppercase;
 }
 
 textarea {

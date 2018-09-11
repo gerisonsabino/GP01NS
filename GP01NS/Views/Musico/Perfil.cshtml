@@ -9,9 +9,8 @@
 
 <img src="@Model.GetImagemPerfil()" alt="profile" />
 
-<form action="/Musico/UploadProfile" enctype="multipart/form-data" method="post">
-    <input type="file" id="Arquivo" name="Arquivo" required="required" />
-    <input type="submit" value="Enviar arquivo" />
+<form action="/Musico/UploadProfile" method="post" enctype="multipart/form-data">
+    <input type="file" id="Arquivo" name="Arquivo" onchange="javascript:this.form.submit();">
 </form>
 
 <p>

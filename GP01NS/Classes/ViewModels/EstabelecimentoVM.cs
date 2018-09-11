@@ -73,6 +73,36 @@ namespace GP01NS.Classes.ViewModels
             return string.Empty;
         }
 
+        public string GetFuncionamentoString()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var dias = db.usuario_estabelecimento_dias.ToList();
+
+                    return dias.First(x => x.ID == this.De).Descricao.Substring(0, 3) + " à " + dias.First(x => x.ID == this.Ate).Descricao.Substring(0, 3) + " - das " + this.Das.ToString("D2") + "h às " + this.As.ToString("D2") + "h"; 
+                }
+            }
+            catch { }
+
+            return string.Empty;
+        }
+
+        public string GetAmbientacao()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    return db.ambientacao.First(x => x.ID == this.IDAmbientacao).Descricao;
+                }
+            }
+            catch { }
+
+            return string.Empty;
+        }
+
         public bool SaveChanges() 
         {
             try
