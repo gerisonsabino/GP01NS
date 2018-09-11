@@ -1824,6 +1824,7 @@
     <Content Include="Scripts\Plugins\inputmask-plugin\jquery.inputmask.bundle.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\Views\Estabelecimento\evento.js" />
+    <Content Include="Scripts\Views\Estabelecimento\evento_table.js" />
     <Content Include="Scripts\Views\Layout\layout.js" />
     <Content Include="Scripts\Views\Util\inputmask_controller.js" />
     <Content Include="Scripts\Views\Entrar\Cadastro\validation_controller.js" />
