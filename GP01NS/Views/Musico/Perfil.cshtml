@@ -17,3 +17,22 @@
     @Model.Descricao
 </p>
 <p>Nascimento: @Model.Nascimento.ToShortDateString()</p>
+<link href="~/CSS/Views/Musico/perfil.css" rel="stylesheet" />
+
+
+
+<div class="card col-lg-10 col-sm-12 mx-auto">
+    <div class="card-body row">
+        <div class="row">
+            <div class="col-lg-8 col-sm-12">
+                @RenderPage("Parciais/Descricao.cshtml")
+            </div>
+            <div class="col-lg-4 col-sm-12 lado-fotos">
+                @RenderPage("Parciais/fotos.cshtml")
+            </div>
+        </div>
+        <div class="row card-compartilhar">
+            @RenderPage("Parciais/compartilhar.cshtml")
+        </div>
+    </div>
+</div>

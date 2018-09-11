@@ -1,0 +1,220 @@
+﻿@model GP01NS.Classes.ViewModels.MusicoVM
+
+@{
+    ViewBag.Title = Model.NomeArtistico;
+    ViewBag.Description = Model.Descricao;
+    var Usuario = (GP01NS.Classes.ViewModels.UsuarioVM)ViewBag.Usuario;
+    var Generos = Model.GetGenerosMusicais();
+    var Habilidades = Model.GetHabilidades();
+}
+
+<link href="~/CSS/Views/Musico/perfil.css" rel="stylesheet" />
+
+<div class="card col-lg-10 col-sm-12 mx-auto">
+    <div class="card-body row">
+        <div class="row">
+            <div class="col-lg-8 col-sm-12">
+                <div class="row">
+                    <div class="perfil">
+                        <div class="perfil-imagem" style="background-image: url(@Model.GetImagemPerfil())"></div>
+                        <div class="perfil-texto text-center">
+                            @Model.NomeArtistico
+                            <br />
+                            <small>
+                                <a href="javascript:void(0);">Denúnciar artista</a>
+                            </small>
+                        </div>
+                    </div>
+                    @if (Usuario != null)
+                    {
+                        if (Usuario.ID == Model.ID)
+                        {
+                            <form action="/Musico/UploadProfile" method="post" enctype="multipart/form-data">
+                                <input type="file" id="Arquivo" name="Arquivo" onchange="javascript:this.form.submit();">
+                            </form>
+                        }
+                    }
+
+                </div>
+                <div class="row mt-5">
+                    <div class="habilidade">
+                        <div class="mb-2">
+                            <strong>Gênero(s) musicais</strong>
+                        </div>
+                        @if (Generos != null)
+                        {
+                            <div class="habilidade-lista flex">
+                                @for (int i = 0; i < Generos.Count; i++)
+                                {
+                                    <div class="habilidade-item">
+                                        @Generos[i]
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <label>-</label>
+                        }
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="sobre">
+                        <div class="mb-2">
+                            <strong>Sobre @Model.NomeArtistico</strong>
+                        </div>
+                        <div class="sobre-texto col-lg-11 col-sm-12 no-padding">
+                            @Html.Raw(Model.Descricao.Replace("\n", "<br />"))
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="habilidade">
+                        <div class="mb-2">
+                            <strong>Habilidade(s)</strong>
+                        </div>
+                        @if (Habilidades != null)
+                        {
+                            <div class="habilidade-lista flex">
+                                @for (int i = 0; i < Habilidades.Count; i++)
+                                {
+                                    <div class="habilidade-item">
+                                        @Habilidades[i]
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <label>-</label>
+                        }
+                    </div>
+                </div>
+                <div class="row mt-5 mb-4">
+                    <div class="portfolio col-12 no-padding">
+                        <div class="mb-2">Veja os trabalhos desse artista</div>
+                        <div class="portfolio-itens flex">
+                            <a href="javascript:void(0);" class="logo-soundcloud titleCustom" data-placement="top" title="Soundclick"></a>
+                            <a href="javascript:void(0);" class="logo-spotify titleCustom" data-placement="top" title="Spotify"></a>
+                            <a href="javascript:void(0);" class="logo-deezer titleCustom" data-placement="top" title="Deezer"></a>
+                            <a href="javascript:void(0);" class="logo-youtube titleCustom" data-placement="top" title="Youtube"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-12 lado-fotos">
+                <div class="bloco-participante shadow p-3 bg-white rounded border mb-4">
+                    <div class="row mb-4 ">
+                        <div class="mb-3 text-center col-12">Veja as fotos deste músico</div>
+                        <div class="foto-lista flex space-between">
+                            <div class="foto-item">
+                                <div class="foto-imagem" style="background-image: url(https://image.freepik.com/fotos-gratis/menina-feliz-gravando-uma-musica_1149-1032.jpg)"></div>
+                            </div>
+                            <div class="foto-item">
+                                <div class="foto-imagem" style="background-image: url(https://image.freepik.com/fotos-gratis/hipster-homem-com-barba-vermelha-com-uma-guitarra-no-campo_58409-2543.jpg)"></div>
+                            </div>
+                            <div class="foto-item">
+                                <div class="foto-imagem" style="background-image: url(https://image.freepik.com/fotos-gratis/homem-sentado-e-tocando-sintetizador_23-2147864203.jpg)"></div>
+                            </div>
+                            <div class="foto-item">
+                                <div class="foto-imagem" style="background-image: url(https://image.freepik.com/fotos-gratis/menina-com-violao_1157-8508.jpg)"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="mb-3 text-center col-12">Comentários recentes</div>
+                        <div class="comentario-lista mb-4">
+                            <div class="comentario-item mb-3 flex">
+                                <div class="comentario-foto" style="background-image: url(https://randomuser.me/api/portraits/men/12.jpg)"></div>
+                                <div class="comentario-nome">Harold King</div>
+                                <div class="comentario-mensagem text-center">
+                                    <div class="nota-4">
+                                        <span class="voto-1 oi oi-heart"></span>
+                                        <span class="voto-2 oi oi-heart"></span>
+                                        <span class="voto-3 oi oi-heart"></span>
+                                        <span class="voto-4 oi oi-heart"></span>
+                                        <span class="voto-5 oi oi-heart"></span>
+                                    </div>
+                                    Mussum Ipsum, cacilds vidis litro abertis.
+                                </div>
+
+                            </div>
+
+                            <div class="comentario-item mb-3 flex">
+                                <div class="comentario-foto" style="background-image: url(https://randomuser.me/api/portraits/women/12.jpg)"></div>
+                                <div class="comentario-nome">April Hughes</div>
+                                <div class="comentario-mensagem text-center">
+                                    <div class="nota-3">
+                                        <span class="voto-1 oi oi-heart"></span>
+                                        <span class="voto-2 oi oi-heart"></span>
+                                        <span class="voto-3 oi oi-heart"></span>
+                                        <span class="voto-4 oi oi-heart"></span>
+                                        <span class="voto-5 oi oi-heart"></span>
+                                    </div>
+                                    Per aumento de cachacis, eu reclamis.
+                                </div>
+
+                            </div>
+
+                            <div class="comentario-item mb-3 flex">
+                                <div class="comentario-foto" style="background-image: url(https://randomuser.me/api/portraits/men/11.jpg)"></div>
+                                <div class="comentario-nome">Ryan Miller</div>
+                                <div class="comentario-mensagem text-center">
+                                    <div class="nota-5">
+                                        <span class="voto-1 oi oi-heart"></span>
+                                        <span class="voto-2 oi oi-heart"></span>
+                                        <span class="voto-3 oi oi-heart"></span>
+                                        <span class="voto-4 oi oi-heart"></span>
+                                        <span class="voto-5 oi oi-heart"></span>
+                                    </div>
+                                    Mé faiz elementum girarzis, nisi eros vermeio.
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    @if (Usuario != null)
+                    {
+                        if (Usuario.ID != Model.ID)
+                        {
+                            <button class="btn btn-primary">Seguir</button>
+                        }
+                        else
+                        {
+                            <a href="/estabelecimento/conta/" class="btn btn-primary">Editar Perfil</a>
+                        }
+
+                    }
+                    else
+                    {
+                        <a href="/entrar/" class="btn btn-primary">Entre para seguir</a>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row card-compartilhar">
+            <div class="col-lg-8 col-sm-12 no-padding flex">
+                <div class="col-lg-7 col-sm-12 no-padding social-media">
+                    <span class="display-5">Compartilhe esse evendo nas redes sociais</span>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="javascript:void(0);"><i class="fab fa-twitter titleCustom" data-placement="top" title="Twitter" style="color: #55acee"></i></a></li>
+                        <li class="list-inline-item"><a href="javascript:void(0);"><i class="fab fa-instagram titleCustom" data-placement="top" title="Instagram" style="color: #55acee"></i></a></li>
+                        <li class="list-inline-item"><a href="javascript:void(0);"><i class="fab fa-facebook-square titleCustom" data-placement="top" title="Facebook" style="color: #3a589e"></i></a></li>
+                        <li class="list-inline-item"><a href="javascript:void(0);"><i class="fab fa-google titleCustom" data-placement="top" title="Google+" style="color: #dc4e41"></i></a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-5 col-sm-12 no-padding">
+                    <span class="display-5">Avalie @Model.NomeArtistico</span>
+                    <div class="nota-4">
+                        <span class="voto-1 oi oi-heart"></span>
+                        <span class="voto-2 oi oi-heart"></span>
+                        <span class="voto-3 oi oi-heart"></span>
+                        <span class="voto-4 oi oi-heart"></span>
+                        <span class="voto-5 oi oi-heart"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

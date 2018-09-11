@@ -33,6 +33,34 @@ namespace GP01NS.Classes.ViewModels
             }
         }
 
+        public List<string> GetGenerosMusicais()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    return db.usuario.First(x => x.ID == this.ID).genero_musical.Select(x => x.Descricao).ToList();
+                }
+            }
+            catch { }
+
+            return null;
+        }
+
+        public List<string> GetHabilidades()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                   return db.usuario.First(x => x.ID == this.ID).hab_musical.Select(x => x.Descricao).ToList();
+                }
+            }
+            catch { }
+
+            return null;
+        }
+
         private usuario_musico GetMusicoByID(int id) 
         {
             try

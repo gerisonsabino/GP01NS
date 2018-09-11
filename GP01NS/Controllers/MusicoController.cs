@@ -46,11 +46,6 @@ namespace GP01NS.Controllers
             return View(cadastro);
         }
 
-		public ActionResult Perfil()
-		{
-			return View();
-		}
-
 		[HttpPost]
         public ActionResult Conta(ContaVM model)
         {

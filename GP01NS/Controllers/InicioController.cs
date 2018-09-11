@@ -76,5 +76,26 @@ namespace GP01NS.Controllers
             }
             catch { return Redirect("/inicio/"); }
         }
+
+        public ActionResult Musico(string id)
+        {
+            if (this.BaseUsuario != null)
+                this.Usuario = new UsuarioVM(this.BaseUsuario);
+            else
+                this.Usuario = null;
+
+            ViewBag.Usuario = this.Usuario;
+
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var u = db.usuario.First(x => x.Username == id && x.Tipo == 4);
+
+                    return View(new MusicoVM(u));
+                }
+            }
+            catch { return Redirect("/inicio/"); }
+        }
     }
 }
