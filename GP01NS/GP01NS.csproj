@@ -3243,9 +3243,6 @@
     <Content Include="Views\Estabelecimento\Evento.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Estabelecimento\Parciais\CardMenu.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Layout\Parciais\Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -3272,12 +3269,6 @@
     <Content Include="Views\Musico\Endereco.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Perfil\Parciais\CardMenu.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Musico\Perfil.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <EntityDeploy Include="Models\nosso_show.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
@@ -3288,9 +3279,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Inicio\Evento.cshtml" />
-    <Content Include="Views\Musico\Parciais\compartilhar.cshtml" />
-    <Content Include="Views\Musico\Parciais\Descricao.cshtml" />
-    <Content Include="Views\Musico\Parciais\fotos.cshtml" />
     <Content Include="Views\Inicio\Musico.cshtml" />
   </ItemGroup>
   <PropertyGroup>
