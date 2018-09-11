@@ -140,6 +140,7 @@
     <Compile Include="Classes\ViewModels\Estabelecimento\ContaVM.cs" />
     <Compile Include="Classes\ViewModels\EventoVM.cs" />
     <Compile Include="Classes\ViewModels\Fa\ContaVM.cs" />
+    <Compile Include="Classes\ViewModels\ImagemVM.cs" />
     <Compile Include="Classes\ViewModels\MusicoVM.cs" />
     <Compile Include="Classes\ViewModels\Musico\ContaVM.cs" />
     <Compile Include="Classes\ViewModels\UsuarioVM.cs" />
@@ -1742,9 +1743,9 @@
     <Content Include="CSS\Views\Entrar\index.css" />
     <Content Include="CSS\Views\forms.css" />
     <Content Include="CSS\Views\Estabelecimento\evento.css" />
+    <Content Include="CSS\Views\Inicio\estabelecimento.css" />
     <Content Include="CSS\Views\layout.css" />
     <Content Include="CSS\Views\Musico\perfil.css" />
-    <Content Include="CSS\Views\Musico\index.css" />
     <Content Include="Imagens\Views\estrela-azul.svg" />
     <Content Include="Imagens\Views\estrela-cinza .svg" />
     <Content Include="Imagens\Views\image.png" />
@@ -1754,6 +1755,7 @@
     <Content Include="Imagens\Views\Musico\soundcloud.svg" />
     <Content Include="Imagens\Views\Musico\spotify.svg" />
     <Content Include="Imagens\Views\Musico\youtube.svg" />
+    <Content Include="Imagens\Views\nosso-show.svg" />
     <Content Include="Imagens\Views\user.svg" />
     <Content Include="Global.asax" />
     <Content Include="HTML\email.html" />
@@ -1825,12 +1827,14 @@
     <Content Include="Scripts\form_main.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\mapa.js" />
     <Content Include="Scripts\Plugins\datepicker-plugin\css\bootstrap-datepicker.css" />
     <Content Include="Scripts\Plugins\datepicker-plugin\js\bootstrap-datepicker.js" />
     <Content Include="Scripts\Plugins\datepicker-plugin\js\bootstrap-datepicker.pt-BR.js" />
     <Content Include="Scripts\Plugins\inputmask-plugin\jquery.inputmask.bundle.js" />
     <Content Include="Scripts\popper.min.js" />
-    <Content Include="Scripts\Views\Evento\evento.js" />
+    <Content Include="Scripts\Views\Estabelecimento\evento.js" />
+    <Content Include="Scripts\Views\Estabelecimento\evento_table.js" />
     <Content Include="Scripts\Views\Layout\layout.js" />
     <Content Include="Scripts\Views\Util\inputmask_controller.js" />
     <Content Include="Scripts\Views\Entrar\Cadastro\validation_controller.js" />
@@ -3247,9 +3251,6 @@
     <Content Include="Views\Estabelecimento\Evento.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Estabelecimento\Parciais\CardMenu.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Layout\Parciais\Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -3260,9 +3261,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Layout\Parciais\Menu\Estabelecimento.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Sair\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Layout\Parciais\Menu\Fa.cshtml" />
@@ -3279,28 +3277,20 @@
     <Content Include="Views\Musico\Endereco.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Perfil\Parciais\CardMenu.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <EntityDeploy Include="Models\nosso_show.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Musico\Perfil.cshtml" />
+    <Content Include="Views\Inicio\Estabelecimento.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Musico\Parciais\Descricao.cshtml" />
+    <Content Include="Views\Inicio\Evento.cshtml" />
+    <Content Include="Views\Inicio\Musico.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Imagens\Views\Musico\my-icons-collection.zip" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Musico\Parciais\fotos.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Musico\Parciais\compartilhar.cshtml" />
+    <Content Include="Imagens\Views\my-icons-collection.zip" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

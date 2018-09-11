@@ -8,46 +8,37 @@
 
 <div class="container-fluid">
 	<div class="row">
-
 		<div class="col-md-3">
 			@RenderPage("Parciais/CardMenu.cshtml")
 			@RenderPage("~/Views/Perfil/Parciais/CardMenu.cshtml")
 		</div>
 		<div class="col-md-9">
-			<form action="" method="post">
-				<div class="col-md-12 form">
-					<table class="table table-borderless">
-						<thead>
-							<tr>
-								<th>Cod</th>
-								<th scope="col">Nome do Evento</th>
-								<th scope="col">Data</th>
-								<th scope="col">Status</th>
-								<th scope="col"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="shadow-none p-3 mb-5 bg-light rounded es">
-								<th scope="row"><img src="assets/img/teste.svg" alt="..." class="rounded-circle"></th>
-								<td>{Nome do Evento}</td>
-								<td>{01/01/2018}</td>
-								<td>{Confirmado}</td>
-								<td><button type="button" class="btn btn-primary">Editar</button></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</form>
+			<div class="col-md-12 form">
+                @Html.Hidden("JSON")
+				<table class="table table-borderless">
+					<thead>
+						<tr>
+							<th>Cod</th>
+							<th scope="col">Nome do Evento</th>
+							<th scope="col">Data</th>
+							<th scope="col">Status</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>
 
 <script>
-        $("#btn1").click(function () {
-            $("#mRecebe").append("<div class='form-group col-md-3'><input type='file' class='form-control-file' id='exampleFormControlFile1'></div>");
-        });
+    $("#btn1").click(function () {
+        $("#mRecebe").append("<div class='form-group col-md-3'><input type='file' class='form-control-file' id='exampleFormControlFile1'></div>");
+    });
 
-        $("#btn2").click(function () {
-            $("input:file").appendTo("<div class='form-group col-md-3'><input type='file' class='form-control-file' id='exampleFormControlFile1'></div>");
-        });
+    $("#btn2").click(function () {
+        $("input:file").appendTo("<div class='form-group col-md-3'><input type='file' class='form-control-file' id='exampleFormControlFile1'></div>");
+    });
 </script>
+<script src="~/Scripts/Views/Estabelecimento/evento_table.js"></script>

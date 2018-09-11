@@ -56,7 +56,7 @@ namespace GP01NS.Classes.ViewModels
             catch { return true; }
         }
 
-        public bool ValidarNomeUsuario(UsuarioVM usuario)
+        public bool ValidarNomeUsuario(UsuarioVM usuario) 
         {
             try
             {
@@ -68,13 +68,46 @@ namespace GP01NS.Classes.ViewModels
             catch { return true; }
         }
 
-        private endereco GetEnderecoByIDUsuario(int id)
+        public string GetEnderecoString()
+        {
+            if (this.Endereco != null)
+                return  this.Endereco.Logradouro + ", " + this.Endereco.Numero + " - " + this.Endereco.Bairro + " - " + this.Endereco.Cidade + " - " + this.Endereco.UF + " - " + this.Endereco.CEP.Insert(5, "-");
+
+            else
+                return string.Empty;
+        }
+
+        public string GetImagemPerfil()
         {
             try
             {
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
-                    return db.endereco.FirstOrDefault(x => x.IDUsuario == id);
+                    return "https://gerisonsabino.azurewebsites.net" + db.usuario.First(x => x.ID == this.ID).imagem.Last(x => x.TipoImagem == 1).Diretorio;
+                }
+            }
+            catch { return "#"; }
+        }
+
+        public string GetImagemCapa()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    return "https://gerisonsabino.azurewebsites.net" + db.usuario.First(x => x.ID == this.ID).imagem.Last(x => x.TipoImagem == 2).Diretorio;
+                }
+            }
+            catch { return "/Imagens/Views/Estabelecimento/bg-estabelecimento.jpg"; }
+        }
+
+        private endereco GetEnderecoByIDUsuario(int id) 
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    return db.usuario.FirstOrDefault(x => x.ID == id).endereco.FirstOrDefault();
                 }
             }
             catch

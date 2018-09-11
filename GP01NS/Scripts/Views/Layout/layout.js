@@ -62,5 +62,16 @@ $(function () {
 		});
 
 		return false;
-	});
+    });
+
+    /*Menu Fixo
+    Última vez editado 09/09/2018 - Lucas Lima*/
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 52) {
+            $('header').addClass('menu_fixo');
+        }
+        else {
+            $('header').removeClass('menu_fixo');
+        }
+    });
 });

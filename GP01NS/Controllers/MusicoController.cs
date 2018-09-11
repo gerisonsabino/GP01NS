@@ -21,10 +21,12 @@ namespace GP01NS.Controllers
 
             using (var db = new nosso_showEntities(Conexao.GetString()))
             {
-                if (db.usuario.Single(x => x.ID == this.Musico.ID).usuario_musico.Count == 0)
+                var u = db.usuario.Single(x => x.ID == this.Musico.ID);
+
+                if (u.usuario_musico.Count == 0)
                     return Redirect("/musico/conta/");
 
-                if (!db.endereco.Any(x => x.IDUsuario == this.Musico.ID))
+                if (u.endereco.Count == 0)
                     return Redirect("/musico/endereco/");
             }
 
@@ -43,11 +45,6 @@ namespace GP01NS.Controllers
 
             return View(cadastro);
         }
-
-		public ActionResult Perfil()
-		{
-			return View();
-		}
 
 		[HttpPost]
         public ActionResult Conta(ContaVM model)
@@ -87,6 +84,22 @@ namespace GP01NS.Controllers
             return View(model);
         }
 
+        public ActionResult Perfil()
+        {
+            this.Musico = new MusicoVM(this.BaseUsuario);
+
+            return View(Musico);
+        }
+
+        [HttpPost]
+        public ActionResult UploadProfile(HttpPostedFileBase Arquivo)
+        {
+            this.Musico = new MusicoVM(this.BaseUsuario);
+
+            new ImagemVM(Arquivo, this.Musico.ID, 1).Upload();
+
+            return Redirect("/musico/perfil/");
+        }
 
         public ActionResult Endereco()
         {
@@ -149,7 +162,7 @@ namespace GP01NS.Controllers
             }
             catch { }
 
-            return Redirect("/entrar");
+            return Redirect("/inicio/");
         }
     }
 }

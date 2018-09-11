@@ -1,5 +1,6 @@
 ﻿using GP01NS.Models;
 using GP01NSLibrary;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,58 @@ namespace GP01NS.Classes.ViewModels
             }
         }
 
+        public string GetEventosJSON()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var u = db.usuario_estabelecimento.Single(x => x.IDUsuario == this.Estabelecimento.IDUsuario);
+                    var e = u.evento.ToList();
+
+                    var eventos = new List<EventoJSON>();
+
+                    for (int i = 0; i < e.Count; i++)
+                        eventos.Add(new EventoJSON(e[i]));
+
+                    return JsonConvert.SerializeObject(eventos);
+                }
+            }
+            catch { }
+
+            return string.Empty;
+        }
+
+        public string GetFuncionamentoString()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var dias = db.usuario_estabelecimento_dias.ToList();
+
+                    return dias.First(x => x.ID == this.De).Descricao.Substring(0, 3) + " à " + dias.First(x => x.ID == this.Ate).Descricao.Substring(0, 3) + " - das " + this.Das.ToString("D2") + "h às " + this.As.ToString("D2") + "h"; 
+                }
+            }
+            catch { }
+
+            return string.Empty;
+        }
+
+        public string GetAmbientacao()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    return db.ambientacao.First(x => x.ID == this.IDAmbientacao).Descricao;
+                }
+            }
+            catch { }
+
+            return string.Empty;
+        }
+
         public bool SaveChanges() 
         {
             try
@@ -95,6 +148,21 @@ namespace GP01NS.Classes.ViewModels
             catch { return false; }
         }
 
+        public evento GetEventoByID(int id)
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    return db.usuario_estabelecimento.FirstOrDefault(x => x.IDUsuario == this.ID).evento.FirstOrDefault(x => x.ID == id);
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         private usuario_estabelecimento GetEstabelecimentoByID(int id)
         {
             try
@@ -108,6 +176,22 @@ namespace GP01NS.Classes.ViewModels
             {
                 return null;
             }
+        }
+    }
+
+    internal class EventoJSON 
+    {
+        public int ID { get; set; }
+        public string Titulo { get; set; }
+        public string Data { get; set; }
+        public string Status { get; set; }
+
+        public EventoJSON(evento evento)
+        {
+            this.Data = evento.DataDe.ToShortDateString() + " - " + evento.DataAte.ToShortDateString();
+            this.ID = evento.ID;
+            this.Status = evento.Publicado ? "Publicado" : "Não Publicado";
+            this.Titulo = evento.Titulo;
         }
     }
 }

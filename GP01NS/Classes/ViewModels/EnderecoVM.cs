@@ -72,13 +72,12 @@ namespace GP01NS.Classes.ViewModels
             {
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
-                    var e = db.endereco.SingleOrDefault(x => x.IDUsuario == usuario.ID);
+                    var u = db.usuario.SingleOrDefault(x => x.ID == usuario.ID);
+                    var e = u.endereco.FirstOrDefault();
 
                     if (e == null)
                     {
                         e = new endereco();
-                        e.IDUsuario = usuario.ID;
-                        e.TipoUsuario = usuario.TipoUsuario;
                     }
 
                     e.Bairro = this.Bairro;
@@ -92,10 +91,14 @@ namespace GP01NS.Classes.ViewModels
                     e.Numero = this.Numero;
                     e.UF = this.UF;
 
-                    if (db.endereco.Any(x => x.IDUsuario == usuario.ID))
+                    if (u.endereco.Count > 0)
+                    {
                         db.ObjectStateManager.ChangeObjectState(e, System.Data.EntityState.Modified);
+                    }
                     else
-                        db.endereco.AddObject(e);
+                    {
+                        u.endereco.Add(e);
+                    }
 
                     db.SaveChanges();
 

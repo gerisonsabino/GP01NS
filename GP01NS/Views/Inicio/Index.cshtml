@@ -3,18 +3,17 @@
     ViewBag.Title = "Início";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-9 col-12 col-lg-9 ml-auto mr-auto mt-10 form" style="margin-top: 5%;">
-            <div class="col-md-7 ml-auto mr-auto text-left">
-                <div class=" text-center">
-                    <h1 class="display-4">@Model.Nome, Seja bem-vindo! =)</h1>
-                    <br>
-                    <p class="display-5">@("@" + Model.Username)</p>
-                    <hr>
-                    <a class="btn btn-danger" href="/sair/" role="button">SAIR</a>
-                </div>
-            </div>  
-        </div>
-    </div>
+<style>
+    main, .container-fluid {
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+
+</style>
+
+<div class="container-fluid fill">
+    <div id="mapa" style="min-height: calc(-200px + 100vh);"></div>
 </div>
+
+<script src="~/Scripts/mapa.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD302LfE2vA-uKZl0y2MFSAJYdnBeQwTNE"></script>
