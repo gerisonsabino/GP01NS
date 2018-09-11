@@ -74,11 +74,33 @@ body > main {
 	padding: 0 0 15px 15px;
 }
 
-.foto-lista .foto-item .foto-imagem {	
-	background: center center / cover no-repeat;
-	border-radius: 5px;
+	.foto-lista .foto-item .foto-imagem {
+		background: url(/Imagens/Views/image.png) center center / cover no-repeat #CCC;
+		border-radius: 5px;
+		width: 100%;
+		padding-top: 100%;
+		position: relative;
+		overflow: hidden;
+		cursor: pointer;
+	}
+
+.foto-lista .foto-item .foto-imagem .foto-hover {
+	position: absolute;
 	width: 100%;
-	padding-top: 100%
+	height: 100%;
+	background: url(/CSS/icons-open-iconic-master/svg/pencil-white.svg) center center / 50px no-repeat rgba(0, 0, 0, .5);
+	opacity: 0;
+	top: 0;
+	left:0;
+}
+
+.foto-lista .foto-item .foto-imagem:hover .foto-hover {
+	opacity: 1;
+}
+
+.foto-lista .foto-item .foto-imagem input {
+	position: absolute;
+	top: -100%;
 }
 
 .comentario-item {

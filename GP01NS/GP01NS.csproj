@@ -1747,6 +1747,7 @@
     <Content Include="CSS\Views\Musico\index.css" />
     <Content Include="Imagens\Views\estrela-azul.svg" />
     <Content Include="Imagens\Views\estrela-cinza .svg" />
+    <Content Include="Imagens\Views\image.png" />
     <Content Include="Imagens\Views\menu.svg" />
     <Content Include="Imagens\Views\Musico\deezer.png" />
     <Content Include="Imagens\Views\Musico\img-banda.png" />
