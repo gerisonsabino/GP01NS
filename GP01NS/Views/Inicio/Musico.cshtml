@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = Model.NomeArtistico;
     ViewBag.Description = Model.Descricao;
+    ViewBag.Image = Model.GetImagemPerfil();
     var Usuario = (GP01NS.Classes.ViewModels.UsuarioVM)ViewBag.Usuario;
     var Generos = Model.GetGenerosMusicais();
     var Habilidades = Model.GetHabilidades();
