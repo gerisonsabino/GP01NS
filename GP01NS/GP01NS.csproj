@@ -3294,10 +3294,6 @@
   <ItemGroup>
     <Content Include="Imagens\Views\my-icons-collection.zip" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\PublishProfiles\gerisonsabino - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\gerisonsabino - Web Deploy.pubxml" />
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
