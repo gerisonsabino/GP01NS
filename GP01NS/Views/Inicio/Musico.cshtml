@@ -15,11 +15,22 @@
 
 <div class="card col-lg-10 col-sm-12 mx-auto">
     <div class="card-body row">
-        <div class="row">
+        <div class="row col-12  no-padding">
             <div class="col-lg-8 col-sm-12">
                 <div class="row">
                     <div class="perfil">
-                        <div class="perfil-imagem" style="background-image: url(@Model.GetImagemPerfil())"></div>
+						<div class="perfil-imagem foto-imagem" style="background-image: url(@Model.GetImagemPerfil())">
+							@if (Usuario != null)
+							{
+								if (Usuario.ID == Model.ID)
+								{
+									<form action="/Musico/UploadProfile" method="post" enctype="multipart/form-data">
+										<label for="perfil-file" class="foto-hover arredondado"></label>
+										<input type="file" id="perfil-file" name="Arquivo" onchange="javascript:this.form.submit();">
+									</form>
+								}
+							}
+						</div>
                         <div class="perfil-texto text-center">
                             @Model.NomeArtistico
                             <br />
@@ -28,16 +39,6 @@
                             </small>
                         </div>
                     </div>
-                    @if (Usuario != null)
-                    {
-                        if (Usuario.ID == Model.ID)
-                        {
-                            <form action="/Musico/UploadProfile" method="post" enctype="multipart/form-data">
-                                <input type="file" id="Arquivo" name="Arquivo" onchange="javascript:this.form.submit();">
-                            </form>
-                        }
-                    }
-
                 </div>
                 <div class="row mt-5">
                     <div class="habilidade">
@@ -133,15 +134,15 @@
                                 for (int i = 0; i < 4 - Imagens.Count; i++)
                                 {
                                     <div class="foto-item">
-                                        <label class="foto-imagem">
+                                        <div class="foto-imagem">
                                             @if (Usuario.ID == Model.ID)
-                                            {
+											{
                                                 <form action="/Musico/UploadImagem" method="post" enctype="multipart/form-data">
-                                                    <div class="foto-hover"></div>
-                                                    <input type="file" name="Imagem" onchange="javascript:this.form.submit();">
-                                                </form>
+                                                    <label for="foto-item-@i" class="foto-hover"></label>
+                                                    <input type="file" id="foto-item-@i" name="Imagem" onchange="javascript:this.form.submit();">
+												</form>
                                             }
-                                        </label>
+                                        </div>
                                     </div>
                                 }
                             }
