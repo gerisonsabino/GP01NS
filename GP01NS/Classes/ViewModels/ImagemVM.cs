@@ -30,7 +30,7 @@ namespace GP01NS.Classes.ViewModels
 
         public bool Upload() 
         {
-            switch (this.Imagem.FileName.Split('.').Last())
+            /*switch (this.Imagem.FileName.Split('.').Last())
             {
                 case "jpg":
                 case "jpeg":
@@ -54,7 +54,7 @@ namespace GP01NS.Classes.ViewModels
                         catch (Exception e) { }
                     }
                     break;
-            }
+            }*/
 
             return false;
         }

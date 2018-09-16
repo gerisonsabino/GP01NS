@@ -8,12 +8,53 @@
         margin: 0px !important;
         padding: 0px !important;
     }
-
 </style>
 
-<div class="container-fluid fill">
-    <div id="mapa" style="min-height: calc(-200px + 100vh);"></div>
+<link href="~/CSS/Views/mapa.css" rel="stylesheet" />
+<link href="~/Scripts/Plugins/customrange-plugin/html-input-range.css" rel="stylesheet" />
+
+<div class="container-fluid fill relative">
+	<div class="buscador absolute col-12">
+		<div class="buscador-caixa flex col-8 no-padding mx-auto">
+			<input class="typeahead buscador-input" type="text" placeholder="Buscar">
+			<button class="buscador-botao" onclick="$('.buscador .buscador-botao, .buscador .buscador-filtro').toggleClass('aberto');"></button>
+			<div class="buscador-filtro relative col-12 flex middle">
+				<div class="no-margin no-padding row col-12 space-between">
+					<label for="html-input-range">Distância maxima</label>
+					<output for="html-input-range">0 km</output>
+					<div class="col-12 no-padding">
+						<input type="range" id="html-input-range">
+					</div>
+				</div>
+				<div class="no-margin no-padding row col-12">
+					<label for="tipo">Tipo de busca</label>
+					<div class="col-12 no-padding flex">
+						<input type="checkbox" name="tipo[]" value="evento" class="custom-checkbox" id="tipo-evento" />
+						<label for="tipo-evento">Evento</label>
+						<input type="checkbox" name="tipo[]" value="estabelecimento" class="custom-checkbox" id="tipo-estabelecimento" />
+						<label for="tipo-estabelecimento">Estabelecimento</label>
+						<input type="checkbox" name="tipo[]" value="musico" class="custom-checkbox" id="tipo-musico" />
+						<label for="tipo-musico">Músico</label>
+					</div>
+				</div>
+				<div class="no-margin no-padding row col-12">
+					<label for="html-input-range">Nota minima</label>
+					<div class="col-12 no-padding">
+						<div class="nota">
+							<span class="voto-1 oi oi-heart"></span>
+							<span class="voto-2 oi oi-heart"></span>
+							<span class="voto-3 oi oi-heart"></span>
+							<span class="voto-4 oi oi-heart"></span>
+							<span class="voto-5 oi oi-heart"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+	<div id="mapa" style="min-height: calc(100vh - 55px);"></div>
 </div>
 
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQOVgr1EKPU6Ygpb23qkWw4NqSUsFuEWY"></script>
+<script src="~/Scripts/Plugins/customrange-plugin/html-input-range.js"></script>
 <script src="~/Scripts/mapa.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD302LfE2vA-uKZl0y2MFSAJYdnBeQwTNE"></script>
