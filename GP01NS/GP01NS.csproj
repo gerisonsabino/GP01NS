@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Servicos\Auth.cs" />
+    <Compile Include="Classes\Servicos\Pesquisar.cs" />
     <Compile Include="Classes\Util\Criptografia.cs" />
     <Compile Include="Classes\Util\MensagemEmail.cs" />
     <Compile Include="Classes\Util\Requisicao.cs" />
@@ -3293,6 +3294,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Imagens\Views\my-icons-collection.zip" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\GP01NS - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\GP01NS - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

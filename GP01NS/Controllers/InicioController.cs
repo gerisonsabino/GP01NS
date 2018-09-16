@@ -1,4 +1,5 @@
-﻿using GP01NS.Classes.Util;
+﻿using GP01NS.Classes.Servicos;
+using GP01NS.Classes.Util;
 using GP01NS.Classes.ViewModels;
 using GP01NS.Models;
 using GP01NSLibrary;
@@ -25,9 +26,49 @@ namespace GP01NS.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Index(HttpPostedFileBase Arquivo) 
+        [HttpGet]
+        public ActionResult Index(string nom, string gen, string amb, string not, string tip)
         {
+            //Pegando usuário caso logado
+            if (this.BaseUsuario != null)
+            {
+                this.Usuario = new UsuarioVM(this.BaseUsuario);
+                ViewBag.Usuario = this.Usuario;
+            }
+
+            try
+            {
+                string nome = nom;
+                int idGenero, idAmbientacao, nota, tipo;
+
+                idAmbientacao = idGenero = nota = tipo = int.MinValue;
+
+                int.TryParse(amb, out idAmbientacao);
+                int.TryParse(gen, out idGenero);
+                int.TryParse(not, out nota);
+                int.TryParse(tip, out tipo);
+
+                if (tipo != 0)
+                {
+                    //Conexão com o banco de dados 
+                    using (var db = new nosso_showEntities(Conexao.GetString()))
+                    {
+                        //var estabelecimentos = db.usuario_estabelecimento.Where(x =>
+                        //    (!string.IsNullOrEmpty(nome) ? x.usuario.Nome.ToLower().Contains(nome.ToLower()) : true)
+                        //    && (idAmbientacao > 0 ? x.ambientacao.ID == idAmbientacao : true)
+                        //).ToList();
+
+                        string s = Pesquisar.EventosJSON(nome, idAmbientacao);
+
+                        //var musicos = db.usuario_musico.Where(x =>
+                        //    (!string.IsNullOrEmpty(nome) ? x.NomeArtistico.ToLower().Contains(nome.ToLower()) : true)
+                        //    && (idGenero > 0 ? x.usuario.genero_musical.Any(y => y.ID == idGenero) : true)
+                        //).ToList();
+                    }
+                }
+            }
+            catch { }
+
             return View();
         }
 

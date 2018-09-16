@@ -90,6 +90,14 @@ namespace GP01NS.Controllers
         }
 
         [HttpPost]
+        public string Seguir(int idUsuario)
+        {
+            this.Usuario = new UsuarioVM(this.BaseUsuario);
+
+            return this.Usuario.Seguir(idUsuario).ToString().ToLower();
+        }
+
+        [HttpPost]
         public ActionResult Endereco(EnderecoVM model)
         {
             this.Usuario = new UsuarioVM(this.BaseUsuario);

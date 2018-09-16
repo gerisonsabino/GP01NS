@@ -9,7 +9,7 @@ using System.Web;
 
 namespace GP01NS.Classes.ViewModels.Musico
 {
-    public class ContaVM
+    public class ContaVM 
     {
         public string Nome { get; set; }
         public string Username { get; set; }
@@ -22,11 +22,11 @@ namespace GP01NS.Classes.ViewModels.Musico
         public string JsonGeneros { get; set; }
         public string JsonHabilidades { get; set; }
 
-        private MusicoVM Musico;
+        private readonly MusicoVM Musico;
 
         public ContaVM() { }
 
-        public ContaVM(MusicoVM musico)
+        public ContaVM(MusicoVM musico) 
         {
             this.Musico = musico;
 
@@ -42,7 +42,7 @@ namespace GP01NS.Classes.ViewModels.Musico
             this.JsonHabilidades = this.GetJsonHabilidades();
         }
 
-        public bool ValidarEmail(MusicoVM musico)
+        public bool ValidarEmail(MusicoVM musico) 
         {
             try
             {
@@ -54,7 +54,7 @@ namespace GP01NS.Classes.ViewModels.Musico
             catch { return true; }
         }
 
-        public bool ValidarNomeUsuario(MusicoVM musico)
+        public bool ValidarNomeUsuario(MusicoVM musico) 
         {
             try
             {
@@ -66,7 +66,7 @@ namespace GP01NS.Classes.ViewModels.Musico
             catch { return true; }
         }
 
-        public List<genero_musical> GetGenerosMusicais()
+        public List<genero_musical> GetGenerosMusicais() 
         {
             try
             {
@@ -80,7 +80,7 @@ namespace GP01NS.Classes.ViewModels.Musico
             return null;
         }
 
-        private string GetJsonGeneros()
+        private string GetJsonGeneros() 
         {
             try
             {
@@ -96,7 +96,7 @@ namespace GP01NS.Classes.ViewModels.Musico
             return null;
         }
 
-        public List<hab_musical_tipo> GetTipoHabilidades()
+        public List<hab_musical_tipo> GetTipoHabilidades() 
         {
             try
             {
@@ -110,7 +110,7 @@ namespace GP01NS.Classes.ViewModels.Musico
             return null;
         }
 
-        private string GetJsonHabilidades()
+        private string GetJsonHabilidades() 
         {
             try
             {
@@ -126,7 +126,7 @@ namespace GP01NS.Classes.ViewModels.Musico
             return null;
         }
 
-        public List<hab_musical> GetHabilidades()
+        public List<hab_musical> GetHabilidades() 
         {
             try
             {
@@ -140,7 +140,7 @@ namespace GP01NS.Classes.ViewModels.Musico
             return null;
         }
 
-        public bool SaveChanges(MusicoVM musico)
+        public bool SaveChanges(MusicoVM musico) 
         {
             try
             {
@@ -157,8 +157,10 @@ namespace GP01NS.Classes.ViewModels.Musico
 
                     if (m == null)
                     {
-                        m = new usuario_musico();
-                        m.CPF = Regex.Replace(this.CPF, @"[^0-9]", string.Empty);
+                        m = new usuario_musico
+                        {
+                            CPF = Regex.Replace(this.CPF, @"[^0-9]", string.Empty)
+                        };
                     }
 
                     m.Descricao = this.Descricao;
@@ -182,12 +184,12 @@ namespace GP01NS.Classes.ViewModels.Musico
                     return true;
                 }
             }
-            catch (Exception e) { }
+            catch { }
 
             return false;
         }
 
-        private void SetJsonHabilidades(usuario usuario)
+        private void SetJsonHabilidades(usuario usuario) 
         {
             try
             {
@@ -219,7 +221,7 @@ namespace GP01NS.Classes.ViewModels.Musico
             catch { }
         }
 
-        private void SetJsonGeneros(usuario usuario)
+        private void SetJsonGeneros(usuario usuario) 
         {
             try
             {

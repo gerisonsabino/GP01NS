@@ -115,6 +115,31 @@ namespace GP01NS.Classes.ViewModels
             catch { return "/Imagens/Views/Estabelecimento/bg-estabelecimento.jpg"; }
         }
 
+        public bool Seguir(int idUsuario)
+        {
+            try
+            {
+                using (var db = new nosso_showEntities())
+                {
+                    var u = db.usuario.Single(x => x.ID == this.ID);
+                    var s = db.usuario.Single(x => x.ID == idUsuario);
+
+                    if (u.usuario1.Any(x => x.ID == idUsuario))
+                        u.usuario1.Remove(s);
+                    else
+                        u.usuario1.Add(s);
+
+                    db.ObjectStateManager.ChangeObjectState(u, System.Data.EntityState.Modified);
+                    db.SaveChanges();
+
+                    return true;
+                }
+            }
+            catch { }
+
+            return false;
+        }
+
         private endereco GetEnderecoByIDUsuario(int id) 
         {
             try
