@@ -1761,6 +1761,8 @@
     <Content Include="Imagens\Views\Musico\spotify.svg" />
     <Content Include="Imagens\Views\Musico\youtube.svg" />
     <Content Include="Imagens\Views\nosso-show.svg" />
+    <Content Include="Imagens\Views\nossoshow2.svg" />
+    <Content Include="Imagens\Views\stool.svg" />
     <Content Include="Imagens\Views\user.svg" />
     <Content Include="Global.asax" />
     <Content Include="HTML\email.html" />
