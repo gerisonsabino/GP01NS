@@ -55,21 +55,46 @@ namespace GP01NS.Classes.Servicos
             return string.Empty;
         }
 
-        public static string MusicosJSON(string nome, int idAmbientacao)
+        public static string MusicosJSON(string nome, int idGenero)
         {
-            //var musicos = db.usuario_musico.Where(x =>
-            //    (!string.IsNullOrEmpty(nome) ? x.NomeArtistico.ToLower().Contains(nome.ToLower()) : true)
-            //    && (idGenero > 0 ? x.usuario.genero_musical.Any(y => y.ID == idGenero) : true)
-            //).ToList();
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var musicos = db.usuario_musico.Where(x =>
+                        (!string.IsNullOrEmpty(nome) ? x.NomeArtistico.ToLower().Contains(nome.ToLower()) : true)
+                        && (idGenero > 0 ? x.usuario.genero_musical.Any(y => y.ID == idGenero) : true)
+                        ).ToList();
+
+                    var resultados = new List<Resultado>();
+
+                    for (int i = 0; i < musicos.Count; i++)
+                    {
+                        var usuario_musico = musicos[i];
+
+                        Resultado r = new Resultado
+                        {
+                            ID = usuario_musico.IDUsuario,
+                            Descricao = usuario_musico.NomeArtistico,
+                            Tipo = "Músico"
+                        };
+
+                        resultados.Add(r);
+                    }
+
+                    return JsonConvert.SerializeObject(resultados);
+                }
+            }
+            catch { }
 
             return string.Empty;
         }
-    }
 
-    internal class Resultado
-    {
-        public int ID { get; set; }
-        public string Descricao { get; set; }
-        public string Tipo { get; set; }
+        internal class Resultado
+        {
+            public int ID { get; set; }
+            public string Descricao { get; set; }
+            public string Tipo { get; set; }
+        }
     }
 }

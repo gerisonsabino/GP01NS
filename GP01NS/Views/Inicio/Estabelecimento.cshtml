@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="perfil" style="margin-top: 250px;">
                         <div class="perfil-texto">
-                            <h2>@Model.Nome</h2>
+                            <h2 id="estabelecimento">@Model.Nome</h2>
                             <small>
                                 <a href="javascript:void(0);">Denúnciar Estabelecimento</a>
                             </small>
@@ -38,7 +38,7 @@
                 <div class="row mt-5">
                     <div class="col-md-8">
                         <span class="oi oi-map-marker"></span>
-                        <strong>@Model.GetEnderecoString()</strong>
+                        <strong id="endereco">@Model.GetEnderecoString()</strong>
                     </div>
                     <div class="col-md-4">
                         <span class="oi oi-calendar"></span>
@@ -199,6 +199,9 @@
         </div>
     </div>
     <div style="width: 100%; padding-bottom: 10px;">
-        <iframe height="450px" width="100%" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=@(Model.GetEnderecoString().Replace(" ", "+"))&key=AIzaSyD302LfE2vA-uKZl0y2MFSAJYdnBeQwTNE"></iframe>
+        <div id="mapa" style="min-height: 450px;"></div>
+        @*<iframe height="450px" width="100%" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=@(Model.GetEnderecoString().Replace(" ", "+"))&key=AIzaSyD302LfE2vA-uKZl0y2MFSAJYdnBeQwTNE"></iframe>*@
     </div>
 </div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQOVgr1EKPU6Ygpb23qkWw4NqSUsFuEWY"></script>
+<script src="~/Scripts/Views/Inicio/estabelecimento.js"></script>

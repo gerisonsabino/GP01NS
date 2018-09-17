@@ -1845,6 +1845,7 @@
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\Views\Estabelecimento\evento.js" />
     <Content Include="Scripts\Views\Estabelecimento\evento_table.js" />
+    <Content Include="Scripts\Views\Inicio\estabelecimento.js" />
     <Content Include="Scripts\Views\Layout\layout.js" />
     <Content Include="Scripts\Views\Util\inputmask_controller.js" />
     <Content Include="Scripts\Views\Entrar\Cadastro\validation_controller.js" />
@@ -3298,6 +3299,10 @@
   <ItemGroup>
     <Content Include="Views\Inicio\Evento.cshtml" />
     <Content Include="Views\Inicio\Musico.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\GP01NS - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\GP01NS - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

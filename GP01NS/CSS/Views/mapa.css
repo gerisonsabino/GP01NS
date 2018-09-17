@@ -46,9 +46,11 @@
 }
 
 .buscador .buscador-filtro.aberto {
-	height: 300px;
-	padding: 25px 35px;
-	border-width: 1px;
+    height: auto;
+    padding: 25px 35px;
+    border-width: 1px;
+    max-height: 350px;
+    overflow: auto;
 }
 
 .buscador .buscador-filtro label {

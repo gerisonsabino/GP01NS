@@ -138,5 +138,19 @@ namespace GP01NS.Controllers
             }
             catch { return Redirect("/inicio/"); }
         }
+
+        [HttpPost]
+        public ActionResult Seguir(int ID)
+        {
+            if (this.BaseUsuario != null)
+            {
+                this.Usuario = new UsuarioVM(this.BaseUsuario);
+                ViewBag.Usuario = this.Usuario;
+
+                this.Usuario.Seguir(ID);
+            }
+
+            return Redirect("");
+        }
     }
 }
