@@ -15,62 +15,147 @@
 
 <div class="container-fluid fill relative">
 	<div class="buscador absolute col-12">
-        <div class="buscador-caixa flex col-8 no-padding mx-auto">
-            <input class="typeahead buscador-input" type="text" placeholder="Buscar">
-            <button class="buscador-botao" onclick="$('.buscador .buscador-botao, .buscador .buscador-filtro').toggleClass('aberto');"></button>
-            <div class="buscador-filtro relative col-12 flex middle">
-                @using (Html.BeginForm())
-                {
-                    @*<div class="no-margin no-padding row col-12 space-between">
-                <label for="html-input-range">Distância maxima</label>
-                <output for="html-input-range">0 km</output>
-                <div class="col-12 no-padding">
-                <input type="range" id="html-input-range">
-                </div>
-                </div>*@
-                    <div class="no-margin no-padding row col-12">
-                        <strong for="tipo">Buscar por:</strong>
-                        <div class="col-12 no-padding flex">
-                            <input type="checkbox" name="tipo" value="2" class="custom-checkbox" id="tipo-estabelecimento" />
-                            <label for="tipo-estabelecimento">Estabelecimento</label>
-                            <input type="checkbox" name="tipo" value="3" class="custom-checkbox" id="tipo-evento" />
-                            <label for="tipo-evento">Evento</label>
-                            <input type="checkbox" name="tipo" value="4" class="custom-checkbox" id="tipo-musico" />
-                            <label for="tipo-musico">Músico</label>
-                        </div>
-                    </div>
-                }
-
-                @*<div class="no-margin no-padding row col-12">
-            <label for="html-input-range">Nota minima</label>
-            <div class="col-12 no-padding">
-            <div class="nota">
-            <span class="voto-1 oi oi-heart"></span>
-            <span class="voto-2 oi oi-heart"></span>
-            <span class="voto-3 oi oi-heart"></span>
-            <span class="voto-4 oi oi-heart"></span>
-            <span class="voto-5 oi oi-heart"></span>
-            </div>
-            </div>
-            </div>*@
-                <div class="mr-0 ml-0 mt-3 no-padding row col-12" id="resultados">
-                    <strong>Resultados</strong>
-                    <ul class="list-group list-group-flush container-fluid">
-                        @for (int i = 0; i < 20; i++)
-                        {
-                            <li class="list-group-item list-group-item-action">Cras justo odio</li>
-                            <li class="list-group-item list-group-item-action">Dapibus ac facilisis in</li>
-                            <li class="list-group-item list-group-item-action">Morbi leo risus</li>
-                            <li class="list-group-item list-group-item-action">Porta ac consectetur ac</li>
-                            <li class="list-group-item list-group-item-action">Vestibulum at eros</li>
-                        }
-                    </ul>
-                </div>
-            </div>
-        </div>		
+		<div class="buscador-caixa flex col-sm-12 col-lg-8 no-padding mx-auto">
+			<input class="buscador-input" type="text" placeholder="Buscar">
+			<button class="buscador-botao" onclick="$('.buscador .buscador-botao, .buscador .buscador-filtro').toggleClass('aberto');"></button>
+			<div class="buscador-filtro relative col-12 flex middle">
+				<div class="no-margin no-padding row col-12 space-between">
+					<label for="html-input-range">Distância maxima</label>
+					<output for="html-input-range">0 km</output>
+					<div class="col-12 no-padding">
+						<input type="range" id="html-input-range">
+					</div>
+				</div>
+				<div class="tipo-busca no-margin no-padding row col-12">
+					<label for="tipo">Tipo de busca</label>
+					<div class="col-12 no-padding checkbox-grupo flex">
+						<input type="checkbox" name="tipo[]" value="evento" class="custom-checkbox" id="tipo-evento" />
+						<label for="tipo-evento">Evento</label>
+						<input type="checkbox" name="tipo[]" value="estabelecimento" class="custom-checkbox" id="tipo-estabelecimento" />
+						<label for="tipo-estabelecimento">Estabelecimento</label>
+						<input type="checkbox" name="tipo[]" value="musico" class="custom-checkbox" id="tipo-musico" />
+						<label for="tipo-musico">Músico</label>
+					</div>
+				</div>
+				<div class="no-margin no-padding row col-12">
+					<label for="html-input-range">Nota minima</label>
+					<div class="col-12 no-padding">
+						<div class="nota">
+							<span class="voto-1 oi oi-heart"></span>
+							<span class="voto-2 oi oi-heart"></span>
+							<span class="voto-3 oi oi-heart"></span>
+							<span class="voto-4 oi oi-heart"></span>
+							<span class="voto-5 oi oi-heart"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
 	</div>
+
 	<div id="mapa" style="min-height: calc(100vh - 55px);"></div>
-</div>
+
+	<div class="resultado-busca card col-10 mx-auto mb-5 no-padding">
+		<div class="resultado-busca-menu flex space-between">
+			<div class="col-sm-12 col-lg-8 resultado-busca-menu-info">
+				<strong>3</strong> itens encontrados
+			</div>
+			<div class="col-sm-6 col-lg-3">
+				<label for="ordenarPor">Ordenar por</label>
+				<select id="ordenarPor" class="col-12">
+					<option>Meus interesses</option>
+					<option>Quem eu sigo</option>
+					<option>Mais próximos</option>
+				</select>
+			</div>
+			</div>
+		<div class="resultado-busca-lista flex">
+			<div class="resultado-busca-item">
+				<div class="resultado-busca-item-imagem" style="background-image: url(https://images.pexels.com/photos/518389/pexels-photo-518389.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
+					<div class="col-12 pb-2 flex space-between">
+						<div class="resultado-busca-item-km">
+							30 km
+						</div>
+						<div class="nota-3 resultado-busca-item-nota">
+							<span class="voto-1 oi oi-heart"></span>
+							<span class="voto-2 oi oi-heart"></span>
+							<span class="voto-3 oi oi-heart"></span>
+							<span class="voto-4 oi oi-heart"></span>
+							<span class="voto-5 oi oi-heart"></span>
+						</div>
+					</div>
+				</div>
+				<div class="resultado-busca-item-texto">
+					<div class="resultado-busca-item-nome">
+						Citibank Hall
+					</div>
+					<div class="resultado-busca-item-endereco">
+						Av. das Nações Unidas, 17955, 04795-100
+					</div>
+					<div class="resultado-busca-item-tipo">
+						Estabelecimento
+					</div>
+				</div>
+			</div>
+
+			<div class="resultado-busca-item">
+				<div class="resultado-busca-item-imagem" style="background-image: url(https://images.pexels.com/photos/1259863/pexels-photo-1259863.jpeg?auto=compress&cs=tinysrgb&h=650&w=940)">
+					<div class="col-12 pb-2 flex space-between">
+						<div class="resultado-busca-item-km">
+							15 km
+						</div>
+						<div class="nota-5 resultado-busca-item-nota">
+							<span class="voto-1 oi oi-heart"></span>
+							<span class="voto-2 oi oi-heart"></span>
+							<span class="voto-3 oi oi-heart"></span>
+							<span class="voto-4 oi oi-heart"></span>
+							<span class="voto-5 oi oi-heart"></span>
+						</div>
+					</div>
+				</div>
+				<div class="resultado-busca-item-texto">
+					<div class="resultado-busca-item-nome">
+						Sertanejo Music
+					</div>
+					<div class="resultado-busca-item-endereco">
+						Rua Tagipuru, 795 - Barra Funda - São Paulo - SP
+					</div>
+					<div class="resultado-busca-item-tipo">
+						Evento
+					</div>
+				</div>
+			</div>
+
+			<div class="resultado-busca-item">
+				<div class="resultado-busca-item-imagem" style="background-image: url(http://ligadoamusica.com.br/wp-content/uploads/2015/07/cachorro-grande-2015-rui-mendes.jpg)">
+					<div class="col-12 pb-2 flex space-between">
+						<div class="resultado-busca-item-km">
+							9 km
+						</div>
+						<div class="nota-3 resultado-busca-item-nota">
+							<span class="voto-1 oi oi-heart"></span>
+							<span class="voto-2 oi oi-heart"></span>
+							<span class="voto-3 oi oi-heart"></span>
+							<span class="voto-4 oi oi-heart"></span>
+							<span class="voto-5 oi oi-heart"></span>
+						</div>
+					</div>
+				</div>
+				<div class="resultado-busca-item-texto">
+					<div class="resultado-busca-item-nome">
+						Cachorro Grande
+					</div>
+					<div class="resultado-busca-item-endereco">
+						Av. Francisco Matarazzo, 694 – Água Branca - São Paulo/SP
+					</div>
+					<div class="resultado-busca-item-tipo">
+						Músico
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQOVgr1EKPU6Ygpb23qkWw4NqSUsFuEWY"></script>
 <script src="~/Scripts/Plugins/customrange-plugin/html-input-range.js"></script>

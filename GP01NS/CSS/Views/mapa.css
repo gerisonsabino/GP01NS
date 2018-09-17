@@ -53,7 +53,122 @@
     overflow: auto;
 }
 
-.buscador .buscador-filtro label {
+.buscador .buscador-filtro label,
+.resultado-busca-menu label{
 	font-size: 14px;
 	color: #828282;
+}
+
+.resultado-busca {
+	margin-top: -200px;
+	border: none;
+	background: #f7f7f7;
+	box-shadow: 0 2px 4px -2px rgba(0,0,0,.8);
+}
+
+.resultado-busca-menu {
+	padding: 25px 35px;
+	padding-bottom: 0;
+}
+
+.resultado-busca-menu-info {
+	text-transform: uppercase;
+	color: #656565;
+	font-size: 20px;
+	display: flex;
+	align-items: center;
+}
+
+.resultado-busca-menu-info strong {
+	margin-right: 5px;
+}
+
+.resultado-busca-menu select {
+	padding: 5px;
+	border-radius: 3px;
+	font-size: 14px;
+	color: #656565;
+	outline: none;
+	background: transparent;
+}
+
+.resultado-busca-lista {
+	padding-top: 35px;
+}
+
+.resultado-busca-item {
+	width: calc(33% - 63px);
+	border-radius: 7px;
+	margin: 0 0 50px 50px;
+	overflow: hidden;
+	background: #FFF;
+	box-shadow: 6px 8px 40px -7px rgba(0, 0, 0, 0.37);
+	cursor: pointer;
+	position: relative;
+}
+.resultado-busca-item:hover {
+	transform: translateY(-5px);
+}
+
+.resultado-busca-item-imagem {
+	padding-top: 50%;
+	background: url(/Imagens/Views/image.png) center center / cover no-repeat #CCC;
+}
+
+.resultado-busca-item-imagem .space-between {
+	padding: 0 25px;
+}
+
+.resultado-busca-item-km {
+	color: var(--branco);
+}
+
+.resultado-busca-item-texto {
+	padding: 20px 25px 45px 25px;
+	border-top: none;
+}
+
+.resultado-busca-item-nome {
+	color: var(--azul);
+	font-weight: 600;
+}
+
+.resultado-busca-item-endereco {
+	color: #9E9E9E;
+	font-size: 13px;
+}
+
+.resultado-busca-item-tipo {
+	color: #4CAF50;
+	font-size: 13px;
+	margin-top: 10px;
+	position: absolute;
+	bottom: 20px;
+}
+
+@media screen and (max-width: 995px) {
+	.resultado-busca-item {
+		width: calc(50% - 70px);
+	}
+
+	.resultado-busca-menu-info {
+		margin-bottom: 15px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.resultado-busca-item {
+		width: calc(100% - 100px);
+	}
+}
+
+@media screen and (max-width: 455px) {
+	.tipo-busca .checkbox-grupo label:not(:last-child) {
+		width: 100%;
+		margin-bottom: 10px
+	}
+
+	.buscador .buscador-filtro.aberto {
+		height: 400px;
+	}
 }
