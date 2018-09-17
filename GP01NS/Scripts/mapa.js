@@ -1,4 +1,6 @@
-﻿$(document).ready(function () { Mapa().Geolocalizacao(); });
+﻿$(function () {
+	Mapa().Geolocalizacao();
+});
 
 function Mapa() {
     var m = {
@@ -10,7 +12,10 @@ function Mapa() {
             mapa: null,
             iw: null,
             Criar: function () {
-                this.mapa = new google.maps.Map(document.getElementById('mapa'), {
+				this.mapa = new google.maps.Map(document.getElementById('mapa'), {					
+					mapTypeControl: false,
+					streetViewControl: false,
+					rotateControl: true,
                     zoom: 14,
                     scrollwheel: false,
                     clickableIcons: true,
@@ -100,7 +105,7 @@ function Mapa() {
                     a.innerHTML = "<h2>Ocorreu um erro desconhecido.<br /><br /><a href='/Inicio/Index'>Por favor, recarregue a página.</a></h2>";
                     break;
             }
-        }
+		}		
     };
 
     return m;

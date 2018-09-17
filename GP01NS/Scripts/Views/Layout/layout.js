@@ -45,10 +45,15 @@ $(function () {
 	fieldsRequest()
 	selectCustom();
 	textareaAutoresize();
-
-	$(function () {
-		$('.titleCustom').tooltip();
-	})
+	htmlInputRange.options({
+		output: '.buscador-filtro output',
+		tooltip: false,
+		posfix: ' km',
+		max: 50,
+		min: 0,
+		value: 25
+	});
+	$('.titleCustom').tooltip();
 
 	$('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
 		if (!$(this).next().hasClass('show')) {
@@ -66,12 +71,12 @@ $(function () {
 
     /*Menu Fixo
     Última vez editado 09/09/2018 - Lucas Lima*/
-    //$(window).scroll(function () {
-    //    if ($(window).scrollTop() > 52) {
-    //        $('header').addClass('menu_fixo');
-    //    }
-    //    else {
-    //        $('header').removeClass('menu_fixo');
-    //    }
-    //});
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 52) {
+            $('header').addClass('menu_fixo');
+        }
+        else {
+            $('header').removeClass('menu_fixo');
+        }
+	});	
 });
