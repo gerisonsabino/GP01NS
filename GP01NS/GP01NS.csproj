@@ -43,7 +43,7 @@
   <ItemGroup>
     <Reference Include="GP01NSLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\GP01NSLibrary\GP01NSLibrary\bin\Release\GP01NSLibrary.dll</HintPath>
+      <HintPath>..\..\..\..\Downloads\GP01NSLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MySql.Data, Version=6.6.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
