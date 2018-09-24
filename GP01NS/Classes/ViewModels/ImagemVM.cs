@@ -37,7 +37,7 @@ namespace GP01NS.Classes.ViewModels
                 case "png":
                     if (this.SaveChanges())
                     {
-                        try
+                        /*try
                         {
                             string wwwroot = "/web/nossoshow";
                             string dir = CriptografarDiretorio();
@@ -51,7 +51,7 @@ namespace GP01NS.Classes.ViewModels
 
                             return true;
                         }
-                        catch (Exception e) { }
+                        catch (Exception e) { }*/
                     }
                     break;
             }

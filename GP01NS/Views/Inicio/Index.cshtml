@@ -20,103 +20,132 @@
 
 <div class="container-fluid fill relative">
 	<div class="buscador absolute col-12">
-        <form action="/inicio/resultados" method="get">
-            <div class="buscador-caixa flex col-sm-12 col-lg-8 no-padding mx-auto">
-                <input class="buscador-input" name="q" type="text" placeholder="Busque por nomes, nomes de usuário ou endereço" required="">
-                <button class="buscador-botao" onclick="$('.buscador .buscador-botao, .buscador .buscador-filtro').toggleClass('aberto');" type="button"></button>
-                <button class="btn btn-primary" type="submit" id="btn-pesquisar" style="width: 150px;">Pesquisar</button>
-                <div class="buscador-filtro relative col-12 flex middle">
-                    @*
-                        <div class="no-margin no-padding row col-12 space-between">
-                            <label for="html-input-range">Distância maxima</label>
-                            <output for="html-input-range">0 km</output>
-                            <div class="col-12 no-padding">
-                                <input type="range" id="html-input-range">
-                            </div>
-                        </div>
-                    *@
-                    <div class="tipo-busca no-padding row col-12">
-                        <strong for="tipo">Buscar por: </strong>
-                        <div class="col-12 no-padding checkbox-grupo flex">
-                            <input type="checkbox" value="3" class="custom-checkbox" id="tipo-evento" data-checked="true" checked="checked" />
-                            <label for="tipo-evento">Evento</label>
-                            <input type="checkbox" value="4" class="custom-checkbox" id="tipo-musico" data-checked="true" checked="checked" />
-                            <label for="tipo-musico">Músico</label>
-                            <input type="checkbox" value="2" class="custom-checkbox" id="tipo-estabelecimento" data-checked="true"checked="checked" />
-                            <label for="tipo-estabelecimento">Estabelecimento</label>
-                            <input type="checkbox" value="1" class="custom-checkbox" id="tipo-endereco" data-checked="true" checked="checked" />
-                            <label for="tipo-endereco">Endereço</label>
-                            @Html.Hidden("e", "")
-                        </div>
-                    </div>
-                    <div class="mt-3 no-padding row col-12">
-                        <strong for="Generos">Genêros músicais (Evento/Músico)</strong>
-                        <div class="col-12 no-padding checkbox-grupo container-fluid">
-                            <select id="Generos" class="select-custom form-control" placeholder="Selecione os genêros músicais" multiple>
-                                @for (int i = 0; i < Generos.Count; i++)
-                                {
-                                    <option value="@Generos[i].ID">@Generos[i].Descricao</option>
-                                }
-                            </select>
-                            @Html.Hidden("g", "")
-                        </div>
-                    </div>
-                    <div class="mt-3 no-padding row col-12">
-                        <strong for="Habilidades">Ambientação (Estabelecimento)</strong>
-                        <div class="col-12 no-padding checkbox-grupo flex">
-                            <select id="Ambientacoes" class="select-custom form-control" placeholder="Selecione as ambientações" multiple>
-                                @for (int i = 0; i < Ambientacoes.Count; i++)
-                                {
-                                    <option value="@Ambientacoes[i].ID">@Ambientacoes[i].Descricao</option>
-                                }
-                            </select>
-                            @Html.Hidden("a", "")
-                        </div>
-                    </div>
-                    <div class="mt-3 no-padding row col-12">
-                        <strong for="Habilidades">Habilidades (Músico)</strong>
-                        <div class="col-12 no-padding checkbox-grupo flex">
-                            <select id="Habilidades" class="select-custom form-control" placeholder="Selecione as habilidades" multiple>
-                                @for (int i = 0; i < TipoHabilidades.Count; i++)
-                                {
-                                    var tipo = TipoHabilidades[i];
-                                    var habs = Habilidades.Where(x => x.TipoHab == tipo.ID).ToList();
+		<form action="/inicio/resultados" method="get">
+			<div class="buscador-caixa flex col-sm-12 col-lg-8 no-padding mx-auto">
+				<input class="buscador-input" name="q" type="text" placeholder="Busque por nomes, nomes de usuário ou endereço" required="">
+				<button class="buscador-botao" onclick="$('.buscador .buscador-botao, .buscador .buscador-filtro').toggleClass('aberto');" type="button"></button>
+				<button class="btn btn-primary" type="submit" id="btn-pesquisar" style="width: 150px;">Pesquisar</button>
+				<div class="buscador-filtro relative col-12 flex middle">
+					@*
+			<div class="no-margin no-padding row col-12 space-between">
+				<label for="html-input-range">Distância maxima</label>
+				<output for="html-input-range">0 km</output>
+				<div class="col-12 no-padding">
+					<input type="range" id="html-input-range">
+				</div>
+			</div>
+					*@
+					<div class="tipo-busca no-padding row col-12">
+						<strong for="tipo">Buscar por: </strong>
+						<div class="col-12 no-padding checkbox-grupo flex">
+							<input type="checkbox" value="3" class="custom-checkbox" id="tipo-evento" data-checked="true" checked="checked" />
+							<label for="tipo-evento">Evento</label>
+							<input type="checkbox" value="4" class="custom-checkbox" id="tipo-musico" data-checked="true" checked="checked" />
+							<label for="tipo-musico">Músico</label>
+							<input type="checkbox" value="2" class="custom-checkbox" id="tipo-estabelecimento" data-checked="true" checked="checked" />
+							<label for="tipo-estabelecimento">Estabelecimento</label>
+							<input type="checkbox" value="1" class="custom-checkbox" id="tipo-endereco" data-checked="true" checked="checked" />
+							<label for="tipo-endereco">Endereço</label>
+							@Html.Hidden("e", "")
+						</div>
+					</div>
+					<div class="mt-3 no-padding row col-12">
+						<strong for="Generos">Genêros músicais (Evento/Músico)</strong>
+						<div class="col-12 no-padding checkbox-grupo container-fluid">
+							<select id="Generos" class="select-custom form-control" placeholder="Selecione os genêros músicais" multiple>
+								@for (int i = 0; i < Generos.Count; i++)
+								{
+									<option value="@Generos[i].ID">@Generos[i].Descricao</option>
+								}
+							</select>
+							@Html.Hidden("g", "")
+						</div>
+					</div>
+					<div class="mt-3 no-padding row col-12">
+						<strong for="Habilidades">Ambientação (Estabelecimento)</strong>
+						<div class="col-12 no-padding checkbox-grupo flex">
+							<select id="Ambientacoes" class="select-custom form-control" placeholder="Selecione as ambientações" multiple>
+								@for (int i = 0; i < Ambientacoes.Count; i++)
+								{
+									<option value="@Ambientacoes[i].ID">@Ambientacoes[i].Descricao</option>
+								}
+							</select>
+							@Html.Hidden("a", "")
+						</div>
+					</div>
+					<div class="mt-3 no-padding row col-12">
+						<strong for="Habilidades">Habilidades (Músico)</strong>
+						<div class="col-12 no-padding checkbox-grupo flex">
+							<select id="Habilidades" class="select-custom form-control" placeholder="Selecione as habilidades" multiple>
+								@for (int i = 0; i < TipoHabilidades.Count; i++)
+								{
+									var tipo = TipoHabilidades[i];
+									var habs = Habilidades.Where(x => x.TipoHab == tipo.ID).ToList();
 
-                                    <optgroup label="@TipoHabilidades[i].Descricao">
-                                        @for (int j = 0; j < habs.Count; j++)
-                                        {
-                                            <option value="@habs[j].ID">@habs[j].Descricao</option>
-                                        }
-                                    </optgroup>
-                                }
-                            </select>
-                            @Html.Hidden("h", "")
-                        </div>
-                    </div>
-                    @*
-        <div class="no-margin no-padding row col-12">
-            <label for="html-input-range">Nota minima</label>
-            <div class="col-12 no-padding">
-                <div class="nota">
-                    <span class="voto-1 oi oi-heart"></span>
-                    <span class="voto-2 oi oi-heart"></span>
-                    <span class="voto-3 oi oi-heart"></span>
-                    <span class="voto-4 oi oi-heart"></span>
-                    <span class="voto-5 oi oi-heart"></span>
-                </div>
-            </div>
-        </div>
-                    *@
-                </div>
-            </div>
-        </form>
+									<optgroup label="@TipoHabilidades[i].Descricao">
+										@for (int j = 0; j < habs.Count; j++)
+										{
+											<option value="@habs[j].ID">@habs[j].Descricao</option>
+										}
+									</optgroup>
+								}
+							</select>
+							@Html.Hidden("h", "")
+						</div>
+					</div>
+					@*
+			<div class="no-margin no-padding row col-12">
+				<label for="html-input-range">Nota minima</label>
+				<div class="col-12 no-padding">
+					<div class="nota">
+						<span class="voto-1 oi oi-heart"></span>
+						<span class="voto-2 oi oi-heart"></span>
+						<span class="voto-3 oi oi-heart"></span>
+						<span class="voto-4 oi oi-heart"></span>
+						<span class="voto-5 oi oi-heart"></span>
+					</div>
+				</div>
+			</div>
+					*@
+				</div>
+
+				<div class="resultado">
+					<div class="resultado-item flex">
+						<div class="resultado-item-imagem arredondado mr-3" style="background-image: url(http://ligadoamusica.com.br/wp-content/uploads/2015/07/cachorro-grande-2015-rui-mendes.jpg)"></div>
+						<div class="resultado-item-texto">
+							<div class="resultado-item-nome flex">
+								<span>Cachorro Grande</span>
+								<div class="resultado-item-tipo ml-2">
+									Músico
+								</div>
+							</div>
+							<div class="resultado-item-endereco">
+								Av. Francisco Matarazzo, 694 – Água Branca - São Paulo/SP
+							</div>
+							<div class="flex">
+								<div class="resultado-item-km mr-2">
+									9 km
+								</div>
+								<div class="nota-3 resultado-item-nota">
+									<span class="voto-1 oi oi-heart"></span>
+									<span class="voto-2 oi oi-heart"></span>
+									<span class="voto-3 oi oi-heart"></span>
+									<span class="voto-4 oi oi-heart"></span>
+									<span class="voto-5 oi oi-heart"></span>
+								</div>
+							</div>
+						</div>
+					</div>					
+				</div>
+			</div>
+		</form>		
 	</div>
 
 	<div id="mapa" style="min-height: calc(100vh - 55px);"></div>
 
-	<div class="resultado-busca card col-10 mx-auto mb-5 no-padding">
-		<div class="resultado-busca-menu flex space-between">
-			<div class="col-sm-12 col-lg-8 resultado-busca-menu-info">
+	<div class="sugestao card col-10 mx-auto mb-5 no-padding">
+		<div class="sugestao-menu flex space-between">
+			<div class="col-sm-12 col-lg-8 sugestao-menu-info">
 				<strong>Sugestões</strong>
 			</div>
 			<div class="col-sm-6 col-lg-3">
@@ -128,14 +157,14 @@
 				</select>
 			</div>
 			</div>
-		<div class="resultado-busca-lista flex">
-			<div class="resultado-busca-item">
-				<div class="resultado-busca-item-imagem" style="background-image: url(https://images.pexels.com/photos/518389/pexels-photo-518389.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
+		<div class="sugestao-lista flex">
+			<div class="sugestao-item">
+				<div class="sugestao-item-imagem" style="background-image: url(https://images.pexels.com/photos/518389/pexels-photo-518389.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
 					<div class="col-12 pb-2 flex space-between">
-						<div class="resultado-busca-item-km">
+						<div class="sugestao-item-km">
 							30 km
 						</div>
-						<div class="nota-3 resultado-busca-item-nota">
+						<div class="nota-3 sugestao-item-nota">
 							<span class="voto-1 oi oi-heart"></span>
 							<span class="voto-2 oi oi-heart"></span>
 							<span class="voto-3 oi oi-heart"></span>
@@ -144,26 +173,26 @@
 						</div>
 					</div>
 				</div>
-				<div class="resultado-busca-item-texto">
-					<div class="resultado-busca-item-nome">
+				<div class="sugestao-item-texto">
+					<div class="sugestao-item-nome">
 						Citibank Hall
 					</div>
-					<div class="resultado-busca-item-endereco">
+					<div class="sugestao-item-endereco">
 						Av. das Nações Unidas, 17955, 04795-100
 					</div>
-					<div class="resultado-busca-item-tipo">
+					<div class="sugestao-item-tipo">
 						Estabelecimento
 					</div>
 				</div>
 			</div>
 
-			<div class="resultado-busca-item">
-				<div class="resultado-busca-item-imagem" style="background-image: url(https://images.pexels.com/photos/1259863/pexels-photo-1259863.jpeg?auto=compress&cs=tinysrgb&h=650&w=940)">
+			<div class="sugestao-item">
+				<div class="sugestao-item-imagem" style="background-image: url(https://images.pexels.com/photos/1259863/pexels-photo-1259863.jpeg?auto=compress&cs=tinysrgb&h=650&w=940)">
 					<div class="col-12 pb-2 flex space-between">
-						<div class="resultado-busca-item-km">
+						<div class="sugestao-item-km">
 							15 km
 						</div>
-						<div class="nota-5 resultado-busca-item-nota">
+						<div class="nota-5 sugestao-item-nota">
 							<span class="voto-1 oi oi-heart"></span>
 							<span class="voto-2 oi oi-heart"></span>
 							<span class="voto-3 oi oi-heart"></span>
@@ -172,26 +201,26 @@
 						</div>
 					</div>
 				</div>
-				<div class="resultado-busca-item-texto">
-					<div class="resultado-busca-item-nome">
+				<div class="sugestao-item-texto">
+					<div class="sugestao-item-nome">
 						Sertanejo Music
 					</div>
-					<div class="resultado-busca-item-endereco">
+					<div class="sugestao-item-endereco">
 						Rua Tagipuru, 795 - Barra Funda - São Paulo - SP
 					</div>
-					<div class="resultado-busca-item-tipo">
+					<div class="sugestao-item-tipo">
 						Evento
 					</div>
 				</div>
 			</div>
 
-			<div class="resultado-busca-item">
-				<div class="resultado-busca-item-imagem" style="background-image: url(http://ligadoamusica.com.br/wp-content/uploads/2015/07/cachorro-grande-2015-rui-mendes.jpg)">
+			<div class="sugestao-item">
+				<div class="sugestao-item-imagem" style="background-image: url(http://ligadoamusica.com.br/wp-content/uploads/2015/07/cachorro-grande-2015-rui-mendes.jpg)">
 					<div class="col-12 pb-2 flex space-between">
-						<div class="resultado-busca-item-km">
+						<div class="sugestao-item-km">
 							9 km
 						</div>
-						<div class="nota-3 resultado-busca-item-nota">
+						<div class="nota-3 sugestao-item-nota">
 							<span class="voto-1 oi oi-heart"></span>
 							<span class="voto-2 oi oi-heart"></span>
 							<span class="voto-3 oi oi-heart"></span>
@@ -200,14 +229,14 @@
 						</div>
 					</div>
 				</div>
-				<div class="resultado-busca-item-texto">
-					<div class="resultado-busca-item-nome">
+				<div class="sugestao-item-texto">
+					<div class="sugestao-item-nome">
 						Cachorro Grande
 					</div>
-					<div class="resultado-busca-item-endereco">
+					<div class="sugestao-item-endereco">
 						Av. Francisco Matarazzo, 694 – Água Branca - São Paulo/SP
 					</div>
-					<div class="resultado-busca-item-tipo">
+					<div class="sugestao-item-tipo">
 						Músico
 					</div>
 				</div>
