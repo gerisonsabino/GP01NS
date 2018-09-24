@@ -1,5 +1,6 @@
 ﻿using GP01NS.Models;
 using GP01NSLibrary;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -105,6 +106,41 @@ namespace GP01NS.Classes.ViewModels
                 return "De " + this.DataDe.ToShortDateString() + " até " + this.DataAte.ToShortDateString() + " - das " + this.HoraDe.ToString("D2") + ":" + this.MinutoDe.ToString("D2") + "h às " + this.HoraAte.ToString("D2") + ":" + this.MinutoAte.ToString("D2") + "h";
         }
 
+        public string GetMusicos()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var em = db.evento_musico.Where(x => x.IDEvento == this.ID).ToList();
+
+                    var musicos = new List<Atracao>();
+
+                    for (int i = 0; i < em.Count; i++)
+                    {
+                        var mu = new MusicoVM(em[i].usuario_musico.usuario);
+
+                        var a = new Atracao
+                        {
+                            Confirmado = em[i].Confirmado,
+                            ID = mu.ID,
+                            Imagem = mu.GetImagemPerfil(),
+                            Nome = mu.NomeArtistico,
+                            Recusado = em[i].Recusado,
+                            Username = mu.Username
+                        };
+
+                        musicos.Add(a);
+                    }
+
+                    return JsonConvert.SerializeObject(musicos);
+                }
+            }
+            catch { }
+
+            return string.Empty;
+        }
+
         public bool SaveChanges(EstabelecimentoVM estabelecimento) 
         {
             try
@@ -125,8 +161,6 @@ namespace GP01NS.Classes.ViewModels
                             TipoUsuario = u.TipoUsuario,
                             Cadastro = DateTime.Now,
                         };
-
-                        e.endereco.Add(u.usuario.endereco.First());
                     }
 
                     e.DataAte = this.DataAte;
@@ -148,7 +182,7 @@ namespace GP01NS.Classes.ViewModels
                     return true;
                 }
             }
-            catch (Exception e) { }
+            catch { }
 
             return false;
         }
@@ -173,5 +207,15 @@ namespace GP01NS.Classes.ViewModels
     {
         public int ID { get; set; }
         public string Hora { get; set; }
+    }
+
+    internal class Atracao
+    {
+        public int ID { get; set; }
+        public string Imagem { get; set; }
+        public string Nome { get; set; }
+        public string Username { get; set; }
+        public bool Confirmado { get; set; }
+        public bool Recusado { get; set; }
     }
 }

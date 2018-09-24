@@ -98,6 +98,21 @@ namespace GP01NS.Classes.ViewModels.Estabelecimento
             return null;
         }
 
+        public List<ambientacao> GetAmbientacoesList()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    return db.ambientacao.ToList();
+                }
+            }
+            catch { }
+
+            return null;
+        }
+
+
         public SelectList GetDias(int dia) 
         {
             try

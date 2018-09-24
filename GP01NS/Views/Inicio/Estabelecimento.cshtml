@@ -19,7 +19,7 @@
                 {
                     if (Usuario.ID == Model.ID)
                     {
-                        <form action="/Estabelecimento/UploadCover" method="post" enctype="multipart/form-data">
+                        <form action="/Estabelecimento/UploadCover/" method="post" enctype="multipart/form-data">
                             <input type="file" id="Arquivo" name="Arquivo" onchange="javascript:this.form.submit();">
                         </form>
                     }
@@ -76,7 +76,7 @@
                             @for (int i = 0; i < Imagens.Count; i++)
                             {
                                 <div class="foto-item">
-                                    <label class="foto-imagem" style="background-image: url(@("https://gerisonsabino.azurewebsites.net" + Imagens[i])"></label>
+                                    <label class="foto-imagem" style="background-image: url(@("http://nossoshow.gerison.net" + Imagens[i])"></label>
                                 </div>
                             }
 
@@ -88,7 +88,7 @@
                                         <label class="foto-imagem">
                                             @if (Usuario.ID == Model.ID)
                                             {
-                                                <form action="/Estabelecimento/UploadImagem" method="post" enctype="multipart/form-data">
+                                                <form action="/Estabelecimento/UploadImagem/" method="post" enctype="multipart/form-data">
                                                     <div class="foto-hover"></div>
                                                     <input type="file" name="Imagem" onchange="javascript:this.form.submit();">
                                                 </form>

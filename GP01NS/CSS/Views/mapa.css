@@ -12,7 +12,7 @@
 }
 
 .buscador .buscador-input {
-	width: calc(100% - 51px);
+	width: calc(100% - 195px);
 	height: 45px;
 	border: 0;
 	font-size: 18px;
@@ -51,6 +51,15 @@
     border-width: 1px;
     max-height: 350px;
     overflow: auto;
+}
+
+.buscador form {
+    width: 100%;
+}
+
+.buscador form .select2 {
+    display: block !important;
+    width: 100% !important;
 }
 
 .buscador .buscador-filtro label,

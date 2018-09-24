@@ -28,9 +28,9 @@ namespace GP01NS.Classes.ViewModels
             this.Diretorio = "/cdn/" + CriptografarDiretorio() + "/" + this.Data.ToString("ssmmhhyyyyMMdd") + "." + this.Imagem.FileName.Split('.').Last();
         }
 
-        public bool Upload() 
+        public bool Upload()
         {
-            /*switch (this.Imagem.FileName.Split('.').Last())
+            switch (this.Imagem.FileName.Split('.').Last())
             {
                 case "jpg":
                 case "jpeg":
@@ -39,7 +39,7 @@ namespace GP01NS.Classes.ViewModels
                     {
                         try
                         {
-                            string wwwroot = "/site/wwwroot";
+                            string wwwroot = "/web/nossoshow";
                             string dir = CriptografarDiretorio();
 
                             string[] diretorios = Regex.Split(FTP.ListDirectory(wwwroot + "/cdn/"), "\r\n");
@@ -54,7 +54,7 @@ namespace GP01NS.Classes.ViewModels
                         catch (Exception e) { }
                     }
                     break;
-            }*/
+            }
 
             return false;
         }

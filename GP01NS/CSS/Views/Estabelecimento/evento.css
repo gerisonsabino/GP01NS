@@ -1,4 +1,4 @@
-form input[type="file"] {
+/*form input[type="file"] {
 	background-color: #4285f4;
 	position: relative;
 	overflow: hidden;
@@ -51,4 +51,31 @@ input[type="file"]::before {
 .table td,
 .table th {
 	vertical-align: baseline;
+}*/
+
+.usuario-item {
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    align-items: center;
 }
+
+.usuario-foto {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background: center center / cover no-repeat;
+}
+
+.usuario-nome {
+    font-size: 12px;
+    color: var(--azul-escuro);
+    margin-right: 10px;
+    width: calc(50% - 55px);
+}
+
+.usuario-botao {
+    width: 49.5%;
+}
+

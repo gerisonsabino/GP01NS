@@ -15,3 +15,9 @@
 		$("input:file").appendTo("<div class='form-group col-md-3'><input type='file' class='form-control-file' id='exampleFormControlFile1'></div>");
 	});
 });
+
+function getAtracoes() {
+    $.post("/Estabelecimento/getAtracoes/", function (s) {
+
+    });
+}
