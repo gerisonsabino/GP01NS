@@ -31,7 +31,7 @@ namespace GP01NS.Classes.Util
                 return "http://localhost:" + HttpContext.Current.Request.Url.Port.ToString();
             else
                 //Online
-                return "https://gerisonsabino.azurewebsites.net";
+                return "http://nossoshow.gerison.net";
         }
 
         private string GerarHash()

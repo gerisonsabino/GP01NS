@@ -6,7 +6,7 @@
 
     var Estabelecimento = (GP01NS.Classes.ViewModels.EstabelecimentoVM)ViewBag.Estabelecimento;
 }
-
+<link href="~/CSS/Views/Estabelecimento/evento.css" rel="stylesheet" />
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-9 col-12 col-lg-9 ml-auto mr-auto form">
@@ -127,8 +127,99 @@
                         </div>
                         }
                     </div>
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
-                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="col-md-12">
+                            <br />
+                            <h5 class="text-uppercase">Atrações de @Model.Titulo</h5>
+                            <br />
+                            <form class="form">
+                                <div class="form-row">
+                                    <div class="form-group col-10">
+                                        <input type="text" class="form-control" id="inputPassword2" placeholder="Procure por um artista">
+                                    </div>
+                                    <div class="form-group col-2">
+                                        <button type="submit" class="btn btn-primary">Pesquisar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="usuario-lista col-12 mb-4">
+                            <div class="usuario-item mb-3 flex">
+                                <div class="usuario-foto" style="background-image: url(https://randomuser.me/api/portraits/men/12.jpg)"></div>
+                                <div class="usuario-nome">Harold King</div>
+                                <div class="usuario-botao text-right">
+                                    <button type="button" class="btn btn-success btn-sm">Enviar convite</button>
+                                </div>
+                            </div>
+
+                            <div class="usuario-item mb-3 flex">
+                                <div class="usuario-foto" style="background-image: url(https://randomuser.me/api/portraits/women/79.jpg)"></div>
+                                <div class="usuario-nome">Priscilla Graham</div>
+                                <div class="usuario-botao text-right">
+                                    <button type="button" class="btn btn-light btn-sm">Cancelar convite</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        <div class="col-md-12 form">
+                            <br />
+                            <h5 class="text-uppercase">Publicação de @Model.Titulo</h5>
+                            <br />
+                            <form class="form">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="inputPassword2" placeholder="Procure por uma publicação">
+                                </div>
+                            </form>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Visualizações</th>
+                                        <th scope="col">Usuários autenticados</th>
+                                        <th scope="col">Navegantes</th>
+                                        <th scope="col">Publicação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>100</td>
+                                        <td>100</td>
+                                        <td>200</td>
+                                        <td>
+                                            <div class="usuario-botao text-right">
+                                                <button type="button" class="btn btn-success btn-sm">Publicar</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>100</td>
+                                        <td>100</td>
+                                        <td>200</td>
+                                        <td>
+                                            <div class="usuario-botao text-right">
+                                                <button type="button" class="btn btn-danger btn-sm">Desativar</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>100</td>
+                                        <td>100</td>
+                                        <td>200</td>
+                                        <td>
+                                            <div class="usuario-botao text-right">
+                                                <button type="button" class="btn btn-danger btn-sm">Desativar</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

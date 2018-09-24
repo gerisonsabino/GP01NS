@@ -23,6 +23,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_autenticacao_usuario", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario), "autenticacao", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.autenticacao), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_endereco_uf", "endereco_uf", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.endereco_uf), "endereco", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.endereco), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_evento_estabelecimento", "usuario_estabelecimento", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario_estabelecimento), "evento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.evento), true)]
+[assembly: EdmRelationshipAttribute("nosso_showModel", "FK_evento_musico_evento", "evento", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.evento), "evento_musico", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.evento_musico), true)]
+[assembly: EdmRelationshipAttribute("nosso_showModel", "FK_evento_musico", "usuario_musico", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario_musico), "evento_musico", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.evento_musico), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_hab_musical_tipo", "hab_musical_tipo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.hab_musical_tipo), "hab_musical", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.hab_musical), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_imagem_tipo", "imagem_tipo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.imagem_tipo), "imagem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.imagem), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_imagem_usuario", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario), "imagem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.imagem), true)]
@@ -33,7 +35,6 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_tipo", "usuario_tipo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario_tipo), "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_estabelecimento_dia_ate", "usuario_estabelecimento_dias", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario_estabelecimento_dias), "usuario_estabelecimento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_estabelecimento), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_estabelecimento_dia_de", "usuario_estabelecimento_dias", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario_estabelecimento_dias), "usuario_estabelecimento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_estabelecimento), true)]
-[assembly: EdmRelationshipAttribute("nosso_showModel", "evento_endereco", "endereco", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.endereco), "evento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.evento))]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "usuario_ambientacao", "ambientacao", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.ambientacao), "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario))]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "usuario_endereco", "endereco", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.endereco), "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario))]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "usuario_genero_musical", "genero_musical", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.genero_musical), "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario))]
@@ -169,6 +170,22 @@ namespace GP01NS.Models
             }
         }
         private ObjectSet<evento> _evento;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<evento_musico> evento_musico
+        {
+            get
+            {
+                if ((_evento_musico == null))
+                {
+                    _evento_musico = base.CreateObjectSet<evento_musico>("evento_musico");
+                }
+                return _evento_musico;
+            }
+        }
+        private ObjectSet<evento_musico> _evento_musico;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -404,6 +421,14 @@ namespace GP01NS.Models
         public void AddToevento(evento evento)
         {
             base.AddObject("evento", evento);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the evento_musico EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToevento_musico(evento_musico evento_musico)
+        {
+            base.AddObject("evento_musico", evento_musico);
         }
     
         /// <summary>
@@ -1211,28 +1236,6 @@ namespace GP01NS.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "evento_endereco", "evento")]
-        public EntityCollection<evento> evento
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<evento>("nosso_showModel.evento_endereco", "evento");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<evento>("nosso_showModel.evento_endereco", "evento", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "usuario_endereco", "usuario")]
         public EntityCollection<usuario> usuario
         {
@@ -1709,7 +1712,7 @@ namespace GP01NS.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String CNPJ
         {
@@ -1719,14 +1722,11 @@ namespace GP01NS.Models
             }
             set
             {
-                if (_CNPJ != value)
-                {
-                    OnCNPJChanging(value);
-                    ReportPropertyChanging("CNPJ");
-                    _CNPJ = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("CNPJ");
-                    OnCNPJChanged();
-                }
+                OnCNPJChanging(value);
+                ReportPropertyChanging("CNPJ");
+                _CNPJ = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("CNPJ");
+                OnCNPJChanged();
             }
         }
         private global::System.String _CNPJ;
@@ -1736,7 +1736,7 @@ namespace GP01NS.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 IDUsuario
         {
@@ -1746,14 +1746,11 @@ namespace GP01NS.Models
             }
             set
             {
-                if (_IDUsuario != value)
-                {
-                    OnIDUsuarioChanging(value);
-                    ReportPropertyChanging("IDUsuario");
-                    _IDUsuario = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("IDUsuario");
-                    OnIDUsuarioChanged();
-                }
+                OnIDUsuarioChanging(value);
+                ReportPropertyChanging("IDUsuario");
+                _IDUsuario = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IDUsuario");
+                OnIDUsuarioChanged();
             }
         }
         private global::System.Int32 _IDUsuario;
@@ -1763,7 +1760,7 @@ namespace GP01NS.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 TipoUsuario
         {
@@ -1773,14 +1770,11 @@ namespace GP01NS.Models
             }
             set
             {
-                if (_TipoUsuario != value)
-                {
-                    OnTipoUsuarioChanging(value);
-                    ReportPropertyChanging("TipoUsuario");
-                    _TipoUsuario = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("TipoUsuario");
-                    OnTipoUsuarioChanged();
-                }
+                OnTipoUsuarioChanging(value);
+                ReportPropertyChanging("TipoUsuario");
+                _TipoUsuario = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TipoUsuario");
+                OnTipoUsuarioChanged();
             }
         }
         private global::System.Int32 _TipoUsuario;
@@ -1836,18 +1830,320 @@ namespace GP01NS.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "evento_endereco", "endereco")]
-        public EntityCollection<endereco> endereco
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "FK_evento_musico_evento", "evento_musico")]
+        public EntityCollection<evento_musico> evento_musico
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<endereco>("nosso_showModel.evento_endereco", "endereco");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<evento_musico>("nosso_showModel.FK_evento_musico_evento", "evento_musico");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<endereco>("nosso_showModel.evento_endereco", "endereco", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<evento_musico>("nosso_showModel.FK_evento_musico_evento", "evento_musico", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="nosso_showModel", Name="evento_musico")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class evento_musico : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new evento_musico object.
+        /// </summary>
+        /// <param name="iDEvento">Initial value of the IDEvento property.</param>
+        /// <param name="recusado">Initial value of the Recusado property.</param>
+        /// <param name="confirmado">Initial value of the Confirmado property.</param>
+        /// <param name="data">Initial value of the Data property.</param>
+        /// <param name="iDMusico">Initial value of the IDMusico property.</param>
+        /// <param name="tipoMusico">Initial value of the TipoMusico property.</param>
+        /// <param name="cPF">Initial value of the CPF property.</param>
+        public static evento_musico Createevento_musico(global::System.Int32 iDEvento, global::System.Boolean recusado, global::System.Boolean confirmado, global::System.DateTime data, global::System.Int32 iDMusico, global::System.Int32 tipoMusico, global::System.String cPF)
+        {
+            evento_musico evento_musico = new evento_musico();
+            evento_musico.IDEvento = iDEvento;
+            evento_musico.Recusado = recusado;
+            evento_musico.Confirmado = confirmado;
+            evento_musico.Data = data;
+            evento_musico.IDMusico = iDMusico;
+            evento_musico.TipoMusico = tipoMusico;
+            evento_musico.CPF = cPF;
+            return evento_musico;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 IDEvento
+        {
+            get
+            {
+                return _IDEvento;
+            }
+            set
+            {
+                if (_IDEvento != value)
+                {
+                    OnIDEventoChanging(value);
+                    ReportPropertyChanging("IDEvento");
+                    _IDEvento = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("IDEvento");
+                    OnIDEventoChanged();
+                }
+            }
+        }
+        private global::System.Int32 _IDEvento;
+        partial void OnIDEventoChanging(global::System.Int32 value);
+        partial void OnIDEventoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Recusado
+        {
+            get
+            {
+                return _Recusado;
+            }
+            set
+            {
+                OnRecusadoChanging(value);
+                ReportPropertyChanging("Recusado");
+                _Recusado = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Recusado");
+                OnRecusadoChanged();
+            }
+        }
+        private global::System.Boolean _Recusado;
+        partial void OnRecusadoChanging(global::System.Boolean value);
+        partial void OnRecusadoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Confirmado
+        {
+            get
+            {
+                return _Confirmado;
+            }
+            set
+            {
+                OnConfirmadoChanging(value);
+                ReportPropertyChanging("Confirmado");
+                _Confirmado = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Confirmado");
+                OnConfirmadoChanged();
+            }
+        }
+        private global::System.Boolean _Confirmado;
+        partial void OnConfirmadoChanging(global::System.Boolean value);
+        partial void OnConfirmadoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Data
+        {
+            get
+            {
+                return _Data;
+            }
+            set
+            {
+                OnDataChanging(value);
+                ReportPropertyChanging("Data");
+                _Data = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Data");
+                OnDataChanged();
+            }
+        }
+        private global::System.DateTime _Data;
+        partial void OnDataChanging(global::System.DateTime value);
+        partial void OnDataChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 IDMusico
+        {
+            get
+            {
+                return _IDMusico;
+            }
+            set
+            {
+                if (_IDMusico != value)
+                {
+                    OnIDMusicoChanging(value);
+                    ReportPropertyChanging("IDMusico");
+                    _IDMusico = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("IDMusico");
+                    OnIDMusicoChanged();
+                }
+            }
+        }
+        private global::System.Int32 _IDMusico;
+        partial void OnIDMusicoChanging(global::System.Int32 value);
+        partial void OnIDMusicoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TipoMusico
+        {
+            get
+            {
+                return _TipoMusico;
+            }
+            set
+            {
+                if (_TipoMusico != value)
+                {
+                    OnTipoMusicoChanging(value);
+                    ReportPropertyChanging("TipoMusico");
+                    _TipoMusico = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("TipoMusico");
+                    OnTipoMusicoChanged();
+                }
+            }
+        }
+        private global::System.Int32 _TipoMusico;
+        partial void OnTipoMusicoChanging(global::System.Int32 value);
+        partial void OnTipoMusicoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String CPF
+        {
+            get
+            {
+                return _CPF;
+            }
+            set
+            {
+                if (_CPF != value)
+                {
+                    OnCPFChanging(value);
+                    ReportPropertyChanging("CPF");
+                    _CPF = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("CPF");
+                    OnCPFChanged();
+                }
+            }
+        }
+        private global::System.String _CPF;
+        partial void OnCPFChanging(global::System.String value);
+        partial void OnCPFChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "FK_evento_musico_evento", "evento")]
+        public evento evento
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<evento>("nosso_showModel.FK_evento_musico_evento", "evento").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<evento>("nosso_showModel.FK_evento_musico_evento", "evento").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<evento> eventoReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<evento>("nosso_showModel.FK_evento_musico_evento", "evento");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<evento>("nosso_showModel.FK_evento_musico_evento", "evento", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "FK_evento_musico", "usuario_musico")]
+        public usuario_musico usuario_musico
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario_musico>("nosso_showModel.FK_evento_musico", "usuario_musico").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario_musico>("nosso_showModel.FK_evento_musico", "usuario_musico").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<usuario_musico> usuario_musicoReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario_musico>("nosso_showModel.FK_evento_musico", "usuario_musico");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<usuario_musico>("nosso_showModel.FK_evento_musico", "usuario_musico", value);
                 }
             }
         }
@@ -4396,6 +4692,28 @@ namespace GP01NS.Models
 
     
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "FK_evento_musico", "evento_musico")]
+        public EntityCollection<evento_musico> evento_musico
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<evento_musico>("nosso_showModel.FK_evento_musico", "evento_musico");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<evento_musico>("nosso_showModel.FK_evento_musico", "evento_musico", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.

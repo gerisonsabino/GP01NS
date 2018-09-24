@@ -130,7 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Servicos\Auth.cs" />
-    <Compile Include="Classes\Servicos\Pesquisar.cs" />
+    <Compile Include="Classes\Servicos\Pesquisa.cs" />
     <Compile Include="Classes\Util\Criptografia.cs" />
     <Compile Include="Classes\Util\MensagemEmail.cs" />
     <Compile Include="Classes\Util\Requisicao.cs" />
@@ -1743,6 +1743,7 @@
     <Content Include="CSS\Views\Entrar\cadastro.css" />
     <Content Include="CSS\Views\Entrar\confirmar-conta.css" />
     <Content Include="CSS\Views\Entrar\index.css" />
+    <Content Include="CSS\Views\Inicio\resultados.css" />
     <Content Include="CSS\Views\mapa.css" />
     <Content Include="CSS\Views\forms.css" />
     <Content Include="CSS\Views\Estabelecimento\evento.css" />
@@ -3290,12 +3291,6 @@
     <Content Include="Views\Musico\Endereco.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\nosso_show.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Inicio\Estabelecimento.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -3303,8 +3298,13 @@
     <Content Include="Views\Inicio\Musico.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\GP01NS - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\GP01NS - Web Deploy.pubxml" />
+    <Content Include="Views\Inicio\Resultados.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\nosso_show.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

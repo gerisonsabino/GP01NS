@@ -23,53 +23,41 @@ namespace GP01NS.Controllers
                 ViewBag.Usuario = this.Usuario;
             }
 
+            var musico = new Classes.ViewModels.Musico.ContaVM();
+
+            ViewBag.Generos = musico.GetGenerosMusicais();
+            ViewBag.TipoHabilidades = musico.GetTipoHabilidades();
+            ViewBag.Habilidades = musico.GetHabilidades();
+
+            var estabelecimento = new Classes.ViewModels.Estabelecimento.ContaVM();
+
+            ViewBag.Ambientacoes = estabelecimento.GetAmbientacoesList();
+
             return View();
         }
 
         [HttpGet]
-        public ActionResult Index(string nom, string gen, string amb, string not, string tip)
+        public ActionResult Resultados(string q, string e, string g, string a, string h)
         {
-            //Pegando usuário caso logado
             if (this.BaseUsuario != null)
             {
                 this.Usuario = new UsuarioVM(this.BaseUsuario);
                 ViewBag.Usuario = this.Usuario;
             }
 
-            try
+            if (!string.IsNullOrEmpty(q))
             {
-                string nome = nom;
-                int idGenero, idAmbientacao, nota, tipo;
-
-                idAmbientacao = idGenero = nota = tipo = int.MinValue;
-
-                int.TryParse(amb, out idAmbientacao);
-                int.TryParse(gen, out idGenero);
-                int.TryParse(not, out nota);
-                int.TryParse(tip, out tipo);
-
-                if (tipo != 0)
+                try
                 {
-                    //Conexão com o banco de dados 
-                    using (var db = new nosso_showEntities(Conexao.GetString()))
-                    {
-                        //var estabelecimentos = db.usuario_estabelecimento.Where(x =>
-                        //    (!string.IsNullOrEmpty(nome) ? x.usuario.Nome.ToLower().Contains(nome.ToLower()) : true)
-                        //    && (idAmbientacao > 0 ? x.ambientacao.ID == idAmbientacao : true)
-                        //).ToList();
+                    ViewBag.JSON = Pesquisa.Pesquisar(Server.UrlDecode(q), Server.UrlDecode(e), Server.UrlDecode(g), Server.UrlDecode(a), Server.UrlDecode(h));
+                    return View();
 
-                        string s = Pesquisar.EventosJSON(nome, idAmbientacao);
-
-                        //var musicos = db.usuario_musico.Where(x =>
-                        //    (!string.IsNullOrEmpty(nome) ? x.NomeArtistico.ToLower().Contains(nome.ToLower()) : true)
-                        //    && (idGenero > 0 ? x.usuario.genero_musical.Any(y => y.ID == idGenero) : true)
-                        //).ToList();
-                    }
                 }
-            }
-            catch { }
+                catch { }
 
-            return View();
+            }
+
+            return Redirect("/inicio/");
         }
 
         public ActionResult Estabelecimento(string id)

@@ -125,8 +125,6 @@ namespace GP01NS.Classes.ViewModels
                             TipoUsuario = u.TipoUsuario,
                             Cadastro = DateTime.Now,
                         };
-
-                        e.endereco.Add(u.usuario.endereco.First());
                     }
 
                     e.DataAte = this.DataAte;

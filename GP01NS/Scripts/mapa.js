@@ -24,12 +24,12 @@ function Mapa() {
                     draggable: true,
                     fullscreenControl: false,
                     keyboardShortcuts: false,
-                    maxZoom: 14,
-                    minZoom: 14,
+                    maxZoom: 16,
+                    minZoom: 12,
                     streetViewControl: false,
                     scaleControl: false,
                     mapTypeControl: false,
-                    zoomControl: false,
+                    //zoomControl: false,
                     styles: [{ "stylers": [{ "hue": "#007bff" }, { "saturation": 250 } ] }, { "featureType": "road", "elementType": "geometry", "stylers": [ { "lightness": 50 }, { "visibility": "simplified" } ] }, { "featureType": "road", "elementType": "labels", "stylers": [ { "visibility": "off" }]}],
                     zoomControlOptions: { style: google.maps.ZoomControlStyle.LARGE },
                     center: { lat: this.coordenadas.latitude, lng: this.coordenadas.longitude }
@@ -95,16 +95,16 @@ function Mapa() {
             var a = document.getElementById("mapa");
             switch (e.code) {
                 case e.PERMISSION_DENIED:
-                    a.innerHTML = "<h2>O Usuário negou o pedido de localização geográfica.<br /><br /><a href='/Inicio/Index'>Por favor, recarregue a página.</a></h2>";
+                    a.innerHTML = "<h5>O Usuário negou o pedido de localização geográfica.<br /><br /><a href='/Inicio/Index'>Por favor, recarregue a página.</a></h5>";
                     break;
                 case e.POSITION_UNAVAILABLE:
-                    a.innerHTML = "<h2>Informações sobre o local não estão disponíveis.<br /><br /><a href='/Inicio/Index'>Por favor, recarregue a página.</a></h2>";
+                    a.innerHTML = "<h5>Informações sobre o local não estão disponíveis.<br /><br /><a href='/Inicio/Index'>Por favor, recarregue a página.</a></h5>";
                     break;
                 case e.TIMEOUT:
-                    a.innerHTML = "<h2>A solicitação para obter a localização do usuário expirou.<br /><br /><a href='/Inicio/Index'>Por favor, recarregue a página.</a></h2>";
+                    a.innerHTML = "<h5>A solicitação para obter a localização do usuário expirou.<br /><br /><a href='/Inicio/Index'>Por favor, recarregue a página.</a></h5>";
                     break;
                 case e.UNKNOWN_ERROR:
-                    a.innerHTML = "<h2>Ocorreu um erro desconhecido.<br /><br /><a href='/Inicio/Index'>Por favor, recarregue a página.</a></h2>";
+                    a.innerHTML = "<h5>Ocorreu um erro desconhecido.<br /><br /><a href='/Inicio/Index'>Por favor, recarregue a página.</a></h5>";
                     break;
             }
 		}		

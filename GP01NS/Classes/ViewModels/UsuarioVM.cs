@@ -71,7 +71,7 @@ namespace GP01NS.Classes.ViewModels
         public string GetEnderecoString()
         {
             if (this.Endereco != null)
-                return this.Endereco.Logradouro + ", " + this.Endereco.Numero + " - " + this.Endereco.Bairro + " - " + this.Endereco.Cidade + " - " + this.Endereco.UF + " - " + this.Endereco.CEP.Insert(5, "-");
+                return this.Endereco.Logradouro + ", " + this.Endereco.Numero + " - " + this.Endereco.Bairro + " - " + this.Endereco.Cidade + ", " + this.Endereco.UF + " - " + this.Endereco.CEP.Insert(5, "-");
 
             else
                 return string.Empty;
@@ -97,7 +97,7 @@ namespace GP01NS.Classes.ViewModels
             {
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
-                    return "https://gerisonsabino.azurewebsites.net" + db.usuario.First(x => x.ID == this.ID).imagem.Last(x => x.TipoImagem == 1).Diretorio;
+                    return "http://nossoshow.gerison.net" + db.usuario.First(x => x.ID == this.ID).imagem.Last(x => x.TipoImagem == 1).Diretorio;
                 }
             }
             catch { return "#"; }
