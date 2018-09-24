@@ -51,7 +51,6 @@ namespace GP01NS.Controllers
                 {
                     ViewBag.JSON = Pesquisa.Pesquisar(Server.UrlDecode(q), Server.UrlDecode(e), Server.UrlDecode(g), Server.UrlDecode(a), Server.UrlDecode(h));
                     return View();
-
                 }
                 catch { }
 

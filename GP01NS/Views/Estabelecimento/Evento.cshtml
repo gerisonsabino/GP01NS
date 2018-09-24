@@ -140,10 +140,11 @@
                                     <div class="form-group col-2">
                                         <button type="submit" class="btn btn-primary">Pesquisar</button>
                                     </div>
+                                    @Html.Hidden("Musicos", Model.GetMusicos())
+
                                 </div>
                             </form>
                         </div>
-
                         <div class="usuario-lista col-12 mb-4">
                             <div class="usuario-item mb-3 flex">
                                 <div class="usuario-foto" style="background-image: url(https://randomuser.me/api/portraits/men/12.jpg)"></div>
