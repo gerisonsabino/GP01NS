@@ -1743,14 +1743,18 @@
     <Content Include="CSS\Views\Entrar\cadastro.css" />
     <Content Include="CSS\Views\Entrar\confirmar-conta.css" />
     <Content Include="CSS\Views\Entrar\index.css" />
+    <Content Include="CSS\Views\Estabelecimento\conta.css" />
+    <Content Include="CSS\Views\Fa\endereco.css" />
     <Content Include="CSS\Views\Inicio\resultados.css" />
     <Content Include="CSS\Views\mapa.css" />
     <Content Include="CSS\Views\forms.css" />
     <Content Include="CSS\Views\Estabelecimento\evento.css" />
     <Content Include="CSS\Views\Inicio\estabelecimento.css" />
     <Content Include="CSS\Views\layout.css" />
+    <Content Include="CSS\Views\Musico\conta.css" />
     <Content Include="CSS\Views\Musico\index.css" />
     <Content Include="CSS\Views\Musico\perfil.css" />
+    <Content Include="CSS\Views\Parciais\Load\load.css" />
     <Content Include="Imagens\Views\check.svg" />
     <Content Include="Imagens\Views\estrela-azul.svg" />
     <Content Include="Imagens\Views\estrela-cinza .svg" />
@@ -1849,6 +1853,7 @@
     <Content Include="Scripts\Views\Estabelecimento\evento.js" />
     <Content Include="Scripts\Views\Estabelecimento\evento_table.js" />
     <Content Include="Scripts\Views\Inicio\estabelecimento.js" />
+    <Content Include="Scripts\Views\Inicio\index.js" />
     <Content Include="Scripts\Views\Layout\layout.js" />
     <Content Include="Scripts\Views\Util\inputmask_controller.js" />
     <Content Include="Scripts\Views\Entrar\Cadastro\validation_controller.js" />
@@ -3305,6 +3310,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Layout\Parciais\Load\Load.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

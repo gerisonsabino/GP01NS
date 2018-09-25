@@ -92,23 +92,75 @@ function Mapa() {
             }
         },
         Erro: function (e) {
-            var a = document.getElementById("mapa");
-            switch (e.code) {
-                case e.PERMISSION_DENIED:
-                    a.innerHTML = "<h5>O Usuário negou o pedido de localização geográfica.<br /><br /><a href='/Inicio/Index'>Por favor, recarregue a página.</a></h5>";
-                    break;
-                case e.POSITION_UNAVAILABLE:
-                    a.innerHTML = "<h5>Informações sobre o local não estão disponíveis.<br /><br /><a href='/Inicio/Index'>Por favor, recarregue a página.</a></h5>";
-                    break;
-                case e.TIMEOUT:
-                    a.innerHTML = "<h5>A solicitação para obter a localização do usuário expirou.<br /><br /><a href='/Inicio/Index'>Por favor, recarregue a página.</a></h5>";
-                    break;
-                case e.UNKNOWN_ERROR:
-                    a.innerHTML = "<h5>Ocorreu um erro desconhecido.<br /><br /><a href='/Inicio/Index'>Por favor, recarregue a página.</a></h5>";
-                    break;
-            }
+            //var a = document.getElementById("mapa");
+
+            //switch (e.code) {
+            //    case e.PERMISSION_DENIED:
+            //        a.innerHTML = "<h5>O Usuário negou o pedido de localização geográfica.<br /><br /><a href='/Inicio/Index'>Por favor, recarregue a página.</a></h5>";
+            //        break;
+            //    case e.POSITION_UNAVAILABLE:
+            //        a.innerHTML = "<h5>Informações sobre o local não estão disponíveis.<br /><br /><a href='/Inicio/Index'>Por favor, recarregue a página.</a></h5>";
+            //        break;
+            //    case e.TIMEOUT:
+            //        a.innerHTML = "<h5>A solicitação para obter a localização do usuário expirou.<br /><br /><a href='/Inicio/Index'>Por favor, recarregue a página.</a></h5>";
+            //        break;
+            //    case e.UNKNOWN_ERROR:
+            //        a.innerHTML = "<h5>Ocorreu um erro desconhecido.<br /><br /><a href='/Inicio/Index'>Por favor, recarregue a página.</a></h5>";
+            //        break;
+            //}
+
+            endereco();
 		}		
     };
 
     return m;
+}
+
+function endereco() {
+    var m = new google.maps.Map(document.getElementById('mapa'), {
+        mapTypeControl: false,
+        streetViewControl: false,
+        rotateControl: true,
+        zoom: 14,
+        scrollwheel: false,
+        clickableIcons: true,
+        disableDefaultUI: false,
+        disableDoubleClickZoom: true,
+        draggable: true,
+        fullscreenControl: false,
+        keyboardShortcuts: false,
+        maxZoom: 16,
+        minZoom: 12,
+        streetViewControl: false,
+        scaleControl: false,
+        mapTypeControl: false,
+        //zoomControl: false,
+        styles: [{ "stylers": [{ "hue": "#007bff" }, { "saturation": 250 }] }, { "featureType": "road", "elementType": "geometry", "stylers": [{ "lightness": 50 }, { "visibility": "simplified" }] }, { "featureType": "road", "elementType": "labels", "stylers": [{ "visibility": "off" }] }],
+        zoomControlOptions: { style: google.maps.ZoomControlStyle.LARGE },
+        center: { lat: 90, lng: 180 }
+    });
+
+    var e = "Rua Galvão Bueno, 868 - Liberdade - São Paulo, SP - 01506-000";
+    var g = new google.maps.Geocoder();
+
+    g.geocode({ 'address': e }, function (r, s) {
+        if (s == google.maps.GeocoderStatus.OK) {
+            m.setCenter(r[0].geometry.location);
+
+            var marca = new google.maps.Marker({
+                position: r[0].geometry.location,
+                map: m
+            });
+
+            var infowindow = new google.maps.InfoWindow({
+                content: "Você"
+            });
+
+            infowindow.open(marca.get('map'), marca);
+        }
+        else {
+            var a = document.getElementById("mapa");
+            a.innerHTML = "<h5 class='text-center'>Houve um erro ao carregar o mapa. Por favor, recarregue a página.</h5>";
+        }
+    });
 }

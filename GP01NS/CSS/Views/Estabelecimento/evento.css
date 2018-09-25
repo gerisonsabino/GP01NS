@@ -79,3 +79,13 @@ input[type="file"]::before {
     width: 49.5%;
 }
 
+@media (min-width: 768px) .col-md-7 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.col-12, .col-lg-9, .col-md-9 {
+    padding-left: 0;
+    padding-right: 0;
+}

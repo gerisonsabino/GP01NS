@@ -13,7 +13,7 @@
 }
 
 .buscador .buscador-input {
-	width: calc(100% - 195px);
+	width: calc(100% - 95px);
 	height: 45px;
 	border: 0;
 	font-size: 18px;
@@ -54,11 +54,7 @@
     overflow: auto;
 }
 
-.buscador form {
-    width: 100%;
-}
-
-.buscador form .select2 {
+.buscador .select2 {
     display: block !important;
     width: 100% !important;
 }
@@ -156,8 +152,20 @@
 	bottom: 20px;
 }
 
+.buscador-load {
+    height: 50px;
+    border-top: 1px solid #f5f5f5;
+    display: none;
+}
+
+.buscador-load .quadrado {
+    top: 25% !important;
+}
+
 .resultado {
-	width: 100%;
+    width: 100%;
+    max-height: 340px;
+    overflow: auto;
 }
 
 .resultado-item {

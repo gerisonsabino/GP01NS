@@ -109,7 +109,7 @@ namespace GP01NS.Classes.ViewModels
             {
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
-                    return "https://gerisonsabino.azurewebsites.net" + db.usuario.First(x => x.ID == this.ID).imagem.Last(x => x.TipoImagem == 2).Diretorio;
+                    return "http://nossoshow.gerison.net" + db.usuario.First(x => x.ID == this.ID).imagem.Last(x => x.TipoImagem == 2).Diretorio;
                 }
             }
             catch { return "/Imagens/Views/Estabelecimento/bg-estabelecimento.jpg"; }

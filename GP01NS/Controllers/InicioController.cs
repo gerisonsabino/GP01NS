@@ -36,6 +36,21 @@ namespace GP01NS.Controllers
             return View();
         }
 
+        [HttpPost]
+        public string Pesquisar(string q, string e, string g, string a, string h)
+        {
+            if (!string.IsNullOrEmpty(q))
+            {
+                try
+                {
+                    return Pesquisa.Pesquisar(Server.UrlDecode(q), Server.UrlDecode(e), Server.UrlDecode(g), Server.UrlDecode(a), Server.UrlDecode(h));
+                }
+                catch { }
+            }
+
+            return string.Empty;
+        }
+
         [HttpGet]
         public ActionResult Resultados(string q, string e, string g, string a, string h)
         {
