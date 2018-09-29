@@ -164,3 +164,9 @@ function endereco() {
         }
     });
 }
+
+function toggleFiltro() {
+	$('.campo-generos').toggle($('#tipo-evento').prop('checked') || $('#tipo-musico').prop('checked'));
+	$('.campo-ambientacao').toggle($('#tipo-estabelecimento').prop('checked'));
+	$('.campo-habilidades').toggle($('#tipo-musico').prop('checked'));
+}
