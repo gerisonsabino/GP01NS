@@ -46,7 +46,17 @@ namespace GP01NS.Controllers
             return View(cadastro);
         }
 
-		[HttpPost]
+        public ActionResult Agenda()
+        {
+            return View();
+        }
+
+        public ActionResult Convites()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult Conta(ContaVM model)
         {
             this.Musico = new MusicoVM(this.BaseUsuario);

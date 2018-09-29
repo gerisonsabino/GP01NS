@@ -3314,6 +3314,15 @@
   <ItemGroup>
     <Content Include="Views\Layout\Parciais\Load\Load.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Estabelecimento\Parciais\Evento\Atracoes.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Musico\Agenda.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Musico\Convites.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
