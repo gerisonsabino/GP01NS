@@ -2,18 +2,7 @@
 
 @{
     ViewBag.Title = "Início";
-    var Generos = (List<GP01NS.Models.genero_musical>)ViewBag.Generos;
-    var TipoHabilidades = (List<GP01NS.Models.hab_musical_tipo>)ViewBag.TipoHabilidades;
-    var Habilidades = (List<GP01NS.Models.hab_musical>)ViewBag.Habilidades;
-    var Ambientacoes = (List<GP01NS.Models.ambientacao>)ViewBag.Ambientacoes;
 }
-
-<style>
-    main, .container-fluid {
-        margin: 0px !important;
-        padding: 0px !important;
-    }
-</style>
 
 <link href="~/CSS/Views/mapa.css" rel="stylesheet" />
 <link href="~/Scripts/Plugins/customrange-plugin/html-input-range.css" rel="stylesheet" />
@@ -21,7 +10,7 @@
 <div class="container-fluid fill relative">
     <div class="buscador absolute col-12">
         <div class="buscador-caixa flex col-sm-12 col-lg-8 no-padding mx-auto">
-            <input class="buscador-input" name="q" type="text" placeholder="Busque por nomes, nomes de usuário, endereço ou CEP" required="">
+            <input class="buscador-input" name="q" type="text" placeholder="Busque por eventos, músicos, estabelecimentos, endereço ou CEP" required="">
             <button class="buscador-botao" onclick="$('.buscador .buscador-botao, .buscador .buscador-filtro').toggleClass('aberto');" type="button"></button>
             <button class="btn btn-primary" type="submit" id="btn-pesquisar" style="width: 50px;">
                 <span class="fa fa-search"></span>
@@ -51,46 +40,23 @@
                     </div>
                 </div>
                 <div class="campo-generos mt-3 no-padding row col-12">
-                    <strong for="Generos">Genêros músicais (Evento/Músico)</strong>
+                    <strong for="Generos">Genêros músicais</strong>
                     <div class="col-12 no-padding checkbox-grupo container-fluid">
-						<select id="Generos" class="select-custom form-control" placeholder="Selecione os genêros músicais" multiple>
-							@for (int i = 0; i < Generos.Count; i++)
-							{
-								<option value="@Generos[i].ID">@Generos[i].Descricao</option>
-							}
-						</select>
+						<select id="Generos" class="select-custom form-control" placeholder="Selecione os genêros músicais" multiple></select>
                         @Html.Hidden("g", "")
                     </div>
                 </div>
                 <div class="campo-ambientacao mt-3 no-padding row col-12">
-                    <strong for="Habilidades">Ambientação (Estabelecimento)</strong>
+                    <strong for="Habilidades">Ambientação</strong>
                     <div class="col-12 no-padding checkbox-grupo flex">
-						<select id="Ambientacoes" class="select-custom form-control" placeholder="Selecione as ambientações" multiple>
-							@for (int i = 0; i < Ambientacoes.Count; i++)
-							{
-								<option value="@Ambientacoes[i].ID">@Ambientacoes[i].Descricao</option>
-							}
-						</select>
+						<select id="Ambientacoes" class="select-custom form-control" placeholder="Selecione as ambientações" multiple></select>
                         @Html.Hidden("a", "")
                     </div>
                 </div>
                 <div class="campo-habilidades mt-3 no-padding row col-12">
-                    <strong for="Habilidades">Habilidades (Músico)</strong>
+                    <strong for="Habilidades">Habilidades</strong>
                     <div class="col-12 no-padding checkbox-grupo flex">
-						<select id="Habilidades" class="select-custom form-control" placeholder="Selecione as habilidades" multiple>
-							@for (int i = 0; i < TipoHabilidades.Count; i++)
-							{
-								var tipo = TipoHabilidades[i];
-								var habs = Habilidades.Where(x => x.TipoHab == tipo.ID).ToList();
-
-								<optgroup label="@TipoHabilidades[i].Descricao">
-									@for (int j = 0; j < habs.Count; j++)
-									{
-										<option value="@habs[j].ID">@habs[j].Descricao</option>
-									}
-								</optgroup>
-							}
-						</select>
+						<select id="Habilidades" class="select-custom form-control" placeholder="Selecione as habilidades" multiple></select>
                         @Html.Hidden("h", "")
                     </div>
                 </div>
@@ -116,7 +82,7 @@
         </div>
     </div>
 
-    <div id="mapa" style="min-height: calc(100vh - 55px);"></div>
+    <div id="mapa" style="min-height: calc(100vh - 65px);"></div>
 
     <div class="sugestao card col-10 mx-auto mb-5 no-padding">
         <div class="sugestao-menu flex space-between">
@@ -221,6 +187,6 @@
 </div>
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQOVgr1EKPU6Ygpb23qkWw4NqSUsFuEWY"></script>
-<script src="~/Scripts/Plugins/customrange-plugin/html-input-range.js"></script>
 <script src="~/Scripts/mapa.js"></script>
 <script src="~/Scripts/Views/Inicio/index.js"></script>
+<script src="~/Scripts/Plugins/customrange-plugin/html-input-range.js"></script>

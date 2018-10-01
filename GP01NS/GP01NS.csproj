@@ -1759,6 +1759,8 @@
     <Content Include="Imagens\Views\estrela-azul.svg" />
     <Content Include="Imagens\Views\estrela-cinza .svg" />
     <Content Include="Imagens\Views\image.png" />
+    <Content Include="Imagens\Views\logo-marca.svg" />
+    <Content Include="Imagens\Views\logo.svg" />
     <Content Include="Imagens\Views\menu-black.svg" />
     <Content Include="Imagens\Views\menu.svg" />
     <Content Include="Imagens\Views\Musico\deezer.png" />
@@ -3322,6 +3324,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Musico\Convites.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CSS\Fonts\LemonMilk.otf" />
+    <Content Include="CSS\Fonts\LemonMilkbold.otf" />
+    <Content Include="CSS\Fonts\LemonMilkbolditalic.otf" />
+    <Content Include="CSS\Fonts\LemonMilkitalic.otf" />
+    <Content Include="CSS\Fonts\LemonMilklight.otf" />
+    <Content Include="CSS\Fonts\LemonMilklightitalic.otf" />
+    <Content Include="CSS\Fonts\tt0855m_.ttf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

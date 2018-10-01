@@ -1,4 +1,10 @@
-﻿function fieldsRequest() {
+﻿$(function () {
+    $("header > div.logo").click(function () {
+        location.href = "/inicio/";
+    });
+});
+
+function fieldsRequest() {
 	$('[required]').each(function () {
 		const textError = $(this).attr('placeholder') || 'Preencha esse campo';
         $(this).after("<div class='invalid-feedback'>Este campo é obrigatório</div>");

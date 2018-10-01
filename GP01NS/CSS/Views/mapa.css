@@ -1,3 +1,8 @@
+main, .container-fluid {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
 /*BUSCADOR*/
 .buscador {
 	z-index: 5;
@@ -182,9 +187,6 @@
 	width: 70px;
 	height: 70px;
 	background: center center / cover no-repeat;
-}
-
-.resultado-item-texto {
 }
 
 .resultado-item-nome {

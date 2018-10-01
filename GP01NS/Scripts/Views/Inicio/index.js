@@ -1,53 +1,5 @@
 ﻿$(function () {
-    $("#btn-pesquisar").click(function () {
-
-        if ($("[name='q']").val() == "") {
-            $("[name='q']").focus();
-            return;
-        }
-
-        var e = new Array();
-
-        $(".custom-checkbox[data-checked='true']").each(function () {
-            e.push(parseInt($(this).val()));
-        });
-
-        $("#e").val(JSON.stringify(e));
-
-        pesquisar();
-    });
-
-    $("[name='q']").on("keydown", function (e) {
-        $("#resultset").html("");
-
-        if (e.keyCode == 13 && $(this).val() != "") {
-            $("#btn-pesquisar").click();
-        }
-    });
-
-    $(".custom-checkbox").click(function () {
-        if ($(this).attr("data-checked") == "true") {
-            $(this).attr("data-checked", "false");
-        }
-        else {
-            $(this).attr("data-checked", "true");
-        }
-    });
-
-    $('#Ambientacoes').val(eval($("#a").val())).trigger('change');
-    $('#Ambientacoes').change(function () {
-        $("#a").val("[" + $('#Ambientacoes').val() + "]");
-    });
-
-    $('#Generos').val(eval($("#g").val())).trigger('change');
-    $('#Generos').change(function () {
-        $("#g").val("[" + $('#Generos').val() + "]");
-    });
-
-    $('#Habilidades').val(eval($("#h").val())).trigger('change');
-    $('#Habilidades').change(function () {
-        $("#h").val("[" + $('#Habilidades').val() + "]");
-    });
+    getGeneros();
 });
 
 function pesquisar() {
@@ -149,6 +101,120 @@ function pesquisar() {
         $(".buscador-load").hide();
     });
 }
+
+function getGeneros() {
+    $.post("/inicio/getgeneros/", function (s) {
+        var Generos = eval(s);
+        var html = "";
+
+        for (var i = 0; i < Generos.length; i++) {
+            html += "<option value='" + Generos[i].ID + "'>" + Generos[i].Descricao + "</option>";
+        }
+
+        $("#Generos").html(html);
+
+        getAmbientacoes();
+    });
+}
+
+function getAmbientacoes() {
+    $.post("/inicio/getambientacoes/", function (s) {
+        var Ambientacoes = JSON.parse(s);
+        var html = "";
+
+        for (var i = 0; i < Ambientacoes.length; i++) {
+            html += "<option value='" + Ambientacoes[i].ID + "'>" + Ambientacoes[i].Descricao + "</option>";
+        }
+
+        $("#Ambientacoes").html(html);
+
+        getHabilidades();
+    });
+}
+
+function getHabilidades() {
+    var Tipos = "";
+    var Habis = "";
+
+    $.post("/inicio/gettipohabilidades/" , function (s) {
+        Tipos = JSON.parse(s);
+        $.post("/inicio/gethabilidades/", function (_s) {
+            Habis = JSON.parse(_s);
+            var html = "";
+
+            for (var i = 0; i < Tipos.length; i++)
+            {
+                var tipo = Tipos[i];
+                html += "<optgroup label='" + tipo.Descricao + "'>";
+
+                for (var j = 0; j < Habis.length; j++) {
+                    if (Habis[j].TipoHab == tipo.ID) {
+                        html += "<option value='" + Habis[j].ID + "'>" + Habis[j].Descricao + "</option>";
+
+                    }
+                }
+                html += "</optgroup>";
+            }
+
+            $("#Habilidades").html(html);
+
+            init();
+        });
+    });
+}
+
+function init() {
+    $("#btn-pesquisar").click(function () {
+
+        if ($("[name='q']").val() == "") {
+            $("[name='q']").focus();
+            return;
+        }
+
+        var e = new Array();
+
+        $(".custom-checkbox[data-checked='true']").each(function () {
+            e.push(parseInt($(this).val()));
+        });
+
+        $("#e").val(JSON.stringify(e));
+
+        pesquisar();
+    });
+
+    $("[name='q']").on("keydown", function (e) {
+        $("#resultset").html("");
+
+        if (e.keyCode == 13 && $(this).val() != "") {
+            $("#btn-pesquisar").click();
+        }
+    });
+
+    $(".custom-checkbox").click(function () {
+        if ($(this).attr("data-checked") == "true") {
+            $(this).attr("data-checked", "false");
+        }
+        else {
+            $(this).attr("data-checked", "true");
+        }
+    });
+
+    $('#Ambientacoes').val(eval($("#a").val())).trigger('change');
+    $('#Ambientacoes').change(function () {
+        $("#a").val("[" + $('#Ambientacoes').val() + "]");
+    });
+
+    $('#Generos').val(eval($("#g").val())).trigger('change');
+    $('#Generos').change(function () {
+        $("#g").val("[" + $('#Generos').val() + "]");
+    });
+
+    $('#Habilidades').val(eval($("#h").val())).trigger('change');
+    $('#Habilidades').change(function () {
+        $("#h").val("[" + $('#Habilidades').val() + "]");
+    });
+}
+
 
 function toggleFiltro() {
     $('.campo-generos').toggle($('#tipo-evento').prop('checked') || $('#tipo-musico').prop('checked'));

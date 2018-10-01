@@ -82,7 +82,7 @@ function convidar(btn) {
 }
 
 function getAtracoes() {
-
+    $("#lista-load").show();
     $(".usuario-lista").html("");
 
     $.post("/estabelecimento/getatracoes/", { "id": $("#ID").val() }, function (s) {
@@ -97,7 +97,15 @@ function getAtracoes() {
                 html += "           <label>@" + json[i].Username + "</label>";
                 html += "        </div > ";
                 html += "    <div class='usuario-botao text-right'>";
-                html += "        <button type='button' class='btn btn-light btn-sm' data-id='" + json[i].ID + "' onclick='convidar(this);'>Cancelar convite</button>";
+                if (!json[i].Recusado && !json[i].Confirmado) {
+                    html += "        <button type='button' class='btn btn-light btn-sm' data-id='" + json[i].ID + "' onclick='convidar(this);'>Cancelar convite</button>";
+                }
+                else if (json[i].Recusado) {
+                    html += "        <button type='button' class='btn btn-danger btn-sm'>Convite Recusado</button>";
+                }
+                else if (json[i].Confirmado) {
+                    html += "        <button type='button' class='btn btn-success btn-sm' data-id='" + json[i].ID + "' onclick='convidar(this);'>Excluir atração</button>";
+                }
                 html += "    </div>";
                 html += "</div>";
             }
@@ -108,6 +116,7 @@ function getAtracoes() {
             html += "</div>";
         }
 
+        $("#lista-load").hide();
         $(".usuario-lista").html(html);
     });
 }

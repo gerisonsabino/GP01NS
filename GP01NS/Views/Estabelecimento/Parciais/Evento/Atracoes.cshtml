@@ -26,20 +26,7 @@
 </div>
 <br />
 <h5 class="text-uppercase">Atrações convidadas</h5>
-<div class="usuario-lista col-12 mb-4">
-    <div class="usuario-item mb-3 flex">
-        <div class="usuario-foto" style="background-image: url(https://randomuser.me/api/portraits/men/12.jpg)"></div>
-        <div class="usuario-nome">Harold King</div>
-        <div class="usuario-botao text-right">
-            <button type="button" class="btn btn-success btn-sm">Enviar convite</button>
-        </div>
-    </div>
-
-    <div class="usuario-item mb-3 flex">
-        <div class="usuario-foto" style="background-image: url(https://randomuser.me/api/portraits/women/79.jpg)"></div>
-        <div class="usuario-nome">Priscilla Graham</div>
-        <div class="usuario-botao text-right">
-            <button type="button" class="btn btn-light btn-sm">Cancelar convite</button>
-        </div>
-    </div>
+<div id="lista-load">
+    @RenderPage("~/Views/Layout/Parciais/Load/Load.cshtml")
 </div>
+<div class="usuario-lista col-12 mb-4"></div>
