@@ -1,5 +1,6 @@
 /*GERAL*/
 :root {
+	--primaria: #6904b7;
 	--branco: #FFF;
 	--cinza: #C4CFDA;
 	--cinza-escuro: #212121;
@@ -20,8 +21,8 @@ html {
 header,
 footer {
 	width: 100%;
-	background: var(--azul);
-	min-height: 40px;
+	background: var(--primaria);
+	min-height: 65px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -70,6 +71,22 @@ footer {
 	margin: 0 !important;
 }
 
+@font-face {
+	font-family: 'humnst';
+	src: url(/CSS/Fonts/tt0855m_.ttf);
+}
+
+@font-face {
+	font-family: 'lemon-milk';
+	src: url(/CSS/Fonts/LemonMilk.otf);
+}
+
+@font-face {
+	font-family: 'lemon-milk';
+	src: url(/CSS/Fonts/LemonMilkbold.otf);
+	font-weight: bold;
+}
+
 /*CHECKBOX*/
 .custom-checkbox {
 	position: absolute;
@@ -105,16 +122,16 @@ header .navbar {
 	justify-content: flex-end;
 }
 
-header .navbar .nav-link,
 footer a {
     color: #FFF;
     font-weight: 600;
 }
 
 header .logo {
-	width: 70px;
+	width: 105px;
 	height: 40px;
-	background: url(../../Imagens/Views/nosso-show.svg) left center / 70px no-repeat;
+	background: url(../../Imagens/Views/logo-marca.svg) left center / 103px no-repeat;
+	margin-top: 5px;
 }
 
 .dropdown-submenu {
@@ -138,19 +155,59 @@ header .logo {
     font-weight: 600 !important;
 }
 
-.navbar .nav-item {
-	margin-left: 15px;
+.navbar .nav-item {	
+	color: var(--primaria);
+}
+
+.navbar .nav-item:not(:last-child) {
+	margin-bottom: 20px;
+}
+
+.navbar .nav-item ul {
+	padding: 0;
+}
+
+.navbar .nav-item h1 {
+	font-family: 'lemon-milk', sans-serif;
+	font-weight: bold;
+	font-size: 13px;
+	letter-spacing: 1.5px;
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
-	border-radius: 5px;
-	padding: .5rem 1rem;
-	display: flex;
-	align-items: center;
+	padding: 0;
+	font-family: 'humnst', sans-serif;
+	color: var(--primaria);
+	font-size: 13px;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link:hover {
+	text-decoration: underline;
 }
 
 .navbar-expand-lg .navbar-nav .nav-item:hover .nav-link {
-	background-color: #006de2;
+	background-color: transparent;
+}
+
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+	padding: 30px 20px;
+	min-width: 210px;
+	box-shadow: 0 0 30px rgba(0, 0, 0, .3);
+	border: none;
+	margin-top: 25px;
+	position: absolute;
+}
+
+.navbar-expand-lg .navbar-nav .dropdown-menu:before {
+	width: 0;
+	height: 0;
+	box-sizing: content-box;
+	border: 5px solid transparent;
+	border-bottom-color: #FFF;
+	content: '';
+	position: absolute;
+	top: -10px;
+	right: 12px;
 }
 
 .dropdown-submenu .dropdown-menu.dropdown-menu-right {
@@ -158,19 +215,23 @@ header .logo {
 	left: auto;
 }
 
-button.navbar-toggler {
-	border: 1px solid #FFF;
+.caixa-menu,
+.caixa-menu:hover,
+.caixa-menu:active{
 	padding: 0;
 	width: 36px;
 	height: 35px;
 	display: flex;
 	align-items: center;
 	text-align: center;
+	background: transparent;
+	border: none;
+	outline: none;
 }
 
-button.navbar-toggler img {
+.caixa-menu img {
 	margin: auto;
-	width: 16px;
+	width: 19px;
 }
 
 .menu_fixo {
@@ -178,6 +239,10 @@ button.navbar-toggler img {
     z-index: 100;
     position: fixed;
     width: 100%;
+}
+
+.navbar-expand-lg .navbar-toggler {
+	display: block;
 }
 
 /*FOOTER*/
