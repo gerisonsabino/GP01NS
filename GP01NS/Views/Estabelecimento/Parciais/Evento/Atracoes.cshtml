@@ -9,20 +9,23 @@
             <div class="buscador">
                 <div class="buscador-caixa">
                     <input class="buscador-input" name="q" type="text" placeholder="Pesquisar Músicos" required="">
-                    <button class="btn btn-primary" type="submit" id="btn-pesquisar" style="width: 50px;">
+                    <button class="btn btn-primary" type="button" id="btn-pesquisar" style="width: 50px; height: 50px;">
                         <span class="fa fa-search"></span>
                     </button>
                     <div class="resultado buscador-load" id="div-load">
                         @RenderPage("~/Views/Layout/Parciais/Load/Load.cshtml")
                     </div>
-                    <div class="resultado" id="resultset"></div>
+                    <div class="resultado" id="resultset">
+
+                    </div>
                 </div>
             </div>
             @Html.Hidden("Musicos", Model.GetMusicos())
-
         </div>
     </form>
 </div>
+<br />
+<h5 class="text-uppercase">Atrações convidadas</h5>
 <div class="usuario-lista col-12 mb-4">
     <div class="usuario-item mb-3 flex">
         <div class="usuario-foto" style="background-image: url(https://randomuser.me/api/portraits/men/12.jpg)"></div>

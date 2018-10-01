@@ -106,6 +106,72 @@ namespace GP01NS.Controllers
         }
 
         [HttpPost]
+        public string PesquisarMusicos(string id, string q)
+        {
+            this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
+
+            var evento = new EventoVM();
+
+            int idEvento = int.MinValue;
+            int.TryParse(id, out idEvento);
+
+            if (idEvento > 0)
+            {
+                var e = this.Estabelecimento.GetEventoByID(idEvento);
+
+                if (e != null)
+                    evento = new EventoVM(e);
+            }
+
+            return evento.PesquisarMusicos(q);
+        }
+
+        [HttpPost]
+        public string GetAtracoes(string id)
+        {
+            this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
+
+            var evento = new EventoVM();
+
+            int idEvento = int.MinValue;
+            int.TryParse(id, out idEvento);
+
+            if (idEvento > 0)
+            {
+                var e = this.Estabelecimento.GetEventoByID(idEvento);
+
+                if (e != null)
+                    evento = new EventoVM(e);
+            }
+
+            return evento.GetMusicos();
+        }
+
+        [HttpPost]
+        public void ConviteMusico(string idE, string idM)
+        {
+            this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
+
+            var evento = new EventoVM();
+
+            int idMusico = int.MinValue;
+            int.TryParse(idM, out idMusico);
+
+            int idEvento = int.MinValue;
+            int.TryParse(idE, out idEvento);
+
+            if (idEvento > 0)
+            {
+                var e = this.Estabelecimento.GetEventoByID(idEvento);
+
+                if (e != null)
+                    evento = new EventoVM(e);
+
+                evento.Atracao(idMusico);
+            }
+        }
+
+        [HttpPost]
         public ActionResult Evento(EventoVM model)
         {
             this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);

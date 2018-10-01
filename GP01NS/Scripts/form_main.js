@@ -6,6 +6,7 @@ $(document).ready(function () {
     $(".linkEsqueceu").click(limparCampos);
 
     /* Criação das Máscaras */
+    $(".cpf-mask").inputmask({ 'mask': '999.999.999-99' });
     $(".cpf").inputmask({ 'mask': '999.999.999-99' });
     $(".cnpj").inputmask({ 'mask': '99.999.999/9999-99' });
     $(".data").inputmask({ alias: "datetime", inputFormat: "dd/mm/yyyy", placeholder: "__/__/____" });

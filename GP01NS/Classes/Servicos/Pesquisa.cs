@@ -38,7 +38,6 @@ namespace GP01NS.Classes.Servicos
             return JsonConvert.SerializeObject(r);
         }
 
-
         private static List<Resultado> Estabelecimentos(string termo, List<int> ambientacoes, bool endereco)
         {
             var resultados = new List<Resultado>();

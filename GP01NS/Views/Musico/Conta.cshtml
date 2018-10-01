@@ -55,11 +55,11 @@
                             <label for="CPF">CPF</label>
                             @if (!string.IsNullOrEmpty(Model.CPF))
                             {
-                                @Html.TextBoxFor(x => x.CPF, new { @class = "form-control cpf", placeholder = "CPF", required = "required", @readonly = "readonly" })
+                                @Html.TextBoxFor(x => x.CPF, new { @class = "form-control cpf-mask", placeholder = "CPF", required = "required", @readonly = "readonly" })
                             }
                             else
                             {
-                                @Html.TextBoxFor(x => x.CPF, new { @class = "form-control cpf", placeholder = "CPF", required = "required" })
+                                @Html.TextBoxFor(x => x.CPF, new { @class = "form-control cpf-mask", placeholder = "CPF", required = "required" })
                             }
                         </div>
                         <div class="form-group col">

@@ -24,7 +24,7 @@ namespace GP01NS.Classes.ViewModels
 
         public EstabelecimentoVM Estabelecimento;
 
-        public EventoVM() 
+        public EventoVM()
         {
             this.DataAte = DateTime.MinValue;
             this.DataDe = DateTime.MinValue;
@@ -139,6 +139,91 @@ namespace GP01NS.Classes.ViewModels
             catch { }
 
             return string.Empty;
+        }
+
+        public string PesquisarMusicos(string termo)
+        {
+            var resultados = new List<Atracao>();
+
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var musicos = db.usuario_musico.Where(x =>
+                        (!string.IsNullOrEmpty(termo) ? x.NomeArtistico.ToLower().Contains(termo.ToLower()) ||
+                        x.usuario.Username.ToLower() == termo.Replace("@", string.Empty).ToLower() : false)
+                    ).ToList();
+
+                    musicos = musicos.Where(x =>
+                        !x.evento_musico.Any(y => y.IDEvento == this.ID)
+                    ).ToList();
+
+                    for (int i = 0; i < musicos.Count; i++)
+                    {
+                        var usuario_musico = musicos[i];
+
+                        Atracao a = new Atracao
+                        {
+                            ID = usuario_musico.IDUsuario,
+                            Nome = usuario_musico.NomeArtistico,
+                            Username = usuario_musico.usuario.Username,
+                        };
+
+                        try
+                        {
+                            a.Imagem = usuario_musico.usuario.imagem.Last(x => x.TipoImagem == 1).Diretorio;
+                        }
+                        catch
+                        {
+                            a.Imagem = "/Imagens/Views/user.svg";
+                        }
+
+                        resultados.Add(a);
+                    }
+                }
+            }
+            catch { }
+
+            return JsonConvert.SerializeObject(resultados);
+        }
+
+        public bool Atracao(int idMusico)
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var musico = db.usuario_musico.Single(x => x.IDUsuario == idMusico);
+                    var evento = db.evento.Single(x => x.ID == this.ID);
+
+                    if (evento.evento_musico.Any(x => x.IDMusico == musico.IDUsuario))
+                    {
+                        var e = evento.evento_musico.Single(x => x.IDMusico == musico.IDUsuario);
+
+                        evento.evento_musico.Remove(e);
+                    }
+                    else
+                    {
+                        var e = new evento_musico
+                        {
+                            evento = evento,
+                            usuario_musico = musico,
+                            Confirmado = false,
+                            Data = DateTime.Now,
+                            Recusado = false
+                        };
+
+                        db.evento_musico.AddObject(e);
+                    }
+
+                    db.SaveChanges();
+
+                    return true;
+                }
+            }
+            catch { }
+
+            return false;
         }
 
         public bool SaveChanges(EstabelecimentoVM estabelecimento) 

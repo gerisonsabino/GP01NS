@@ -30,7 +30,7 @@ function Mapa() {
                     scaleControl: false,
                     mapTypeControl: false,
                     //zoomControl: false,
-                    styles: [{ "stylers": [{ "hue": "#007bff" }, { "saturation": 250 } ] }, { "featureType": "road", "elementType": "geometry", "stylers": [ { "lightness": 50 }, { "visibility": "simplified" } ] }, { "featureType": "road", "elementType": "labels", "stylers": [ { "visibility": "off" }]}],
+                    //styles: [{ "stylers": [{ "hue": "#B01B8B" }, { "saturation": 250 } ] }, { "featureType": "road", "elementType": "geometry", "stylers": [ { "lightness": 50 }, { "visibility": "simplified" } ] }, { "featureType": "road", "elementType": "labels", "stylers": [ { "visibility": "off" }]}],
                     zoomControlOptions: { style: google.maps.ZoomControlStyle.LARGE },
                     center: { lat: this.coordenadas.latitude, lng: this.coordenadas.longitude }
                 });
@@ -135,7 +135,7 @@ function endereco() {
         scaleControl: false,
         mapTypeControl: false,
         //zoomControl: false,
-        styles: [{ "stylers": [{ "hue": "#007bff" }, { "saturation": 250 }] }, { "featureType": "road", "elementType": "geometry", "stylers": [{ "lightness": 50 }, { "visibility": "simplified" }] }, { "featureType": "road", "elementType": "labels", "stylers": [{ "visibility": "off" }] }],
+        //styles: [{ "stylers": [{ "hue": "#B01B8B" }, { "saturation": 250 }] }, { "featureType": "road", "elementType": "geometry", "stylers": [{ "lightness": 50 }, { "visibility": "simplified" }] }, { "featureType": "road", "elementType": "labels", "stylers": [{ "visibility": "off" }] }],
         zoomControlOptions: { style: google.maps.ZoomControlStyle.LARGE },
         center: { lat: 90, lng: 180 }
     });
@@ -163,10 +163,4 @@ function endereco() {
             a.innerHTML = "<h5 class='text-center'>Houve um erro ao carregar o mapa. Por favor, recarregue a página.</h5>";
         }
     });
-}
-
-function toggleFiltro() {
-	$('.campo-generos').toggle($('#tipo-evento').prop('checked') || $('#tipo-musico').prop('checked'));
-	$('.campo-ambientacao').toggle($('#tipo-estabelecimento').prop('checked'));
-	$('.campo-habilidades').toggle($('#tipo-musico').prop('checked'));
 }

@@ -39,13 +39,13 @@
                 <div class="tipo-busca no-padding row col-12">
                     <strong for="tipo">Buscar por: </strong>
                     <div class="col-12 no-padding checkbox-grupo flex">
-                        <input type="checkbox" value="3" class="custom-checkbox" id="tipo-evento" onchange="toggleFiltro()" checked/>
+                        <input type="checkbox" value="3" class="custom-checkbox" id="tipo-evento" onchange="toggleFiltro()" data-checked="true" checked="checked" />
                         <label for="tipo-evento">Evento</label>
-                        <input type="checkbox" value="4" class="custom-checkbox" id="tipo-musico" onchange="toggleFiltro()" checked/>
+                        <input type="checkbox" value="4" class="custom-checkbox" id="tipo-musico" onchange="toggleFiltro()" data-checked="true" checked="checked" />
                         <label for="tipo-musico">Músico</label>
-                        <input type="checkbox" value="2" class="custom-checkbox" id="tipo-estabelecimento" onchange="toggleFiltro()" checked/>
+                        <input type="checkbox" value="2" class="custom-checkbox" id="tipo-estabelecimento" onchange="toggleFiltro()" data-checked="true" checked="checked" />
                         <label for="tipo-estabelecimento">Estabelecimento</label>
-                        <input type="checkbox" value="1" class="custom-checkbox" id="tipo-endereco" onchange="toggleFiltro()" checked/>
+                        <input type="checkbox" value="1" class="custom-checkbox" id="tipo-endereco" onchange="toggleFiltro()" data-checked="true" checked="checked" />
                         <label for="tipo-endereco">Endereço</label>
                         @Html.Hidden("e", "")
                     </div>
