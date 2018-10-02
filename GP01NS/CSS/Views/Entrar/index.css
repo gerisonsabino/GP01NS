@@ -1,78 +1,160 @@
-body,
-html {
-    height: 100%
-}
-
-.container-fluid {
-    height: 100%;
-}
-
-.row {
-    height: 100%;
-    /*background: linear-gradient(to bottom, #0099cc 0%, #000066 100%)*/
-}
-
-.btn {
-    padding: 0.7em 4em;
-    margin-top: 3em;
-}
-
-.form {
-    margin-top: 13%;
-}
-
-.conta {
-    margin-top: 2em;
-}
-
-h5 {
-    margin-bottom: 3em;
-}
-
-.img {
-    background-image: url('../../../Imagens/Views/entrar/index.png');
+body {
+    background: url('../../../Imagens/Views/Entrar/back_login.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
     background-size: cover;
-    background-position: center;
-    width: 100%;
+    -o-background-size: cover;
 }
 
-.input-campo {
-    position: relative;
+img {
+    margin-bottom: 60px;
+    margin-top: 0px;
+    width: 170px;
 }
 
-.form-control {
-    padding: 0.375rem 0.75rem 0.375rem 2.5rem;
+.separador {
+    background: #6904b7;
+    border-radius: 50px;
+    width: 40px;
+    height: 6px;
+    margin: 0 auto;
+    margin-top: 14px;
+    margin-bottom: 40px
 }
 
-.oi {
-    position: absolute;
-    top: 12px;
-    left: 14px;
+p {
+    color: #88939a;
+    margin-bottom: 40px;
 }
 
-/* Medium devices (tablets, 768px and up)*/
-@media (max-width: 768px) {
-    .img {
-        display: none;
+form {
+    background: #fff;
+    -webkit-box-shadow: -1px 9px 48px -6px rgba(0,0,0,0.39);
+    -moz-box-shadow: -1px 9px 48px -6px rgba(0,0,0,0.39);
+    box-shadow: -1px 9px 48px -6px rgba(0,0,0,0.20);
+    border-radius: 13px;
+    padding-top: 80px;
+    padding-bottom: 20px;
+    padding-left: 35px;
+    padding-right: 35px;
+    margin-top: -40px;
+    min-width: 300px;
+}
+
+input {
+    border-radius: 100px !important;
+    text-align: center;
+    height: 45px !important;
+}
+
+    input:focus {
+        background-color: #ffffff !important;
+        color: #666 !important;
+        border: 1px solid #6904b7 !important;
+        box-shadow: 0 0 0 0.2rem rgba(105, 004, 183, 0.25) !important;
     }
 
-    .form {
-        margin-top: 4em;
+::-webkit-input-placeholder {
+    text-align: center;
+    color: #c1c1c1 !important;
+}
+
+::-moz-placeholder {
+    text-align: center;
+    color: #c1c1c1 !important;
+}
+
+:-ms-input-placeholder {
+    text-align: center;
+    color: #c1c1c1 !important;
+}
+
+:-moz-placeholder {
+    text-align: center;
+    color: #c1c1c1 !important;
+}
+
+a {
+    color: #88939a;
+}
+
+    a:hover {
+        transition: 0.3s !important;
+        color: #0056b3;
+    }
+
+button {
+    background-color: #6904b7 !important;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    border: none !important;
+    border-radius: 100px !important;
+    width: 100% !important;
+    height: 45px;
+}
+
+.col-lg-8, .col-md-6, .col-sm-3, .col-xl-8 {
+    padding-left: 9px !important;
+}
+
+/*trasição*/
+.col-xl-8, .col-lg-7, .col-md-5, .col-sm-3, .col-12, .col-xl-4, .col-lg-5, .float-right, .row, .container, .form, .form-control {
+    transition: 0.3s;
+}
+
+.btn-danger:focus, .btn-danger.focus {
+    box-shadow: 0 0 0 0.2rem rgba(105, 004, 183, 0.25);
+}
+
+.btn-danger:not(:disabled):not(.disabled):active:focus, .btn-danger:not(:disabled):not(.disabled).active:focus,
+.show > .btn-danger.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(105, 004, 183, 0.25);
+}
+
+
+/*Normalize*/
+
+/* Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 320px) {
+    .separador {
+        margin-bottom: 10px;
+    }
+
+    form {
+        padding-bottom: 0px;
+    }
+
+    button {
+        margin-bottom: 25px;
+        margin-top: 25px !important;
+    }
+
+    .col.lg-5, .col-md-7, .col-sm-9, .col-xl-4 {
+        padding-left: 10px !important;
+        transition: 0.3s;
     }
 }
 
-/*Small devices (landscape phones, 360px and up)*/
-@media (max-width: 360px) {
-    .form {
-        margin-top: 2em;
+/* Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 374.98px) {
+    img {
+        margin-bottom: 28px;
+        margin-top: 0px;
     }
 
-    .btn {
-        padding: 0.7em 4em;
-        margin-top: 0em;
+    .col.lg-5, .col-md-7, .col-sm-9, .col-xl-4 {
+        padding-left: 10px !important;
+        transition: 0.3s;
     }
+}
 
-    .conta {
-        margin-top: 3em;
+@media (max-width: 992px) {
+
+    .col-sm-9 {
+        flex-basis: 100%;
+        max-width: 100%;
+        padding-right: 10px;
+        padding-left: 10px;
+        transition: 0.3s;
     }
 }

@@ -437,3 +437,12 @@ span[class^=voto]:hover {
     color: var(--primaria);
     font-size: 15px;
 }
+
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+    padding: 37px 26px;
+    min-width: 226px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .3);
+    border: none;
+    margin-top: 25px;
+    position: absolute;
+}

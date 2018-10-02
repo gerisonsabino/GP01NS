@@ -48,7 +48,9 @@ namespace GP01NS.Controllers
 
         public ActionResult Agenda()
         {
-            return View();
+            this.Musico = new MusicoVM(this.BaseUsuario);
+
+            return View(this.Musico);
         }
 
         public ActionResult Convites()

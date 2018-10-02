@@ -1,6 +1,6 @@
 ﻿@{
 	var Conta = new GP01NS.Classes.ViewModels.UsuarioVM((GP01NS.Models.usuario)ViewBag.BaseUsuario);
-	var ImgPerfil = Conta.GetImagemPerfil();
+	var ImgPerfil = Conta.GetImagemCapa();
 }
 
 <nav class="navbar navbar-expand-lg">
@@ -13,6 +13,12 @@
 				<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 					<li class="nav-item">
                         <ul>
+                            <li class="nav-item">
+                                <div class="flex">
+                                    <img src="@(ImgPerfil != "#" ? ImgPerfil : "/Imagens/Views/user.svg")" style="width: 25px; height: 25px; margin-right: 5px; border-radius: 25px" />
+                                    @Conta.Nome.Split(' ')[0]
+                                </div>
+                            </li>
                             <h1>ESTABELECIMENTO</h1>
                             <li>
                                 <a class="nav-link" href="/inicio/">Início</a>

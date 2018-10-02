@@ -1742,6 +1742,7 @@
     <Content Include="CSS\icons-open-iconic-master\svg\zoom-out.svg" />
     <Content Include="CSS\Views\Entrar\cadastro.css" />
     <Content Include="CSS\Views\Entrar\confirmar-conta.css" />
+    <Content Include="CSS\Views\Entrar\index - Copy.css" />
     <Content Include="CSS\Views\Entrar\index.css" />
     <Content Include="CSS\Views\Estabelecimento\conta.css" />
     <Content Include="CSS\Views\Fa\endereco.css" />
@@ -1755,7 +1756,11 @@
     <Content Include="CSS\Views\Musico\index.css" />
     <Content Include="CSS\Views\Musico\perfil.css" />
     <Content Include="CSS\Views\Parciais\Load\load.css" />
+    <Content Include="Imagens\card-logo.png" />
+    <Content Include="Imagens\favicon.ico" />
     <Content Include="Imagens\Views\check.svg" />
+    <Content Include="Imagens\Views\Entrar\back_login.jpg" />
+    <Content Include="Imagens\Views\Entrar\logo.png" />
     <Content Include="Imagens\Views\estrela-azul.svg" />
     <Content Include="Imagens\Views\estrela-cinza .svg" />
     <Content Include="Imagens\Views\image.png" />
@@ -1852,6 +1857,7 @@
     <Content Include="Scripts\Plugins\datepicker-plugin\js\bootstrap-datepicker.pt-BR.js" />
     <Content Include="Scripts\Plugins\inputmask-plugin\jquery.inputmask.bundle.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\Views\Entrar\index.js" />
     <Content Include="Scripts\Views\Estabelecimento\evento.js" />
     <Content Include="Scripts\Views\Estabelecimento\evento_table.js" />
     <Content Include="Scripts\Views\Inicio\estabelecimento.js" />
@@ -3333,6 +3339,9 @@
     <Content Include="CSS\Fonts\LemonMilklight.otf" />
     <Content Include="CSS\Fonts\LemonMilklightitalic.otf" />
     <Content Include="CSS\Fonts\tt0855m_.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Entrar\Index - Copy.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

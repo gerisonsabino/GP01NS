@@ -1,95 +1,70 @@
 ﻿@{
     ViewBag.Title = "Entrar";
-    Layout = "~/Views/entrar/Layout.cshtml";
+    Layout = null;
 }
-<link href="~/CSS/assets/icons-open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
-
-<link href="~/CSS/Views/entrar/index.css" rel="stylesheet" />
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-3 col-xl-3 img"></div>
-        <div class="col-md-9 col-12 col-lg-9 ml-auto mr-auto form">
-            <div class="col-md-7 ml-auto mr-auto">
-                <h5>ENTRE NO NOSSO SHOW</h5>
-
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <title>@ViewBag.Title | Nosso Show</title>
+    <meta charset=utf-8>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="~/CSS/Views/Entrar/index.css" />
+    
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="~/Scripts/Plugins/inputmask-plugin/jquery.inputmask.bundle.js"></script>
+    <script src="~/Scripts/Plugins/datepicker-plugin/js/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/Plugins/datepicker-plugin/js/bootstrap-datepicker.pt-BR.js"></script>
+    <script src="~/Scripts/Views/Entrar/index.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-xl-4 col-lg-5 col-sm-9 ml-auto" style="text-align: center">
                 @using (Html.BeginForm())
                 {
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Nome de Usuário ou E-mail</label>
-                        <div class="input-campo">
-                            <span class="oi oi-person"></span>
-                            <input type="text" class="form-control" id="Email" name="Email" aria-describedby="emailHelp" placeholder="Nome de Usuário ou E-mail" required/>
-                            <label class="invalid-feedback">Nome de Usuário ou E-mail inválido!</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Senha</label>
-                        <div class="input-campo">
-                            <span class="oi oi-lock-locked"></span>
-                            <input type="password" class="form-control" id="Senha" name="Senha" placeholder="Senha" required="" />
-                            <label class="invalid-feedback">Senha inválida!</label>
-                        </div>
-                    </div>
+                    <a target="_blank" href="/inicio/">
+                        <img src="~/Imagens/Views/Entrar/logo.png">
+                    </a>
+                    <h5 style="font-weight: bold;">Seja Bem-Vindo(a)</h5>
+                    <div class="separador">&nbsp;</div>
+                    <p>Nos campos abaixo, informe o usuário/e-mail e senha de sua conta.</p>
+                    <div id="erro">
+                        @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+                        {
+                            <div class="alert alert-danger">
+                                <strong>@ViewBag.Mensagem</strong>
+                            </div>
+                        }
 
-                    if (!string.IsNullOrEmpty(ViewBag.Mensagem))
-                    {
-                        <div class="alert alert-danger">
-                            <strong>@ViewBag.Mensagem</strong>
-                        </div>
-                    }
-
-                    if (!string.IsNullOrEmpty(ViewBag.Sucesso))
-                    {
-                        <div class="alert alert-success">
-                            <strong>@ViewBag.Sucesso</strong>
-                        </div>
-                    }
-
+                        @if (!string.IsNullOrEmpty(ViewBag.Sucesso))
+                        {
+                            <div class="alert alert-success">
+                                <strong>@ViewBag.Sucesso</strong>
+                            </div>
+                        }
+                    </div>
                     <div class="form-group">
-                        <a href="#" data-toggle="modal" data-target="#ExemploModalCentralizado" class="linkEsqueceu">Esqueceu sua senha?</a>
+                        <input type="text" class="form-control" id="Email" name="Email" aria-describedby="emailHelp" placeholder="usuário ou e-mail" required />
+                        <label class="invalid-feedback">Nome de Usuário ou E-mail inválido!</label>
                     </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">ENTRAR</button>
-                    </div>
-                }
-            </div>
-            <div class="form-group text-center conta">
-                <a href="/entrar/cadastro/">Criar conta</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-uppercase">Recuperar senha</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <br />
-                <p class="display-5">Insira seu NOME DE USUÁRIO ou E-MAIL para redefinir seu acesso.</p>
-                <br />
-                @using (Html.BeginForm())
-                {
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Nome de Usuário ou E-mail</label>
-                        <div class="input-campo">
-                            <span class="oi oi-person"></span>
-                            <input type="text" class="form-control" id="Esqueci" name="Esqueci" aria-describedby="emailHelp" placeholder="Nome de Usuário ou E-mail" />
-                        </div>
+                        <input type="password" class="form-control" id="Senha" name="Senha" placeholder="senha" required="" />
+                        <label class="invalid-feedback">Senha inválida!</label>
                     </div>
-                    <div class="text-center form-group">
-                        <button type="submit" class="btn btn-primary">SOLICITAR!</button>
-                    </div>
+                    <a href="#" class="text-center" id="a-esqueci">esqueceu sua senha?</a>
+                    <button type="submit" class="btn btn-danger">
+                        <strong>entrar</strong>  &rarr;
+                    </button>
+                    <a href="/entrar/cadastro/" class="text-center">criar uma conta!</a>
                 }
             </div>
         </div>
     </div>
-</div>
-
-<script src="~/Scripts/form_main.js"></script>
+    <script src="~/Scripts/form_main.js"></script>
+</body>
+</html>

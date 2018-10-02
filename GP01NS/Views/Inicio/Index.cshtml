@@ -1,7 +1,10 @@
 ﻿@model GP01NS.Classes.ViewModels.UsuarioVM
 
 @{
-    ViewBag.Title = "Início";
+    ViewBag.Description = "Descubra eventos próximo a você, encontre estabelecimentos com ambientação para qualquer ocasião e conheça novos artistas dos seu(s) genêro(s) favorito(s).";
+    ViewBag.Image = "http://nossoshow.gerison.net/Imagens/card-logo.png";
+
+    ViewBag.Title = "Nosso Show";
 }
 
 <link href="~/CSS/Views/mapa.css" rel="stylesheet" />
@@ -10,20 +13,20 @@
 <div class="container-fluid fill relative">
     <div class="buscador absolute col-12">
         <div class="buscador-caixa flex col-sm-12 col-lg-8 no-padding mx-auto">
-            <input class="buscador-input" name="q" type="text" placeholder="Busque por eventos, músicos, estabelecimentos, endereço ou CEP" required="">
+            <input class="buscador-input" name="q" type="text" placeholder="Procure por eventos, estabelecimentos, artistas, endereço ou cep" required="">
             <button class="buscador-botao" onclick="$('.buscador .buscador-botao, .buscador .buscador-filtro').toggleClass('aberto');" type="button"></button>
             <button class="btn btn-primary" type="submit" id="btn-pesquisar" style="width: 50px;">
                 <span class="fa fa-search"></span>
             </button>
             <div class="buscador-filtro relative col-12 flex middle">
                 @*
-            <div class="no-margin no-padding row col-12 space-between">
-                <label for="html-input-range">Distância maxima</label>
-                <output for="html-input-range">0 km</output>
-                <div class="col-12 no-padding">
-                    <input type="range" id="html-input-range">
-                </div>
-            </div>
+                    <div class="no-margin no-padding row col-12 space-between">
+                        <label for="html-input-range">Distância maxima</label>
+                        <output for="html-input-range">0 km</output>
+                        <div class="col-12 no-padding">
+                            <input type="range" id="html-input-range">
+                        </div>
+                    </div>
                 *@
                 <div class="tipo-busca no-padding row col-12">
                     <strong for="tipo">Buscar por: </strong>
@@ -42,37 +45,37 @@
                 <div class="campo-generos mt-3 no-padding row col-12">
                     <strong for="Generos">Genêros músicais</strong>
                     <div class="col-12 no-padding checkbox-grupo container-fluid">
-						<select id="Generos" class="select-custom form-control" placeholder="Selecione os genêros músicais" multiple></select>
+                        <select id="Generos" class="select-custom form-control" placeholder="Selecione os genêros músicais" multiple></select>
                         @Html.Hidden("g", "")
                     </div>
                 </div>
                 <div class="campo-ambientacao mt-3 no-padding row col-12">
                     <strong for="Habilidades">Ambientação</strong>
                     <div class="col-12 no-padding checkbox-grupo flex">
-						<select id="Ambientacoes" class="select-custom form-control" placeholder="Selecione as ambientações" multiple></select>
+                        <select id="Ambientacoes" class="select-custom form-control" placeholder="Selecione as ambientações" multiple></select>
                         @Html.Hidden("a", "")
                     </div>
                 </div>
                 <div class="campo-habilidades mt-3 no-padding row col-12">
                     <strong for="Habilidades">Habilidades</strong>
                     <div class="col-12 no-padding checkbox-grupo flex">
-						<select id="Habilidades" class="select-custom form-control" placeholder="Selecione as habilidades" multiple></select>
+                        <select id="Habilidades" class="select-custom form-control" placeholder="Selecione as habilidades" multiple></select>
                         @Html.Hidden("h", "")
                     </div>
                 </div>
                 @*
-            <div class="no-margin no-padding row col-12">
-                <label for="html-input-range">Nota minima</label>
-                <div class="col-12 no-padding">
-                    <div class="nota">
-                        <span class="voto-1 oi oi-heart"></span>
-                        <span class="voto-2 oi oi-heart"></span>
-                        <span class="voto-3 oi oi-heart"></span>
-                        <span class="voto-4 oi oi-heart"></span>
-                        <span class="voto-5 oi oi-heart"></span>
+                    <div class="no-margin no-padding row col-12">
+                        <label for="html-input-range">Nota minima</label>
+                        <div class="col-12 no-padding">
+                            <div class="nota">
+                                <span class="voto-1 oi oi-heart"></span>
+                                <span class="voto-2 oi oi-heart"></span>
+                                <span class="voto-3 oi oi-heart"></span>
+                                <span class="voto-4 oi oi-heart"></span>
+                                <span class="voto-5 oi oi-heart"></span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
                 *@
             </div>
             <div class="resultado buscador-load" id="div-load">
