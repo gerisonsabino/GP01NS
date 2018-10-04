@@ -1747,7 +1747,7 @@
     <Content Include="CSS\Views\Estabelecimento\conta.css" />
     <Content Include="CSS\Views\Fa\endereco.css" />
     <Content Include="CSS\Views\Inicio\resultados.css" />
-    <Content Include="CSS\Views\mapa.css" />
+    <Content Include="CSS\Views\Inicio\index.css" />
     <Content Include="CSS\Views\forms.css" />
     <Content Include="CSS\Views\Estabelecimento\evento.css" />
     <Content Include="CSS\Views\Inicio\estabelecimento.css" />
@@ -3342,6 +3342,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Entrar\Index - Copy.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Fa\Seguindo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inicio\Parciais\_Sugestoes.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -84,8 +84,6 @@ namespace GP01NS.Controllers
 
             }
 
-
-
             base.OnActionExecuting(filterContext);
         }
     }

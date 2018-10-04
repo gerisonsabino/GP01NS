@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Seguindo";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <h2>Quem eu sigo</h2>
+    </div>
+    <div class="row">
+        <div class="col ml-auto mr-auto">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link text-uppercase @(ViewBag.Tab != "estabelecimentos" && ViewBag.Tab != "musicos"  ? "active" : "")" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Eventos</a>
+                    <a class="nav-item nav-link text-uppercase @(ViewBag.Tab == "estabelecimentos" ? "active" : "")" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Estabelecimentos</a>
+                    <a class="nav-item nav-link text-uppercase @(ViewBag.Tab == "musicos" ? "active" : "")" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Músicos</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    @RenderPage("~/Views/Layout/Parciais/Load/Load.cshtml")
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    @RenderPage("~/Views/Layout/Parciais/Load/Load.cshtml")
+                </div>
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    @RenderPage("~/Views/Layout/Parciais/Load/Load.cshtml")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

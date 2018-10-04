@@ -90,14 +90,6 @@ namespace GP01NS.Controllers
         }
 
         [HttpPost]
-        public string Seguir(int idUsuario)
-        {
-            this.Usuario = new UsuarioVM(this.BaseUsuario);
-
-            return this.Usuario.Seguir(idUsuario).ToString().ToLower();
-        }
-
-        [HttpPost]
         public ActionResult Endereco(EnderecoVM model)
         {
             this.Usuario = new UsuarioVM(this.BaseUsuario);
@@ -112,6 +104,23 @@ namespace GP01NS.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpPost]
+        public string Seguir(int idUsuario)
+        {
+            this.Usuario = new UsuarioVM(this.BaseUsuario);
+
+            return this.Usuario.Seguir(idUsuario).ToString().ToLower();
+        }
+
+        public ActionResult Seguindo(string tab = "evento")
+        {
+            this.Usuario = new UsuarioVM(this.BaseUsuario);
+
+            ViewBag.Tab = tab;
+
+            return View();
         }
 
         public ActionResult Sair()

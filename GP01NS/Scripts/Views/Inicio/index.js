@@ -1,4 +1,8 @@
 ﻿$(function () {
+    $("#btn-menu-pesquisar").click(function () {
+        $('.buscador .buscador-botao, .buscador .buscador-filtro').toggleClass('aberto');
+    });
+
     getGeneros();
 });
 
