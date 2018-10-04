@@ -1747,6 +1747,7 @@
     <Content Include="CSS\Views\Entrar\index.css" />
     <Content Include="CSS\Views\Estabelecimento\conta.css" />
     <Content Include="CSS\Views\Fa\endereco.css" />
+    <Content Include="CSS\Views\Fa\seguindo.css" />
     <Content Include="CSS\Views\Inicio\resultados.css" />
     <Content Include="CSS\Views\Inicio\index.css" />
     <Content Include="CSS\Views\forms.css" />

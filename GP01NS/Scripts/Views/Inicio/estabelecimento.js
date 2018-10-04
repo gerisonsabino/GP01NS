@@ -1,4 +1,29 @@
-﻿$(document).ready(function () { mapa(); });
+﻿
+$(function () {
+    $("#btn-seguir").click(toggleSeguir);
+    mapa();
+});
+
+function toggleSeguir() {
+    var a = $(this).attr("data-musico");
+
+    $.post("/inicio/toggleseguir/", { "ID": a }, function (s) {
+        if (s == "ok") {
+            var t = $("#btn-seguir").text();
+
+            if (t == "Seguir") {
+                $("#btn-seguir").removeClass("btn-primary");
+                $("#btn-seguir").addClass("btn-danger");
+                $("#btn-seguir").text("Deixar de Seguir");
+            }
+            else {
+                $("#btn-seguir").addClass("btn-primary");
+                $("#btn-seguir").removeClass("btn-danger");
+                $("#btn-seguir").text("Seguir");
+            }
+        }
+    });
+}
 
 function mapa() {
 
@@ -14,7 +39,7 @@ function mapa() {
         zoomControl: false,
         streetViewControl: false,
         scaleControl: false,
-        styles: [{ "stylers": [{ "hue": "#007bff" }, { "saturation": 250 }] }, { "featureType": "road", "elementType": "geometry", "stylers": [{ "lightness": 50 }, { "visibility": "simplified" }] }, { "featureType": "road", "elementType": "labels", "stylers": [{ "visibility": "off" }] }],
+        //styles: [{ "stylers": [{ "hue": "#007bff" }, { "saturation": 250 }] }, { "featureType": "road", "elementType": "geometry", "stylers": [{ "lightness": 50 }, { "visibility": "simplified" }] }, { "featureType": "road", "elementType": "labels", "stylers": [{ "visibility": "off" }] }],
         zoomControlOptions: { style: google.maps.ZoomControlStyle.LARGE },
         center: { lat: 90, lng: 180 }
     });

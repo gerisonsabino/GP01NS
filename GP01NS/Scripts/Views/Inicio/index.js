@@ -33,7 +33,7 @@ function pesquisar() {
                         html += "            <a href='/inicio/estabelecimento/" + json[i].Username + "'>" + json[i].Nome + "</a>";
                         html += "            <div class='resultado-item-tipo ml-2'>";
                         html += "                <span style='color: #AAA;'>@" + json[i].Username + "</span>";
-                        html += "                Estabelecimento";
+                        html += "                <span class='badge badge-secondary'>Estabelecimento</span>";
                         html += "            </div>";
                         html += "        </div>";
                         html += "        <div class='resultado-item-endereco'>" + json[i].Endereco + "</div>";
@@ -49,7 +49,7 @@ function pesquisar() {
                         html += "        <div class='resultado-item-nome flex'>";
                         html += "            <a href='/inicio/evento/" + json[i].ID + "'>" + json[i].Nome + "</a>";
                         html += "            <div class='resultado-item-tipo ml-2'>";
-                        html += "                Evento";
+                        html += "                <span class='badge badge-secondary'>Evento</span>";
                         html += "            </div>";
                         html += "        </div>";
                         html += "        <div class='resultado-item-endereco'>" + json[i].Endereco + "</div>";
@@ -63,7 +63,7 @@ function pesquisar() {
                         html += "            <a href='/inicio/musico/" + json[i].Username + "'>" + json[i].Nome + "</a>";
                         html += "            <div class='resultado-item-tipo ml-2'>";
                         html += "                <span style='color: #AAA;'>@" + json[i].Username + "</span>";
-                        html += "                Músico";
+                        html += "                <span class='badge badge-secondary'>Músico</span>";
                         html += "            </div>";
                         html += "        </div>";
                         html += "        <div class='resultado-item-endereco'>";
@@ -101,6 +101,10 @@ function pesquisar() {
         }
 
         $("#resultset").html(html);
+
+        $(".resultado-item").click(function () {
+            location.href = $(this).find("a").attr("href");
+        });
 
         $(".buscador-load").hide();
     });

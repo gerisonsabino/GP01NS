@@ -114,13 +114,11 @@ namespace GP01NS.Controllers
             return this.Usuario.ToggleSeguir(idUsuario).ToString().ToLower();
         }
 
-        public ActionResult Seguindo(string tab = "evento")
+        public ActionResult Seguindo()
         {
             this.Usuario = new UsuarioVM(this.BaseUsuario);
 
-            ViewBag.Tab = tab;
-
-            return View();
+            return View(this.Usuario);
         }
 
         public ActionResult Sair()

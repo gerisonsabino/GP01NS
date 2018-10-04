@@ -1,0 +1,46 @@
+﻿.resultado {
+    width: 100%;
+}
+
+.resultado-item {
+    padding: 7px 15px;
+    border: 1px solid #CED4DA;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.resultado-item:hover {
+    background: #f5f5f5;
+}
+
+.resultado-item-imagem {
+    width: 70px;
+    height: 70px;
+    background: center center / cover no-repeat;
+    float: left;
+}
+
+.resultado-item-nome {
+    color: var(--azul);
+    font-weight: 600;
+}
+
+.resultado-item-endereco {
+    color: #9E9E9E;
+    font-size: 13px;
+}
+
+.resultado-item-km {
+    color: #9E9E9E;
+    font-size: 13px;
+}
+
+.resultado-item-tipo {
+    color: #4CAF50;
+    font-size: 13px;
+    padding-top: 3px;
+}
+
+.resultado-item-nota {
+    font-size: 14px;
+}

@@ -1,31 +1,50 @@
-﻿@{
+﻿@model GP01NS.Classes.ViewModels.UsuarioVM
+
+@{
     ViewBag.Title = "Seguindo";
 }
 
-<div class="container-fluid">
+<link href="~/CSS/Views/Fa/seguindo.css" rel="stylesheet" />
+
+<div class="container">
     <div class="row">
         <h2>Quem eu sigo</h2>
+        @Html.Hidden("JSON", Model.GetSeguindoJSON())
     </div>
+
     <div class="row">
-        <div class="col ml-auto mr-auto">
-            <nav>
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link text-uppercase @(ViewBag.Tab != "estabelecimentos" && ViewBag.Tab != "musicos"  ? "active" : "")" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Eventos</a>
-                    <a class="nav-item nav-link text-uppercase @(ViewBag.Tab == "estabelecimentos" ? "active" : "")" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Estabelecimentos</a>
-                    <a class="nav-item nav-link text-uppercase @(ViewBag.Tab == "musicos" ? "active" : "")" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Músicos</a>
-                </div>
-            </nav>
-            <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                    @RenderPage("~/Views/Layout/Parciais/Load/Load.cshtml")
-                </div>
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    @RenderPage("~/Views/Layout/Parciais/Load/Load.cshtml")
-                </div>
-                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                    @RenderPage("~/Views/Layout/Parciais/Load/Load.cshtml")
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Estabelecimentos</a>
+            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Eventos</a>
+            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Músicos</a>
+        </div>
+        <div class="tab-content col" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                <div class="resultado" id="resultset">
+                    <div class="resultado-item mb-1">
+                        <div class="resultado-item-imagem arredondado mr-3" style="background-image: url(http://nossoshow.gerison.net/cdn/1160EF5180AF0AD539C48C28315148D6F72E4B052F1A482956AF41B5A351D000/05530820180929.jpg)"></div>
+                        <div class="resultado-item-texto">
+                            <div class="resultado-item-nome flex">
+                                <a href="/inicio/musico/lionelrichie">Lionel Richie</a>
+                                <div class="resultado-item-tipo ml-2">
+                                    <span style="color: #AAA;">lionelrichie</span>
+                                    <span class="badge badge-secondary">Músico</span>
+                                </div>
+                            </div>
+                            <div class="resultado-item-endereco">
+                                <span class="badge bg-primary" style="color: #FFF !important; margin-left: 3px;">COUNTRY</span>
+                                <span class="badge bg-primary" style="color: #FFF !important; margin-left: 3px;">POP/ROCK</span>
+                                <span class="badge bg-primary" style="color: #FFF !important; margin-left: 3px;">R&amp;B</span>
+                                <span class="badge bg-primary" style="color: #FFF !important; margin-left: 3px;">SOFT ROCK</span>
+                            </div>
+                            <div class="flex">//Endereço caso evento ou estabelecimento</div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
             </div>
+            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
+            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
         </div>
     </div>
 </div>

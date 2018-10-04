@@ -181,6 +181,8 @@ namespace GP01NS.Classes.ViewModels
                     var u = db.usuario.Single(x => x.ID == this.ID);
                     var l = u.usuario2.ToList();
 
+                    var estabelecimentos = l.Where(x => x.Tipo == 2).Select(x => x.usuario_estabelecimento.FirstOrDefault()).ToList();
+                    //var eventos = l.Where(x => x.Tipo == 2).Select(x => x.usuario_estabelecimento.FirstOrDefault()).ToList();
                     var musicos = l.Where(x => x.Tipo == 4).Select(x => x.usuario_musico.FirstOrDefault()).ToList();
 
                     var seguindo = new List<SeguindoJSON>();
@@ -189,7 +191,7 @@ namespace GP01NS.Classes.ViewModels
                     {
                         SeguindoJSON s = new SeguindoJSON
                         {
-                            //Estabelecimentos = GetSeguindoEstabelecimentosJSON(),
+                            Estabelecimentos = GetSeguindoEstabelecimentosJSON(estabelecimentos),
                             //Eventos = GetSeguindoEventosJSON(),
                             Musicos = this.GetSeguindoMusicosJSON(musicos)
                         };
@@ -233,6 +235,84 @@ namespace GP01NS.Classes.ViewModels
 
                 resultados.Add(r);
             }
+
+            return JsonConvert.SerializeObject(resultados);
+        }
+
+        private string GetSeguindoEstabelecimentosJSON(List<usuario_estabelecimento> estabelecimentos)
+        {
+            var resultados = new List<Resultado>();
+
+            for (int i = 0; i < estabelecimentos.Count; i++)
+            {
+                var e = estabelecimentos[i];
+
+                Resultado r = new Resultado
+                {
+                    ID = e.IDUsuario,
+                    Nome = e.usuario.Nome,
+                    Username = e.usuario.Username,
+                    Tipo = "Estabelecimento"
+                };
+
+                try
+                {
+                    r.Imagem = e.usuario.imagem.Last(x => x.TipoImagem == 2).Diretorio;
+                }
+                catch
+                {
+                    r.Imagem = "/Imagens/Views/user.svg";
+                }
+
+                var usuario = new UsuarioVM(e.usuario);
+                r.Endereco = usuario.GetEnderecoString();
+
+                r.Badges = new List<string>();
+                r.Badges.Add(e.ambientacao.Descricao);
+
+                resultados.Add(r);
+            }
+
+            return JsonConvert.SerializeObject(resultados);
+        }
+
+        private string GetSeguindoEventosJSON(List<evento> eventos)
+        {
+            var resultados = new List<Resultado>();
+
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    for (int i = 0; i < eventos.Count; i++)
+                    {
+                        var evento = eventos[i];
+
+                        Resultado r = new Resultado
+                        {
+                            ID = evento.ID,
+                            Nome = evento.Titulo,
+                            Username = string.Empty,
+                            Tipo = "Evento"
+                        };
+
+                        try
+                        {
+                            //   r.Imagem = evento.usuario.imagem.Last(x => x.TipoImagem == 1).Diretorio;/
+                            r.Imagem = "/Imagens/Views/user.svg";
+                        }
+                        catch
+                        {
+                            r.Imagem = string.Empty;
+                        }
+
+                        var usuario = new UsuarioVM(evento.usuario_estabelecimento.usuario);
+                        r.Endereco = usuario.GetEnderecoString();
+                        resultados.Add(r);
+                    }
+                }
+            }
+            catch { }
 
             return JsonConvert.SerializeObject(resultados);
         }

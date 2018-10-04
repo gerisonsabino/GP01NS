@@ -1,11 +1,12 @@
 /*GERAL*/
 :root {
-	--primaria: #6904b7;
-	--branco: #FFF;
-	--cinza: #C4CFDA;
-	--cinza-escuro: #212121;
-	--azul: #007bff;
-	--azul-escuro: #04111e;
+    --primaria: #6904b7;
+    --secundaria: #f601ff;
+    --branco: #FFF;
+    --cinza: #C4CFDA;
+    --cinza-escuro: #212121;
+    --azul: #007bff;
+    --azul-escuro: #04111e;
 }
 
 * {
@@ -264,11 +265,11 @@ header .logo {
     flex-wrap: wrap;
 }
 
-    .box-footer .titulo-footer {
-        font-size: 16px;
-        font-weight: 500;
-        margin-top: 20px;
-    }
+.box-footer .titulo-footer {
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 20px;
+}
 
 .titulo-footer {
     font-weight: 600 !important;
@@ -445,4 +446,12 @@ span[class^=voto]:hover {
     border: none;
     margin-top: 25px;
     position: absolute;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: var(--primaria);
+}
+
+.badge-secondary {
+    background-color: var(--secundaria);
 }
