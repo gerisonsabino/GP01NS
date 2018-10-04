@@ -25,16 +25,6 @@ namespace GP01NS.Controllers
                 ViewBag.Usuario = this.Usuario;
             }
 
-            //var musico = new Classes.ViewModels.Musico.ContaVM();
-
-            //ViewBag.Generos = musico.GetGenerosMusicais();
-            //ViewBag.TipoHabilidades = musico.GetTipoHabilidades();
-            //ViewBag.Habilidades = musico.GetHabilidades();
-
-            //var estabelecimento = new Classes.ViewModels.Estabelecimento.ContaVM();
-
-            //ViewBag.Ambientacoes = estabelecimento.GetAmbientacoesList();
-
             return View();
         }
 
@@ -253,17 +243,19 @@ namespace GP01NS.Controllers
         }
 
         [HttpPost]
-        public ActionResult Seguir(int ID)
+        public string ToggleSeguir(int ID)
         {
             if (this.BaseUsuario != null)
             {
                 this.Usuario = new UsuarioVM(this.BaseUsuario);
                 ViewBag.Usuario = this.Usuario;
 
-                this.Usuario.Seguir(ID);
+                this.Usuario.ToggleSeguir(ID);
+
+                return "ok";
             }
 
-            return Redirect("");
+            return "erro";
         }
     }
 }

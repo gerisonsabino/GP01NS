@@ -119,12 +119,12 @@
                                         @if (Usuario != null)
                                         {
                                             @*if (Usuario.ID == Model.ID)
-                                            {
-                                                <form action="/Musico/UploadImagem" method="post" enctype="multipart/form-data">
-                                                    <div class="foto-hover"></div>
-                                                    <input type="file" name="Imagem" onchange="javascript:this.form.submit();">
-                                                </form>
-                                            }*@
+                                                {
+                                                    <form action="/Musico/UploadImagem" method="post" enctype="multipart/form-data">
+                                                        <div class="foto-hover"></div>
+                                                        <input type="file" name="Imagem" onchange="javascript:this.form.submit();">
+                                                    </form>
+                                                }*@
                                         }
                                     </label>
                                 </div>
@@ -212,7 +212,14 @@
                     {
                         if (Usuario.ID != Model.ID)
                         {
-                            <button class="btn btn-primary">Seguir</button>
+                            if (!Usuario.Seguindo(Model.ID))
+                            {
+                                <button class="btn btn-primary" id="btn-seguir" data-musico="@Model.ID">Seguir</button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-danger" id="btn-seguir" data-musico="@Model.ID">Deixar de Seguir</button>
+                            }
                         }
                         else
                         {
@@ -252,3 +259,4 @@
         </div>
     </div>
 </div>
+<script src="~/Scripts/Views/Inicio/musico.js"></script>

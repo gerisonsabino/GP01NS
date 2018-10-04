@@ -127,7 +127,7 @@
     width: 49.5%;
 }
 
-.btn-primary {
+.btn-primary, .btn-danger {
     width: 100%;
     padding: 1rem;
 }

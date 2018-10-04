@@ -1,5 +1,6 @@
 ﻿using GP01NS.Models;
 using GP01NSLibrary;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -115,24 +116,40 @@ namespace GP01NS.Classes.ViewModels
             catch { return "/Imagens/Views/Estabelecimento/bg-estabelecimento.jpg"; }
         }
 
-        public bool Seguir(int idUsuario)
+        public bool ToggleSeguir(int idUsuario)
         {
             try
             {
-                using (var db = new nosso_showEntities())
+                using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
                     var u = db.usuario.Single(x => x.ID == this.ID);
                     var s = db.usuario.Single(x => x.ID == idUsuario);
 
-                    if (u.usuario1.Any(x => x.ID == idUsuario))
-                        u.usuario1.Remove(s);
+                    if (u.usuario2.Any(x => x.ID == idUsuario))
+                        u.usuario2.Remove(s);
                     else
-                        u.usuario1.Add(s);
+                        u.usuario2.Add(s);
 
                     db.ObjectStateManager.ChangeObjectState(u, System.Data.EntityState.Modified);
                     db.SaveChanges();
 
                     return true;
+                }
+            }
+            catch { }
+
+            return false;
+        }
+
+        public bool Seguindo(int idUsuario)
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var u = db.usuario.Single(x => x.ID == this.ID);
+
+                    return u.usuario2.Any(x => x.ID == idUsuario);
                 }
             }
             catch { }
@@ -153,6 +170,89 @@ namespace GP01NS.Classes.ViewModels
             {
                 return null;
             }
+        }
+
+        public string GetSeguindoJSON()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var u = db.usuario.Single(x => x.ID == this.ID);
+                    var l = u.usuario2.ToList();
+
+                    var musicos = l.Where(x => x.Tipo == 4).Select(x => x.usuario_musico.FirstOrDefault()).ToList();
+
+                    var seguindo = new List<SeguindoJSON>();
+
+                    for (int i = 0; i < l.Count; i++)
+                    {
+                        SeguindoJSON s = new SeguindoJSON
+                        {
+                            //Estabelecimentos = GetSeguindoEstabelecimentosJSON(),
+                            //Eventos = GetSeguindoEventosJSON(),
+                            Musicos = this.GetSeguindoMusicosJSON(musicos)
+                        };
+
+                        seguindo.Add(s);
+                    }
+
+                    return JsonConvert.SerializeObject(seguindo);
+                }
+            }
+            catch { }
+
+            return string.Empty;
+        }
+
+        private string GetSeguindoMusicosJSON(List<usuario_musico> musicos)
+        {
+            var resultados = new List<Resultado>();
+
+            for (int i = 0; i < musicos.Count; i++)
+            {
+                var m = musicos[i];
+
+                Resultado r = new Resultado
+                {
+                    ID = m.IDUsuario,
+                    Nome = m.NomeArtistico,
+                    Username = m.usuario.Username,
+                    Badges = m.usuario.genero_musical.Select(x => x.Descricao).ToList(),
+                    Tipo = "Músico"
+                };
+
+                try
+                {
+                    r.Imagem = m.usuario.imagem.Last(x => x.TipoImagem == 1).Diretorio;
+                }
+                catch
+                {
+                    r.Imagem = "/Imagens/Views/user.svg";
+                }
+
+                resultados.Add(r);
+            }
+
+            return JsonConvert.SerializeObject(resultados);
+        }
+
+        internal class SeguindoJSON
+        {
+            public string Estabelecimentos { get; set; }
+            public string Eventos { get; set; }
+            public string Musicos { get; set; }
+        }
+
+        internal class Resultado
+        {
+            public int ID { get; set; }
+            public string Nome { get; set; }
+            public string Tipo { get; set; }
+            public string Username { get; set; }
+            public string Endereco { get; set; }
+            public string Imagem { get; set; }
+            public List<string> Badges { get; set; }
         }
     }
 }
