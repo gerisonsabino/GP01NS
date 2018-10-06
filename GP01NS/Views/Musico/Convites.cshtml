@@ -1,5 +1,30 @@
-﻿@{
+﻿@model GP01NS.Classes.ViewModels.MusicoVM
+
+@{
     ViewBag.Title = "Convites";
 }
 
-<h2>Convites</h2>
+<div class="container-fluid">
+    <h2>Convites</h2>
+    <div class="table-responsive">
+        <table class="table table-hover" id="tb-convites" data-page-length="50">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Evento</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Estabelecimento</th>
+                    <th scope="col" width="70px">Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="5" class="text-center">Nenhum convite foi recebido.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<input id="JSON" name="JSON" type="hidden" value="@Model.GetConvitesJSON()">
+
+<script src="~/Scripts/Views/Musico/convites.js"></script>

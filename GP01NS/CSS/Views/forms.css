@@ -79,6 +79,11 @@ h5 {
     color: #FFF;
 }
 
+.select2 {
+    display: block !important;
+    width: 100% !important;
+}
+
 /* Media */
 @media (max-width: 768px) {
     .img {

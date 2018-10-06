@@ -43,7 +43,7 @@
   <ItemGroup>
     <Reference Include="GP01NSLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Downloads\GP01NSLibrary.dll</HintPath>
+      <HintPath>..\..\GP01NSLibrary\GP01NSLibrary\bin\Release\GP01NSLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MySql.Data, Version=6.6.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
@@ -1754,7 +1754,6 @@
     <Content Include="CSS\Views\Estabelecimento\evento.css" />
     <Content Include="CSS\Views\Inicio\estabelecimento.css" />
     <Content Include="CSS\Views\layout.css" />
-    <Content Include="CSS\Views\Musico\conta.css" />
     <Content Include="CSS\Views\Musico\index.css" />
     <Content Include="CSS\Views\Musico\perfil.css" />
     <Content Include="CSS\Views\Parciais\Load\load.css" />
@@ -1766,6 +1765,7 @@
     <Content Include="Imagens\Views\estrela-azul.svg" />
     <Content Include="Imagens\Views\estrela-cinza .svg" />
     <Content Include="Imagens\Views\image.png" />
+    <Content Include="Imagens\Views\Inicio\pin.png" />
     <Content Include="Imagens\Views\logo-marca.svg" />
     <Content Include="Imagens\Views\logo.svg" />
     <Content Include="Imagens\Views\menu-black.svg" />
@@ -1847,6 +1847,39 @@
     <Content Include="Plugins\Select2\js\select2.full.min.js" />
     <Content Include="Plugins\Select2\js\select2.js" />
     <Content Include="Plugins\Select2\js\select2.min.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\css\dataTables.bootstrap.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\css\dataTables.bootstrap.min.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\css\dataTables.bootstrap4.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\css\dataTables.foundation.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\css\dataTables.foundation.min.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\css\dataTables.jqueryui.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\css\dataTables.jqueryui.min.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\css\dataTables.semanticui.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\css\dataTables.semanticui.min.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\css\jquery.dataTables.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\css\jquery.dataTables.min.css" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\images\sort_asc.png" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\images\sort_asc_disabled.png" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\images\sort_both.png" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\images\sort_desc.png" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\images\sort_desc_disabled.png" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\js\dataTables.bootstrap.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\js\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\js\dataTables.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\js\dataTables.foundation.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\js\dataTables.foundation.min.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\js\dataTables.jqueryui.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\js\dataTables.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\js\dataTables.semanticui.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\js\dataTables.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\js\jquery.dataTables.js" />
+    <Content Include="Scripts\DataTables\DataTables-1.10.18\js\jquery.dataTables.min.js" />
+    <Content Include="Scripts\DataTables\datatables.css" />
+    <Content Include="Scripts\DataTables\datatables.js" />
+    <Content Include="Scripts\DataTables\datatables.min.css" />
+    <Content Include="Scripts\DataTables\datatables.min.js" />
     <Content Include="Scripts\form_main.js" />
     <Content Include="Scripts\nota.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
@@ -1866,6 +1899,8 @@
     <Content Include="Scripts\Views\Inicio\index.js" />
     <Content Include="Scripts\Views\Inicio\musico.js" />
     <Content Include="Scripts\Views\Layout\layout.js" />
+    <Content Include="Scripts\Views\Musico\agenda_table.js" />
+    <Content Include="Scripts\Views\Musico\convites.js" />
     <Content Include="Scripts\Views\Util\inputmask_controller.js" />
     <Content Include="Scripts\Views\Entrar\Cadastro\validation_controller.js" />
     <Content Include="Scripts\Views\Util\viacep-endereco.js" />
@@ -3249,7 +3284,7 @@
   <ItemGroup>
     <Content Include="Views\Entrar\Cadastro.cshtml" />
     <Content Include="Views\Entrar\Index.cshtml" />
-    <Content Include="Views\Entrar\Layout.cshtml" />
+    <Content Include="Views\Layout\Entrar\Layout.cshtml" />
     <Content Include="Views\Inicio\Index.cshtml" />
     <Content Include="Views\Layout\Padrao\Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -3259,7 +3294,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Entrar\ConfirmarConta.cshtml" />
-    <Content Include="Views\Entrar\EsqueciMinhaSenha.cshtml" />
     <Content Include="Views\Entrar\RedefinirSenha.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -3343,9 +3377,6 @@
     <Content Include="CSS\Fonts\LemonMilklight.otf" />
     <Content Include="CSS\Fonts\LemonMilklightitalic.otf" />
     <Content Include="CSS\Fonts\tt0855m_.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Entrar\Index - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Fa\Seguindo.cshtml" />

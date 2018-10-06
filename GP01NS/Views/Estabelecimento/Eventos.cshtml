@@ -1,60 +1,35 @@
 ﻿@{
-	ViewBag.Title = "Meus Eventos";
-	Layout = "~/Views/Layout/Padrao/Layout.cshtml";
+    ViewBag.Title = "Meus Eventos";
+    Layout = "~/Views/Layout/Padrao/Layout.cshtml";
 }
 
 <!--STYLES-->
 <link href="~/CSS/Views/Estabelecimento/evento.css" rel="stylesheet" />
+<link href="~/Scripts/DataTables/datatables.min.css" rel="stylesheet" />
+<script src="~/Scripts/DataTables/datatables.min.js"></script>
 
 <div class="container-fluid">
-	<div class="row">
-        <div class="col-md-3">
-            <ul class="nav flex-column form">
-                <li class="nav-item">
-                    <span class="nav-link">Eventos</span>
-                    <ul>
-                        <li class="nav-item"><a class="nav-link" href="/estabelecimento/evento/">Criar evento</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav flex-column form">
-                <li class="nav-item">
-                    <span class="nav-link">Meu Perfil</span>
-                    <ul>
-                        <li class="nav-item"><a class="nav-link" href="#">Alterar dados</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Minha assinatura</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Promover evento</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-		<div class="col-md-9">
-			<div class="col-md-12 form">
-                @Html.Hidden("JSON")
-				<table class="table table-borderless">
-					<thead>
-						<tr>
-							<th>Cod</th>
-							<th scope="col">Nome do Evento</th>
-							<th scope="col">Data</th>
-							<th scope="col">Status</th>
-							<th scope="col"></th>
-						</tr>
-					</thead>
-					<tbody></tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+    <h2>Eventos</h2>
+    <br />
+    <div class="table-responsive">
+        <table class="table table-hover" id="tb-eventos"  data-page-length="50">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th scope="col">Nome do Evento</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Status</th>
+                    <th scope="col" width="50px">Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center" colspan="5">Você ainda não possui eventos cadastrados. <a href="/estabelecimento/evento/">Clique aqui e adicione um novo evento.</a></td>
+                </tr>
+            </tbody>
+        </table>
+        @Html.Hidden("JSON")
+    </div>
 </div>
 
-<script>
-    $("#btn1").click(function () {
-        $("#mRecebe").append("<div class='form-group col-md-3'><input type='file' class='form-control-file' id='exampleFormControlFile1'></div>");
-    });
-
-    $("#btn2").click(function () {
-        $("input:file").appendTo("<div class='form-group col-md-3'><input type='file' class='form-control-file' id='exampleFormControlFile1'></div>");
-    });
-</script>
 <script src="~/Scripts/Views/Estabelecimento/evento_table.js"></script>

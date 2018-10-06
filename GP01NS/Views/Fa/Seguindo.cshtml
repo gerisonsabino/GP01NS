@@ -1,7 +1,7 @@
 ﻿@model GP01NS.Classes.ViewModels.UsuarioVM
 
 @{
-    ViewBag.Title = "Seguindo";
+    ViewBag.Title = "Quem eu sigo";
 }
 
 <link href="~/CSS/Views/Fa/seguindo.css" rel="stylesheet" />
@@ -11,15 +11,22 @@
         <h2>Quem eu sigo</h2>
         @Html.Hidden("JSON", Model.GetSeguindoJSON())
     </div>
+    <br />
 
     <div class="row">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Estabelecimentos</a>
-            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Eventos</a>
-            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Músicos</a>
+            <a class="nav-link" data-toggle="pill" href="#tab-estabelecimentos" role="tab" aria-controls="v-pills-home" aria-selected="true">Estabelecimentos</a>
+            <a class="nav-link" data-toggle="pill" href="#tab-eventos" role="tab" aria-controls="v-pills-profile" aria-selected="false">Eventos</a>
+            <a class="nav-link active" data-toggle="pill" href="#tab-musicos" role="tab" aria-controls="v-pills-messages" aria-selected="false">Músicos</a>
         </div>
-        <div class="tab-content col" id="v-pills-tabContent">
-            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+        <div class="tab-content col" id="tab-estabelecimentos">
+            <div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+            </div>
+            <div class="tab-pane fade" id="tab-eventos" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+
+            </div>
+            <div class="tab-pane fade active show" id="tab-musicos" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                 <div class="resultado" id="resultset">
                     <div class="resultado-item mb-1">
                         <div class="resultado-item-imagem arredondado mr-3" style="background-image: url(http://nossoshow.gerison.net/cdn/1160EF5180AF0AD539C48C28315148D6F72E4B052F1A482956AF41B5A351D000/05530820180929.jpg)"></div>
@@ -43,8 +50,6 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
-            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
         </div>
     </div>
 </div>

@@ -4,9 +4,24 @@
     ViewBag.Title = "Agenda";
 }
 
-<h2>Agenda</h2>
-<label>Agenda</label>
-<p>@Model.GetAgendaJSON()</p>
+<div class="container-fluid">
+    <h2>Agenda/Histórico de eventos</h2>
+    <br />
+    <div class="table-responsive">
+        <table class="table table-hover" id="tb-agenda" data-page-length="50">
+            <thead>
+                <tr>
+                    <th scope="col">Data</th>
+                    <th scope="col">Evento</th>
+                    <th scope="col">Estabelecimento</th>
+                    <th scope="col">Endereço</th>
+                    <th scope="col">Opções</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        @Html.Hidden("JSON", Model.GetAgendaJSON())
+    </div>
+</div>
 
-<label>Convites</label>
-<p>@Model.GetConvitesJSON()</p>
+<script src="~/Scripts/Views/Musico/agenda_table.js" type="text/JavaScript"></script>

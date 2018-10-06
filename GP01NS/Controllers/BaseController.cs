@@ -45,37 +45,48 @@ namespace GP01NS.Controllers
             }
             else
             {
-                using (var db = new nosso_showEntities(Conexao.GetString()))
+                try
                 {
-                    var auths = db.autenticacao.Where(x => x.Sessao.Equals(this.Session.SessionID)).ToList();
+                    using (var db = new nosso_showEntities(Conexao.GetString()))
+                    {
+                        var auths = db.autenticacao.Where(x => x.Sessao.Equals(this.Session.SessionID)).ToList();
 
-                    var auth = auths.Last();
+                        var auth = auths.Last();
 
-                    this.BaseUsuario = auth.usuario;
-                    ViewBag.BaseUsuario = this.BaseUsuario;
+                        this.BaseUsuario = auth.usuario;
+                        ViewBag.BaseUsuario = this.BaseUsuario;
+                    }
                 }
+                catch { }
 
                 var rota = string.Empty;
 
                 if (controller != "inicio")
                 {
-                    switch (this.BaseUsuario.Tipo)
+                    if (this.BaseUsuario != null)
                     {
-                        case 1:
-                            rota = "administrador";
-                            break;
+                        switch (this.BaseUsuario.Tipo)
+                        {
+                            case 1:
+                                rota = "administrador";
+                                break;
 
-                        case 2:
-                            rota = "estabelecimento";
-                            break;
+                            case 2:
+                                rota = "estabelecimento";
+                                break;
 
-                        case 3:
-                            rota = "fa";
-                            break;
+                            case 3:
+                                rota = "fa";
+                                break;
 
-                        case 4:
-                            rota = "musico";
-                            break;
+                            case 4:
+                                rota = "musico";
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        rota = "inicio";
                     }
 
                     if (controller.ToUpper() != rota.ToUpper())

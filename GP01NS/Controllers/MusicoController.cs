@@ -55,7 +55,9 @@ namespace GP01NS.Controllers
 
         public ActionResult Convites()
         {
-            return View();
+            this.Musico = new MusicoVM(this.BaseUsuario);
+
+            return View(this.Musico);
         }
 
         [HttpPost]

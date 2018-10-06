@@ -89,7 +89,8 @@ namespace GP01NS.Classes.ViewModels
             {
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
-                    var e = db.evento_musico.ToList();
+                    var m = db.usuario_musico.Single(x => x.IDUsuario == this.ID);
+                    var e = m.evento_musico.ToList();
 
                     var eventos = new List<ConviteJSON>();
 

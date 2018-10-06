@@ -1,8 +1,4 @@
 ﻿$(function () {
-    $("#btn-menu-pesquisar").click(function () {
-        $('.buscador .buscador-botao, .buscador .buscador-filtro').toggleClass('aberto');
-    });
-
     getGeneros();
 });
 
@@ -91,9 +87,13 @@ function pesquisar() {
                 html += "    </div>";
                 html += "</div>";
             }
+
+            $(".resultado-item").click(function () {
+                location.href = $(this).find("a").attr("href");
+            });
         }
         else {
-            html += "<div class='resultado-item flex'>";
+            html += "<div class='resultado-item p-4 flex'>";
             html += "   <div class='container-fluid text-center'>";
             html += "       <strong>Oops! Nenhum resultado encontrado.</strong>";
             html += "   </div > ";
@@ -102,41 +102,44 @@ function pesquisar() {
 
         $("#resultset").html(html);
 
-        $(".resultado-item").click(function () {
-            location.href = $(this).find("a").attr("href");
-        });
-
         $(".buscador-load").hide();
     });
 }
 
 function getGeneros() {
     $.post("/inicio/getgeneros/", function (s) {
-        var Generos = eval(s);
-        var html = "";
+        try {
+            var Generos = eval(s);
+            var html = "";
 
-        for (var i = 0; i < Generos.length; i++) {
-            html += "<option value='" + Generos[i].ID + "'>" + Generos[i].Descricao + "</option>";
+            for (var i = 0; i < Generos.length; i++) {
+                html += "<option value='" + Generos[i].ID + "'>" + Generos[i].Descricao + "</option>";
+            }
+
+            $("#Generos").html(html);
+
+            getAmbientacoes();
         }
-
-        $("#Generos").html(html);
-
-        getAmbientacoes();
+        catch (e) { }
     });
 }
 
 function getAmbientacoes() {
     $.post("/inicio/getambientacoes/", function (s) {
-        var Ambientacoes = JSON.parse(s);
-        var html = "";
+        try
+        {
+            var Ambientacoes = JSON.parse(s);
+            var html = "";
 
-        for (var i = 0; i < Ambientacoes.length; i++) {
-            html += "<option value='" + Ambientacoes[i].ID + "'>" + Ambientacoes[i].Descricao + "</option>";
+            for (var i = 0; i < Ambientacoes.length; i++) {
+                html += "<option value='" + Ambientacoes[i].ID + "'>" + Ambientacoes[i].Descricao + "</option>";
+            }
+
+            $("#Ambientacoes").html(html);
+
+            getHabilidades();
         }
-
-        $("#Ambientacoes").html(html);
-
-        getHabilidades();
+        catch (e) { }
     });
 }
 
@@ -144,34 +147,41 @@ function getHabilidades() {
     var Tipos = "";
     var Habis = "";
 
-    $.post("/inicio/gettipohabilidades/" , function (s) {
-        Tipos = JSON.parse(s);
-        $.post("/inicio/gethabilidades/", function (_s) {
-            Habis = JSON.parse(_s);
-            var html = "";
+    $.post("/inicio/gettipohabilidades/", function (s) {
+        try {
+            Tipos = JSON.parse(s);
+            $.post("/inicio/gethabilidades/", function (_s) {
+                Habis = JSON.parse(_s);
+                var html = "";
 
-            for (var i = 0; i < Tipos.length; i++)
-            {
-                var tipo = Tipos[i];
-                html += "<optgroup label='" + tipo.Descricao + "'>";
+                for (var i = 0; i < Tipos.length; i++) {
+                    var tipo = Tipos[i];
+                    html += "<optgroup label='" + tipo.Descricao + "'>";
 
-                for (var j = 0; j < Habis.length; j++) {
-                    if (Habis[j].TipoHab == tipo.ID) {
-                        html += "<option value='" + Habis[j].ID + "'>" + Habis[j].Descricao + "</option>";
+                    for (var j = 0; j < Habis.length; j++) {
+                        if (Habis[j].TipoHab == tipo.ID) {
+                            html += "<option value='" + Habis[j].ID + "'>" + Habis[j].Descricao + "</option>";
 
+                        }
                     }
+                    html += "</optgroup>";
                 }
-                html += "</optgroup>";
-            }
 
-            $("#Habilidades").html(html);
-
+                $("#Habilidades").html(html);
+                init();
+            });
+        }
+        catch (e) {
             init();
-        });
+        }
     });
 }
 
 function init() {
+    $("#btn-menu-pesquisar").click(function () {
+        $('.buscador .buscador-botao, .buscador .buscador-filtro').toggleClass('aberto');
+    });
+
     $("#btn-pesquisar").click(function () {
 
         if ($("[name='q']").val() == "") {

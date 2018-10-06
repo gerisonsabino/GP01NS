@@ -13,7 +13,7 @@
 <div class="container-fluid fill relative">
     <div class="buscador absolute col-12">
         <div class="buscador-caixa flex col-sm-12 col-lg-8 no-padding mx-auto">
-            <input class="buscador-input" name="q" type="text" placeholder="Procure por eventos, estabelecimentos, artistas, endereço ou CEP..." required="">
+            <input class="buscador-input" name="q" id="q" type="text" placeholder="Procure por eventos, estabelecimentos, músicos, endereço ou CEP..." required="required" />
             <button class="buscador-botao" id="btn-menu-pesquisar" type="button"></button>
             <button class="btn btn-primary" type="submit" id="btn-pesquisar" style="width: 50px;">
                 <span class="fa fa-search"></span>
@@ -78,7 +78,7 @@
                     </div>
                 *@
             </div>
-            <div class="resultado buscador-load" id="div-load">
+            <div class="resultado buscador-load p-4" id="div-load">
                 @RenderPage("~/Views/Layout/Parciais/Load/Load.cshtml")
             </div>
             <div class="resultado" id="resultset"></div>
