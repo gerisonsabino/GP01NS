@@ -57,10 +57,10 @@ namespace GP01NS.Classes.Util
             switch (req.TipoRequisicao)
             {
                 case 1:
-                    return Mensagem.MensagemRedefinirSenha(req);
+                    return Mensagem.RedefinirSenha(req);
 
                 case 2:
-                    return Mensagem.MensagemCadastro(req);
+                    return Mensagem.Cadastro(req);
             }
 
             return false;

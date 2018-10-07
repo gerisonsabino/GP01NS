@@ -28,6 +28,17 @@ namespace GP01NS.Controllers
             return View();
         }
 
+        public ActionResult Buscar()
+        {
+            if (this.BaseUsuario != null)
+            {
+                this.Usuario = new UsuarioVM(this.BaseUsuario);
+                ViewBag.Usuario = this.Usuario;
+            }
+
+            return View();
+        }
+
         [HttpPost]
         public string GetGeneros()
         {

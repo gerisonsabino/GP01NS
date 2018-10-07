@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     $("header > div.logo").click(function () {
-        location.href = "/inicio/";
+        location.href = "/inicio/buscar/";
     });
 
     fieldsRequest()

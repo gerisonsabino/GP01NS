@@ -1,4 +1,5 @@
-﻿using GP01NS.Models;
+﻿using GP01NS.Classes.Util;
+using GP01NS.Models;
 using GP01NSLibrary;
 using Newtonsoft.Json;
 using System;
@@ -187,7 +188,7 @@ namespace GP01NS.Classes.ViewModels
             return JsonConvert.SerializeObject(resultados);
         }
 
-        public bool Atracao(int idMusico)
+        public bool ToggleSetMusico(int idMusico)
         {
             try
             {
@@ -214,6 +215,8 @@ namespace GP01NS.Classes.ViewModels
                         };
 
                         db.evento_musico.AddObject(e);
+
+                        new MensagemEmail().Convite(this, new MusicoVM(musico.usuario));
                     }
 
                     db.SaveChanges();

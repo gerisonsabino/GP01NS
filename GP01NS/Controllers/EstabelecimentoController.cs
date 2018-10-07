@@ -167,7 +167,7 @@ namespace GP01NS.Controllers
                 if (e != null)
                     evento = new EventoVM(e);
 
-                evento.Atracao(idMusico);
+                evento.ToggleSetMusico(idMusico);
             }
         }
 

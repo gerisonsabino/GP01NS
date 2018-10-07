@@ -1,4 +1,5 @@
-﻿using GP01NS.Models;
+﻿using GP01NS.Classes.ViewModels;
+using GP01NS.Models;
 using GP01NSLibrary;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace GP01NS.Classes.Util
         }
 
         #region MENSAGENS DE E-MAIL
-        public bool MensagemCadastro(requisicao req)
+        public bool Cadastro(requisicao req)
         {
             string TITULO = "Olá, " + req.usuario.Nome.Split(' ')[0] + "!";
             string SUBTITULO = "Foi solicitada a criação de sua conta no Nosso Show.";
@@ -75,7 +76,7 @@ namespace GP01NS.Classes.Util
             return false;
         }
 
-        public bool MensagemRedefinirSenha(requisicao req)
+        public bool RedefinirSenha(requisicao req)
         {
             string TITULO = "Olá, " + req.usuario.Nome.Split(' ')[0] + "!";
             string SUBTITULO = "Foi solicitada uma redefinição de senha para sua conta no Nosso Show.";
@@ -102,6 +103,39 @@ namespace GP01NS.Classes.Util
             try
             {
                 Email.Enviar(req.usuario.Email, "Redefina sua senha - Nosso Show", Html);
+
+                return true;
+            }
+            catch { }
+
+            return false;
+        }
+
+        public bool Convite(EventoVM evento, MusicoVM musico)
+        {
+            string TITULO = "Olá, " + musico.NomeArtistico + "!";
+            string SUBTITULO = "Você foi convidado para realizar um evento no Nosso Show.";
+
+            string MENSAGEM = string.Empty;
+
+            MENSAGEM += "<p style='font-size:17px;font-weight:500;margin:0;padding:0.5em 0;'>";
+            MENSAGEM += "   Veja os detalhes do Evento: ";
+            MENSAGEM += "</p>";
+            MENSAGEM += "<p style='font-size:17px;font-weight:500;margin:0;padding:0.5em 0;'>";
+            MENSAGEM += "<b>Título: </b>" + evento.Titulo + "<br /><br />";
+            MENSAGEM += "<b>Horário: </b>" + evento.GetHorarioString() + "<br /><br />";
+            MENSAGEM += "<b>Endereço: </b>" + evento.Estabelecimento.GetEnderecoString() + "<br /><br />";
+            MENSAGEM += "<b>Sobre o evento</b><br /><br />" + evento.Descricao + "<br /><br />";
+            MENSAGEM += "</p>";
+            MENSAGEM += "<p style='font-size:17px;font-weight:500;margin:0;padding:0.5em 0;'>Caso desconheça o convite, por favor, apenas ignore este e-mail.</p>";
+
+            Html = Html.Replace("#TITULO", TITULO);
+            Html = Html.Replace("#SUBTITULO", SUBTITULO);
+            Html = Html.Replace("#MENSAGEM", MENSAGEM);
+
+            try
+            {
+                Email.Enviar(musico.Email, "Convite para realização de Evento - Nosso Show", Html);
 
                 return true;
             }

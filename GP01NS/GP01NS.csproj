@@ -1749,22 +1749,27 @@
     <Content Include="CSS\Views\Fa\endereco.css" />
     <Content Include="CSS\Views\Fa\seguindo.css" />
     <Content Include="CSS\Views\Inicio\resultados.css" />
-    <Content Include="CSS\Views\Inicio\index.css" />
+    <Content Include="CSS\Views\Inicio\buscar.css" />
     <Content Include="CSS\Views\forms.css" />
     <Content Include="CSS\Views\Estabelecimento\evento.css" />
     <Content Include="CSS\Views\Inicio\estabelecimento.css" />
+    <Content Include="CSS\Views\Inicio\index.css" />
     <Content Include="CSS\Views\layout.css" />
     <Content Include="CSS\Views\Musico\index.css" />
     <Content Include="CSS\Views\Musico\perfil.css" />
     <Content Include="CSS\Views\Parciais\Load\load.css" />
     <Content Include="Imagens\card-logo.png" />
     <Content Include="Imagens\favicon.ico" />
+    <Content Include="Imagens\HTML\logo.png" />
     <Content Include="Imagens\Views\check.svg" />
     <Content Include="Imagens\Views\Entrar\back_login.jpg" />
     <Content Include="Imagens\Views\Entrar\logo.png" />
     <Content Include="Imagens\Views\estrela-azul.svg" />
     <Content Include="Imagens\Views\estrela-cinza .svg" />
     <Content Include="Imagens\Views\image.png" />
+    <Content Include="Imagens\Views\Inicio\002-logo.svg" />
+    <Content Include="Imagens\Views\Inicio\background.png" />
+    <Content Include="Imagens\Views\Inicio\logo.png" />
     <Content Include="Imagens\Views\Inicio\pin.png" />
     <Content Include="Imagens\Views\logo-marca.svg" />
     <Content Include="Imagens\Views\logo.svg" />
@@ -3392,6 +3397,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Administrador\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inicio\Buscar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CSS\Fonts\Humnst777LtBT.ttf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
