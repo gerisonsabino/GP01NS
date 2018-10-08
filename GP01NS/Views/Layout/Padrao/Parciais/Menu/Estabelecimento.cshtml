@@ -1,6 +1,6 @@
 ﻿@{
 	var Conta = new GP01NS.Classes.ViewModels.UsuarioVM((GP01NS.Models.usuario)ViewBag.BaseUsuario);
-	var ImgPerfil = Conta.GetImagemCapa();
+	var ImgPerfil = Conta.GetImagemPerfil();
 }
 
 <nav class="navbar navbar-expand-lg">
@@ -16,7 +16,7 @@
                             <li class="nav-item">
                                 <div class="flex">
                                     <img src="@(ImgPerfil != "#" ? ImgPerfil : "/Imagens/Views/user.svg")" style="width: 25px; height: 25px; margin-right: 5px; border-radius: 25px" />
-                                    @Conta.Nome.Split(' ')[0]
+                                    @("@" + Conta.Username)
                                 </div>
                             </li>
                             <h1>ESTABELECIMENTO</h1>

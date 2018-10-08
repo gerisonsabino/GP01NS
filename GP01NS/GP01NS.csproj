@@ -1752,7 +1752,7 @@
     <Content Include="CSS\Views\Inicio\buscar.css" />
     <Content Include="CSS\Views\forms.css" />
     <Content Include="CSS\Views\Estabelecimento\evento.css" />
-    <Content Include="CSS\Views\Inicio\estabelecimento.css" />
+    <Content Include="CSS\Views\Inicio\evento.css" />
     <Content Include="CSS\Views\Inicio\index.css" />
     <Content Include="CSS\Views\layout.css" />
     <Content Include="CSS\Views\Musico\index.css" />
@@ -1900,8 +1900,9 @@
     <Content Include="Scripts\Views\Entrar\index.js" />
     <Content Include="Scripts\Views\Estabelecimento\evento.js" />
     <Content Include="Scripts\Views\Estabelecimento\evento_table.js" />
+    <Content Include="Scripts\Views\Inicio\evento.js" />
     <Content Include="Scripts\Views\Inicio\estabelecimento.js" />
-    <Content Include="Scripts\Views\Inicio\index.js" />
+    <Content Include="Scripts\Views\Inicio\buscar.js" />
     <Content Include="Scripts\Views\Inicio\musico.js" />
     <Content Include="Scripts\Views\Layout\layout.js" />
     <Content Include="Scripts\Views\Musico\agenda_table.js" />
@@ -3354,15 +3355,6 @@
     <Content Include="Views\Inicio\Musico.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Inicio\Resultados.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Models\nosso_show.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Layout\Parciais\Load\Load.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -3403,6 +3395,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CSS\Fonts\Humnst777LtBT.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\nosso_show.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

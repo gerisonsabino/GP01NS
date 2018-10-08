@@ -2,10 +2,8 @@
 using GP01NS.Models;
 using GP01NSLibrary;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace GP01NS.Classes.Servicos
 {
@@ -73,18 +71,15 @@ namespace GP01NS.Classes.Servicos
 
                         try
                         {
-                            r.Imagem = e.usuario.imagem.Last(x => x.TipoImagem == 2).Diretorio;
+                            r.Imagem = e.usuario.imagem.Last(x => x.TipoImagem == 1).Diretorio;
                         }
                         catch
                         {
                             r.Imagem = "/Imagens/Views/user.svg";
                         }
 
-                        if (endereco)
-                        {
-                            var usuario = new UsuarioVM(e.usuario);
-                            r.Endereco = usuario.GetEnderecoString();
-                        }
+                        var usuario = new UsuarioVM(e.usuario);
+                        r.Endereco = usuario.GetEnderecoString();
 
                         r.Badges = new List<string>();
                         r.Badges.Add(e.ambientacao.Descricao);
@@ -136,28 +131,16 @@ namespace GP01NS.Classes.Servicos
 
                         try
                         {
-                         //   r.Imagem = evento.usuario.imagem.Last(x => x.TipoImagem == 1).Diretorio;/
-                            r.Imagem = "/Imagens/Views/user.svg";
+                            r.Imagem = evento.imagem.Last(x => x.TipoImagem == 4).Diretorio;
                         }
                         catch
                         {
-                            r.Imagem = string.Empty;
+                            r.Imagem = "/Imagens/Views/user.svg";
                         }
 
-                        if (endereco)
-                        {
-                            var usuario = new UsuarioVM(evento.usuario_estabelecimento.usuario);
-
-                            if (usuario.GetEnderecoString().ToLower().Contains(termo.ToLower()))
-                            {
-                                r.Endereco = usuario.GetEnderecoString();
-                                resultados.Add(r);
-                            }
-                        }
-                        else
-                        {
-                            resultados.Add(r);
-                        }
+                        var usuario = new UsuarioVM(evento.usuario_estabelecimento.usuario);
+                        r.Endereco = usuario.GetEnderecoString();
+                        resultados.Add(r);
                     }
                 }
             }

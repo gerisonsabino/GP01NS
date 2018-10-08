@@ -16,13 +16,15 @@ namespace GP01NS.Classes.ViewModels
         public string Diretorio { get; set; }
         public int Tipo { get; set; }
         public int IDUsuario { get; set; }
+        public int IDEvento { get; set; }
 
         private HttpPostedFileBase Imagem;
 
-        public ImagemVM(HttpPostedFileBase imagem, int idUsuario, int tipo)
+        public ImagemVM(HttpPostedFileBase imagem, int idUsuario, int idEvento, int tipo)
         {
             this.Imagem = imagem;
             this.IDUsuario = idUsuario;
+            this.IDEvento = idEvento;
             this.Data = DateTime.Now;
             this.Tipo = tipo;
             this.Diretorio = "/cdn/" + CriptografarDiretorio() + "/" + this.Data.ToString("ssmmhhyyyyMMdd") + "." + this.Imagem.FileName.Split('.').Last();
@@ -75,14 +77,22 @@ namespace GP01NS.Classes.ViewModels
 
                     var img = new imagem
                     {
+                        ID = this.Data.ToString("ssmmhhyyyyMMdd"),
                         Data = this.Data,
-                        IDUsuario = this.IDUsuario,
                         Diretorio = this.Diretorio,
                         TipoImagem = t.ID,
-                        TipoUsuario = u.Tipo
                     };
 
-                    db.imagem.AddObject(img);
+                    if (img.TipoImagem != 4)
+                    {
+                        u.imagem.Add(img);
+                    }
+                    else
+                    {
+                        var e = db.evento.Single(x => x.ID == this.IDEvento && x.IDUsuario == this.IDUsuario);
+                        e.imagem.Add(img);
+                    }
+
                     db.SaveChanges();
 
                     return true;

@@ -1,11 +1,11 @@
-﻿
-$(function () {
+﻿$(function () {
     $("#btn-seguir").click(toggleSeguir);
     initMap();
+    carouselMusicos();
 });
 
 function toggleSeguir() {
-    var a = $(this).attr("data-estabelecimento");
+    var a = $(this).attr("data-musico");
 
     $.post("/inicio/toggleseguir/", { "ID": a }, function (s) {
         if (s == "ok") {
@@ -50,8 +50,9 @@ function initMap() {
 }
 
 function setMarkers(m) {
-    var es = document.getElementById("estabelecimento").innerHTML;
+    var es = document.getElementById("evento").innerHTML;
     var e = document.getElementById("endereco").textContent;
+    var d = document.getElementById("data").textContent;
     var g = new google.maps.Geocoder();
 
     g.geocode({ 'address': e }, function (r, s) {
@@ -64,7 +65,7 @@ function setMarkers(m) {
             });
 
             var infowindow = new google.maps.InfoWindow({
-                content: "<h6>" + es + "</h6><p style='margin-bottom: 0px;'>" + e + "</p>"
+                content: "<h6>" + es + "</h6><strong style='margin-bottom: 5px; display: block;'>" + d + "</strong><p style='margin-bottom: 0px;'>" + e + "</p>"
             });
 
             infowindow.open(marca.get('map'), marca);
@@ -74,4 +75,28 @@ function setMarkers(m) {
             a.innerHTML = "<h5 class='text-center'>Houve um erro ao carregar o mapa. Por favor, recarregue a página.</h5>";
         }
     });
+}
+
+function carouselMusicos() {
+    var json = JSON.parse($("#MusicosJSON").val());
+    var html = "";
+
+    for (var i = 0; i < json.length; i++) {
+        var m = json[i];
+
+        //if (m.Confirmado) {
+        if (true) {
+            html += "<div class='carousel-item" + (i == 0 ? " active" : "") + "'>";
+            html += "    <img class='d-block w-100' src='" + m.Imagem + "' alt='" + m.Nome + "' />";
+            html += "    <div class='carousel-caption d-none d-md-block'>";
+            html += "        <h5><a href='/inicio/musico/" + m.Username + "' style='color: #FFF !important;' target='_blank'>@" + m.Nome + "</a></h5>";
+            html += "    </div>";
+            html += "</div>";
+        }
+
+    }
+
+    $("#carouselMusicos .carousel-inner").html(html);
+
+    $("#MusicosJSON").remove();
 }

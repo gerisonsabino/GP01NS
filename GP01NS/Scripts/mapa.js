@@ -41,7 +41,7 @@ function setMarkers(m){
             });
 
             var infowindow = new google.maps.InfoWindow({
-                content: "Você"
+                content: "<h6 style='margin-bottom: 1px;'>Você</h6>"
             });
 
             infowindow.open(marca.get('map'), marca);

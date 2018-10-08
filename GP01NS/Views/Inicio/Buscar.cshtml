@@ -19,15 +19,13 @@
                 <span class="fa fa-search"></span>
             </button>
             <div class="buscador-filtro relative col-12 flex middle">
-                @*
-                    <div class="no-margin no-padding row col-12 space-between">
-                        <label for="html-input-range">Distância maxima</label>
-                        <output for="html-input-range">0 km</output>
-                        <div class="col-12 no-padding">
-                            <input type="range" id="html-input-range">
-                        </div>
+                <div class="no-margin no-padding row col-12 space-between" style="display: none !important;">
+                    <label for="html-input-range">Distância maxima</label>
+                    <output for="html-input-range">0 km</output>
+                    <div class="col-12 no-padding">
+                        <input type="range" id="html-input-range">
                     </div>
-                *@
+                </div>
                 <div class="tipo-busca no-padding col">
                     <strong for="tipo">Buscar por: </strong>
                     <div class="col-12 no-padding checkbox-grupo flex">
@@ -92,5 +90,5 @@
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQOVgr1EKPU6Ygpb23qkWw4NqSUsFuEWY"></script>
 <script src="~/Scripts/mapa.js"></script>
-<script src="~/Scripts/Views/Inicio/index.js"></script>
+<script src="~/Scripts/Views/Inicio/buscar.js"></script>
 <script src="~/Scripts/Plugins/customrange-plugin/html-input-range.js"></script>

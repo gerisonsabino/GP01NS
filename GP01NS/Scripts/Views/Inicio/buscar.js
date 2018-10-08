@@ -1,5 +1,14 @@
 ﻿$(function () {
     getGeneros();
+
+   htmlInputRange.options({
+        output: '.buscador-filtro output',
+        tooltip: false,
+        posfix: ' km',
+        max: 50,
+        min: 0,
+        value: 25
+    });
 });
 
 function pesquisar() {
@@ -87,10 +96,6 @@ function pesquisar() {
                 html += "    </div>";
                 html += "</div>";
             }
-
-            $(".resultado-item").click(function () {
-                location.href = $(this).find("a").attr("href");
-            });
         }
         else {
             html += "<div class='resultado-item p-4 flex'>";
@@ -101,6 +106,12 @@ function pesquisar() {
         }
 
         $("#resultset").html(html);
+
+        if (json != "") {
+            $(".resultado-item").click(function () {
+                location.href = $(this).find("a").attr("href");
+            });
+        }
 
         $(".buscador-load").hide();
     });

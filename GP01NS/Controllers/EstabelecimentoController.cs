@@ -220,12 +220,23 @@ namespace GP01NS.Controllers
             return View(model);
         }
 
+
+        [HttpPost]
+        public ActionResult UploadProfile(HttpPostedFileBase Arquivo)
+        {
+            this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
+
+            new ImagemVM(Arquivo, this.Estabelecimento.ID, int.MinValue, 1).Upload();
+
+            return Redirect("/inicio/estabelecimento/" + this.Estabelecimento.Username);
+        }
+
         [HttpPost]
         public ActionResult UploadCover(HttpPostedFileBase Arquivo)
         {
             this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
 
-            new ImagemVM(Arquivo, this.Estabelecimento.ID, 2).Upload();
+            new ImagemVM(Arquivo, this.Estabelecimento.ID, int.MinValue, 2).Upload();
 
             return Redirect("/inicio/estabelecimento/" + this.Estabelecimento.Username);
         }
@@ -235,9 +246,22 @@ namespace GP01NS.Controllers
         {
             this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
 
-            new ImagemVM(Imagem, this.Estabelecimento.ID, 3).Upload();
+            new ImagemVM(Imagem, this.Estabelecimento.ID, int.MinValue, 3).Upload();
 
             return Redirect("/inicio/estabelecimento/" + this.Estabelecimento.Username);
+        }
+
+        [HttpPost]
+        public ActionResult UploadBannerEvento(HttpPostedFileBase Arquivo, int IDEvento)
+        {
+            this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
+
+            var e = this.Estabelecimento.GetEventoByID(IDEvento);
+
+            if (e != null)
+                new ImagemVM(Arquivo, this.Estabelecimento.ID, IDEvento, 4).Upload();
+
+            return Redirect("/inicio/evento/" + IDEvento);
         }
 
         public ActionResult Sair()

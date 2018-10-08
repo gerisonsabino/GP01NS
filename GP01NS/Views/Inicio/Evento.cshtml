@@ -3,23 +3,28 @@
 @{
     ViewBag.Title = Model.Titulo;
     var Usuario = (GP01NS.Classes.ViewModels.UsuarioVM)ViewBag.Usuario;
+    var Banner = Model.GetImagemBanner();
 }
 
 <link href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" rel="stylesheet" crossorigin="anonymous" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU">
-<link href="~/CSS/Views/Inicio/estabelecimento.css" rel="stylesheet" />
+<link href="~/CSS/Views/Inicio/evento.css" rel="stylesheet" />
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12 div1" id="Cover" style="background: url(#) center center / cover no-repeat;">
-            @if (Usuario != null)
-            {
-                if (Usuario.ID == Model.Estabelecimento.ID)
+        <div class="perfil">
+            <label class="perfil-imagem foto-imagem col-md-12 div1" id="Cover"  style="@(Banner != "#" ? "background: url(" + Banner + ") center center / cover no-repeat;" : string.Empty)">
+                @if (Usuario != null)
                 {
-                    <form action="#" method="post" enctype="multipart/form-data">
-                        <input type="file" id="Arquivo" name="Arquivo" onchange="javascript:this.form.submit();">
-                    </form>
+                    if (Usuario.ID == Model.Estabelecimento.ID)
+                    {
+                        <form action="/Estabelecimento/UploadBannerEvento/" method="post" enctype="multipart/form-data">
+                            <div class="foto-hover"></div>
+                            @Html.Hidden("IDEvento", Model.ID)
+                            <input type="file" id="Arquivo" name="Arquivo" onchange="javascript:this.form.submit();">
+                        </form>
+                    }
                 }
-            }
+            </label>
         </div>
     </div>
 </div>
@@ -27,86 +32,76 @@
     <div class="row">
         <div class="col-md-9 div2">
             <div class="row">
-                <div class="col-md-6">
-                    <h1 class="display-5">@Model.Titulo</h1>
-                </div>
-                <div class="col-md-6">
-                    <a href="#">Denunciar Evento</a>
+                <div class="perfil-texto">
+                    <h2 id="evento">
+                        @Model.Titulo
+                        <span class="badge badge-secondary" style="font-size: 0.6rem; font-family: 'Segoe UI', sans-serif">Evento</span>
+                    </h2>
+                    <small class="text-uppercase">
+                        <a href="javascript:void(0);">Denúnciar Estabelecimento</a>
+                    </small>
                 </div>
             </div>
+            <br />
             <div class="row">
                 <div class="col-md-6">
-                    <span class="oi oi-map-marker"></span>
-                    <strong>@Model.Estabelecimento.GetEnderecoString()</strong>
+                    <span class="oi oi-map-marker" style="color: var(--secundaria);"></span>
+                    <strong id="endereco">@Model.Estabelecimento.GetEnderecoString()</strong>
                 </div>
                 <div class="col-md-6">
-                    <span class="oi oi-calendar"></span>
-                    <strong>@Model.GetHorarioString()</strong>
+                    <span class="oi oi-calendar" style="color: var(--secundaria);"></span>
+                    <strong id="data">@Model.GetHorarioString()</strong>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 div2">
-                    <h3 class="display-5">Descrição do evento</h3>
+                    <strong>Descrição do evento</strong>
+                    <br /><br />
                     <p class="lead">
                         @Html.Raw(Model.Descricao.Replace("\n", "<br />"))
                     </p>
                 </div>
             </div>
-            <div class="row div2">
-                <div class="col-md-6">
-                    <span class="display-5"><strong>Compartilhe esse evento nas redes sociais</strong></span>
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><a href=""><i class="fab fa-twitter"></i></a></li>
-                        <li class="list-inline-item"><a href=""><i class="fab fa-instagram"></i></a></li>
-                        <li class="list-inline-item"><a href=""><i class="fab fa-facebook-square"></i></a></li>
-                        <li class="list-inline-item"><a href=""><i class="fab fa-google"></i></a></li>
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <span class="display-5"><strong>Avalie esse evento</strong></span>
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><a href=""><span class="oi oi-heart"></span></a></li>
-                        <li class="list-inline-item"><a href=""><span class="oi oi-heart"></span></a></li>
-                        <li class="list-inline-item"><a href=""><span class="oi oi-heart"></span></a></li>
-                        <li class="list-inline-item"><a href=""><span class="oi oi-heart"></span></a></li>
-                        <li class="list-inline-item"><a href=""><span class="oi oi-heart"></span></a></li>
-                    </ul>
+            
+            <div class="row card-compartilhar" style="padding-top: 50px; padding-bottom: 50px;">
+                <div class="col-lg-8 col-sm-12 no-padding flex">
+                    <div class="col-lg-7 col-sm-12 no-padding social-media">
+                        <strong class="display-5">Compartilhe @Model.Titulo nas redes sociais</strong>
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><a href="javascript:void(0);"><i class="fab fa-twitter titleCustom" data-placement="top" title="Twitter" style="color: #55acee"></i></a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0);"><i class="fab fa-instagram titleCustom" data-placement="top" title="Instagram" style="color: #55acee"></i></a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0);"><i class="fab fa-facebook-square titleCustom" data-placement="top" title="Facebook" style="color: #3a589e"></i></a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0);"><i class="fab fa-google titleCustom" data-placement="top" title="Google+" style="color: #dc4e41"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-5 col-sm-12 no-padding">
+                        <strong class="display-5">Avalie este estabelecimento</strong>
+                        <div class="nota-4">
+                            <span class="voto-1 oi oi-heart"></span>
+                            <span class="voto-2 oi oi-heart"></span>
+                            <span class="voto-3 oi oi-heart"></span>
+                            <span class="voto-4 oi oi-heart"></span>
+                            <span class="voto-5 oi oi-heart"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="bloco-participante text-center shadow p-3 mb-5 bg-white rounded border">
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div id="carouselMusicos" class="carousel slide" data-ride="carousel">
+                    <h6>Atrações confirmadas</h6>
+                    <br />
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="assets/img/perfil.svg" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Joao</h5>
-                                <p>Carlos</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="assets/img/perfil.svg" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Joao</h5>
-                                <p>Carlos</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="assets/img/perfil.svg" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Joao</h5>
-                                <p>Carlos</p>
-                            </div>
-                        </div>
+                        @Html.Hidden("MusicosJSON", Model.GetMusicos())
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <a class="carousel-control-prev" href="#carouselMusicos" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
+                        <span class="sr-only">Anterior</span>
                     </a>
-                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <a class="carousel-control-next" href="#carouselMusicos" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
+                        <span class="sr-only">Próximo</span>
                     </a>
                 </div>
                 @if (Usuario != null)
@@ -128,10 +123,8 @@
         </div>
     </div>
 </div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12 mapa">
-            <iframe height="450px" width="100%" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=@(Model.Estabelecimento.GetEnderecoString().Replace(" ", "+"))&key=AIzaSyD302LfE2vA-uKZl0y2MFSAJYdnBeQwTNE"></iframe>
-        </div>
-    </div>
+<div style="width: 100%;">
+    <div id="mapa" style="min-height: 450px;"></div>
 </div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQOVgr1EKPU6Ygpb23qkWw4NqSUsFuEWY"></script>
+<script src="~/Scripts/Views/Inicio/evento.js"></script>

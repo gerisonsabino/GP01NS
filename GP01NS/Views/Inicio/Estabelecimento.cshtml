@@ -6,42 +6,47 @@
     ViewBag.Image = Model.GetImagemPerfil();
     var Usuario = (GP01NS.Classes.ViewModels.UsuarioVM)ViewBag.Usuario;
     var Imagens = Model.GetImagens();
+    var Perfil = Model.GetImagemPerfil();
 }
 
 <link href="~/CSS/Views/Musico/perfil.css" rel="stylesheet" />
 
-<div class="col mx-auto">
-    <img class="card-img-overlay" src="@Model.GetImagemCapa()" alt="Card image cap" style="width: 100%; max-height: 300px;" />
+<div class="card-body pt-0">
     <div class="card-body row">
         <div class="row">
             <div class="col-lg-8 col-sm-12">
-                @if (Usuario != null)
-                {
-                    if (Usuario.ID == Model.ID)
-                    {
-                        <form action="/Estabelecimento/UploadCover/" method="post" enctype="multipart/form-data">
-                            <input type="file" id="Arquivo" name="Arquivo" onchange="javascript:this.form.submit();">
-                        </form>
-                    }
-                }
                 <div class="row">
-                    <div class="perfil" style="margin-top: 250px;">
+                    <div class="perfil">
+                        <label class="perfil-imagem foto-imagem" style="@(Perfil != "#" ? "background-image:url(" + Perfil + ");" : string.Empty)">
+                            @if (Usuario != null)
+                            {
+                                if (Usuario.ID == Model.ID)
+                                {
+                                    <form action="/Estabelecimento/UploadProfile/" method="post" enctype="multipart/form-data">
+                                        <div class="foto-hover"></div>
+                                        <input type="file" id="Arquivo" name="Arquivo" onchange="javascript:this.form.submit();">
+                                    </form>
+                                }
+                            }
+                        </label>
                         <div class="perfil-texto">
-                            <h2 id="estabelecimento">@Model.Nome</h2>
+                            <h2 id="estabelecimento">
+                                @Model.Nome
+                                <span class="badge badge-secondary" style="font-size: 0.6rem; font-family: 'Segoe UI', sans-serif">Estabelecimento</span>
+                            </h2>
                             <small>
                                 <a href="javascript:void(0);">Denúnciar Estabelecimento</a>
                             </small>
                         </div>
                     </div>
                 </div>
-
                 <div class="row mt-5">
                     <div class="col-md-8">
-                        <span class="oi oi-map-marker"></span>
+                        <span class="oi oi-map-marker" style="color: var(--secundaria);"></span>
                         <strong id="endereco">@Model.GetEnderecoString()</strong>
                     </div>
                     <div class="col-md-4">
-                        <span class="oi oi-calendar"></span>
+                        <span class="oi oi-calendar" style="color: var(--secundaria);"></span>
                         <strong>@Model.GetFuncionamentoString()</strong>
                     </div>
                 </div>
@@ -161,11 +166,11 @@
                         {
                             if (!Usuario.Seguindo(Model.ID))
                             {
-                                <button class="btn btn-primary" id="btn-seguir" data-musico="@Model.ID">Seguir</button>
+                                <button class="btn btn-primary" id="btn-seguir" data-estabelecimento="@Model.ID">Seguir</button>
                             }
                             else
                             {
-                                <button class="btn btn-danger" id="btn-seguir" data-musico="@Model.ID">Deixar de Seguir</button>
+                                <button class="btn btn-danger" id="btn-seguir" data-estabelecimento="@Model.ID">Deixar de Seguir</button>
                             }
                         }
                         else
@@ -205,10 +210,9 @@
             </div>
         </div>
     </div>
-    <div style="width: 100%; padding-bottom: 10px;">
-        <div id="mapa" style="min-height: 450px;"></div>
-        @*<iframe height="450px" width="100%" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=@(Model.GetEnderecoString().Replace(" ", "+"))&key=AIzaSyD302LfE2vA-uKZl0y2MFSAJYdnBeQwTNE"></iframe>*@
-    </div>
+</div>
+<div style="width: 100%;">
+    <div id="mapa" style="min-height: 450px;"></div>
 </div>
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQOVgr1EKPU6Ygpb23qkWw4NqSUsFuEWY"></script>

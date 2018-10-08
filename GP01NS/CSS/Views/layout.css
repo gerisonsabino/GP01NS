@@ -509,9 +509,9 @@ span[class^=voto]:hover {
     color: #FFF !important;
 }
 
-    .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
-        color: #c33 !important;
-    }
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+    color: #c33 !important;
+}
 
 .select2-container--default [aria-selected].select2-results__option--highlighted {
     background-color: var(--primaria);

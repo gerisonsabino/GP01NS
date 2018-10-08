@@ -6,14 +6,7 @@
     fieldsRequest()
     selectCustom();
     textareaAutoresize();
-    htmlInputRange.options({
-        output: '.buscador-filtro output',
-        tooltip: false,
-        posfix: ' km',
-        max: 50,
-        min: 0,
-        value: 25
-    });
+
 
     $('.titleCustom').tooltip();
 

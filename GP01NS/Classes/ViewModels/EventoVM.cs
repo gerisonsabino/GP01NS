@@ -139,7 +139,20 @@ namespace GP01NS.Classes.ViewModels
             }
             catch { }
 
+
             return string.Empty;
+        }
+
+        public string GetImagemBanner()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    return "http://nossoshow.gerison.net" + db.evento.First(x => x.ID == this.ID).imagem.Last(x => x.TipoImagem == 4).Diretorio;
+                }
+            }
+            catch { return "#"; }
         }
 
         public string PesquisarMusicos(string termo)

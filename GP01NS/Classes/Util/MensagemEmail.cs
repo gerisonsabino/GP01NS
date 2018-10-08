@@ -127,7 +127,7 @@ namespace GP01NS.Classes.Util
             MENSAGEM += "<b>Endereço: </b>" + evento.Estabelecimento.GetEnderecoString() + "<br /><br />";
             MENSAGEM += "<b>Sobre o evento</b><br /><br />" + evento.Descricao + "<br /><br />";
             MENSAGEM += "</p>";
-            MENSAGEM += "<p style='font-size:17px;font-weight:500;margin:0;padding:0.5em 0;'>Caso desconheça o convite, por favor, apenas ignore este e-mail.</p>";
+            MENSAGEM += "<p style='font-size:17px;font-weight:500;margin:0;padding:0.5em 0;'>Para confirmar/cancelar a sua presença, acesse o site.</p>";
 
             Html = Html.Replace("#TITULO", TITULO);
             Html = Html.Replace("#SUBTITULO", SUBTITULO);

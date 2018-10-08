@@ -1,8 +1,8 @@
-﻿@model GP01NS.Classes.ViewModels.UsuarioVM
-
+﻿
 @{
     ViewBag.Description = "Descubra eventos próximo a você, encontre estabelecimentos com ambientação para qualquer ocasião e conheça novos artistas dos seu(s) genêro(s) favorito(s).";
     ViewBag.Image = "http://nossoshow.gerison.net/Imagens/card-logo.png";
+    var Usuario = (GP01NS.Classes.ViewModels.UsuarioVM)ViewBag.Usuario;
 
     Layout = null;
 }
@@ -46,7 +46,14 @@
             <div class="col-md-12 cabeca">
                 <header class="cabecalho">
                     <img src="~/Imagens/Views/Inicio/002-logo.svg" alt="">
-                    <a href="/entrar/" class="link btn-ent float-right fonteMilk">entrar</a>
+                    @if (Usuario == null)
+                    {
+                        <a href="/entrar/" class="link btn-ent float-right fonteMilk">entrar</a>
+                    }
+                    else
+                    {
+                        <a href="/inicio/buscar/" class="link btn-ent float-right fonteMilk">@("@" + Usuario.Username)</a>
+                    }
                 </header>
                 <section class="conteudo">
                     <h1 class="fonteMilk" style="margin-top:5%;">

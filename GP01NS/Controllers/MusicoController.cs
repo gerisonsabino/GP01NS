@@ -112,7 +112,7 @@ namespace GP01NS.Controllers
         {
             this.Musico = new MusicoVM(this.BaseUsuario);
 
-            new ImagemVM(Arquivo, this.Musico.ID, 1).Upload();
+            new ImagemVM(Arquivo, this.Musico.ID, int.MinValue, 1).Upload();
 
             return Redirect("/inicio/musico/" + this.Musico.Username);
         }
@@ -122,7 +122,7 @@ namespace GP01NS.Controllers
         {
             this.Musico = new MusicoVM(this.BaseUsuario);
 
-            new ImagemVM(Imagem, this.Musico.ID, 3).Upload();
+            new ImagemVM(Imagem, this.Musico.ID, int.MinValue, 3).Upload();
 
             return Redirect("/inicio/musico/" + this.Musico.Username);
         }

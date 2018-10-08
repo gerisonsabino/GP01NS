@@ -12,10 +12,10 @@
 				</a>
 				<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 					<li class="nav-item">
-						<div class="flex">
-							<img src="~/Imagens/Views/user.svg" style="width: 25px; height: 25px; margin-right: 5px" />
-							@Conta.Nome
-						</div>
+                        <div class="flex">
+                            <img src="~/Imagens/Views/user.svg" style="width: 25px; height: 25px; margin-right: 5px" />
+                            @("@" + Conta.Username)
+                        </div>
 					</li>
 					<li class="nav-item">
                         <ul>

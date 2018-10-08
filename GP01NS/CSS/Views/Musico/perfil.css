@@ -1,12 +1,47 @@
+main {
+    padding: 0px !important;
+}
+
 .card-body {
     padding: 50px;
 }
 
+.card-body strong {
+    color: var(--primaria);
+}
+
 .perfil-imagem {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     background: url(/Imagens/Views/user.svg) center center / cover no-repeat;
     border-radius: 50%;
+}
+
+.perfil .foto-imagem {
+    background: url(/Imagens/Views/image.png) center center / cover no-repeat #CCC;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.perfil .foto-imagem .foto-hover {
+    position: absolute !important;
+    width: 100%;
+    height: 100%;
+    background: url(/CSS/icons-open-iconic-master/svg/pencil-white.svg) center center / 50px no-repeat rgba(0, 0, 0, .5);
+    opacity: 0;
+    top: 0;
+    left: 0;
+}
+
+.perfil .foto-imagem:hover .foto-hover {
+    opacity: 1;
+}
+
+
+.perfil .foto-imagem input {
+    position: absolute !important;
+    top: -100% !important;
 }
 
 .perfil-texto {
