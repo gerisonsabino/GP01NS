@@ -63,6 +63,17 @@ namespace GP01NS.Controllers
         }
 
         [HttpPost]
+        public string ResponderConvite(int a, bool b)
+        {
+            this.Musico = new MusicoVM(this.BaseUsuario);
+
+            if (this.Musico.ResponderConvite(a, b))
+                return "OK";
+            else
+                return "Erro";
+        }
+
+        [HttpPost]
         public ActionResult Conta(ContaVM model)
         {
             this.Musico = new MusicoVM(this.BaseUsuario);

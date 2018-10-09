@@ -92,7 +92,6 @@ namespace GP01NS.Controllers
                     if (controller.ToUpper() != rota.ToUpper())
                         filterContext.Result = RedirectPermanent("/" + rota + "/");
                 }
-
             }
 
             base.OnActionExecuting(filterContext);

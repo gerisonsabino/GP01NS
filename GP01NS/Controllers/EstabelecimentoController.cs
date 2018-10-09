@@ -190,6 +190,27 @@ namespace GP01NS.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult PublicarEvento(int IDEvento)
+        {
+            this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
+
+            ViewBag.Estabelecimento = this.Estabelecimento;
+            var evento = this.Estabelecimento.GetEventoByID(IDEvento);
+
+            if (evento != null)
+            {
+                if (new EventoVM(evento).TogglePublicar())
+                {
+                    return Redirect("/inicio/evento/" + evento.ID);
+                }
+            }
+
+            ViewBag.Erro = "Falha ao publicar o evento, por favor, tente novamente.";
+
+            return Redirect("/estabelecimento/evento/" + IDEvento);
+        }
+
         public ActionResult Endereco()
         {
             this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);

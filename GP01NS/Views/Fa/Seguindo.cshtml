@@ -12,44 +12,17 @@
         @Html.Hidden("JSON", Model.GetSeguindoJSON())
     </div>
     <br />
-
     <div class="row">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
             <a class="nav-link" data-toggle="pill" href="#tab-estabelecimentos" role="tab" aria-controls="v-pills-home" aria-selected="true">Estabelecimentos</a>
             <a class="nav-link" data-toggle="pill" href="#tab-eventos" role="tab" aria-controls="v-pills-profile" aria-selected="false">Eventos</a>
             <a class="nav-link active" data-toggle="pill" href="#tab-musicos" role="tab" aria-controls="v-pills-messages" aria-selected="false">Músicos</a>
         </div>
-        <div class="tab-content col" id="tab-estabelecimentos">
-            <div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-
-            </div>
-            <div class="tab-pane fade" id="tab-eventos" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-
-            </div>
-            <div class="tab-pane fade active show" id="tab-musicos" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                <div class="resultado" id="resultset">
-                    <div class="resultado-item mb-1">
-                        <div class="resultado-item-imagem arredondado mr-3" style="background-image: url(http://nossoshow.gerison.net/cdn/1160EF5180AF0AD539C48C28315148D6F72E4B052F1A482956AF41B5A351D000/05530820180929.jpg)"></div>
-                        <div class="resultado-item-texto">
-                            <div class="resultado-item-nome flex">
-                                <a href="/inicio/musico/lionelrichie">Lionel Richie</a>
-                                <div class="resultado-item-tipo ml-2">
-                                    <span style="color: #AAA;">lionelrichie</span>
-                                    <span class="badge badge-secondary">Músico</span>
-                                </div>
-                            </div>
-                            <div class="resultado-item-endereco">
-                                <span class="badge bg-primary" style="color: #FFF !important; margin-left: 3px;">COUNTRY</span>
-                                <span class="badge bg-primary" style="color: #FFF !important; margin-left: 3px;">POP/ROCK</span>
-                                <span class="badge bg-primary" style="color: #FFF !important; margin-left: 3px;">R&amp;B</span>
-                                <span class="badge bg-primary" style="color: #FFF !important; margin-left: 3px;">SOFT ROCK</span>
-                            </div>
-                            <div class="flex">//Endereço caso evento ou estabelecimento</div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
+        <div class="tab-content col">
+            <div class="tab-pane fade" id="tab-estabelecimentos" role="tabpanel" aria-labelledby="v-pills-home-tab"></div>
+            <div class="tab-pane fade" id="tab-eventos" role="tabpanel" aria-labelledby="v-pills-profile-tab"></div>
+            <div class="tab-pane fade active show" id="tab-musicos" role="tabpanel" aria-labelledby="v-pills-messages-tab"></div>
         </div>
     </div>
 </div>
+<script src="~/Scripts/Views/Fa/seguindo.js"></script>

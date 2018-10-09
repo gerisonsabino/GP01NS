@@ -185,21 +185,14 @@ namespace GP01NS.Classes.ViewModels
                     //var eventos = l.Where(x => x.Tipo == 2).Select(x => x.usuario_estabelecimento.FirstOrDefault()).ToList();
                     var musicos = l.Where(x => x.Tipo == 4).Select(x => x.usuario_musico.FirstOrDefault()).ToList();
 
-                    var seguindo = new List<SeguindoJSON>();
-
-                    for (int i = 0; i < l.Count; i++)
+                    SeguindoJSON s = new SeguindoJSON
                     {
-                        SeguindoJSON s = new SeguindoJSON
-                        {
-                            Estabelecimentos = GetSeguindoEstabelecimentosJSON(estabelecimentos),
-                            //Eventos = GetSeguindoEventosJSON(),
-                            Musicos = this.GetSeguindoMusicosJSON(musicos)
-                        };
+                        Estabelecimentos = GetSeguindoEstabelecimentosJSON(estabelecimentos),
+                        //Eventos = GetSeguindoEventosJSON(),
+                        Musicos = this.GetSeguindoMusicosJSON(musicos)
+                    };
 
-                        seguindo.Add(s);
-                    }
-
-                    return JsonConvert.SerializeObject(seguindo);
+                    return JsonConvert.SerializeObject(s);
                 }
             }
             catch { }
@@ -257,7 +250,7 @@ namespace GP01NS.Classes.ViewModels
 
                 try
                 {
-                    r.Imagem = e.usuario.imagem.Last(x => x.TipoImagem == 2).Diretorio;
+                    r.Imagem = e.usuario.imagem.Last(x => x.TipoImagem == 1).Diretorio;
                 }
                 catch
                 {

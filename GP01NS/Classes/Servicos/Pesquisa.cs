@@ -120,12 +120,13 @@ namespace GP01NS.Classes.Servicos
                     for (int i = 0; i < eventos.Count; i++)
                     {
                         var evento = eventos[i];
+                        var u = evento.usuario_estabelecimento;
 
                         Resultado r = new Resultado
                         {
                             ID = evento.ID,
                             Nome = evento.Titulo,
-                            Username = string.Empty,
+                            Username = u.usuario.Username,
                             Tipo = "Evento"
                         };
 

@@ -58,8 +58,8 @@ function pesquisar() {
                         html += "            </div>";
                         html += "        </div>";
                         html += "        <div class='resultado-item-endereco'>" + json[i].Endereco + "</div>";
-                        html += "        <div class='resultado-item-tipo ml-2'>";
-                        html += "           Evento de: <span style='color: #AAA;'>@" + json[i].Username + "</span>";
+                        html += "        <div class='resultado-item-tipo'>";
+                        html += "           <strong>Evento de: </strong> <span style='color: #AAA;'>@" + json[i].Username + "</span>";
                         html += "        </div>";
                         break;
 

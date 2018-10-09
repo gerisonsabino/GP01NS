@@ -16,115 +16,129 @@
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active text-uppercase" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Evento</a>
                         <a class="nav-item nav-link @(Model.ID == 0 ? "disabled" : "") text-uppercase" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Atrações</a>
-                        <a class="nav-item nav-link @(Model.ID == 0 ? "disabled" : "") text-uppercase" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Publicação</a>
+                        <a class="nav-item nav-link @(Model.ID == 0 || Model.GetConfirmados() == 0 ? "disabled" : "") text-uppercase" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Publicação</a>
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         @using (Html.BeginForm())
                         {
-                        <div class="col-md-12 form">
-                            <br />
-                            <h5 class="text-uppercase">Evento de @Estabelecimento.Nome</h5>
-                            <br />
-                            <div class="form-group">
-                                <label for="Titulo">Título</label>
-                                @Html.TextBoxFor(x => x.Titulo, new { @class = "form-control", placeholder = "Título do evento", required = "required" })
-                                @Html.HiddenFor(x => x.ID)
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Descrição</label>
-                                @Html.TextAreaFor(x => x.Descricao, new { @class = "form-control", placeholder = "Escreva sobre o evento aqui!", required = "required", maxlength = "2000", rows = "8" })
-                            </div>
-                            <br />
-                            <h5 class="text-uppercase">Data e Horário</h5>
-                            <br />
-                            <div class="form-row">
-                                <div class="form-group col">
-                                    <label for="inputFuncionamento">De</label>
-                                    @Html.TextBoxFor(x => x.DataDe, "{0:dd/MM/yyyy}", new { @class = "form-control datapicker", placeholder = "Data de ínicio do evento", required = "required" })
+                            <div class="col-md-12 form">
+                                <br />
+                                <h5 class="text-uppercase">Evento de @Estabelecimento.Nome</h5>
+                                <br />
+                                <div class="form-group">
+                                    <label for="Titulo">Título</label>
+                                    @Html.TextBoxFor(x => x.Titulo, new { @class = "form-control", placeholder = "Título do evento", required = "required" })
+                                    @Html.HiddenFor(x => x.ID)
                                 </div>
-                                <div class="form-group col">
-                                    <label>Até</label>
-                                    @Html.TextBoxFor(x => x.DataAte, "{0:dd/MM/yyyy}", new { @class = "form-control datapicker", placeholder = "Data de término do evento", required = "required" })
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col">
-                                    <label>Das</label>
-                                    <div class="input-group mb-2">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">Hrs</div>
-                                        </div>
-                                        @Html.DropDownListFor(x => x.HoraDe, Model.GetHoras(Model.HoraDe), new { @class = "form-control", required = "required" })
-                                    </div>
-                                    <div class="input-group mb-2">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">Min</div>
-                                        </div>
-                                        @Html.DropDownListFor(x => x.MinutoDe, Model.GetMinutos(Model.MinutoDe), new { @class = "form-control", required = "required" })
-                                    </div>
-                                </div>
-                                <div class="form-group col">
-                                    <label>Às</label>
-                                    <div class="input-group mb-2">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">Hrs</div>
-                                        </div>
-                                        @Html.DropDownListFor(x => x.HoraAte, Model.GetHoras(Model.HoraAte), new { @class = "form-control", required = "required" })
-                                    </div>
-                                    <div class="input-group mb-2">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">Min</div>
-                                        </div>
-                                        @Html.DropDownListFor(x => x.MinutoAte, Model.GetMinutos(Model.MinutoAte), new { @class = "form-control", required = "required" })
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <h5 class="text-uppercase">Endereço</h5>
-                            <br />
-                            <div class="form-row">
-                                <div class="form-group col-md-2">
-                                    <label for="inputCep">CEP</label>
-                                    @Html.TextBoxFor(x => Estabelecimento.Endereco.CEP, new { @class = "form-control cep", placeholder = "CEP", @readonly = "readonly" })
-                                    @Html.HiddenFor(x => Estabelecimento.Endereco.IDMunicipio)
-                                </div>
-                                <div class="form-group col">
-                                    <label for="Logradouro">Logradouro</label>
-                                    @Html.TextBoxFor(x => Estabelecimento.Endereco.Logradouro, new { @class = "form-control", placeholder = "Logradouro", @readonly = "readonly" })
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="Numero">Número</label>
-                                    @Html.TextBoxFor(x => Estabelecimento.Endereco.Numero, new { @class = "form-control", placeholder = "Número", @readonly = "readonly" })
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Descrição</label>
+                                    @Html.TextAreaFor(x => x.Descricao, new { @class = "form-control", placeholder = "Escreva sobre o evento aqui!", required = "required", maxlength = "2000", rows = "8" })
                                 </div>
                                 <br />
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col">
-                                    <label for="Bairro">Bairro</label>
-                                    @Html.TextBoxFor(x => Estabelecimento.Endereco.Bairro, new { @class = "form-control", placeholder = "Bairro", @readonly = "readonly" })
+                                <h5 class="text-uppercase">Data e Horário</h5>
+                                <br />
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <label for="inputFuncionamento">De</label>
+                                        @Html.TextBoxFor(x => x.DataDe, "{0:dd/MM/yyyy}", new { @class = "form-control datapicker", placeholder = "Data de ínicio do evento", required = "required" })
+                                    </div>
+                                    <div class="form-group col">
+                                        <label>Até</label>
+                                        @Html.TextBoxFor(x => x.DataAte, "{0:dd/MM/yyyy}", new { @class = "form-control datapicker", placeholder = "Data de término do evento", required = "required" })
+                                    </div>
                                 </div>
-                                <div class="form-group col">
-                                    <label for="Cidade">Cidade</label>
-                                    @Html.TextBoxFor(x => Estabelecimento.Endereco.Cidade, new { @class = "form-control", placeholder = "Cidade", @readonly = "readonly" })
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <label>Das</label>
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">Hrs</div>
+                                            </div>
+                                            @Html.DropDownListFor(x => x.HoraDe, Model.GetHoras(Model.HoraDe), new { @class = "form-control", required = "required" })
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">Min</div>
+                                            </div>
+                                            @Html.DropDownListFor(x => x.MinutoDe, Model.GetMinutos(Model.MinutoDe), new { @class = "form-control", required = "required" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col">
+                                        <label>Às</label>
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">Hrs</div>
+                                            </div>
+                                            @Html.DropDownListFor(x => x.HoraAte, Model.GetHoras(Model.HoraAte), new { @class = "form-control", required = "required" })
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">Min</div>
+                                            </div>
+                                            @Html.DropDownListFor(x => x.MinutoAte, Model.GetMinutos(Model.MinutoAte), new { @class = "form-control", required = "required" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <h5 class="text-uppercase">Endereço</h5>
+                                <br />
+                                <div class="form-row">
+                                    <div class="form-group col-md-2">
+                                        <label for="inputCep">CEP</label>
+                                        @Html.TextBoxFor(x => Estabelecimento.Endereco.CEP, new { @class = "form-control cep", placeholder = "CEP", @readonly = "readonly" })
+                                        @Html.HiddenFor(x => Estabelecimento.Endereco.IDMunicipio)
+                                    </div>
+                                    <div class="form-group col">
+                                        <label for="Logradouro">Logradouro</label>
+                                        @Html.TextBoxFor(x => Estabelecimento.Endereco.Logradouro, new { @class = "form-control", placeholder = "Logradouro", @readonly = "readonly" })
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="Numero">Número</label>
+                                        @Html.TextBoxFor(x => Estabelecimento.Endereco.Numero, new { @class = "form-control", placeholder = "Número", @readonly = "readonly" })
+                                    </div>
+                                    <br />
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <label for="Bairro">Bairro</label>
+                                        @Html.TextBoxFor(x => Estabelecimento.Endereco.Bairro, new { @class = "form-control", placeholder = "Bairro", @readonly = "readonly" })
+                                    </div>
+                                    <div class="form-group col">
+                                        <label for="Cidade">Cidade</label>
+                                        @Html.TextBoxFor(x => Estabelecimento.Endereco.Cidade, new { @class = "form-control", placeholder = "Cidade", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <label for="Complemento">Complemento</label>
+                                        @Html.TextBoxFor(x => Estabelecimento.Endereco.Complemento, new { @class = "form-control", placeholder = "Complemento", @readonly = "readonly" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="Cidade">Estado</label>
+                                        @Html.TextBoxFor(x => Estabelecimento.Endereco.UF, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="form-group text-center">
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col">
-                                    <label for="Complemento">Complemento</label>
-                                    @Html.TextBoxFor(x => Estabelecimento.Endereco.Complemento, new { @class = "form-control", placeholder = "Complemento", @readonly = "readonly" })
+
+                            if (!string.IsNullOrEmpty(ViewBag.Erro))
+                            {
+                                <div class="alert alert-danger">
+                                    <strong>@ViewBag.Erro</strong>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="Cidade">Estado</label>
-                                    @Html.TextBoxFor(x => Estabelecimento.Endereco.UF, new { @class = "form-control", @readonly = "readonly" })
+                            }
+
+                            if (!string.IsNullOrEmpty(ViewBag.Sucesso))
+                            {
+                                <div class="alert alert-success">
+                                    <strong>@ViewBag.Sucesso</strong>
                                 </div>
-                            </div>
-                            <hr>
-                            <div class="form-group text-center">
-                                <button type="submit" class="btn btn-primary">Salvar</button>
-                            </div>
-                        </div>
+                            }
                         }
                     </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -135,57 +149,30 @@
                             <br />
                             <h5 class="text-uppercase">Publicação de @Model.Titulo</h5>
                             <br />
-                            <form class="form">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="inputPassword2" placeholder="Procure por uma publicação">
-                                </div>
-                            </form>
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Visualizações</th>
                                         <th scope="col">Usuários autenticados</th>
                                         <th scope="col">Navegantes</th>
-                                        <th scope="col">Publicação</th>
+                                        <th scope="col">Total de Visualizações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <th scope="row">1</th>
-                                        <td>100</td>
-                                        <td>100</td>
                                         <td>200</td>
-                                        <td>
-                                            <div class="usuario-botao text-right">
-                                                <button type="button" class="btn btn-success btn-sm">Publicar</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
                                         <td>100</td>
-                                        <td>100</td>
-                                        <td>200</td>
-                                        <td>
-                                            <div class="usuario-botao text-right">
-                                                <button type="button" class="btn btn-danger btn-sm">Desativar</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>100</td>
-                                        <td>100</td>
-                                        <td>200</td>
-                                        <td>
-                                            <div class="usuario-botao text-right">
-                                                <button type="button" class="btn btn-danger btn-sm">Desativar</button>
-                                            </div>
-                                        </td>
+                                        <td>300</td>
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="text-center pt-5">
+                                <form action="/Estabelecimento/PublicarEvento/" method="post">
+                                    @Html.Hidden("IDEvento", Model.ID)
+                                    <button type="submit" class="btn btn-primary">Publicar no Nosso Show</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -12,7 +12,7 @@ $(document).ready(function () {
                     $('<td>').text(item.Evento),
                     $('<td>').text(item.Estabelecimento),
                     $('<td>').text(item.Endereco),
-                    $('<td>').append($("<a class='btn btn-primary' href='/estabelecimento/evento/" + item.ID + "'><span class='fa fa-chevron-right'></span> Abrir</a>"))).appendTo('.table');
+                    $('<td>').append($("<a class='btn btn-primary' target='_blank' href='/inicio/evento/" + item.ID + "'><span class='fa fa-chevron-right'></span> Abrir</a>"))).appendTo('.table');
             });
 
             $("#tb-agenda").dataTable({

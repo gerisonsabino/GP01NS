@@ -1,4 +1,5 @@
-﻿using GP01NS.Models;
+﻿using GP01NS.Classes.Util;
+using GP01NS.Models;
 using GP01NSLibrary;
 using Newtonsoft.Json;
 using System;
@@ -68,12 +69,13 @@ namespace GP01NS.Classes.ViewModels
             {
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
-                    var e = db.evento.ToList();
+                    var m = db.usuario_musico.Single(x => x.IDUsuario == this.ID);
+                    var e = m.evento_musico.Where(x => x.Confirmado).ToList();
 
                     var eventos = new List<AgendaJSON>();
 
                     for (int i = 0; i < e.Count; i++)
-                        eventos.Add(new AgendaJSON(e[i]));
+                        eventos.Add(new AgendaJSON(e[i].evento));
 
                     return JsonConvert.SerializeObject(eventos);
                 }
@@ -90,7 +92,7 @@ namespace GP01NS.Classes.ViewModels
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
                     var m = db.usuario_musico.Single(x => x.IDUsuario == this.ID);
-                    var e = m.evento_musico.ToList();
+                    var e = m.evento_musico.Where(x => !x.Confirmado && !x.Recusado).ToList();
 
                     var eventos = new List<ConviteJSON>();
 
@@ -103,6 +105,38 @@ namespace GP01NS.Classes.ViewModels
             catch { }
 
             return string.Empty;
+        }
+
+        public bool ResponderConvite(int idEvento, bool confirmado)
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var c = db.evento_musico.FirstOrDefault(x => x.IDEvento == idEvento && x.IDMusico == this.ID);
+
+                    if (confirmado)
+                    {
+                        c.Confirmado = true;
+                        c.Recusado = false;
+                    }
+                    else
+                    {
+                        c.Confirmado = false;
+                        c.Recusado = true;
+                    }
+
+                    db.ObjectStateManager.ChangeObjectState(c, System.Data.EntityState.Modified);
+                    db.SaveChanges();
+
+                    new MensagemEmail().RespostaConvite(c);
+
+                    return true;
+                }
+            }
+            catch { }
+
+            return false;
         }
 
         private usuario_musico GetMusicoByID(int id) 

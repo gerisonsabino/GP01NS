@@ -143,6 +143,20 @@ namespace GP01NS.Classes.ViewModels
             return string.Empty;
         }
 
+        public int GetConfirmados()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    return db.evento.FirstOrDefault(x => x.ID == this.ID).evento_musico.Count(x => x.Confirmado && !x.Recusado);
+                }
+            }
+            catch { }
+
+            return 0;
+        }
+
         public string GetImagemBanner()
         {
             try
@@ -232,6 +246,36 @@ namespace GP01NS.Classes.ViewModels
                         new MensagemEmail().Convite(this, new MusicoVM(musico.usuario));
                     }
 
+                    db.SaveChanges();
+
+                    return true;
+                }
+            }
+            catch { }
+
+            return false;
+        }
+
+        public bool TogglePublicar()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var evento = db.evento.Single(x => x.ID == this.ID);
+
+                    if (evento.Publicado)
+                    {
+                        evento.Ativo = false;
+                        evento.Publicado = false;
+                    }
+                    else
+                    {
+                        evento.Ativo = true;
+                        evento.Publicado = true;
+                    }
+
+                    db.ObjectStateManager.ChangeObjectState(evento, System.Data.EntityState.Modified);
                     db.SaveChanges();
 
                     return true;

@@ -51,6 +51,7 @@ function initMap() {
 
 function setMarkers(m) {
     var es = document.getElementById("evento").innerHTML;
+    var et = document.getElementById("estabelecimento").innerHTML;
     var e = document.getElementById("endereco").textContent;
     var d = document.getElementById("data").textContent;
     var g = new google.maps.Geocoder();
@@ -80,23 +81,27 @@ function setMarkers(m) {
 function carouselMusicos() {
     var json = JSON.parse($("#MusicosJSON").val());
     var html = "";
+    var any = false;
 
     for (var i = 0; i < json.length; i++) {
         var m = json[i];
 
-        //if (m.Confirmado) {
-        if (true) {
+        if (m.Confirmado) {
+            any = true;
             html += "<div class='carousel-item" + (i == 0 ? " active" : "") + "'>";
             html += "    <img class='d-block w-100' src='" + m.Imagem + "' alt='" + m.Nome + "' />";
             html += "    <div class='carousel-caption d-none d-md-block'>";
-            html += "        <h5><a href='/inicio/musico/" + m.Username + "' style='color: #FFF !important;' target='_blank'>@" + m.Nome + "</a></h5>";
+            html += "        <h5><a href='/inicio/musico/" + m.Username + "' style='color: #FFF !important;' target='_blank'>@" + m.Username + "</a></h5>";
             html += "    </div>";
             html += "</div>";
         }
-
     }
 
     $("#carouselMusicos .carousel-inner").html(html);
+
+    if (!any) {
+        $("#carouselMusicos").hide();
+    }
 
     $("#MusicosJSON").remove();
 }

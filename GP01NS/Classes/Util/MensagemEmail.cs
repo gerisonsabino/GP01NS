@@ -111,6 +111,58 @@ namespace GP01NS.Classes.Util
             return false;
         }
 
+        public bool RespostaConvite(evento_musico c)
+        {
+            string TITULO = string.Empty;
+            string SUBTITULO = string.Empty;
+            string MENSAGEM = string.Empty;
+
+            if (c.Confirmado)
+            {
+                TITULO = "Atração confirmada!";
+                SUBTITULO = c.usuario_musico.NomeArtistico + ", acaba de confirmar presença ao seu evento no Nosso Show.";
+
+                MENSAGEM += "<p style='font-size:17px;font-weight:500;margin:0;padding:0.5em 0;'>";
+                MENSAGEM += "   Ótima notícia! Seu evento " + c.evento.Titulo.ToUpper() + " agora conta com a presença confirmada de " + c.usuario_musico.NomeArtistico.ToUpper() + "."; 
+                MENSAGEM += "</p>";
+                MENSAGEM += "<p style='font-size:17px;font-weight:500;margin:0;padding:0.5em 0;'>";
+                MENSAGEM += "   A partir de agora, é possível publicar seu evento para que todos possam saber. Basta acessar o Nosso Show!";
+                MENSAGEM += "</p>";
+                MENSAGEM += "<p style='font-size:17px;font-weight:500;margin:0;padding:0.5em 0;'>";
+                MENSAGEM += "   <a href='http://nossoshow.gerison.net/inicio/evento/" + c.evento.ID + "'>http://nossoshow.gerison.net/inicio/evento/" + c.evento.ID + "</a>";
+                MENSAGEM += "</p>";
+            }
+            else
+            {
+                TITULO = "Seu convite foi recusado!";
+                SUBTITULO = c.usuario_musico.NomeArtistico + ", não confirmou presença ao seu evento no Nosso Show.";
+
+                MENSAGEM += "<p style='font-size:17px;font-weight:500;margin:0;padding:0.5em 0;'>";
+                MENSAGEM += "   Que pena! Parece que seu evento " + c.evento.Titulo.ToUpper() + " não poderá contar com a presença de " + c.usuario_musico.NomeArtistico.ToUpper() + ".";
+                MENSAGEM += "</p>";
+                MENSAGEM += "<p style='font-size:17px;font-weight:500;margin:0;padding:0.5em 0;'>";
+                MENSAGEM += "   A publicação de seu evento pode ter sido removida caso esteja sem atrações confirmadas. Do contrário, tudo continua como estava. Acesse o Nosso Show para conferir!";
+                MENSAGEM += "</p>";
+                MENSAGEM += "<p style='font-size:17px;font-weight:500;margin:0;padding:0.5em 0;'>";
+                MENSAGEM += "   <a href='http://nossoshow.gerison.net/entrar/'>http://nossoshow.gerison.net/entrar/</a>";
+                MENSAGEM += "</p>";
+            }
+
+            Html = Html.Replace("#TITULO", TITULO);
+            Html = Html.Replace("#SUBTITULO", SUBTITULO);
+            Html = Html.Replace("#MENSAGEM", MENSAGEM);
+
+            try
+            {
+                Email.Enviar(c.evento.usuario_estabelecimento.usuario.Email, "Resposta ao convite - Nosso Show", Html);
+
+                return true;
+            }
+            catch { }
+
+            return false;
+        }
+
         public bool Convite(EventoVM evento, MusicoVM musico)
         {
             string TITULO = "Olá, " + musico.NomeArtistico + "!";

@@ -4,6 +4,7 @@
     ViewBag.Title = Model.Titulo;
     var Usuario = (GP01NS.Classes.ViewModels.UsuarioVM)ViewBag.Usuario;
     var Banner = Model.GetImagemBanner();
+    var Perfil = Model.Estabelecimento.GetImagemPerfil();
 }
 
 <link href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" rel="stylesheet" crossorigin="anonymous" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU">
@@ -37,8 +38,16 @@
                         @Model.Titulo
                         <span class="badge badge-secondary" style="font-size: 0.6rem; font-family: 'Segoe UI', sans-serif">Evento</span>
                     </h2>
+                    <h6 id="estabelecimento">
+                        <small style="color: #000;">Por</small> 
+                        @if (Perfil != "#")
+                        {
+                            <img src="@Perfil" style="width: 40px; height: 40px; border-radius: 50%;" /> 
+                        }
+                        @Model.Estabelecimento.Nome
+                    </h6>
                     <small class="text-uppercase">
-                        <a href="javascript:void(0);">Denúnciar Estabelecimento</a>
+                        <a href="javascript:void(0);">Denúnciar Evento</a>
                     </small>
                 </div>
             </div>
@@ -75,7 +84,7 @@
                         </ul>
                     </div>
                     <div class="col-lg-5 col-sm-12 no-padding">
-                        <strong class="display-5">Avalie este estabelecimento</strong>
+                        <strong class="display-5">Avalie este evento</strong>
                         <div class="nota-4">
                             <span class="voto-1 oi oi-heart"></span>
                             <span class="voto-2 oi oi-heart"></span>
