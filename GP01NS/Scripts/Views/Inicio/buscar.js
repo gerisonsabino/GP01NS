@@ -28,7 +28,7 @@ function pesquisar() {
 
         if (json != "") {
             for (var i = 0; i < json.length; i++) {
-                html += "<div class='resultado-item flex'>";
+                html += "<div class='resultado-item flex' data-json='" + JSON.stringify(json[i]) + "'>";
                 html += "    <div class='resultado-item-imagem arredondado mr-3' style='background-image: url(http://nossoshow.gerison.net" + json[i].Imagem + ")'></div>";
                 html += "    <div class='resultado-item-texto'>";
 
@@ -41,12 +41,15 @@ function pesquisar() {
                         html += "                <span class='badge badge-secondary'>Estabelecimento</span>";
                         html += "            </div>";
                         html += "        </div>";
-                        html += "        <div class='resultado-item-endereco'>" + json[i].Endereco + "</div>";
-                        html += "        <div class='resultado-item-endereco'>";
+                        html += "        <div class='resultado-item-endereco'><span class='oi oi-map-marker'></span>" + json[i].Endereco + " - <a href='#'>Ver no Mapa</a></div>";
+                        html += "        <div class='resultado-item-badges'>";
+
                         var badges = eval(json[i].Badges);
+
                         for (var j = 0; j < badges.length; j++) {
-                            html += "        <span class='badge bg-primary' style='color: #FFF !important; margin-left: 3px;'>" + badges[j] + "</span>";
+                            html += "        <span class='badge bg-primary' style='color: #FFF !important; margin-right: 3px;'>" + badges[j] + "</span>";
                         }
+
                         html += "        </div>";
                         break;
 
@@ -57,7 +60,7 @@ function pesquisar() {
                         html += "                <span class='badge badge-secondary'>Evento</span>";
                         html += "            </div>";
                         html += "        </div>";
-                        html += "        <div class='resultado-item-endereco'>" + json[i].Endereco + "</div>";
+                        html += "        <div class='resultado-item-endereco'><span class='oi oi-map-marker'></span>" + json[i].Endereco + " - <a href='#'>Ver no Mapa</a></div>";
                         html += "        <div class='resultado-item-tipo'>";
                         html += "           <strong>Evento de: </strong> <span style='color: #AAA;'>@" + json[i].Username + "</span>";
                         html += "        </div>";
@@ -71,10 +74,10 @@ function pesquisar() {
                         html += "                <span class='badge badge-secondary'>Músico</span>";
                         html += "            </div>";
                         html += "        </div>";
-                        html += "        <div class='resultado-item-endereco'>";
+                        html += "        <div class='resultado-item-badges'>";
                         var badges = eval(json[i].Badges);
                         for (var j = 0; j < badges.length; j++) {
-                            html += "        <span class='badge bg-primary' style='color: #FFF !important; margin-left: 3px;'>" + badges[j] + "</span>";
+                            html += "        <span class='badge bg-primary' style='color: #FFF !important; margin-right: 3px;'>" + badges[j] + "</span>";
                         }
                         html += "        </div>";
                         break;
@@ -110,6 +113,11 @@ function pesquisar() {
         if (json != "") {
             $(".resultado-item").click(function () {
                 location.href = $(this).find("a").attr("href");
+            });
+
+            $(".resultado-item-endereco").click(function () {
+                setMark($(this).closest(".resultado-item").attr("data-json"));
+                return false;
             });
         }
 
@@ -172,7 +180,6 @@ function getHabilidades() {
                     for (var j = 0; j < Habis.length; j++) {
                         if (Habis[j].TipoHab == tipo.ID) {
                             html += "<option value='" + Habis[j].ID + "'>" + Habis[j].Descricao + "</option>";
-
                         }
                     }
                     html += "</optgroup>";
@@ -244,9 +251,92 @@ function init() {
     });
 }
 
-
 function toggleFiltro() {
     $('.campo-generos').toggle($('#tipo-evento').prop('checked') || $('#tipo-musico').prop('checked'));
     $('.campo-ambientacao').toggle($('#tipo-estabelecimento').prop('checked'));
     $('.campo-habilidades').toggle($('#tipo-musico').prop('checked'));
+}
+
+function setMark(j) {
+    var m = new google.maps.Map(document.getElementById('mapa'), {
+        mapTypeControl: false,
+        streetViewControl: false,
+        rotateControl: true,
+        zoom: 16,
+        scrollwheel: false,
+        clickableIcons: true,
+        disableDefaultUI: false,
+        disableDoubleClickZoom: true,
+        draggable: true,
+        fullscreenControl: false,
+        keyboardShortcuts: false,
+        maxZoom: 18,
+        minZoom: 14,
+        streetViewControl: false,
+        scaleControl: false,
+        mapTypeControl: false,
+        zoomControlOptions: { style: google.maps.ZoomControlStyle.LARGE },
+    });
+
+    var g = new google.maps.Geocoder();
+
+    var end = "Rua Galvão Bueno, 868 - Liberdade - São Paulo, SP - 01506-000";
+    if (j != "" && j != null) {
+        var json = JSON.parse(j);
+        end = json.Endereco;
+    }
+
+
+    g.geocode({ 'address': end }, function (r, s) {
+        if (s == google.maps.GeocoderStatus.OK) {
+            m.setCenter(r[0].geometry.location);
+
+            var marca = new google.maps.Marker({
+                //icon: "http://www.nossoshow.gerison.net/Imagens/Views/Inicio/pin.png",
+                position: r[0].geometry.location,
+                map: m
+            });
+
+            var c = "";
+
+            if (j != "" && j != null) {
+                c += "<h6>";
+                c += "<img style='width: 30px; height: 30px; border-radius: 50%;' src='http://nossoshow.gerison.net" + json.Imagem + "' />";
+                c += "&nbsp;" + json.Nome + "&nbsp;";
+                c += "<span class=\"badge badge-secondary\" style=\"font-size: 0.6rem; font-family: 'Segoe UI', sans-serif !important;\">" + json.Tipo + "</span>";
+                c += "</h6 > ";
+                c += "<p style='margin-bottom: 5px;'>" + json.Endereco + "</p>";
+                if (json.Badges != "" && json.Badges != null) {
+                    var badges = eval(json.Badges);
+                    c += "<p style='margin-bottom: 5px;'>";
+                    for (var k = 0; k < badges.length; k++) {
+                        c += "<span class='badge bg-primary' style='color: #FFF !important; margin-right: 3px;'>" + badges[k] + "</span>";
+                    }
+                    c += "</p>";
+                }
+                c += "<p style='margin-bottom: 0px;'><a href='" + (json.Tipo == "Evento" ? "/inicio/evento/" + json.ID : "/inicio/estabelecimento/" + json.Username) + "'<a href='#'>Ver Perfil</a> | <a href='#' onclick=\"setMark('');\">Minha Localização</a></p > ";
+            }
+            else {
+                c = "<h6>Você</h6>";
+            }
+
+            var infowindow = new google.maps.InfoWindow({
+                content: c
+            });
+
+            marca.addListener('click', function () {
+                infowindow.open(marca.get('map'), marca);
+            });
+
+            infowindow.open(marca.get('map'), marca);
+        }
+        else {
+            var a = document.getElementById("mapa");
+            a.innerHTML = "<h5 class='text-center' style='margin-top: 15%;'>Houve um erro ao carregar o mapa. Por favor, recarregue a página.</h5>";
+        }
+    });
+}
+
+function resetMark() {
+    setMark("");
 }

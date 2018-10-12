@@ -135,6 +135,7 @@
     <Compile Include="Classes\Util\MensagemEmail.cs" />
     <Compile Include="Classes\Util\Requisicao.cs" />
     <Compile Include="Classes\Util\UrlHifenizada.cs" />
+    <Compile Include="Classes\ViewModels\AdministradorVM.cs" />
     <Compile Include="Classes\ViewModels\EnderecoVM.cs" />
     <Compile Include="Classes\ViewModels\Entrar\CadastroVM.cs" />
     <Compile Include="Classes\ViewModels\EstabelecimentoVM.cs" />

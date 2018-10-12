@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace GP01NS.Controllers
 {
-    public class AdministradorController : Controller
+    public class AdministradorController : BaseController
     {
         public ActionResult Index()
         {

@@ -133,7 +133,7 @@ namespace GP01NS.Controllers
                 }
                 else
                 {
-                    ViewBag.Mensagem = "O endereço de e-mail informado já está sendo utilizado.";
+                    ViewBag.Mensagem = "O e-mail informado está sendo utilizado por outro usuário.";
                 }
             }
             else 

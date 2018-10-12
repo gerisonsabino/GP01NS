@@ -41,7 +41,11 @@ function setMarkers(m){
             });
 
             var infowindow = new google.maps.InfoWindow({
-                content: "<h6 style='margin-bottom: 1px;'>Você</h6>"
+                content: "<h6 style='margin-bottom: 3px;'>Você</h6>"
+            });
+
+            marca.addListener('mouseover', function () {
+                infowindow.open(marca.get('map'), marca);
             });
 
             infowindow.open(marca.get('map'), marca);

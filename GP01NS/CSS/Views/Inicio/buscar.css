@@ -206,6 +206,21 @@ main, .container-fluid {
 .resultado-item-endereco {
 	color: #9E9E9E;
 	font-size: 13px;
+    font-weight: 600;
+}
+
+.resultado-item-endereco:hover {
+	color: #6904b7 !important;
+}
+
+span.oi-map-marker {
+    font-size: 11px !important;
+    margin-right: 5px !important;
+}
+
+.resultado-item-badges {
+	color: #9E9E9E;
+	font-size: 13px;
 }
 
 .resultado-item-km {

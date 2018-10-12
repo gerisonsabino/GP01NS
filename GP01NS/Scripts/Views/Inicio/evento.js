@@ -69,6 +69,10 @@ function setMarkers(m) {
                 content: "<h6>" + es + "</h6><strong style='margin-bottom: 5px; display: block;'>" + d + "</strong><p style='margin-bottom: 0px;'>" + e + "</p>"
             });
 
+            marca.addListener('mouseover', function () {
+                infowindow.open(marca.get('map'), marca);
+            });
+
             infowindow.open(marca.get('map'), marca);
         }
         else {
