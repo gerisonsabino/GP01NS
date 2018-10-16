@@ -164,21 +164,15 @@ namespace GP01NS.Controllers
 
                         db.SaveChanges();
 
-                        ViewBag.Nome = u.Nome;
-                        ViewBag.Mensagem = "Sua conta foi confirmada, efetue o acesso para continuar com o cadastro.";
-                        ViewBag.Button = "CONTINUAR";
-                    }
-                    else
-                    {
-                        ViewBag.Nome = "Visitante";
-                        ViewBag.Mensagem = "Este link não é mais válido, para continuar você deve entrar com seu acesso.";
-                        ViewBag.Button = "ENTRAR";
-                    }
+                        ViewBag.Nome = u.Username;
 
-                    return View();
+                        return View();
+                    }
                 }
             }
-            catch { return Redirect("/entrar/"); }
+            catch { }
+
+            return Redirect("/entrar/"); 
         }
 
         public ActionResult RedefinirSenha(string id) 

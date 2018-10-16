@@ -2,121 +2,90 @@
 
 @{
     ViewBag.Title = "Cadastro";
-    Layout = "~/Views/Layout/Entrar/Layout.cshtml";
 }
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <title>@ViewBag.Title | Nosso Show</title>
-    <meta charset=utf-8>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width" name="viewport">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="~/CSS/Views/Entrar/index.css" />
-    <link href="~/Imagens/favicon.ico" rel="icon" type="image/x-icon">
+@using (Html.BeginForm())
+{
+    <a href="http://nossoshow.gerison.net" target="_blank">
+        <img src="~/Imagens/Views/Entrar/logo.png">
+    </a>
 
-    <script src="~/Scripts/jquery.js"></script>
-    <script src="~/Scripts/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script src="~/Scripts/Plugins/inputmask-plugin/jquery.inputmask.bundle.js"></script>
-    <script src="~/Scripts/Plugins/datepicker-plugin/js/bootstrap-datepicker.js"></script>
-    <script src="~/Scripts/Plugins/datepicker-plugin/js/bootstrap-datepicker.pt-BR.js"></script>
-    <script src="~/Scripts/Views/Entrar/index.js"></script>
-</head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-xl-4 col-lg-5 col-sm-9 ml-auto" style="text-align: center">
-                @using (Html.BeginForm())
-                {
-                    <a href="http://nossoshow.gerison.net" target="_blank">
-                        <img src="~/Imagens/Views/Entrar/logo.png">
-                    </a>
-
-                    if (string.IsNullOrEmpty(ViewBag.Sucesso))
-                    {
-                        @Html.HiddenFor(x => x.ID)
-                        @Html.HiddenFor(x => x.Tipo)
-                        <div id="div-cadastro-1" class="active">
-                            <h5 style="font-weight: bold;">Vamos começar?</h5>
-                            <div class="separador">&nbsp;</div>
-                            <p>Que tipo de usuário deseja criar?</p>
-                            <div class="form-group">
-                                <div class="form-group" id="div-buttons-tipo">
-                                    <button class="btn btn-danger" id="tipo-usuario-fa" style="margin-top: 10px; margin-bottom: 0px;" type="button" data-tipo="3">
-                                        <strong>Fã</strong>
-                                    </button>
-                                    <button class="btn btn-danger" id="tipo-usuario-musico" style="margin-top: 10px; margin-bottom: 0px;" type="button" data-tipo="4">
-                                        <strong>Músico</strong>
-                                    </button>
-                                    <button class="btn btn-danger" id="tipo-usuario-local" style="margin-top: 10px; margin-bottom: 15px;" type="button" data-tipo="2">
-                                        <strong>Estabelecimento</strong>
-                                    </button>
-                                </div>
-                            </div>
-                            <a href="/entrar/">← voltar</a>
-                        </div>
-                        <div id="div-cadastro-2">
-                            <h5 style="font-weight: bold;">Agora iremos precisar de alguns dados.</h5>
-                            <div class="separador">&nbsp;</div>
-                            <p>Informe nos campos abaixo seu nome completo e e-mail.</p>
-                            <div class="form-group">
-                                <input id="Nome" name="Nome" class="form-control nome" aria-describedby="emailHelp" required="" type="text" maxlength="150" placeholder="nome" />
-                            </div>
-                            <div class="form-group">
-                                <input name="Email" class="form-control email" id="Email" aria-describedby="emailHelp" autocomplete="off" required="" type="email" maxlength="150" placeholder="e-mail" />
-                            </div>
-                            <button class="btn btn-danger" id="btn-proximo" type="button">
-                                <strong>Próximo</strong>
-                            </button>
-                            <a href="#" id="a-voltar-1">← voltar</a>
-                        </div>
-                        <div id="div-cadastro-3">
-                            <h5 style="font-weight: bold;">Estamos quase concluindo...</h5>
-                            <div class="separador">&nbsp;</div>
-                            <p style="margin-bottom: 16px !important;">Precisamos que crie um usuário e senha para seu perfil.</p>
-                            <div class="form-group">
-                                <input name="Usuario" class="form-control usuario" id="Usuario" aria-describedby="basic-addon1" aria-label="Username" required="" type="text" placeholder="usuário" />
-                            </div>
-                            <div class="form-group">
-                                <input name="Senha" class="form-control senha" id="Senha" aria-describedby="emailHelp" required="" type="password" placeholder="senha" />
-                            </div>
-                            <div class="form-group">
-                                <input name="Confirmacao" class="form-control confirmaSenha" id="Confirmacao" aria-describedby="emailHelp" required="" type="password" placeholder="confirmar senha" />
-                            </div>
-                            <button class="btn btn-danger" type="submit">
-                                <strong>Concluir</strong>
-                            </button>
-                            <a href="#" id="a-voltar-2">← voltar</a>
-                        </div>
-                    }
-
-                    <div id="erro" class="mt-4">
-                        @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
-                        {
-                            <div class="alert alert-danger">
-                                <strong>@ViewBag.Mensagem</strong>
-                            </div>
-                        }
-
-                        @if (!string.IsNullOrEmpty(ViewBag.Sucesso))
-                        {
-                            <div>
-                                <h5 style="font-weight: bold;">Uhuul, concluímos!!</h5>
-                                <div class="separador">&nbsp;</div>
-                                <p style="margin-bottom: 25px !important;">Agora você faz parte do Nosso Show.</p>
-                                <p style="margin-bottom: 25px !important;">Enviamos algumas informações ao seu e-mail, precisamos que nos confirme seu cadastro.</p>
-                                <a style="color: rgb(105, 4, 183);" href="/entrar/">Fazer login</a>
-                            </div>
-                        }
-                    </div>
-                }
+    if (string.IsNullOrEmpty(ViewBag.Sucesso))
+    {
+        @Html.HiddenFor(x => x.ID)
+        @Html.HiddenFor(x => x.Tipo)
+        <div id="div-cadastro-1" class="active">
+            <h5 style="font-weight: bold;">Vamos começar?</h5>
+            <div class="separador">&nbsp;</div>
+            <p>Que tipo de usuário deseja criar?</p>
+            <div class="form-group">
+                <div class="form-group" id="div-buttons-tipo">
+                    <button class="btn btn-danger" id="tipo-usuario-fa" style="margin-top: 10px; margin-bottom: 0px;" type="button" data-tipo="3">
+                        <strong>Fã</strong>
+                    </button>
+                    <button class="btn btn-danger" id="tipo-usuario-musico" style="margin-top: 10px; margin-bottom: 0px;" type="button" data-tipo="4">
+                        <strong>Músico</strong>
+                    </button>
+                    <button class="btn btn-danger" id="tipo-usuario-local" style="margin-top: 10px; margin-bottom: 15px;" type="button" data-tipo="2">
+                        <strong>Estabelecimento</strong>
+                    </button>
+                </div>
             </div>
+            <a href="/entrar/">← voltar</a>
         </div>
+        <div id="div-cadastro-2">
+            <h5 style="font-weight: bold;">Agora iremos precisar de alguns dados.</h5>
+            <div class="separador">&nbsp;</div>
+            <p>Informe nos campos abaixo seu nome completo e e-mail.</p>
+            <div class="form-group">
+                <input id="Nome" name="Nome" class="form-control nome" aria-describedby="emailHelp" required="" type="text" maxlength="150" placeholder="nome" />
+            </div>
+            <div class="form-group">
+                <input name="Email" class="form-control email" id="Email" aria-describedby="emailHelp" autocomplete="off" required="" type="email" maxlength="150" placeholder="e-mail" />
+            </div>
+            <button class="btn btn-danger" id="btn-proximo" type="button">
+                <strong>Próximo</strong>
+            </button>
+            <a href="#" id="a-voltar-1">← voltar</a>
+        </div>
+        <div id="div-cadastro-3">
+            <h5 style="font-weight: bold;">Estamos quase concluindo...</h5>
+            <div class="separador">&nbsp;</div>
+            <p style="margin-bottom: 16px !important;">Precisamos que crie um usuário e senha para seu perfil.</p>
+            <div class="form-group">
+                <input name="Usuario" class="form-control usuario" id="Usuario" aria-describedby="basic-addon1" aria-label="Username" required="" type="text" placeholder="usuário" />
+            </div>
+            <div class="form-group">
+                <input name="Senha" class="form-control senha" id="Senha" aria-describedby="emailHelp" required="" type="password" placeholder="senha" />
+            </div>
+            <div class="form-group">
+                <input name="Confirmacao" class="form-control confirmaSenha" id="Confirmacao" aria-describedby="emailHelp" required="" type="password" placeholder="confirmar senha" />
+            </div>
+            <button class="btn btn-danger" type="submit">
+                <strong>Concluir</strong>
+            </button>
+            <a href="#" id="a-voltar-2">← voltar</a>
+        </div>
+    }
+
+    <div id="erro" class="mt-4">
+        @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+        {
+            <div class="alert alert-danger">
+                <strong>@ViewBag.Mensagem</strong>
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(ViewBag.Sucesso))
+        {
+            <div>
+                <h5 style="font-weight: bold;">Uhuul, concluímos!!</h5>
+                <div class="separador">&nbsp;</div>
+                <p style="margin-bottom: 25px !important;">Agora você faz parte do Nosso Show.</p>
+                <p style="margin-bottom: 25px !important;">Enviamos algumas informações ao seu e-mail, precisamos que nos confirme seu cadastro.</p>
+                <a style="color: rgb(105, 4, 183);" href="/entrar/">Fazer login</a>
+            </div>
+        }
     </div>
-    <script src="~/Scripts/form_main.js"></script>
-    <script src="~/Scripts/Views/Entrar/cadastro.js"></script>
-</body>
-</html>
+}
+<script src="~/Scripts/Views/Entrar/cadastro.js"></script>

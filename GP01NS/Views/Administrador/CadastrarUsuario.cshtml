@@ -1,0 +1,85 @@
+﻿@model GP01NS.Classes.ViewModels.Entrar.CadastroVM
+
+@{
+    ViewBag.Title = "Cadastrar Usuário";
+}
+
+<div class="container-fluid">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(x => x.ID)
+        <div id="div-cadastro-2">
+            <div class="form-group">
+                <label>Nome</label>
+                <input id="Nome" name="Nome" class="form-control nome" aria-describedby="emailHelp" required="" type="text" maxlength="150" placeholder="nome" />
+            </div>
+            <div class="form-group">
+                <label>E-mail</label>
+                <input name="Email" class="form-control email" id="Email" aria-describedby="emailHelp" autocomplete="off" required="" type="email" maxlength="150" placeholder="e-mail" />
+            </div>
+        </div>
+        <div id="div-cadastro-3">
+            <div class="form-group">
+                <label>Usuário</label>
+                <input name="Usuario" class="form-control usuario" id="Usuario" aria-describedby="basic-addon1" aria-label="Username" required="" type="text" placeholder="usuário" />
+            </div>
+            <div class="form-group">
+                <label>Senha</label>
+                <input name="Senha" class="form-control senha" id="Senha" aria-describedby="emailHelp" required="" type="text" placeholder="senha" />
+            </div>
+            <div class="form-group">
+                <label>Tipo</label>
+                <select id="Tipo" name="Tipo" class="form-control">
+                    <option value="1">ADMINISTRADOR</option>
+                    <option value="2">ESTABELECIMENTO (Teste)</option>
+                    <option value="3">FÃ (Teste)</option>
+                    <option value="4">MÚSICO (Teste)</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" type="submit">
+                <strong>Salvar</strong>
+            </button>
+             <button class="btn btn-danger" id="btn-gerar" type="button">
+                <strong>Gerar Usuário</strong>
+            </button>
+        </div>
+
+        <div id="erro" class="mt-4">
+            @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+            {
+                <div class="alert alert-danger">
+                    <strong>@ViewBag.Mensagem</strong>
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(ViewBag.Sucesso))
+            {
+                <div class="alert alert-success">
+                    <strong>@ViewBag.Sucesso</strong>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#btn-gerar").click(gerarUsuario);
+    });
+
+    function gerarUsuario() {
+        $.ajax({
+            url: 'https://randomuser.me/api/?nat=us',
+            dataType: 'json',
+            success: function (data) {
+                var json = eval(data);
+                var obj = json.results[0];
+
+                $("#Nome").val(obj.name.first + " " + obj.name.last);
+                $("#Email").val(obj.email);
+                $("#Usuario").val(obj.login.username);
+                $("#Senha").val(obj.login.password);
+            }
+        });
+    }
+</script>

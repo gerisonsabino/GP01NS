@@ -70,12 +70,14 @@ namespace GP01NS.Classes.ViewModels.Entrar
                     {
                         Ativo = true,
                         Confirmado = false,
+                        Teste = false,
                         Cadastro = data,
                         Email = this.Email,
                         Username = this.Usuario,
                         Nascimento = DateTime.MinValue,
                         Nome = this.Nome,
                         Senha = Criptografia.GetHash128(this.Senha),
+                        SenhaTeste = string.Empty,
                         Telefone = string.Empty,
                         Tipo = db.usuario_tipo.First(x => x.ID == this.Tipo).ID
                     };
@@ -86,6 +88,43 @@ namespace GP01NS.Classes.ViewModels.Entrar
                     var req = new Requisicao(u, 2);
                     
                     req.SaveChanges();
+
+                    return true;
+                }
+            }
+            catch { return false; }
+        }
+
+        public bool SaveChangesAdmin()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var data = DateTime.Now;
+
+                    var u = new usuario
+                    {
+                        Ativo = true,
+                        Confirmado = true,
+                        Cadastro = data,
+                        Email = this.Email,
+                        Username = this.Usuario,
+                        Nascimento = DateTime.MinValue,
+                        Nome = this.Nome,
+                        Senha = Criptografia.GetHash128(this.Senha),
+                        SenhaTeste = this.Senha,
+                        Telefone = string.Empty,
+                        Tipo = db.usuario_tipo.First(x => x.ID == this.Tipo).ID
+                    };
+
+                    if (Tipo != 1)
+                        u.Teste = true;
+                    else
+                        u.Teste = false;
+
+                    db.usuario.AddObject(u);
+                    db.SaveChanges();
 
                     return true;
                 }

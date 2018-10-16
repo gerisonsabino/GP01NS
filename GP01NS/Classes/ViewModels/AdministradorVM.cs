@@ -14,13 +14,39 @@ namespace GP01NS.Classes.ViewModels
 
         public AdministradorVM(usuario usuario) : base(usuario) { }
 
+        public string GetAdministradoresJSON()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    List<usuario> usuarios = db.usuario.Where(x => x.Tipo == 1).OrderBy(x => x.ID).ToList();
+                    var lista = new List<UsuarioJSON>();
+
+                    for (int i = 0; i < usuarios.Count; i++)
+                    {
+                        var at = usuarios[i];
+
+                        var u = new UsuarioJSON(at);
+
+                        lista.Add(u);
+                    }
+
+                    return JsonConvert.SerializeObject(lista);
+                }
+            }
+            catch { }
+
+            return string.Empty;
+        }
+
         public string GetEstabelecimentosJSON()
         {
             try
             {
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
-                    List<usuario> usuarios = db.usuario.Where(x => x.Tipo == 2).OrderBy(x => x.ID).ToList();
+                    List<usuario> usuarios = db.usuario.Where(x => x.Tipo == 2 && !x.Teste).OrderBy(x => x.ID).ToList();
 
                     var lista = new List<UsuarioJSON>();
 
@@ -47,7 +73,7 @@ namespace GP01NS.Classes.ViewModels
             {
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
-                    List<usuario> usuarios = db.usuario.Where(x => x.Tipo == 3).OrderBy(x => x.ID).ToList();
+                    List<usuario> usuarios = db.usuario.Where(x => x.Tipo == 3 && !x.Teste).OrderBy(x => x.ID).ToList();
                     var lista = new List<UsuarioJSON>();
 
                     for (int i = 0; i < usuarios.Count; i++)
@@ -73,7 +99,33 @@ namespace GP01NS.Classes.ViewModels
             {
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
-                    List<usuario> usuarios = db.usuario.Where(x => x.Tipo == 4).OrderBy(x => x.ID).ToList();
+                    List<usuario> usuarios = db.usuario.Where(x => x.Tipo == 4 && !x.Teste).OrderBy(x => x.ID).ToList();
+                    var lista = new List<UsuarioJSON>();
+
+                    for (int i = 0; i < usuarios.Count; i++)
+                    {
+                        var at = usuarios[i];
+
+                        var u = new UsuarioJSON(at);
+
+                        lista.Add(u);
+                    }
+
+                    return JsonConvert.SerializeObject(lista);
+                }
+            }
+            catch { }
+
+            return string.Empty;
+        }
+
+        public string GetUsuariosDeTesteJSON()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    List<usuario> usuarios = db.usuario.Where(x => x.Teste).OrderBy(x => x.ID).ToList();
                     var lista = new List<UsuarioJSON>();
 
                     for (int i = 0; i < usuarios.Count; i++)
@@ -103,6 +155,7 @@ namespace GP01NS.Classes.ViewModels
                 this.Status = at.Ativo ? "Ativo" : "Inativo";
                 this.Tipo = at.usuario_tipo.Descricao;
                 this.Username = at.Username;
+                this.Senha = at.SenhaTeste;
             }
 
             public string Cadastro { get; set; }
@@ -111,6 +164,7 @@ namespace GP01NS.Classes.ViewModels
             public string Status { get; set; }
             public string Tipo { get; set; }
             public string Username { get; set; }
+            public string Senha { get; set; }
         }
     }
 

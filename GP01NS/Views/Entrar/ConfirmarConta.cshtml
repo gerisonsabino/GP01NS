@@ -1,25 +1,14 @@
 ﻿@{
     ViewBag.Title = "Confirmar Conta";
-    Layout = "~/Views/Layout/Entrar/Layout.cshtml";
 }
 
-<link href="~/CSS/Views/entrar/confirmar-conta.css" rel="stylesheet" />
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-3 col-xl-3 img"></div>
-        <div class="col-md-9 col-12 col-lg-9 ml-auto mr-auto form">
-            <div class="col-md-7 ml-auto mr-auto">
-                <div class="form-group text-center">
-                    <div class=" text-center">
-                        <h1 class="display-4">Olá, @ViewBag.Nome! =)</h1>
-                        <br>
-                        <p class="display-5">@ViewBag.Mensagem</p>
-                        <hr>
-                        <a class="btn btn-primary" href="/entrar/" role="button">@ViewBag.Button</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@using (Html.BeginForm())
+{
+    <a  target="_blank" href="http://www.nossoshow.gerison.net">
+        <img src="~/Imagens/Views/Entrar/logo.png">
+    </a>
+    <h5 style="font-weight: bold;" >@("@" + ViewBag.Nome)</h5>
+    <div class="separador">&nbsp;</div>
+    <p>Sua conta foi confirmada, efetue login para continuar com o cadastro.</p>                  
+    <a href="/entrar/" style='color:#6904b7;'>Fazer login</a>    
+}

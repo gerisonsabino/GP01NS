@@ -45,19 +45,11 @@
         <div class="row">
             <div class="col-md-12 cabeca">
                 <header class="cabecalho">
-                    <img src="~/Imagens/Views/Inicio/002-logo.svg" alt="">
-                    @if (Usuario == null)
-                    {
-                        <a href="/entrar/" class="link btn-ent float-right fonteMilk">entrar</a>
-                    }
-                    else
-                    {
-                        <a href="/inicio/buscar/" class="link btn-ent float-right fonteMilk">@("@" + Usuario.Username)</a>
-                    }
+                    <img src="~/Imagens/Views/logo-marca.svg" alt="" class="logoTopo">
+                    <a href="/entrar/" class="link btn-ent float-right fonteMilk ">entrar</a>
                 </header>
                 <section class="conteudo">
-                    <h1 class="fonteMilk" style="margin-top:5%;">
-                        Frequente estabelecimentos,<br>
+                    <h1 class="fonteMilk">Frequente estabelecimento,<br>
                         encontre músicos,<br>
                         divirta-se.
                     </h1>
@@ -66,20 +58,20 @@
                     <div class="detalhe float-left"></div>
                     <p class="fonteHumnst" style="font-size:22px;">Transforme momentos em história, participe de eventos no Nosso Show.</p>
                 </section>
-                <section class="conteudo" style="padding-top:100px;">
+                <section class="conteudo">
                     <a href="/inicio/buscar/" class="link btn-at fonteMilk ">PROCURAR EVENTO</a>
                 </section>
             </div>
             <footer class="col-md-12">
                 <section class="footer-conteudo">
-                    <nav class="fonteHumnst float-left">
+                    <nav class="fonteHumnst">
                         <ul>
                             <li><a href="#" class="a">Sobre nós</a></li>
                             <li><a href="#" class="a">Ajuda</a></li>
                             <li><a href="#" class="a">Termos e Privacidade</a></li>
                         </ul>
                     </nav>
-                    <img class="float-right" src="~/Imagens/Views/Inicio/logo.png" alt="">
+                    <img class="float-right logoFooter" src="~/Imagens/Views/inicio/logo.png" alt="">                    
                 </section>
             </footer>
         </div>

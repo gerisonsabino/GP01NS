@@ -7,7 +7,6 @@
     font-family: Humnst777LtBT;
     src: url('/CSS/Fonts/Humnst777LtBT.ttf');
 }
-
 .container-fluid, .row, body, html, .cabeca{height: 100%;}
 
 .fonteMilk {
@@ -19,11 +18,9 @@
     font-family: Humnst777LtBT;
 }
 
-
-
 body,
 html {
-    background: url('/Imagens/Views/Inicio/background.png') no-repeat center center;
+    background: url('../../../Imagens/Views/Inicio/background.png') no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -31,45 +28,59 @@ html {
 }
 
 .cabecalho {
-    padding: 30px 87px 0 87px;
+    padding: 50px 87px 0 87px;
 }
 
 .conteudo {
     width: 100%;
-    padding-top: 74px;
+    padding-top:5%;
     padding-left: 15%;    
     padding-right: 20%;
     color: #fff;
+    transition: 0.6s;
 }
 
-img{
-    width: 200px;
+.logoTopo{
+    width: 170px;
     color: #fff;
 }
 
+h1{
+    font-size: 2rem ;
+    margin-top:5%;
+}
+
 .detalhe{
-    height: 64px;
+    height: 66px;
     width: 18px;
     background: #8d36c8;
     border-radius: 50px;
     margin-right: 33px;
 }
 
+P{
+    max-width: 584px;
+    min-width: 49%;
+
+}
+
 .btn-ent {
     background: #fff;
-    padding: 15px 25px;
+    padding: 13px 20px;
     border-radius: 5px;
     color: #7e2ced;
     box-shadow: 0 10px 16px -1px #00000045;
+    font-size: 15px;
 }
 
 .btn-at {
-    background: #fff;
-    padding: 20px 35px;
+	background: -webkit-linear-gradient(23deg, #ffca37 -8%, #f70ada 100%);
+    padding: 15px 30px;
     border-radius: 50px;
-    box-shadow: 0 10px 16px -1px #00000045;
-    color: #7e2ced;
+    box-shadow: 0 10px 16px -1px #0000004;
+    color: #FFF;
     margin-top: 10px;
+    font-size: 15px;
 }
 
 .link:link {
@@ -104,21 +115,30 @@ footer{
     padding: 90px 87px 0 87px;
 }
 
-nav > ul {
-    list-style: none !important;
+.logoFooter{
+    width: 170px;
+    float: right;
 }
 
-nav ul > li {
+nav{
+    float: left;    
+}
+
+nav ul {
+    list-style: none;    
+}
+
+nav ul > li{
     display: inline-block;
     list-style: none;
     margin-right: 36px;
     text-decoration: none;
+    
 }
 
 .a{
     color: #7e2ced;
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 22px;
     text-decoration: none;
 }
 
@@ -126,3 +146,74 @@ nav ul > li {
     color: #7e2ced;
     text-decoration: underline;
 }
+
+/*mobile*/
+@media (max-width: 641px) { 
+
+    *{
+        transition: 0.6s;
+    }
+    .container-fluid, .row, body, html, .cabeca{
+        height: 829px;
+    }
+
+    .detalhe{
+        display: none;
+    }
+
+    h1{
+        font-size: 1.6rem;
+        padding-top:20px ;
+    }
+
+    .conteudo {
+        padding-top: 40px;        
+        padding-right: 0;
+        padding-left: 4%;
+    }
+
+    .cabecalho{
+        padding-left: 4%;
+        padding-right: 4%;
+        padding-top: 10%;
+    }
+
+    .btn-ent {
+        padding: 9px 8px;
+        font-size: 15px;
+    }
+
+    .logoTopo{
+        width: 150px;
+    }
+
+    img.logoFooter{
+        display: none;
+    }
+    
+    .footer-conteudo{
+        text-align: center; 
+        width: 100%;
+        padding-top: 0;
+    }
+
+    nav{
+        float: none;
+    }
+
+    nav > li{
+        display: block;
+        margin-right: 4%;
+        text-decoration: none;
+        width: 100%;
+        padding-bottom: 40px;
+    }    
+
+ }
+
+
+ @media (max-width: 855px) { 
+    img.logoFooter{
+        display: none;
+    }
+ }

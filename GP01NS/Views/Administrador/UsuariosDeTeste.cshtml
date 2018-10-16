@@ -1,0 +1,26 @@
+﻿@model GP01NS.Classes.ViewModels.AdministradorVM
+
+@{
+    ViewBag.Title = "Usuários de Teste";
+}
+
+<div class="container-fluid">
+    <table class="table table-hover" id="tb-usuarios"  data-page-length="50"> 
+        <thead>
+            <tr>
+                <th>#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Usuário</th>
+                <th scope="col">Senha</th>
+                <th scope="col">Status</th> 
+                <th scope="col">Cadastro</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Opções</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    @Html.Hidden("JSON", Model.GetUsuariosDeTesteJSON())
+</div>
+<script src="~/Scripts/Views/Administrador/usuarios-de-teste.js" type="text/javascript"></script>

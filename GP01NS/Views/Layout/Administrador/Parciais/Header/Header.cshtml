@@ -1,0 +1,27 @@
+﻿@{
+	var Conta = new GP01NS.Classes.ViewModels.AdministradorVM((GP01NS.Models.usuario)ViewBag.BaseUsuario);
+	var ImgPerfil = Conta.GetImagemPerfil();
+}
+
+<header class="row">
+    <div class="col-md-6 col-lg-8 col-4 Flex">
+        <div class="Flex mr-auto">
+            <a href="javascript:void(0);" class="MobileMenu" onclick="$('aside').toggleClass('Open')">
+                <span class="fa fa-th"></span>
+            </a>
+            <h4>@ViewBag.Title</h4>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4 col-8 Flex">                
+        @*<div class="Flex ml-auto">
+            <div class="Perfil--image">
+                <img src="@ImgPerfil" alt="@Conta.Username" />   
+            </div>
+            <div class="Perfil--text Flex">
+                <div class="Perfil--email">@Conta.Username</div>
+                <div class="Perfil--name">Administrador</div>
+            </div>
+            <i class="fas fa-caret-down"></i>
+        </div>*@                
+    </div>
+</header>

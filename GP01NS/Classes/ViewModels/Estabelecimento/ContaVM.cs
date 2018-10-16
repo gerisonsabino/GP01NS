@@ -112,7 +112,6 @@ namespace GP01NS.Classes.ViewModels.Estabelecimento
             return null;
         }
 
-
         public SelectList GetDias(int dia) 
         {
             try

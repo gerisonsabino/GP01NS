@@ -1742,10 +1742,8 @@
     <Content Include="CSS\icons-open-iconic-master\svg\yen.svg" />
     <Content Include="CSS\icons-open-iconic-master\svg\zoom-in.svg" />
     <Content Include="CSS\icons-open-iconic-master\svg\zoom-out.svg" />
-    <Content Include="CSS\Views\Entrar\cadastro.css" />
-    <Content Include="CSS\Views\Entrar\confirmar-conta.css" />
-    <Content Include="CSS\Views\Entrar\index - Copy.css" />
-    <Content Include="CSS\Views\Entrar\index.css" />
+    <Content Include="CSS\Views\Administrador\layout.css" />
+    <Content Include="CSS\Views\Entrar\layout.css" />
     <Content Include="CSS\Views\Estabelecimento\conta.css" />
     <Content Include="CSS\Views\Fa\endereco.css" />
     <Content Include="CSS\Views\Fa\seguindo.css" />
@@ -1898,6 +1896,11 @@
     <Content Include="Scripts\Plugins\datepicker-plugin\js\bootstrap-datepicker.pt-BR.js" />
     <Content Include="Scripts\Plugins\inputmask-plugin\jquery.inputmask.bundle.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\Views\Administrador\administradores.js" />
+    <Content Include="Scripts\Views\Administrador\usuarios-de-teste.js" />
+    <Content Include="Scripts\Views\Administrador\musicos.js" />
+    <Content Include="Scripts\Views\Administrador\estabelecimentos.js" />
+    <Content Include="Scripts\Views\Administrador\fas.js" />
     <Content Include="Scripts\Views\Entrar\cadastro.js" />
     <Content Include="Scripts\Views\Entrar\index.js" />
     <Content Include="Scripts\Views\Estabelecimento\evento.js" />
@@ -1925,7 +1928,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Layout\Administrador\Parciais\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -3399,10 +3401,40 @@
     <Content Include="CSS\Fonts\Humnst777LtBT.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Layout\Padrao\Parciais\Menu\Administrador.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Administrador\Fas.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Administrador\Estabelecimentos.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Administrador\Musicos.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Layout\Administrador\Parciais\Menu\Menu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Layout\Administrador\Parciais\Header\Header.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Administrador\CadastrarUsuario.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <EntityDeploy Include="Models\nosso_show.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Administrador\UsuariosDeTeste.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Administrador\Administradores.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Entrar\_ViewStart.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

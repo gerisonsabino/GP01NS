@@ -1,0 +1,44 @@
+﻿@{
+	var Conta = new GP01NS.Classes.ViewModels.AdministradorVM((GP01NS.Models.usuario)ViewBag.BaseUsuario);
+	var ImgPerfil = Conta.GetImagemPerfil();
+}
+
+<nav class="navbar navbar-expand-lg">
+	<div class="navbar-collapse" id="navbarNavDropdown">
+		<ul class="navbar-nav">
+			<li class="nav-item dropdown">
+				<a class="caixa-menu nav-link dropdown" href="javascript:void(0);" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<img src="~/Imagens/Views/menu.svg" />
+				</a>
+				<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+					<li class="nav-item">
+                        <ul>
+                            <li class="nav-item">
+                                <div class="flex">
+                                    <img src="@(ImgPerfil != "#" ? ImgPerfil : "/Imagens/Views/user.svg")" style="width: 25px; height: 25px; margin-right: 5px; border-radius: 25px" />
+                                    @("@" + Conta.Username)
+                                </div>
+                            </li>
+                            <h1>Painel de controle</h1>
+                            <li>
+                                <a class="nav-link" href="/administrador/">Início</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="/administrador/estabelecimentos/">Estabelecimentos</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="/administrador/fas/">Fãs</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="/administrador/musicos/">Músicos</a>
+                            </li>
+                        </ul>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/estabelecimento/sair/">Sair</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</nav>

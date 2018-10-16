@@ -3348,26 +3348,30 @@ namespace GP01NS.Models
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="ativo">Initial value of the Ativo property.</param>
         /// <param name="confirmado">Initial value of the Confirmado property.</param>
+        /// <param name="teste">Initial value of the Teste property.</param>
         /// <param name="cadastro">Initial value of the Cadastro property.</param>
         /// <param name="nascimento">Initial value of the Nascimento property.</param>
         /// <param name="username">Initial value of the Username property.</param>
         /// <param name="nome">Initial value of the Nome property.</param>
         /// <param name="email">Initial value of the Email property.</param>
         /// <param name="senha">Initial value of the Senha property.</param>
+        /// <param name="senhaTeste">Initial value of the SenhaTeste property.</param>
         /// <param name="telefone">Initial value of the Telefone property.</param>
         /// <param name="tipo">Initial value of the Tipo property.</param>
-        public static usuario Createusuario(global::System.Int32 id, global::System.Boolean ativo, global::System.Boolean confirmado, global::System.DateTime cadastro, global::System.DateTime nascimento, global::System.String username, global::System.String nome, global::System.String email, global::System.String senha, global::System.String telefone, global::System.Int32 tipo)
+        public static usuario Createusuario(global::System.Int32 id, global::System.Boolean ativo, global::System.Boolean confirmado, global::System.Boolean teste, global::System.DateTime cadastro, global::System.DateTime nascimento, global::System.String username, global::System.String nome, global::System.String email, global::System.String senha, global::System.String senhaTeste, global::System.String telefone, global::System.Int32 tipo)
         {
             usuario usuario = new usuario();
             usuario.ID = id;
             usuario.Ativo = ativo;
             usuario.Confirmado = confirmado;
+            usuario.Teste = teste;
             usuario.Cadastro = cadastro;
             usuario.Nascimento = nascimento;
             usuario.Username = username;
             usuario.Nome = nome;
             usuario.Email = email;
             usuario.Senha = senha;
+            usuario.SenhaTeste = senhaTeste;
             usuario.Telefone = telefone;
             usuario.Tipo = tipo;
             return usuario;
@@ -3451,6 +3455,30 @@ namespace GP01NS.Models
         private global::System.Boolean _Confirmado;
         partial void OnConfirmadoChanging(global::System.Boolean value);
         partial void OnConfirmadoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Teste
+        {
+            get
+            {
+                return _Teste;
+            }
+            set
+            {
+                OnTesteChanging(value);
+                ReportPropertyChanging("Teste");
+                _Teste = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Teste");
+                OnTesteChanged();
+            }
+        }
+        private global::System.Boolean _Teste;
+        partial void OnTesteChanging(global::System.Boolean value);
+        partial void OnTesteChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3595,6 +3623,30 @@ namespace GP01NS.Models
         private global::System.String _Senha;
         partial void OnSenhaChanging(global::System.String value);
         partial void OnSenhaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String SenhaTeste
+        {
+            get
+            {
+                return _SenhaTeste;
+            }
+            set
+            {
+                OnSenhaTesteChanging(value);
+                ReportPropertyChanging("SenhaTeste");
+                _SenhaTeste = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("SenhaTeste");
+                OnSenhaTesteChanged();
+            }
+        }
+        private global::System.String _SenhaTeste;
+        partial void OnSenhaTesteChanging(global::System.String value);
+        partial void OnSenhaTesteChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
