@@ -53,7 +53,11 @@ namespace GP01NS.Controllers
 
                             base.Session.Add("IDUsuario", Criptografia.Criptografar(u.ID.ToString()));
 
-                            return Redirect("/inicio/buscar/");
+
+                            if (u.Tipo != 1)
+                                return Redirect("/inicio/buscar/");
+                            else
+                                return Redirect("/administrador/");
                         }
                     }
                     else

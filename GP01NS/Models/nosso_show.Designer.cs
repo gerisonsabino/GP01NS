@@ -31,6 +31,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_requisicao_usuario", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario), "requisicao", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.requisicao), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_estabelecimento", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario), "usuario_estabelecimento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_estabelecimento), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_musico", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario), "usuario_musico", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_musico), true)]
+[assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_rede_sociais", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario), "usuario_redes_sociais", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GP01NS.Models.usuario_redes_sociais), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_tipo", "usuario_tipo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario_tipo), "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_estabelecimento_dia_ate", "usuario_estabelecimento_dias", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario_estabelecimento_dias), "usuario_estabelecimento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_estabelecimento), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_estabelecimento_dia_de", "usuario_estabelecimento_dias", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario_estabelecimento_dias), "usuario_estabelecimento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_estabelecimento), true)]
@@ -40,6 +41,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("nosso_showModel", "usuario_endereco", "endereco", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.endereco), "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario))]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "usuario_genero_musical", "genero_musical", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.genero_musical), "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario))]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "usuario_hab_musical", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario), "hab_musical", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.hab_musical))]
+[assembly: EdmRelationshipAttribute("nosso_showModel", "usuario_segue_evento", "evento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.evento), "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario))]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "usuario_segue_usuario", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario), "usuario1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario))]
 
 #endregion
@@ -367,6 +369,22 @@ namespace GP01NS.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<usuario_redes_sociais> usuario_redes_sociais
+        {
+            get
+            {
+                if ((_usuario_redes_sociais == null))
+                {
+                    _usuario_redes_sociais = base.CreateObjectSet<usuario_redes_sociais>("usuario_redes_sociais");
+                }
+                return _usuario_redes_sociais;
+            }
+        }
+        private ObjectSet<usuario_redes_sociais> _usuario_redes_sociais;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<usuario_tipo> usuario_tipo
         {
             get
@@ -518,6 +536,14 @@ namespace GP01NS.Models
         public void AddTousuario_musico(usuario_musico usuario_musico)
         {
             base.AddObject("usuario_musico", usuario_musico);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the usuario_redes_sociais EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTousuario_redes_sociais(usuario_redes_sociais usuario_redes_sociais)
+        {
+            base.AddObject("usuario_redes_sociais", usuario_redes_sociais);
         }
     
         /// <summary>
@@ -1865,6 +1891,28 @@ namespace GP01NS.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<imagem>("nosso_showModel.imagem_evento", "imagem", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "usuario_segue_evento", "usuario")]
+        public EntityCollection<usuario> usuario
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<usuario>("nosso_showModel.usuario_segue_evento", "usuario");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<usuario>("nosso_showModel.usuario_segue_evento", "usuario", value);
                 }
             }
         }
@@ -3798,6 +3846,44 @@ namespace GP01NS.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "FK_usuario_rede_sociais", "usuario_redes_sociais")]
+        public usuario_redes_sociais usuario_redes_sociais
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario_redes_sociais>("nosso_showModel.FK_usuario_rede_sociais", "usuario_redes_sociais").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario_redes_sociais>("nosso_showModel.FK_usuario_rede_sociais", "usuario_redes_sociais").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<usuario_redes_sociais> usuario_redes_sociaisReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario_redes_sociais>("nosso_showModel.FK_usuario_rede_sociais", "usuario_redes_sociais");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<usuario_redes_sociais>("nosso_showModel.FK_usuario_rede_sociais", "usuario_redes_sociais", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "FK_usuario_tipo", "usuario_tipo")]
         public usuario_tipo usuario_tipo
         {
@@ -3936,6 +4022,28 @@ namespace GP01NS.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<hab_musical>("nosso_showModel.usuario_hab_musical", "hab_musical", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "usuario_segue_evento", "evento")]
+        public EntityCollection<evento> evento
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<evento>("nosso_showModel.usuario_segue_evento", "evento");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<evento>("nosso_showModel.usuario_segue_evento", "evento", value);
                 }
             }
         }
@@ -4817,6 +4925,368 @@ namespace GP01NS.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<usuario>("nosso_showModel.FK_usuario_musico", "usuario", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="nosso_showModel", Name="usuario_redes_sociais")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class usuario_redes_sociais : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new usuario_redes_sociais object.
+        /// </summary>
+        /// <param name="iDUsuario">Initial value of the IDUsuario property.</param>
+        /// <param name="deezer">Initial value of the Deezer property.</param>
+        /// <param name="facebook">Initial value of the Facebook property.</param>
+        /// <param name="googlePlus">Initial value of the GooglePlus property.</param>
+        /// <param name="instagram">Initial value of the Instagram property.</param>
+        /// <param name="soundCloud">Initial value of the SoundCloud property.</param>
+        /// <param name="spotify">Initial value of the Spotify property.</param>
+        /// <param name="twitter">Initial value of the Twitter property.</param>
+        /// <param name="youTube">Initial value of the YouTube property.</param>
+        /// <param name="embed">Initial value of the Embed property.</param>
+        /// <param name="tipoUsuario">Initial value of the TipoUsuario property.</param>
+        public static usuario_redes_sociais Createusuario_redes_sociais(global::System.Int32 iDUsuario, global::System.String deezer, global::System.String facebook, global::System.String googlePlus, global::System.String instagram, global::System.String soundCloud, global::System.String spotify, global::System.String twitter, global::System.String youTube, global::System.String embed, global::System.Int32 tipoUsuario)
+        {
+            usuario_redes_sociais usuario_redes_sociais = new usuario_redes_sociais();
+            usuario_redes_sociais.IDUsuario = iDUsuario;
+            usuario_redes_sociais.Deezer = deezer;
+            usuario_redes_sociais.Facebook = facebook;
+            usuario_redes_sociais.GooglePlus = googlePlus;
+            usuario_redes_sociais.Instagram = instagram;
+            usuario_redes_sociais.SoundCloud = soundCloud;
+            usuario_redes_sociais.Spotify = spotify;
+            usuario_redes_sociais.Twitter = twitter;
+            usuario_redes_sociais.YouTube = youTube;
+            usuario_redes_sociais.Embed = embed;
+            usuario_redes_sociais.TipoUsuario = tipoUsuario;
+            return usuario_redes_sociais;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 IDUsuario
+        {
+            get
+            {
+                return _IDUsuario;
+            }
+            set
+            {
+                if (_IDUsuario != value)
+                {
+                    OnIDUsuarioChanging(value);
+                    ReportPropertyChanging("IDUsuario");
+                    _IDUsuario = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("IDUsuario");
+                    OnIDUsuarioChanged();
+                }
+            }
+        }
+        private global::System.Int32 _IDUsuario;
+        partial void OnIDUsuarioChanging(global::System.Int32 value);
+        partial void OnIDUsuarioChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Deezer
+        {
+            get
+            {
+                return _Deezer;
+            }
+            set
+            {
+                OnDeezerChanging(value);
+                ReportPropertyChanging("Deezer");
+                _Deezer = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Deezer");
+                OnDeezerChanged();
+            }
+        }
+        private global::System.String _Deezer;
+        partial void OnDeezerChanging(global::System.String value);
+        partial void OnDeezerChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Facebook
+        {
+            get
+            {
+                return _Facebook;
+            }
+            set
+            {
+                OnFacebookChanging(value);
+                ReportPropertyChanging("Facebook");
+                _Facebook = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Facebook");
+                OnFacebookChanged();
+            }
+        }
+        private global::System.String _Facebook;
+        partial void OnFacebookChanging(global::System.String value);
+        partial void OnFacebookChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String GooglePlus
+        {
+            get
+            {
+                return _GooglePlus;
+            }
+            set
+            {
+                OnGooglePlusChanging(value);
+                ReportPropertyChanging("GooglePlus");
+                _GooglePlus = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("GooglePlus");
+                OnGooglePlusChanged();
+            }
+        }
+        private global::System.String _GooglePlus;
+        partial void OnGooglePlusChanging(global::System.String value);
+        partial void OnGooglePlusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Instagram
+        {
+            get
+            {
+                return _Instagram;
+            }
+            set
+            {
+                OnInstagramChanging(value);
+                ReportPropertyChanging("Instagram");
+                _Instagram = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Instagram");
+                OnInstagramChanged();
+            }
+        }
+        private global::System.String _Instagram;
+        partial void OnInstagramChanging(global::System.String value);
+        partial void OnInstagramChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String SoundCloud
+        {
+            get
+            {
+                return _SoundCloud;
+            }
+            set
+            {
+                OnSoundCloudChanging(value);
+                ReportPropertyChanging("SoundCloud");
+                _SoundCloud = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("SoundCloud");
+                OnSoundCloudChanged();
+            }
+        }
+        private global::System.String _SoundCloud;
+        partial void OnSoundCloudChanging(global::System.String value);
+        partial void OnSoundCloudChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Spotify
+        {
+            get
+            {
+                return _Spotify;
+            }
+            set
+            {
+                OnSpotifyChanging(value);
+                ReportPropertyChanging("Spotify");
+                _Spotify = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Spotify");
+                OnSpotifyChanged();
+            }
+        }
+        private global::System.String _Spotify;
+        partial void OnSpotifyChanging(global::System.String value);
+        partial void OnSpotifyChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Twitter
+        {
+            get
+            {
+                return _Twitter;
+            }
+            set
+            {
+                OnTwitterChanging(value);
+                ReportPropertyChanging("Twitter");
+                _Twitter = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Twitter");
+                OnTwitterChanged();
+            }
+        }
+        private global::System.String _Twitter;
+        partial void OnTwitterChanging(global::System.String value);
+        partial void OnTwitterChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String YouTube
+        {
+            get
+            {
+                return _YouTube;
+            }
+            set
+            {
+                OnYouTubeChanging(value);
+                ReportPropertyChanging("YouTube");
+                _YouTube = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("YouTube");
+                OnYouTubeChanged();
+            }
+        }
+        private global::System.String _YouTube;
+        partial void OnYouTubeChanging(global::System.String value);
+        partial void OnYouTubeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Embed
+        {
+            get
+            {
+                return _Embed;
+            }
+            set
+            {
+                OnEmbedChanging(value);
+                ReportPropertyChanging("Embed");
+                _Embed = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Embed");
+                OnEmbedChanged();
+            }
+        }
+        private global::System.String _Embed;
+        partial void OnEmbedChanging(global::System.String value);
+        partial void OnEmbedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TipoUsuario
+        {
+            get
+            {
+                return _TipoUsuario;
+            }
+            set
+            {
+                if (_TipoUsuario != value)
+                {
+                    OnTipoUsuarioChanging(value);
+                    ReportPropertyChanging("TipoUsuario");
+                    _TipoUsuario = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("TipoUsuario");
+                    OnTipoUsuarioChanged();
+                }
+            }
+        }
+        private global::System.Int32 _TipoUsuario;
+        partial void OnTipoUsuarioChanging(global::System.Int32 value);
+        partial void OnTipoUsuarioChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "FK_usuario_rede_sociais", "usuario")]
+        public usuario usuario
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario>("nosso_showModel.FK_usuario_rede_sociais", "usuario").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario>("nosso_showModel.FK_usuario_rede_sociais", "usuario").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<usuario> usuarioReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario>("nosso_showModel.FK_usuario_rede_sociais", "usuario");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<usuario>("nosso_showModel.FK_usuario_rede_sociais", "usuario", value);
                 }
             }
         }

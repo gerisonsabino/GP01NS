@@ -29,6 +29,8 @@
           <EntitySet Name="usuario_genero_musical" EntityType="nosso_showModel.Store.usuario_genero_musical" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="usuario_hab_musical" EntityType="nosso_showModel.Store.usuario_hab_musical" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="usuario_musico" EntityType="nosso_showModel.Store.usuario_musico" store:Type="Tables" Schema="nosso_show" />
+          <EntitySet Name="usuario_redes_sociais" EntityType="nosso_showModel.Store.usuario_redes_sociais" store:Type="Tables" Schema="nosso_show" />
+          <EntitySet Name="usuario_segue_evento" EntityType="nosso_showModel.Store.usuario_segue_evento" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="usuario_segue_usuario" EntityType="nosso_showModel.Store.usuario_segue_usuario" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="usuario_tipo" EntityType="nosso_showModel.Store.usuario_tipo" store:Type="Tables" Schema="nosso_show" />
           <AssociationSet Name="FK_autenticacao_usuario" Association="nosso_showModel.Store.FK_autenticacao_usuario">
@@ -134,6 +136,18 @@
           <AssociationSet Name="FK_usuario_musico" Association="nosso_showModel.Store.FK_usuario_musico">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="usuario_musico" EntitySet="usuario_musico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_rede_sociais" Association="nosso_showModel.Store.FK_usuario_rede_sociais">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_redes_sociais" EntitySet="usuario_redes_sociais" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_segue_evento" Association="nosso_showModel.Store.FK_usuario_segue_evento">
+            <End Role="evento" EntitySet="evento" />
+            <End Role="usuario_segue_evento" EntitySet="usuario_segue_evento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_segue_evento_usuario" Association="nosso_showModel.Store.FK_usuario_segue_evento_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_segue_evento" EntitySet="usuario_segue_evento" />
           </AssociationSet>
           <AssociationSet Name="FK_usuario_seguido" Association="nosso_showModel.Store.FK_usuario_seguido">
             <End Role="usuario" EntitySet="usuario" />
@@ -409,6 +423,33 @@
           <Property Name="Descricao" Type="varchar" Nullable="false" MaxLength="500" />
           <Property Name="IDUsuario" Type="int" Nullable="false" />
           <Property Name="TipoUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario_redes_sociais">
+          <Key>
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="TipoUsuario" />
+          </Key>
+          <Property Name="IDUsuario" Type="int" Nullable="false" />
+          <Property Name="Deezer" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="Facebook" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="GooglePlus" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="Instagram" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="SoundCloud" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="Spotify" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="Twitter" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="YouTube" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="Embed" Type="text" Nullable="false" />
+          <Property Name="TipoUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario_segue_evento">
+          <Key>
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="TipoUsuario" />
+            <PropertyRef Name="IDEvento" />
+          </Key>
+          <Property Name="IDUsuario" Type="int" Nullable="false" />
+          <Property Name="TipoUsuario" Type="int" Nullable="false" />
+          <Property Name="IDEvento" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="usuario_segue_usuario">
           <Key>
@@ -777,6 +818,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_usuario_rede_sociais">
+          <End Role="usuario" Type="nosso_showModel.Store.usuario" Multiplicity="1" />
+          <End Role="usuario_redes_sociais" Type="nosso_showModel.Store.usuario_redes_sociais" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="usuario_redes_sociais">
+              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="TipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_segue_evento">
+          <End Role="evento" Type="nosso_showModel.Store.evento" Multiplicity="1" />
+          <End Role="usuario_segue_evento" Type="nosso_showModel.Store.usuario_segue_evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="evento">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="usuario_segue_evento">
+              <PropertyRef Name="IDEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_segue_evento_usuario">
+          <End Role="usuario" Type="nosso_showModel.Store.usuario" Multiplicity="1" />
+          <End Role="usuario_segue_evento" Type="nosso_showModel.Store.usuario_segue_evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="usuario_segue_evento">
+              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="TipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_usuario_seguido">
           <End Role="usuario" Type="nosso_showModel.Store.usuario" Multiplicity="1" />
           <End Role="usuario_segue_usuario" Type="nosso_showModel.Store.usuario_segue_usuario" Multiplicity="*" />
@@ -840,6 +921,7 @@
           <EntitySet Name="usuario_estabelecimento" EntityType="nosso_showModel.usuario_estabelecimento" />
           <EntitySet Name="usuario_estabelecimento_dias" EntityType="nosso_showModel.usuario_estabelecimento_dias" />
           <EntitySet Name="usuario_musico" EntityType="nosso_showModel.usuario_musico" />
+          <EntitySet Name="usuario_redes_sociais" EntityType="nosso_showModel.usuario_redes_sociais" />
           <EntitySet Name="usuario_tipo" EntityType="nosso_showModel.usuario_tipo" />
           <AssociationSet Name="FK_usuario_estabelecimento_ambientacao" Association="nosso_showModel.FK_usuario_estabelecimento_ambientacao">
             <End Role="ambientacao" EntitySet="ambientacao" />
@@ -889,6 +971,10 @@
             <End Role="usuario" EntitySet="usuario" />
             <End Role="usuario_musico" EntitySet="usuario_musico" />
           </AssociationSet>
+          <AssociationSet Name="FK_usuario_rede_sociais" Association="nosso_showModel.FK_usuario_rede_sociais">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_redes_sociais" EntitySet="usuario_redes_sociais" />
+          </AssociationSet>
           <AssociationSet Name="FK_usuario_tipo" Association="nosso_showModel.FK_usuario_tipo">
             <End Role="usuario_tipo" EntitySet="usuario_tipo" />
             <End Role="usuario" EntitySet="usuario" />
@@ -924,6 +1010,10 @@
           <AssociationSet Name="usuario_hab_musical" Association="nosso_showModel.usuario_hab_musical">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="hab_musical" EntitySet="hab_musical" />
+          </AssociationSet>
+          <AssociationSet Name="usuario_segue_evento" Association="nosso_showModel.usuario_segue_evento">
+            <End Role="evento" EntitySet="evento" />
+            <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
           <AssociationSet Name="usuario_segue_usuario" Association="nosso_showModel.usuario_segue_usuario">
             <End Role="usuario" EntitySet="usuario" />
@@ -1000,6 +1090,7 @@
           <NavigationProperty Name="usuario_estabelecimento" Relationship="nosso_showModel.FK_evento_estabelecimento" FromRole="evento" ToRole="usuario_estabelecimento" />
           <NavigationProperty Name="evento_musico" Relationship="nosso_showModel.FK_evento_musico_evento" FromRole="evento" ToRole="evento_musico" />
           <NavigationProperty Name="imagem" Relationship="nosso_showModel.imagem_evento" FromRole="evento" ToRole="imagem" />
+          <NavigationProperty Name="usuario" Relationship="nosso_showModel.usuario_segue_evento" FromRole="evento" ToRole="usuario" />
         </EntityType>
         <EntityType Name="evento_musico">
           <Key>
@@ -1114,12 +1205,14 @@
           <NavigationProperty Name="requisicao" Relationship="nosso_showModel.FK_requisicao_usuario" FromRole="usuario" ToRole="requisicao" />
           <NavigationProperty Name="usuario_estabelecimento" Relationship="nosso_showModel.FK_usuario_estabelecimento" FromRole="usuario" ToRole="usuario_estabelecimento" />
           <NavigationProperty Name="usuario_musico" Relationship="nosso_showModel.FK_usuario_musico" FromRole="usuario" ToRole="usuario_musico" />
+          <NavigationProperty Name="usuario_redes_sociais" Relationship="nosso_showModel.FK_usuario_rede_sociais" FromRole="usuario" ToRole="usuario_redes_sociais" />
           <NavigationProperty Name="usuario_tipo" Relationship="nosso_showModel.FK_usuario_tipo" FromRole="usuario" ToRole="usuario_tipo" />
           <NavigationProperty Name="imagem" Relationship="nosso_showModel.imagem_usuario" FromRole="usuario" ToRole="imagem" />
           <NavigationProperty Name="ambientacao" Relationship="nosso_showModel.usuario_ambientacao" FromRole="usuario" ToRole="ambientacao" />
           <NavigationProperty Name="endereco" Relationship="nosso_showModel.usuario_endereco" FromRole="usuario" ToRole="endereco" />
           <NavigationProperty Name="genero_musical" Relationship="nosso_showModel.usuario_genero_musical" FromRole="usuario" ToRole="genero_musical" />
           <NavigationProperty Name="hab_musical" Relationship="nosso_showModel.usuario_hab_musical" FromRole="usuario" ToRole="hab_musical" />
+          <NavigationProperty Name="evento" Relationship="nosso_showModel.usuario_segue_evento" FromRole="usuario" ToRole="evento" />
           <NavigationProperty Name="usuario1" Relationship="nosso_showModel.usuario_segue_usuario" FromRole="usuario" ToRole="usuario1" />
           <NavigationProperty Name="usuario2" Relationship="nosso_showModel.usuario_segue_usuario" FromRole="usuario1" ToRole="usuario" />
         </EntityType>
@@ -1167,6 +1260,24 @@
           <Property Name="TipoUsuario" Type="Int32" Nullable="false" />
           <NavigationProperty Name="evento_musico" Relationship="nosso_showModel.FK_evento_musico" FromRole="usuario_musico" ToRole="evento_musico" />
           <NavigationProperty Name="usuario" Relationship="nosso_showModel.FK_usuario_musico" FromRole="usuario_musico" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="usuario_redes_sociais">
+          <Key>
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="TipoUsuario" />
+          </Key>
+          <Property Name="IDUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Deezer" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="Facebook" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="GooglePlus" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="Instagram" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="SoundCloud" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="Spotify" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="Twitter" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="YouTube" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="Embed" Type="String" Nullable="false" MaxLength="65535" Unicode="false" FixedLength="false" />
+          <Property Name="TipoUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="usuario" Relationship="nosso_showModel.FK_usuario_rede_sociais" FromRole="usuario_redes_sociais" ToRole="usuario" />
         </EntityType>
         <EntityType Name="usuario_tipo">
           <Key>
@@ -1336,6 +1447,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_usuario_rede_sociais">
+          <End Role="usuario" Type="nosso_showModel.usuario" Multiplicity="1" />
+          <End Role="usuario_redes_sociais" Type="nosso_showModel.usuario_redes_sociais" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="usuario_redes_sociais">
+              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="TipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_usuario_tipo">
           <End Role="usuario_tipo" Type="nosso_showModel.usuario_tipo" Multiplicity="1" />
           <End Role="usuario" Type="nosso_showModel.usuario" Multiplicity="*" />
@@ -1395,6 +1520,10 @@
         <Association Name="usuario_hab_musical">
           <End Role="usuario" Type="nosso_showModel.usuario" Multiplicity="*" />
           <End Role="hab_musical" Type="nosso_showModel.hab_musical" Multiplicity="*" />
+        </Association>
+        <Association Name="usuario_segue_evento">
+          <End Role="evento" Type="nosso_showModel.evento" Multiplicity="*" />
+          <End Role="usuario" Type="nosso_showModel.usuario" Multiplicity="*" />
         </Association>
         <Association Name="usuario_segue_usuario">
           <End Role="usuario" Type="nosso_showModel.usuario" Multiplicity="*" />
@@ -1602,6 +1731,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="usuario_redes_sociais">
+            <EntityTypeMapping TypeName="nosso_showModel.usuario_redes_sociais">
+              <MappingFragment StoreEntitySet="usuario_redes_sociais">
+                <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+                <ScalarProperty Name="Deezer" ColumnName="Deezer" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="GooglePlus" ColumnName="GooglePlus" />
+                <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+                <ScalarProperty Name="SoundCloud" ColumnName="SoundCloud" />
+                <ScalarProperty Name="Spotify" ColumnName="Spotify" />
+                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+                <ScalarProperty Name="YouTube" ColumnName="YouTube" />
+                <ScalarProperty Name="Embed" ColumnName="Embed" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="usuario_tipo">
             <EntityTypeMapping TypeName="nosso_showModel.usuario_tipo">
               <MappingFragment StoreEntitySet="usuario_tipo">
@@ -1668,6 +1814,15 @@
               <ScalarProperty Name="TipoHab" ColumnName="TipoHab" />
             </EndProperty>
           </AssociationSetMapping>
+          <AssociationSetMapping Name="usuario_segue_evento" TypeName="nosso_showModel.usuario_segue_evento" StoreEntitySet="usuario_segue_evento">
+            <EndProperty Name="evento">
+              <ScalarProperty Name="ID" ColumnName="IDEvento" />
+            </EndProperty>
+            <EndProperty Name="usuario">
+              <ScalarProperty Name="ID" ColumnName="IDUsuario" />
+              <ScalarProperty Name="Tipo" ColumnName="TipoUsuario" />
+            </EndProperty>
+          </AssociationSetMapping>
           <AssociationSetMapping Name="usuario_segue_usuario" TypeName="nosso_showModel.usuario_segue_usuario" StoreEntitySet="usuario_segue_usuario">
             <EndProperty Name="usuario">
               <ScalarProperty Name="ID" ColumnName="IDSeguido" />
@@ -1699,164 +1854,163 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="nosso_show">
-        <EntityTypeShape EntityType="nosso_showModel.ambientacao" Width="1.5" PointX="0.75" PointY="9.875" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.autenticacao" Width="1.5" PointX="5.25" PointY="5.125" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.endereco" Width="1.5" PointX="0.75" PointY="4.75" Height="3.5186979166666648" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.endereco_uf" Width="1.5" PointX="1.5" PointY="1.625" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.evento" Width="1.5" PointX="7.5" PointY="8.5" Height="4.480205078125" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.evento_musico" Width="1.5" PointX="9.75" PointY="12.75" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.genero_musical" Width="1.5" PointX="0.75" PointY="13" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.hab_musical" Width="1.5" PointX="5.25" PointY="13.75" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.hab_musical_tipo" Width="1.5" PointX="3" PointY="15" Height="1.5956835937500014" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.imagem" Width="1.5" PointX="9.75" PointY="9.625" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.imagem_tipo" Width="1.5" PointX="7.5" PointY="14" Height="1.5956835937500031" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.requisicao" Width="1.5" PointX="8.25" PointY="4.375" Height="2.7494921875000031" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.requisicao_tipo" Width="1.5" PointX="6" PointY="2" Height="1.5956835937500031" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario" Width="1.5" PointX="3" PointY="7.875" Height="5.8263151041666674" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento" Width="1.5" PointX="5.25" PointY="8.875" Height="3.903300781249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento_dias" Width="1.5" PointX="3" PointY="4.375" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario_musico" Width="1.5" PointX="5.25" PointY="17.25" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario_tipo" Width="1.5" PointX="0.75" PointY="15.25" Height="1.5956835937500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.ambientacao" Width="1.5" PointX="0.75" PointY="9.125" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.autenticacao" Width="1.5" PointX="9.75" PointY="3.875" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.endereco" Width="1.5" PointX="5.25" PointY="4.5" Height="3.5186979166666656" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.endereco_uf" Width="1.5" PointX="3" PointY="5.375" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.evento" Width="1.5" PointX="5.25" PointY="12.25" Height="4.6725065104166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.evento_musico" Width="1.5" PointX="7.5" PointY="13.125" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.genero_musical" Width="1.5" PointX="5.25" PointY="8.75" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.hab_musical" Width="1.5" PointX="12.75" PointY="7.5" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.hab_musical_tipo" Width="1.5" PointX="10.5" PointY="21.75" Height="1.595683593749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.imagem" Width="1.5" PointX="10.5" PointY="13.375" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.imagem_tipo" Width="1.5" PointX="8.25" PointY="21.75" Height="1.5956835937500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.requisicao" Width="1.5" PointX="12.75" PointY="3.125" Height="2.7494921875000031" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.requisicao_tipo" Width="1.5" PointX="10.5" PointY="0.75" Height="1.5956835937500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario" Width="1.5" PointX="7.5" PointY="5.5" Height="6.210917968749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento" Width="1.5" PointX="3" PointY="12.625" Height="3.903300781249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento_dias" Width="1.5" PointX="0.75" PointY="13.625" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_musico" Width="1.5" PointX="9.75" PointY="10" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_redes_sociais" Width="1.5" PointX="9.75" PointY="17.125" Height="3.3263964843750031" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_tipo" Width="1.5" PointX="5.25" PointY="18" Height="1.5956835937500031" IsExpanded="true" />
         <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento_ambientacao" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="10.768992513020834" />
-          <ConnectorPoint PointX="2.75" PointY="10.768992513020834" />
-          <ConnectorPoint PointX="2.75" PointY="7.625" />
-          <ConnectorPoint PointX="4.666666666666667" PointY="7.6249999999999991" />
-          <ConnectorPoint PointX="4.833333333333333" PointY="7.625" />
-          <ConnectorPoint PointX="4.885416666666667" PointY="7.6249999999999991" />
-          <ConnectorPoint PointX="5.145833333333333" PointY="7.625" />
-          <ConnectorPoint PointX="6" PointY="7.625" />
-          <ConnectorPoint PointX="6" PointY="8.875" />
+          <ConnectorPoint PointX="2.25" PointY="10.018992513020834" />
+          <ConnectorPoint PointX="3.75" PointY="10.018992513020834" />
+          <ConnectorPoint PointX="3.75" PointY="12.625" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_autenticacao_usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="7.875" />
-          <ConnectorPoint PointX="4.875" PointY="7.5" />
-          <ConnectorPoint PointX="4.875" PointY="7.672587890625" />
-          <ConnectorPoint PointX="4.90982443490112" PointY="7.6377634557238778" />
-          <ConnectorPoint PointX="5.1214255650988791" PointY="7.42616232552612" />
-          <ConnectorPoint PointX="5.25" PointY="7.297587890625" />
+          <ConnectorPoint PointX="9" PointY="5.7737939453125" />
+          <ConnectorPoint PointX="9.75" PointY="5.7737939453125" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_endereco_uf" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.875" PointY="3.2206835937499996" />
-          <ConnectorPoint PointX="1.875" PointY="4.75" />
+          <ConnectorPoint PointX="4.5" PointY="6.172841796875" />
+          <ConnectorPoint PointX="5.25" PointY="6.172841796875" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_evento_estabelecimento" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="10.826650390624998" />
-          <ConnectorPoint PointX="7.5" PointY="10.826650390624998" />
+          <ConnectorPoint PointX="4.5" PointY="14.576650390624998" />
+          <ConnectorPoint PointX="5.25" PointY="14.576650390624998" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_evento_musico_evento" ManuallyRouted="false">
-          <ConnectorPoint PointX="9" PointY="12.980205078125" />
-          <ConnectorPoint PointX="9.1598244349011217" PointY="13.14002951302612" />
-          <ConnectorPoint PointX="9.2776755650988783" PointY="13.257880643223878" />
-          <ConnectorPoint PointX="9.375" PointY="13.355205078125" />
-          <ConnectorPoint PointX="9.375" PointY="12.375" />
-          <ConnectorPoint PointX="9.5035744349011217" PointY="12.50357443490112" />
-          <ConnectorPoint PointX="9.6214255650988783" PointY="12.621425565098878" />
-          <ConnectorPoint PointX="9.75" PointY="12.75" />
+          <ConnectorPoint PointX="6.75" PointY="14.49974609375" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="14.49974609375" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="14.49974609375" />
+          <ConnectorPoint PointX="7.5" PointY="14.49974609375" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_evento_musico" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="18.432444661458334" />
-          <ConnectorPoint PointX="10.5" PointY="18.432444661458334" />
-          <ConnectorPoint PointX="10.5" PointY="15.4994921875" />
+          <ConnectorPoint PointX="10.09375" PointY="12.364889322916667" />
+          <ConnectorPoint PointX="10.09375" PointY="13.21875" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="13.21875" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="13.21875" />
+          <ConnectorPoint PointX="9" PointY="13.21875" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_hab_musical_tipo" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="15.365143229166666" />
-          <ConnectorPoint PointX="4.822916666666667" PointY="15.365143229166666" />
-          <ConnectorPoint PointX="4.989583333333333" PointY="15.365143229166666" />
-          <ConnectorPoint PointX="5.25" PointY="15.365143229166666" />
+          <ConnectorPoint PointX="12" PointY="22.547841796874998" />
+          <ConnectorPoint PointX="13.5" PointY="22.547841796874998" />
+          <ConnectorPoint PointX="13.5" PointY="9.4802864583333317" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_imagem_tipo1" ManuallyRouted="false">
-          <ConnectorPoint PointX="9" PointY="14.062306692307692" />
-          <ConnectorPoint PointX="9.5625" PointY="13.499806692307693" />
-          <ConnectorPoint PointX="9.5625" PointY="10.807444661458334" />
-          <ConnectorPoint PointX="9.75" PointY="10.807444661458334" />
+          <ConnectorPoint PointX="9" PointY="21.75" />
+          <ConnectorPoint PointX="9" PointY="16.1244921875" />
+          <ConnectorPoint PointX="9.25" PointY="16.1244921875" />
+          <ConnectorPoint PointX="9.25" PointY="14.557444661458334" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="14.557444661458334" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="14.557444661458334" />
+          <ConnectorPoint PointX="10.5" PointY="14.557444661458334" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_requisicao_tipo" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.15625" PointY="3.5956835937500031" />
-          <ConnectorPoint PointX="7.15625" PointY="4.71875" />
-          <ConnectorPoint PointX="8.25" PointY="4.71875" />
+          <ConnectorPoint PointX="11.65625" PointY="2.3456835937500031" />
+          <ConnectorPoint PointX="11.65625" PointY="3.46875" />
+          <ConnectorPoint PointX="12.75" PointY="3.46875" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_requisicao_usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="13.372010091145834" />
-          <ConnectorPoint PointX="4.666666666666667" PointY="13.372010091145832" />
-          <ConnectorPoint PointX="4.9564962706330133" PointY="13.372010091145834" />
-          <ConnectorPoint PointX="9.21875" PointY="13.372010091145834" />
-          <ConnectorPoint PointX="9.21875" PointY="7.1244921875000031" />
+          <ConnectorPoint PointX="8.25" PointY="5.5" />
+          <ConnectorPoint PointX="8.25" PointY="3.6718775000000008" />
+          <ConnectorPoint PointX="12.75" PointY="3.6718775000000008" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="10.826650390624998" />
-          <ConnectorPoint PointX="5.25" PointY="10.826650390624998" />
+          <ConnectorPoint PointX="7.5" PointY="7.6263876201923066" />
+          <ConnectorPoint PointX="4.156252" PointY="7.6263876201923066" />
+          <ConnectorPoint PointX="4.156252" PointY="12.625" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_musico" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="13.69439102724359" />
-          <ConnectorPoint PointX="4.90625" PointY="14.10064102724359" />
-          <ConnectorPoint PointX="4.90625" PointY="18.432444661458334" />
-          <ConnectorPoint PointX="5.25" PointY="18.432444661458334" />
+          <ConnectorPoint PointX="9" PointY="10.855458984374998" />
+          <ConnectorPoint PointX="9.75" PointY="10.855458984374998" />
+        </AssociationConnector>
+        <AssociationConnector Association="nosso_showModel.FK_usuario_rede_sociais" ManuallyRouted="false">
+          <ConnectorPoint PointX="9" PointY="11.710917968749996" />
+          <ConnectorPoint PointX="9.375" PointY="12.085917968749996" />
+          <ConnectorPoint PointX="9.375" PointY="18.7881982421875" />
+          <ConnectorPoint PointX="9.75" PointY="18.7881982421875" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_tipo" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="15.251152846153847" />
-          <ConnectorPoint PointX="2.625" PointY="14.876152846153847" />
-          <ConnectorPoint PointX="2.625" PointY="12.235153308593752" />
-          <ConnectorPoint PointX="3" PointY="12.235153308593752" />
+          <ConnectorPoint PointX="6.75" PointY="18.001152846153843" />
+          <ConnectorPoint PointX="7.125" PointY="17.626152846153843" />
+          <ConnectorPoint PointX="7.125" PointY="8.605458984374998" />
+          <ConnectorPoint PointX="7.5" PointY="8.605458984374998" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento_dia_ate" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.4757692307692309" PointY="6.1629850260416674" />
-          <ConnectorPoint PointX="5.0625" PointY="6.7497157952724365" />
-          <ConnectorPoint PointX="5.0625" PointY="9.8195731953125041" />
-          <ConnectorPoint PointX="5.25" PointY="9.8195731953125041" />
+          <ConnectorPoint PointX="2.25" PointY="14.518992513020834" />
+          <ConnectorPoint PointX="3" PointY="14.518992513020834" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento_dia_de" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="6.1064455645032059" />
-          <ConnectorPoint PointX="4.96875" PointY="6.5751955645032059" />
-          <ConnectorPoint PointX="4.96875" PointY="9.8195731953125041" />
-          <ConnectorPoint PointX="5.25" PointY="9.8195731953125041" />
+          <ConnectorPoint PointX="2.25" PointY="14.009496256510417" />
+          <ConnectorPoint PointX="3" PointY="14.009496256510417" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.imagem_evento" ManuallyRouted="false">
-          <ConnectorPoint PointX="9" PointY="10.153722330729167" />
-          <ConnectorPoint PointX="9.1354166666666661" PointY="10.153722330729167" />
-          <ConnectorPoint PointX="9.3020833333333339" PointY="10.153722330729167" />
-          <ConnectorPoint PointX="9.75" PointY="10.153722330729167" />
+          <ConnectorPoint PointX="6.75" PointY="16.523499348958332" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="16.523499348958332" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="16.523499348958332" />
+          <ConnectorPoint PointX="8.9166666666666661" PointY="16.523499348958332" />
+          <ConnectorPoint PointX="9.0833333333333339" PointY="16.523499348958332" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="16.523499348958332" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="16.523499348958332" />
+          <ConnectorPoint PointX="11.25" PointY="16.523499348958332" />
+          <ConnectorPoint PointX="11.25" PointY="15.739889322916667" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.imagem_usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="8.1875024999999937" />
-          <ConnectorPoint PointX="4.885416666666667" PointY="8.1875024999999919" />
-          <ConnectorPoint PointX="5.145833333333333" PointY="8.1875024999999937" />
-          <ConnectorPoint PointX="5.916666666666667" PointY="8.1875024999999937" />
-          <ConnectorPoint PointX="6.083333333333333" PointY="8.1875024999999937" />
-          <ConnectorPoint PointX="9.1354166666666661" PointY="8.1875024999999937" />
-          <ConnectorPoint PointX="9.3020833333333339" PointY="8.1875024999999937" />
-          <ConnectorPoint PointX="10.5" PointY="8.1875024999999937" />
-          <ConnectorPoint PointX="10.5" PointY="9.625" />
+          <ConnectorPoint PointX="9" PointY="8.0237939453125" />
+          <ConnectorPoint PointX="11.65625" PointY="8.0237939453125" />
+          <ConnectorPoint PointX="11.65625" PointY="13.375" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.usuario_ambientacao" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="10.259496256510417" />
-          <ConnectorPoint PointX="2.6666666666666665" PointY="10.259496256510417" />
-          <ConnectorPoint PointX="2.8333333333333335" PointY="10.259496256510417" />
-          <ConnectorPoint PointX="3" PointY="10.259496256510417" />
+          <ConnectorPoint PointX="2.25" PointY="10.660584309895834" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="10.660584309895834" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="10.660584309895834" />
+          <ConnectorPoint PointX="4.0729186666666672" PointY="10.660584309895834" />
+          <ConnectorPoint PointX="4.2395853333333333" PointY="10.660584309895834" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="10.660584309895834" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="10.660584309895834" />
+          <ConnectorPoint PointX="7.5" PointY="10.660584309895834" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.usuario_endereco" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="8.0718489583333319" />
-          <ConnectorPoint PointX="2.6666666666666665" PointY="8.0718489583333319" />
-          <ConnectorPoint PointX="2.8333333333333335" PointY="8.0718489583333319" />
-          <ConnectorPoint PointX="3" PointY="8.0718489583333319" />
+          <ConnectorPoint PointX="6.75" PointY="6.5006938100961538" />
+          <ConnectorPoint PointX="7.5" PointY="6.5006938100961538" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.usuario_genero_musical" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="13.350657552083334" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="13.350657552083334" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="13.350657552083334" />
-          <ConnectorPoint PointX="3" PointY="13.350657552083334" />
+          <ConnectorPoint PointX="6.75" PointY="9.547841796875" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="9.547841796875" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="9.547841796875" />
+          <ConnectorPoint PointX="7.5" PointY="9.547841796875" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.usuario_hab_musical" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="13.675929488782053" />
-          <ConnectorPoint PointX="4.75" PointY="13.925929488782053" />
-          <ConnectorPoint PointX="4.75" PointY="13.248847153846153" />
-          <ConnectorPoint PointX="5.2511528461538459" PointY="13.75" />
+          <ConnectorPoint PointX="9" PointY="8.8145402018229149" />
+          <ConnectorPoint PointX="11.572916666666666" PointY="8.8145402018229149" />
+          <ConnectorPoint PointX="11.739583333333334" PointY="8.8145402018229149" />
+          <ConnectorPoint PointX="12.75" PointY="8.8145402018229149" />
+        </AssociationConnector>
+        <AssociationConnector Association="nosso_showModel.usuario_segue_evento" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="12.313460538461539" />
+          <ConnectorPoint PointX="7.0660744349011209" PointY="11.99738610356042" />
+          <ConnectorPoint PointX="7.1839255650988791" PointY="11.879534973362663" />
+          <ConnectorPoint PointX="7.3125" PointY="11.750960538461541" />
+          <ConnectorPoint PointX="7.3125" PointY="11.899570814903843" />
+          <ConnectorPoint PointX="7.5011528461538459" PointY="11.710917968749996" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.usuario_segue_usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.5319230769230767" PointY="13.701315104166667" />
-          <ConnectorPoint PointX="3.5319230769230767" PointY="13.951315104166667" />
-          <ConnectorPoint PointX="3.9784615384615383" PointY="13.951315104166667" />
-          <ConnectorPoint PointX="3.9784615384615383" PointY="13.701315104166667" />
+          <ConnectorPoint PointX="8.0319230769230767" PointY="11.710917968749996" />
+          <ConnectorPoint PointX="8.0319230769230767" PointY="11.960917968749996" />
+          <ConnectorPoint PointX="8.47846153846154" PointY="11.960917968749996" />
+          <ConnectorPoint PointX="8.47846153846154" PointY="11.710917968749996" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

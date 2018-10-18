@@ -77,8 +77,8 @@ P{
 	background: -webkit-linear-gradient(23deg, #ffca37 -8%, #f70ada 100%);
     padding: 15px 30px;
     border-radius: 50px;
-    box-shadow: 0 10px 16px -1px #0000004;
-    color: #FFF;
+    box-shadow: 0 10px 16px -1px #00000045;
+    color: #FFF !important;
     margin-top: 10px;
     font-size: 15px;
 }

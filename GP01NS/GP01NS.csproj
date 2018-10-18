@@ -3422,12 +3422,6 @@
     <Content Include="Views\Administrador\CadastrarUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\nosso_show.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Administrador\UsuariosDeTeste.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -3435,6 +3429,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Entrar\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\nosso_show.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
