@@ -2,7 +2,7 @@
 Grupo 01 - Nosso Show
 
 DLLs Externas (MySQL Connector)
-https://1drv.ms/u/s!AkfG3xss47DlmqAtpxv9wI6Dz-iVTg
+https://1drv.ms/u/s!AkfG3xss47DlmqI4XZmL0pecRnmb2w
 
 Para inserir as .dll:
 
