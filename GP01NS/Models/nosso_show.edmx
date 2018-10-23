@@ -23,6 +23,8 @@
           <EntitySet Name="requisicao_tipo" EntityType="nosso_showModel.Store.requisicao_tipo" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="usuario" EntityType="nosso_showModel.Store.usuario" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="usuario_ambientacao" EntityType="nosso_showModel.Store.usuario_ambientacao" store:Type="Tables" Schema="nosso_show" />
+          <EntitySet Name="usuario_avalia_usuario" EntityType="nosso_showModel.Store.usuario_avalia_usuario" store:Type="Tables" Schema="nosso_show" />
+          <EntitySet Name="usuario_avaliacao_elogio" EntityType="nosso_showModel.Store.usuario_avaliacao_elogio" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="usuario_endereco" EntityType="nosso_showModel.Store.usuario_endereco" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="usuario_estabelecimento" EntityType="nosso_showModel.Store.usuario_estabelecimento" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="usuario_estabelecimento_dias" EntityType="nosso_showModel.Store.usuario_estabelecimento_dias" store:Type="Tables" Schema="nosso_show" />
@@ -104,6 +106,18 @@
           <AssociationSet Name="FK_usuario_ambientacao_usuario" Association="nosso_showModel.Store.FK_usuario_ambientacao_usuario">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="usuario_ambientacao" EntitySet="usuario_ambientacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_avalia_usuario1" Association="nosso_showModel.Store.FK_usuario_avalia_usuario1">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_avalia_usuario" EntitySet="usuario_avalia_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_avalia_usuario2" Association="nosso_showModel.Store.FK_usuario_avalia_usuario2">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_avalia_usuario" EntitySet="usuario_avalia_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_elogio" Association="nosso_showModel.Store.FK_usuario_elogio">
+            <End Role="usuario_avaliacao_elogio" EntitySet="usuario_avaliacao_elogio" />
+            <End Role="usuario_avalia_usuario" EntitySet="usuario_avalia_usuario" />
           </AssociationSet>
           <AssociationSet Name="FK_usuario_endereco" Association="nosso_showModel.Store.FK_usuario_endereco">
             <End Role="endereco" EntitySet="endereco" />
@@ -342,7 +356,7 @@
           <Property Name="Nome" Type="varchar" Nullable="false" MaxLength="150" />
           <Property Name="Email" Type="varchar" Nullable="false" MaxLength="150" />
           <Property Name="Senha" Type="varchar" Nullable="false" MaxLength="128" />
-          <Property Name="SenhaTeste" Type="varchar" Nullable="false" MaxLength="75" />
+          <Property Name="Hash128" Type="varchar" Nullable="false" MaxLength="128" />
           <Property Name="Telefone" Type="varchar" Nullable="false" MaxLength="15" />
           <Property Name="Tipo" Type="int" Nullable="false" />
         </EntityType>
@@ -355,6 +369,30 @@
           <Property Name="IDAmbientacao" Type="int" Nullable="false" />
           <Property Name="IDUsuario" Type="int" Nullable="false" />
           <Property Name="TipoUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario_avalia_usuario">
+          <Key>
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="TipoUsuario" />
+            <PropertyRef Name="IDAvaliado" />
+            <PropertyRef Name="TipoAvaliado" />
+          </Key>
+          <Property Name="Data" Type="datetime" Nullable="false" />
+          <Property Name="Nota" Type="int" Nullable="false" />
+          <Property Name="Comentario" Type="varchar" Nullable="false" MaxLength="280" />
+          <Property Name="IDUsuario" Type="int" Nullable="false" />
+          <Property Name="TipoUsuario" Type="int" Nullable="false" />
+          <Property Name="IDAvaliado" Type="int" Nullable="false" />
+          <Property Name="TipoAvaliado" Type="int" Nullable="false" />
+          <Property Name="IDElogio" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario_avaliacao_elogio">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="Tipo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="usuario_endereco">
           <Key>
@@ -714,6 +752,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_usuario_avalia_usuario1">
+          <End Role="usuario" Type="nosso_showModel.Store.usuario" Multiplicity="1" />
+          <End Role="usuario_avalia_usuario" Type="nosso_showModel.Store.usuario_avalia_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="usuario_avalia_usuario">
+              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="TipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_avalia_usuario2">
+          <End Role="usuario" Type="nosso_showModel.Store.usuario" Multiplicity="1" />
+          <End Role="usuario_avalia_usuario" Type="nosso_showModel.Store.usuario_avalia_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="usuario_avalia_usuario">
+              <PropertyRef Name="IDAvaliado" />
+              <PropertyRef Name="TipoAvaliado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_elogio">
+          <End Role="usuario_avaliacao_elogio" Type="nosso_showModel.Store.usuario_avaliacao_elogio" Multiplicity="1" />
+          <End Role="usuario_avalia_usuario" Type="nosso_showModel.Store.usuario_avalia_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario_avaliacao_elogio">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="usuario_avalia_usuario">
+              <PropertyRef Name="IDElogio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_usuario_endereco">
           <End Role="endereco" Type="nosso_showModel.Store.endereco" Multiplicity="1" />
           <End Role="usuario_endereco" Type="nosso_showModel.Store.usuario_endereco" Multiplicity="*" />
@@ -918,6 +996,8 @@
           <EntitySet Name="requisicao" EntityType="nosso_showModel.requisicao" />
           <EntitySet Name="requisicao_tipo" EntityType="nosso_showModel.requisicao_tipo" />
           <EntitySet Name="usuario" EntityType="nosso_showModel.usuario" />
+          <EntitySet Name="usuario_avalia_usuario" EntityType="nosso_showModel.usuario_avalia_usuario" />
+          <EntitySet Name="usuario_avaliacao_elogio" EntityType="nosso_showModel.usuario_avaliacao_elogio" />
           <EntitySet Name="usuario_estabelecimento" EntityType="nosso_showModel.usuario_estabelecimento" />
           <EntitySet Name="usuario_estabelecimento_dias" EntityType="nosso_showModel.usuario_estabelecimento_dias" />
           <EntitySet Name="usuario_musico" EntityType="nosso_showModel.usuario_musico" />
@@ -963,6 +1043,14 @@
             <End Role="usuario" EntitySet="usuario" />
             <End Role="requisicao" EntitySet="requisicao" />
           </AssociationSet>
+          <AssociationSet Name="FK_usuario_avalia_usuario1" Association="nosso_showModel.FK_usuario_avalia_usuario1">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_avalia_usuario" EntitySet="usuario_avalia_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_avalia_usuario2" Association="nosso_showModel.FK_usuario_avalia_usuario2">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_avalia_usuario" EntitySet="usuario_avalia_usuario" />
+          </AssociationSet>
           <AssociationSet Name="FK_usuario_estabelecimento" Association="nosso_showModel.FK_usuario_estabelecimento">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="usuario_estabelecimento" EntitySet="usuario_estabelecimento" />
@@ -978,6 +1066,10 @@
           <AssociationSet Name="FK_usuario_tipo" Association="nosso_showModel.FK_usuario_tipo">
             <End Role="usuario_tipo" EntitySet="usuario_tipo" />
             <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_elogio" Association="nosso_showModel.FK_usuario_elogio">
+            <End Role="usuario_avaliacao_elogio" EntitySet="usuario_avaliacao_elogio" />
+            <End Role="usuario_avalia_usuario" EntitySet="usuario_avalia_usuario" />
           </AssociationSet>
           <AssociationSet Name="FK_usuario_estabelecimento_dia_ate" Association="nosso_showModel.FK_usuario_estabelecimento_dia_ate">
             <End Role="usuario_estabelecimento_dias" EntitySet="usuario_estabelecimento_dias" />
@@ -1198,11 +1290,13 @@
           <Property Name="Nome" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
           <Property Name="Senha" Type="String" Nullable="false" MaxLength="128" Unicode="false" FixedLength="false" />
-          <Property Name="SenhaTeste" Type="String" Nullable="false" MaxLength="75" Unicode="false" FixedLength="false" />
+          <Property Name="Hash128" Type="String" Nullable="false" MaxLength="128" Unicode="false" FixedLength="false" />
           <Property Name="Telefone" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
           <Property Name="Tipo" Type="Int32" Nullable="false" />
           <NavigationProperty Name="autenticacao" Relationship="nosso_showModel.FK_autenticacao_usuario" FromRole="usuario" ToRole="autenticacao" />
           <NavigationProperty Name="requisicao" Relationship="nosso_showModel.FK_requisicao_usuario" FromRole="usuario" ToRole="requisicao" />
+          <NavigationProperty Name="usuario_avalia_usuario" Relationship="nosso_showModel.FK_usuario_avalia_usuario1" FromRole="usuario" ToRole="usuario_avalia_usuario" />
+          <NavigationProperty Name="usuario_avalia_usuario1" Relationship="nosso_showModel.FK_usuario_avalia_usuario2" FromRole="usuario" ToRole="usuario_avalia_usuario" />
           <NavigationProperty Name="usuario_estabelecimento" Relationship="nosso_showModel.FK_usuario_estabelecimento" FromRole="usuario" ToRole="usuario_estabelecimento" />
           <NavigationProperty Name="usuario_musico" Relationship="nosso_showModel.FK_usuario_musico" FromRole="usuario" ToRole="usuario_musico" />
           <NavigationProperty Name="usuario_redes_sociais" Relationship="nosso_showModel.FK_usuario_rede_sociais" FromRole="usuario" ToRole="usuario_redes_sociais" />
@@ -1215,6 +1309,34 @@
           <NavigationProperty Name="evento" Relationship="nosso_showModel.usuario_segue_evento" FromRole="usuario" ToRole="evento" />
           <NavigationProperty Name="usuario1" Relationship="nosso_showModel.usuario_segue_usuario" FromRole="usuario" ToRole="usuario1" />
           <NavigationProperty Name="usuario2" Relationship="nosso_showModel.usuario_segue_usuario" FromRole="usuario1" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="usuario_avalia_usuario">
+          <Key>
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="TipoUsuario" />
+            <PropertyRef Name="IDAvaliado" />
+            <PropertyRef Name="TipoAvaliado" />
+          </Key>
+          <Property Name="Data" Type="DateTime" Nullable="false" />
+          <Property Name="Nota" Type="Int32" Nullable="false" />
+          <Property Name="Comentario" Type="String" Nullable="false" MaxLength="280" Unicode="false" FixedLength="false" />
+          <Property Name="IDUsuario" Type="Int32" Nullable="false" />
+          <Property Name="TipoUsuario" Type="Int32" Nullable="false" />
+          <Property Name="IDAvaliado" Type="Int32" Nullable="false" />
+          <Property Name="TipoAvaliado" Type="Int32" Nullable="false" />
+          <Property Name="IDElogio" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="usuario" Relationship="nosso_showModel.FK_usuario_avalia_usuario1" FromRole="usuario_avalia_usuario" ToRole="usuario" />
+          <NavigationProperty Name="usuario1" Relationship="nosso_showModel.FK_usuario_avalia_usuario2" FromRole="usuario_avalia_usuario" ToRole="usuario" />
+          <NavigationProperty Name="usuario_avaliacao_elogio" Relationship="nosso_showModel.FK_usuario_elogio" FromRole="usuario_avalia_usuario" ToRole="usuario_avaliacao_elogio" />
+        </EntityType>
+        <EntityType Name="usuario_avaliacao_elogio">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Tipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="usuario_avalia_usuario" Relationship="nosso_showModel.FK_usuario_elogio" FromRole="usuario_avaliacao_elogio" ToRole="usuario_avalia_usuario" />
         </EntityType>
         <EntityType Name="usuario_estabelecimento">
           <Key>
@@ -1419,6 +1541,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_usuario_avalia_usuario1">
+          <End Role="usuario" Type="nosso_showModel.usuario" Multiplicity="1" />
+          <End Role="usuario_avalia_usuario" Type="nosso_showModel.usuario_avalia_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="usuario_avalia_usuario">
+              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="TipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_avalia_usuario2">
+          <End Role="usuario" Type="nosso_showModel.usuario" Multiplicity="1" />
+          <End Role="usuario_avalia_usuario" Type="nosso_showModel.usuario_avalia_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="ID" />
+              <PropertyRef Name="Tipo" />
+            </Principal>
+            <Dependent Role="usuario_avalia_usuario">
+              <PropertyRef Name="IDAvaliado" />
+              <PropertyRef Name="TipoAvaliado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_usuario_estabelecimento">
           <End Role="usuario" Type="nosso_showModel.usuario" Multiplicity="1" />
           <End Role="usuario_estabelecimento" Type="nosso_showModel.usuario_estabelecimento" Multiplicity="*" />
@@ -1470,6 +1620,18 @@
             </Principal>
             <Dependent Role="usuario">
               <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_elogio">
+          <End Role="usuario_avaliacao_elogio" Type="nosso_showModel.usuario_avaliacao_elogio" Multiplicity="1" />
+          <End Role="usuario_avalia_usuario" Type="nosso_showModel.usuario_avalia_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario_avaliacao_elogio">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="usuario_avalia_usuario">
+              <PropertyRef Name="IDElogio" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1690,8 +1852,31 @@
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Senha" ColumnName="Senha" />
-                <ScalarProperty Name="SenhaTeste" ColumnName="SenhaTeste" />
+                <ScalarProperty Name="Hash128" ColumnName="Hash128" />
                 <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario_avalia_usuario">
+            <EntityTypeMapping TypeName="nosso_showModel.usuario_avalia_usuario">
+              <MappingFragment StoreEntitySet="usuario_avalia_usuario">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Nota" ColumnName="Nota" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+                <ScalarProperty Name="IDAvaliado" ColumnName="IDAvaliado" />
+                <ScalarProperty Name="TipoAvaliado" ColumnName="TipoAvaliado" />
+                <ScalarProperty Name="IDElogio" ColumnName="IDElogio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario_avaliacao_elogio">
+            <EntityTypeMapping TypeName="nosso_showModel.usuario_avaliacao_elogio">
+              <MappingFragment StoreEntitySet="usuario_avaliacao_elogio">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
                 <ScalarProperty Name="Tipo" ColumnName="Tipo" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1854,163 +2039,203 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="nosso_show">
-        <EntityTypeShape EntityType="nosso_showModel.ambientacao" Width="1.5" PointX="0.75" PointY="9.125" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.autenticacao" Width="1.5" PointX="9.75" PointY="3.875" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.endereco" Width="1.5" PointX="5.25" PointY="4.5" Height="3.5186979166666656" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.endereco_uf" Width="1.5" PointX="3" PointY="5.375" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.evento" Width="1.5" PointX="5.25" PointY="12.25" Height="4.6725065104166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.evento_musico" Width="1.5" PointX="7.5" PointY="13.125" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.genero_musical" Width="1.5" PointX="5.25" PointY="8.75" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.hab_musical" Width="1.5" PointX="12.75" PointY="7.5" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.hab_musical_tipo" Width="1.5" PointX="10.5" PointY="21.75" Height="1.595683593749996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.imagem" Width="1.5" PointX="10.5" PointY="13.375" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.imagem_tipo" Width="1.5" PointX="8.25" PointY="21.75" Height="1.5956835937500031" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.requisicao" Width="1.5" PointX="12.75" PointY="3.125" Height="2.7494921875000031" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.requisicao_tipo" Width="1.5" PointX="10.5" PointY="0.75" Height="1.5956835937500031" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario" Width="1.5" PointX="7.5" PointY="5.5" Height="6.210917968749996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento" Width="1.5" PointX="3" PointY="12.625" Height="3.903300781249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento_dias" Width="1.5" PointX="0.75" PointY="13.625" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario_musico" Width="1.5" PointX="9.75" PointY="10" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario_redes_sociais" Width="1.5" PointX="9.75" PointY="17.125" Height="3.3263964843750031" IsExpanded="true" />
-        <EntityTypeShape EntityType="nosso_showModel.usuario_tipo" Width="1.5" PointX="5.25" PointY="18" Height="1.5956835937500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.ambientacao" Width="1.5" PointX="0.75" PointY="9.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.autenticacao" Width="1.5" PointX="9.75" PointY="4.5" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.endereco" Width="1.5" PointX="5.25" PointY="5.125" Height="3.5186979166666648" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.endereco_uf" Width="1.5" PointX="3" PointY="6" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.evento" Width="1.5" PointX="5.25" PointY="12.875" Height="4.6725065104166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.evento_musico" Width="1.5" PointX="7.5" PointY="13.75" Height="2.7494921874999978" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.genero_musical" Width="1.5" PointX="5.25" PointY="9.375" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.hab_musical" Width="1.5" PointX="9.75" PointY="8.125" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.hab_musical_tipo" Width="1.5" PointX="7.5" PointY="3.375" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.imagem" Width="1.5" PointX="10.5" PointY="14" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.imagem_tipo" Width="1.5" PointX="8.25" PointY="25.375" Height="1.5956835937500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.requisicao" Width="1.5" PointX="12.75" PointY="7.75" Height="2.7494921875000031" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.requisicao_tipo" Width="1.5" PointX="10.5" PointY="11.375" Height="1.5956835937500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario" Width="1.5" PointX="7.5" PointY="5.875" Height="6.5955208333333388" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_avalia_usuario" Width="1.5" PointX="12.75" PointY="3.625" Height="3.1340950520833388" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_avaliacao_elogio" Width="1.5" PointX="10.5" PointY="1.25" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento" Width="1.5" PointX="3" PointY="13.25" Height="3.903300781249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_estabelecimento_dias" Width="1.5" PointX="0.75" PointY="14.25" Height="1.7879850260416692" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_musico" Width="1.5" PointX="9.75" PointY="17.5" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_redes_sociais" Width="1.5" PointX="9.75" PointY="20.625" Height="3.3263964843750031" IsExpanded="true" />
+        <EntityTypeShape EntityType="nosso_showModel.usuario_tipo" Width="1.5" PointX="5.25" PointY="18.625" Height="1.5956835937500031" IsExpanded="true" />
         <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento_ambientacao" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="10.018992513020834" />
-          <ConnectorPoint PointX="3.75" PointY="10.018992513020834" />
-          <ConnectorPoint PointX="3.75" PointY="12.625" />
+          <ConnectorPoint PointX="2.25" PointY="10.643992513020834" />
+          <ConnectorPoint PointX="3.75" PointY="10.643992513020834" />
+          <ConnectorPoint PointX="3.75" PointY="13.25" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_autenticacao_usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="9" PointY="5.7737939453125" />
-          <ConnectorPoint PointX="9.75" PointY="5.7737939453125" />
+          <ConnectorPoint PointX="9" PointY="6.2737939453125" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="6.2737939453124989" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="6.2737939453125" />
+          <ConnectorPoint PointX="9.75" PointY="6.2737939453125" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_endereco_uf" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="6.172841796875" />
-          <ConnectorPoint PointX="5.25" PointY="6.172841796875" />
+          <ConnectorPoint PointX="4.5" PointY="6.797841796875" />
+          <ConnectorPoint PointX="5.25" PointY="6.797841796875" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_evento_estabelecimento" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="14.576650390624998" />
-          <ConnectorPoint PointX="5.25" PointY="14.576650390624998" />
+          <ConnectorPoint PointX="4.5" PointY="15.201650390624998" />
+          <ConnectorPoint PointX="5.25" PointY="15.201650390624998" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_evento_musico_evento" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="14.49974609375" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="14.49974609375" />
-          <ConnectorPoint PointX="7.208333333333333" PointY="14.49974609375" />
-          <ConnectorPoint PointX="7.5" PointY="14.49974609375" />
+          <ConnectorPoint PointX="6.75" PointY="15.124746093749998" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="15.124746093749998" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="15.124746093749998" />
+          <ConnectorPoint PointX="7.5" PointY="15.124746093749998" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_evento_musico" ManuallyRouted="false">
-          <ConnectorPoint PointX="10.09375" PointY="12.364889322916667" />
-          <ConnectorPoint PointX="10.09375" PointY="13.21875" />
-          <ConnectorPoint PointX="9.4583333333333339" PointY="13.21875" />
-          <ConnectorPoint PointX="9.2916666666666661" PointY="13.21875" />
-          <ConnectorPoint PointX="9" PointY="13.21875" />
+          <ConnectorPoint PointX="10.09375" PointY="17.5" />
+          <ConnectorPoint PointX="10.09375" PointY="13.84375" />
+          <ConnectorPoint PointX="9.8645833333333339" PointY="13.84375" />
+          <ConnectorPoint PointX="9.6979166666666661" PointY="13.84375" />
+          <ConnectorPoint PointX="9.6770833333333339" PointY="13.84375" />
+          <ConnectorPoint PointX="9.5104166666666661" PointY="13.84375" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="13.84375" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="13.84375" />
+          <ConnectorPoint PointX="9" PointY="13.84375" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_hab_musical_tipo" ManuallyRouted="false">
-          <ConnectorPoint PointX="12" PointY="22.547841796874998" />
-          <ConnectorPoint PointX="13.5" PointY="22.547841796874998" />
-          <ConnectorPoint PointX="13.5" PointY="9.4802864583333317" />
+          <ConnectorPoint PointX="9" PointY="4.9695287475961534" />
+          <ConnectorPoint PointX="9.375" PointY="5.3445287475961534" />
+          <ConnectorPoint PointX="9.375" PointY="9.1151432291666659" />
+          <ConnectorPoint PointX="9.4479166666666661" PointY="9.1151432291666659" />
+          <ConnectorPoint PointX="9.6145833333333339" PointY="9.1151432291666659" />
+          <ConnectorPoint PointX="9.75" PointY="9.1151432291666659" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_imagem_tipo1" ManuallyRouted="false">
-          <ConnectorPoint PointX="9" PointY="21.75" />
-          <ConnectorPoint PointX="9" PointY="16.1244921875" />
-          <ConnectorPoint PointX="9.25" PointY="16.1244921875" />
-          <ConnectorPoint PointX="9.25" PointY="14.557444661458334" />
-          <ConnectorPoint PointX="9.2916666666666661" PointY="14.557444661458334" />
-          <ConnectorPoint PointX="9.4583333333333339" PointY="14.557444661458334" />
-          <ConnectorPoint PointX="10.5" PointY="14.557444661458334" />
+          <ConnectorPoint PointX="9.75" PointY="26.172841796875" />
+          <ConnectorPoint PointX="11.65625" PointY="26.172841796875" />
+          <ConnectorPoint PointX="11.65625" PointY="16.364889322916667" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_requisicao_tipo" ManuallyRouted="false">
-          <ConnectorPoint PointX="11.65625" PointY="2.3456835937500031" />
-          <ConnectorPoint PointX="11.65625" PointY="3.46875" />
-          <ConnectorPoint PointX="12.75" PointY="3.46875" />
+          <ConnectorPoint PointX="11.65625" PointY="11.375" />
+          <ConnectorPoint PointX="11.65625" PointY="10.333639322916667" />
+          <ConnectorPoint PointX="12.75" PointY="10.333639322916667" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_requisicao_usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.25" PointY="5.5" />
-          <ConnectorPoint PointX="8.25" PointY="3.6718775000000008" />
-          <ConnectorPoint PointX="12.75" PointY="3.6718775000000008" />
+          <ConnectorPoint PointX="9" PointY="7.90625" />
+          <ConnectorPoint PointX="9.1041666666666661" PointY="7.9062499999999991" />
+          <ConnectorPoint PointX="9.2708333333333339" PointY="7.90625" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="7.9062499999999991" />
+          <ConnectorPoint PointX="9.6145833333333339" PointY="7.90625" />
+          <ConnectorPoint PointX="12.75" PointY="7.90625" />
+        </AssociationConnector>
+        <AssociationConnector Association="nosso_showModel.FK_usuario_avalia_usuario1" ManuallyRouted="false">
+          <ConnectorPoint PointX="9" PointY="12.423212141025648" />
+          <ConnectorPoint PointX="9.1875" PointY="12.610712141025648" />
+          <ConnectorPoint PointX="9.1875" PointY="7.1340950520833388" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="7.1340950520833379" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="7.1340950520833388" />
+          <ConnectorPoint PointX="12.350769230769231" PointY="7.1340950520833388" />
+          <ConnectorPoint PointX="12.75" PointY="6.7348642828525689" />
+        </AssociationConnector>
+        <AssociationConnector Association="nosso_showModel.FK_usuario_avalia_usuario2" ManuallyRouted="false">
+          <ConnectorPoint PointX="9" PointY="12.447442910256417" />
+          <ConnectorPoint PointX="9.53125" PointY="12.978692910256417" />
+          <ConnectorPoint PointX="9.53125" PointY="7.1340950520833388" />
+          <ConnectorPoint PointX="12.400383615384616" PointY="7.1340950520833388" />
+          <ConnectorPoint PointX="12.775383615384616" PointY="6.7590950520833388" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.5" PointY="7.6263876201923066" />
-          <ConnectorPoint PointX="4.156252" PointY="7.6263876201923066" />
-          <ConnectorPoint PointX="4.156252" PointY="12.625" />
+          <ConnectorPoint PointX="7.5" PointY="8.1315608974359" />
+          <ConnectorPoint PointX="4.156252" PointY="8.1315608974359" />
+          <ConnectorPoint PointX="4.156252" PointY="13.25" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_musico" ManuallyRouted="false">
-          <ConnectorPoint PointX="9" PointY="10.855458984374998" />
-          <ConnectorPoint PointX="9.75" PointY="10.855458984374998" />
+          <ConnectorPoint PointX="8.9746153846153849" PointY="12.470520833333339" />
+          <ConnectorPoint PointX="9.59375" PointY="13.089655448717954" />
+          <ConnectorPoint PointX="9.59375" PointY="18.682444661458334" />
+          <ConnectorPoint PointX="9.75" PointY="18.682444661458334" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_rede_sociais" ManuallyRouted="false">
-          <ConnectorPoint PointX="9" PointY="11.710917968749996" />
-          <ConnectorPoint PointX="9.375" PointY="12.085917968749996" />
-          <ConnectorPoint PointX="9.375" PointY="18.7881982421875" />
-          <ConnectorPoint PointX="9.75" PointY="18.7881982421875" />
+          <ConnectorPoint PointX="8.9503846153846158" PointY="12.470520833333339" />
+          <ConnectorPoint PointX="9.375" PointY="12.895136217948723" />
+          <ConnectorPoint PointX="9.375" PointY="22.2881982421875" />
+          <ConnectorPoint PointX="9.75" PointY="22.2881982421875" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_tipo" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="18.001152846153843" />
-          <ConnectorPoint PointX="7.125" PointY="17.626152846153843" />
-          <ConnectorPoint PointX="7.125" PointY="8.605458984374998" />
-          <ConnectorPoint PointX="7.5" PointY="8.605458984374998" />
+          <ConnectorPoint PointX="6.75" PointY="18.626152846153843" />
+          <ConnectorPoint PointX="7.125" PointY="18.251152846153843" />
+          <ConnectorPoint PointX="7.125" PointY="9.17276041666667" />
+          <ConnectorPoint PointX="7.5" PointY="9.17276041666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="nosso_showModel.FK_usuario_elogio" ManuallyRouted="false">
+          <ConnectorPoint PointX="12" PointY="2.1439925130208337" />
+          <ConnectorPoint PointX="13.5" PointY="2.1439925130208337" />
+          <ConnectorPoint PointX="13.5" PointY="3.625" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento_dia_ate" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="14.518992513020834" />
-          <ConnectorPoint PointX="3" PointY="14.518992513020834" />
+          <ConnectorPoint PointX="2.25" PointY="15.143992513020834" />
+          <ConnectorPoint PointX="3" PointY="15.143992513020834" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.FK_usuario_estabelecimento_dia_de" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="14.009496256510417" />
-          <ConnectorPoint PointX="3" PointY="14.009496256510417" />
+          <ConnectorPoint PointX="2.25" PointY="14.634496256510417" />
+          <ConnectorPoint PointX="3" PointY="14.634496256510417" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.imagem_evento" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="16.523499348958332" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="16.523499348958332" />
-          <ConnectorPoint PointX="7.208333333333333" PointY="16.523499348958332" />
-          <ConnectorPoint PointX="8.9166666666666661" PointY="16.523499348958332" />
-          <ConnectorPoint PointX="9.0833333333333339" PointY="16.523499348958332" />
-          <ConnectorPoint PointX="9.2916666666666661" PointY="16.523499348958332" />
-          <ConnectorPoint PointX="9.4583333333333339" PointY="16.523499348958332" />
-          <ConnectorPoint PointX="11.25" PointY="16.523499348958332" />
-          <ConnectorPoint PointX="11.25" PointY="15.739889322916667" />
+          <ConnectorPoint PointX="6.75" PointY="16.999746093749998" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="16.999746093749998" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="16.999746093749998" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="16.999746093749998" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="16.999746093749998" />
+          <ConnectorPoint PointX="9.5104166666666661" PointY="16.999746093749998" />
+          <ConnectorPoint PointX="9.6770833333333339" PointY="16.999746093749998" />
+          <ConnectorPoint PointX="10.010416666666666" PointY="16.999746093749998" />
+          <ConnectorPoint PointX="10.177083333333334" PointY="16.999746093749998" />
+          <ConnectorPoint PointX="11.4531225" PointY="16.999746093749998" />
+          <ConnectorPoint PointX="11.4531225" PointY="16.364889322916667" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.imagem_usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="9" PointY="8.0237939453125" />
-          <ConnectorPoint PointX="11.65625" PointY="8.0237939453125" />
-          <ConnectorPoint PointX="11.65625" PointY="13.375" />
+          <ConnectorPoint PointX="9" PointY="12.44051983333334" />
+          <ConnectorPoint PointX="9.78125" PointY="13.22176983333334" />
+          <ConnectorPoint PointX="9.78125" PointY="15.182444661458334" />
+          <ConnectorPoint PointX="10.010416666666666" PointY="15.182444661458334" />
+          <ConnectorPoint PointX="10.177083333333334" PointY="15.182444661458334" />
+          <ConnectorPoint PointX="10.5" PointY="15.182444661458334" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.usuario_ambientacao" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="10.660584309895834" />
-          <ConnectorPoint PointX="3.6666666666666665" PointY="10.660584309895834" />
-          <ConnectorPoint PointX="3.8333333333333335" PointY="10.660584309895834" />
-          <ConnectorPoint PointX="4.0729186666666672" PointY="10.660584309895834" />
-          <ConnectorPoint PointX="4.2395853333333333" PointY="10.660584309895834" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="10.660584309895834" />
-          <ConnectorPoint PointX="7.208333333333333" PointY="10.660584309895834" />
-          <ConnectorPoint PointX="7.5" PointY="10.660584309895834" />
+          <ConnectorPoint PointX="2.25" PointY="11.285584309895834" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="11.285584309895834" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="11.285584309895834" />
+          <ConnectorPoint PointX="4.0729186666666672" PointY="11.285584309895834" />
+          <ConnectorPoint PointX="4.2395853333333333" PointY="11.285584309895834" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="11.285584309895834" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="11.285584309895834" />
+          <ConnectorPoint PointX="7.5" PointY="11.285584309895834" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.usuario_endereco" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="6.5006938100961538" />
-          <ConnectorPoint PointX="7.5" PointY="6.5006938100961538" />
+          <ConnectorPoint PointX="6.75" PointY="6.94078044871795" />
+          <ConnectorPoint PointX="7.5" PointY="6.94078044871795" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.usuario_genero_musical" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="9.547841796875" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="9.547841796875" />
-          <ConnectorPoint PointX="7.208333333333333" PointY="9.547841796875" />
-          <ConnectorPoint PointX="7.5" PointY="9.547841796875" />
+          <ConnectorPoint PointX="6.75" PointY="10.172841796875" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="10.172841796875" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="10.172841796875" />
+          <ConnectorPoint PointX="7.5" PointY="10.172841796875" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.usuario_hab_musical" ManuallyRouted="false">
-          <ConnectorPoint PointX="9" PointY="8.8145402018229149" />
-          <ConnectorPoint PointX="11.572916666666666" PointY="8.8145402018229149" />
-          <ConnectorPoint PointX="11.739583333333334" PointY="8.8145402018229149" />
-          <ConnectorPoint PointX="12.75" PointY="8.8145402018229149" />
+          <ConnectorPoint PointX="9" PointY="8.5575716145833329" />
+          <ConnectorPoint PointX="9.1041666666666661" PointY="8.5575716145833329" />
+          <ConnectorPoint PointX="9.2708333333333339" PointY="8.5575716145833329" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="8.5575716145833312" />
+          <ConnectorPoint PointX="9.6145833333333339" PointY="8.5575716145833329" />
+          <ConnectorPoint PointX="9.75" PointY="8.5575716145833329" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.usuario_segue_evento" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="12.313460538461539" />
-          <ConnectorPoint PointX="7.0660744349011209" PointY="11.99738610356042" />
-          <ConnectorPoint PointX="7.1839255650988791" PointY="11.879534973362663" />
-          <ConnectorPoint PointX="7.3125" PointY="11.750960538461541" />
-          <ConnectorPoint PointX="7.3125" PointY="11.899570814903843" />
-          <ConnectorPoint PointX="7.5011528461538459" PointY="11.710917968749996" />
+          <ConnectorPoint PointX="6.75" PointY="12.938460538461539" />
+          <ConnectorPoint PointX="7.0660744349011209" PointY="12.62238610356042" />
+          <ConnectorPoint PointX="7.1839255650988791" PointY="12.504534973362663" />
+          <ConnectorPoint PointX="7.3125" PointY="12.375960538461541" />
+          <ConnectorPoint PointX="7.3125" PointY="12.659173679487186" />
+          <ConnectorPoint PointX="7.5011528461538459" PointY="12.470520833333339" />
         </AssociationConnector>
         <AssociationConnector Association="nosso_showModel.usuario_segue_usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.0319230769230767" PointY="11.710917968749996" />
-          <ConnectorPoint PointX="8.0319230769230767" PointY="11.960917968749996" />
-          <ConnectorPoint PointX="8.47846153846154" PointY="11.960917968749996" />
-          <ConnectorPoint PointX="8.47846153846154" PointY="11.710917968749996" />
+          <ConnectorPoint PointX="8.0319230769230767" PointY="12.470520833333339" />
+          <ConnectorPoint PointX="8.0319230769230767" PointY="12.720520833333339" />
+          <ConnectorPoint PointX="8.47846153846154" PointY="12.720520833333339" />
+          <ConnectorPoint PointX="8.47846153846154" PointY="12.470520833333339" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

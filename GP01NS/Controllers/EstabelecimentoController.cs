@@ -241,15 +241,39 @@ namespace GP01NS.Controllers
             return View(model);
         }
 
+        public ActionResult RedesSociais()
+        {
+            this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
+            
+            return View(this.Estabelecimento.RedesSociais);
+        }
 
         [HttpPost]
-        public ActionResult UploadProfile(HttpPostedFileBase Arquivo)
+        [ValidateInput(false)]
+        public ActionResult RedesSociais(RedesSociaisVM model)
+        {
+            this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
+
+            if (model.SaveChanges(this.Estabelecimento))
+            {
+                ViewBag.Sucesso = "Os dados de redes sociais foram salvos.";
+            }
+            else
+            {
+                ViewBag.Erro = "Por favor, confira os dados informados e tente novamente.";
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult UploadProfile(HttpPostedFileBase Arquivo, string Href)
         {
             this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
 
             new ImagemVM(Arquivo, this.Estabelecimento.ID, int.MinValue, 1).Upload();
 
-            return Redirect("/inicio/estabelecimento/" + this.Estabelecimento.Username);
+            return Redirect(Href);
         }
 
         [HttpPost]

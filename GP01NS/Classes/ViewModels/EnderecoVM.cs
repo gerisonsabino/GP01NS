@@ -22,7 +22,6 @@ namespace GP01NS.Classes.ViewModels
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public string UF { get; set; }
-        public object Razao { get; private set; }
 
         public EnderecoVM()
         {

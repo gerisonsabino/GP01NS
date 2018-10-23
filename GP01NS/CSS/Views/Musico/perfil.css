@@ -66,12 +66,16 @@ main {
     padding: 15px;
 }
 
+.list-inline-item {
+    vertical-align: middle;
+    margin-top: 10px;
+}
+
 .portfolio-itens a {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     background: center center / cover no-repeat;
     display: block;
-    margin-right: 15px
 }
 
 .portfolio-itens .logo-soundcloud {
@@ -173,4 +177,15 @@ main {
 
 .social-media ul li {
     font-size: 20px;
+}
+
+#modal-avaliar .oi-heart {
+    font-size: 2rem;
+}
+
+
+@media (max-width:768px) {
+    .card-body {
+        padding: 1rem;
+    }
 }

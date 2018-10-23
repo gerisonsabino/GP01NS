@@ -13,10 +13,52 @@
 				<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 					<li class="nav-item">
                         <ul>
+                            @*<li class="nav-item">
+                                <div class="flex">
+                                    <img src="@(ImgPerfil != "#" ? ImgPerfil : "/Imagens/Views/user.svg")" style="width: 25px; height: 25px; margin-right: 5px; border-radius: 25px" />
+                                    <strong>@("@" + Conta.Username)</strong>
+                                </div>
+                            </li>
+                            <h1>ESTABELECIMENTO</h1>*@
+                            <li>
+                                <a class="nav-link" href="/estabelecimento/">Início</a>
+                            </li>
+                            @*<li>
+                                <a class="nav-link" href="/inicio/estabelecimento/@Conta.Username">Perfil</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="/estabelecimento/conta/">Conta</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="/estabelecimento/endereco/">Endereço</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="/estabelecimento/redes-sociais/">Redes Sociais</a>
+                            </li>*@
+                        </ul>
+					</li>
+					<li class="nav-item">
+                        <ul>
+                            <h1>Evento</h1>
+                            <li>
+                                <a class="nav-link" href="/estabelecimento/eventos/">Meus Eventos</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="/estabelecimento/evento/">Novo Evento</a>
+                            </li>
+                        </ul>
+					</li>
+				</ul>
+			</li>
+            <li class="nav-item li-perfil dropdown">
+                <label class="label-perfil img-label dropdown" data-toggle="dropdown" style="@(ImgPerfil != "#" ? "background-image:url(" + ImgPerfil + ");" : string.Empty)"></label>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+					<li class="nav-item">
+                        <ul>
                             <li class="nav-item">
                                 <div class="flex">
                                     <img src="@(ImgPerfil != "#" ? ImgPerfil : "/Imagens/Views/user.svg")" style="width: 25px; height: 25px; margin-right: 5px; border-radius: 25px" />
-                                    @("@" + Conta.Username)
+                                    <strong>@("@" + Conta.Username)</strong>
                                 </div>
                             </li>
                             <h1>ESTABELECIMENTO</h1>
@@ -32,16 +74,8 @@
                             <li>
                                 <a class="nav-link" href="/estabelecimento/endereco/">Endereço</a>
                             </li>
-                        </ul>
-					</li>
-					<li class="nav-item">
-                        <ul>
-                            <h1>Evento</h1>
                             <li>
-                                <a class="nav-link" href="/estabelecimento/eventos/">Meus Eventos</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" href="/estabelecimento/evento/">Novo Evento</a>
+                                <a class="nav-link" href="/estabelecimento/redes-sociais/">Redes Sociais</a>
                             </li>
                         </ul>
 					</li>
@@ -49,7 +83,7 @@
 						<a class="nav-link" href="/estabelecimento/sair/">Sair</a>
 					</li>
 				</ul>
-			</li>
+            </li>
 		</ul>
 	</div>
 </nav>

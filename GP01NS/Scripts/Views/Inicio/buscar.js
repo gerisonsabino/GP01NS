@@ -283,6 +283,8 @@ function setMark(j) {
     var end = "Rua Galvão Bueno, 868 - Liberdade - São Paulo, SP - 01506-000";
     if (j != "" && j != null) {
         var json = JSON.parse(j);
+        $("[name='q']").val(json.Nome);
+        $("#resultset").html("");
         end = json.Endereco;
     }
 

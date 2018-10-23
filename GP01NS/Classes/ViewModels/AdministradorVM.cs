@@ -155,7 +155,7 @@ namespace GP01NS.Classes.ViewModels
                 this.Status = at.Ativo ? "Ativo" : "Inativo";
                 this.Tipo = at.usuario_tipo.Descricao;
                 this.Username = at.Username;
-                this.Senha = at.SenhaTeste;
+                this.Senha = at.Senha;
             }
 
             public string Cadastro { get; set; }

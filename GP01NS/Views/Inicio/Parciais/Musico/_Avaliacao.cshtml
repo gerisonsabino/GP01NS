@@ -1,0 +1,68 @@
+﻿@{  
+    var Avaliacao = (GP01NS.Classes.ViewModels.AvaliacaoVM)ViewBag.Avaliacao;
+    var Elogios = Avaliacao.GetElogios();
+}
+
+<script src="~/Scripts/nota.js" type="text/javascript"></script>
+<link href="~/CSS/Views/Inicio/Parciais/avaliacao.css" rel="stylesheet" type="text/css" />
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="PerfilVertical Flex">
+                    <div class="PerfilVertical__Imagem">
+                    <div class="FotoUsuario"></div>
+                    </div>
+                    <div class="PerfilVertical__Texto">
+                        <h6 class="PerfilVertical__Nome"></h6>
+                        <div class="PerfilVertical__Tipo">
+                            <span class="badge badge-secondary">Músico</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="message-text" class="col-form-label">Nota</label>
+                    <div class="avaliacao">
+                        <div class="nota">
+                            <span class="voto-1 oi oi-heart"></span>
+                            <span class="voto-2 oi oi-heart"></span>
+                            <span class="voto-3 oi oi-heart"></span>
+                            <span class="voto-4 oi oi-heart"></span>
+                            <span class="voto-5 oi oi-heart"></span>
+                        </div>
+                    </div>            
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="IDElogio" class="col-form-label">Elogio</label>
+                <select class="form-control" id="Avaliacao_IDElogio" name="Avaliacao.IDElogio">
+                    <option value="11">-</option>
+                    @for (int i = 0; i < Elogios.Count; i++)
+                    {
+                        <option value="@Elogios[i].ID" @(Elogios[i].ID == Avaliacao.IDElogio ? "selected='selected'" : string.Empty)>@Elogios[i].Descricao</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Avaliacao_Comentario" class="col-form-label">Comentário</label>
+                @Html.TextAreaFor(x => Avaliacao.Comentario, new { @class = "form-control", maxlength="200" })
+            </div>
+            <div class="modal-footer">
+                @Html.HiddenFor(x => Avaliacao.IDAvaliado)
+                @Html.HiddenFor(x => Avaliacao.TipoAvaliado)
+                @Html.HiddenFor(x => Avaliacao.Nota)
+                <button type="button" class="btn btn-primary" id="btn-salvar-avaliacao">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Scripts/mo.min.js"></script>
+<script type="text/javascript" src="~/Scripts/demo.js"></script>
+<script src="~/Scripts/Views/Inicio/avaliacao.js"></script>

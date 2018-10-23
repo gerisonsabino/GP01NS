@@ -33,6 +33,14 @@ namespace GP01NS.Controllers
                         {
                             ViewBag.Mensagem = "Usuário sem permissão de acesso ao sistema. Por favor, contate a administração.";
                         }
+                        /*else if(!u.Confirmado)
+                        {
+                            var req = new Requisicao(u, 2);
+                    
+                            req.SaveChanges();
+
+                            ViewBag.Mensagem = "Sua conta ainda não foi confirmada, enviamos as instruções no seu e-mail para efetuar a confirmação.";
+                        }*/
                         else
                         {
                             string id = string.Empty;
@@ -217,7 +225,7 @@ namespace GP01NS.Controllers
 
                             if (Senha == Confirmacao)
                             {
-                                u.Senha = Criptografia.GetHash128(Senha);
+                                u.Hash128 = Criptografia.GetHash128(Senha);
 
                                 db.ObjectStateManager.ChangeObjectState(u, System.Data.EntityState.Modified);
                                 db.SaveChanges();

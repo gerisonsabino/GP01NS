@@ -1,0 +1,80 @@
+﻿@model GP01NS.Classes.ViewModels.RedesSociaisVM
+
+@{
+    ViewBag.Title = "Redes Sociais";
+}
+<link href="~/CSS/Views/Musico/redes-sociais.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm())
+            {
+                <h2>Redes Sociais</h2>
+                <div class="card">
+                    <div class="card-header">Plataformas de Música</div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="">SoundClick</label>
+                            @Html.TextBoxFor(x => x.SoundCloud, new { @class = "form-control", placeholder = " adicione aqui o link do SoundClick" })
+                        </div>
+                        <div class="form-group">
+                            <label for="">Deezer</label>
+                            @Html.TextBoxFor(x => x.Deezer, new { @class = "form-control", placeholder = " adicione aqui o link do Deezer" })
+                        </div>
+                        <div class="form-group">
+                            <label for="">Spotify</label>
+                            @Html.TextBoxFor(x => x.Spotify, new { @class = "form-control", placeholder = " adicione aqui o link do Spotify" })
+                        </div>
+                        <div class="form-group">
+                            <label for="">YouTube</label>
+                            @Html.TextBoxFor(x => x.Youtube, new { @class = "form-control", placeholder = " adicione aqui o link do YouTube" })
+                        </div>
+                        <div class="form-group">
+                            <label for="">Embed do Youtube</label>
+                            @Html.TextAreaFor(x => x.Embed, new { @class = "form-control", rows = "3", placeholder = " adicione aqui o embed do YouTube para o seu perfil" })
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header text-left">Redes Sociais</div>
+                    <div class="card-body">
+                    <div class="form-group">
+                        <label for="">Twitter</label>
+                        @Html.TextBoxFor(x => x.Twitter, new { @class = "form-control", placeholder = " adicione aqui o link do Twitter" })
+                    </div>
+                    <div class="form-group">
+                        <label for="">Instagram</label>
+                        @Html.TextBoxFor(x => x.Instagram, new { @class = "form-control", placeholder = " adicione aqui o link do Instagram" })
+                    </div>
+                    <div class="form-group">
+                        <label for="">Facebook</label>
+                        @Html.TextBoxFor(x => x.Facebook, new { @class = "form-control", placeholder = " adicione aqui o link do Facebook" })
+                    </div>
+                    <div class="form-group">
+                        <label for="">Google+</label>
+                        @Html.TextBoxFor(x => x.GooglePlus, new { @class = "form-control", placeholder = " adicione aqui o link do Google+" })
+                    </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">salvar</button>
+                </div>
+
+                if (!string.IsNullOrEmpty(ViewBag.Erro))
+                {
+                    <div class="alert alert-danger">
+                        <strong>@ViewBag.Erro</strong>
+                    </div>
+                }
+
+                if (!string.IsNullOrEmpty(ViewBag.Sucesso))
+                {
+                    <div class="alert alert-success">
+                        <strong>@ViewBag.Sucesso</strong>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

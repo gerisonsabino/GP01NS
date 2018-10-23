@@ -14,6 +14,7 @@ namespace GP01NS.Classes.ViewModels
         public string NomeArtistico { get; set; }
         public string CPF { get; set; }
         public string Descricao { get; set; }
+        public RedesSociaisVM RedesSociais { get; set; }
 
         private readonly usuario_musico Musico;
 
@@ -26,12 +27,14 @@ namespace GP01NS.Classes.ViewModels
                 this.NomeArtistico = this.Musico.NomeArtistico;
                 this.CPF = this.Musico.CPF;
                 this.Descricao = this.Musico.Descricao;
+                this.RedesSociais = this.GetRedesSociais();
             }
             else
             {
                 this.NomeArtistico = string.Empty;
                 this.CPF = string.Empty;
                 this.Descricao = string.Empty;
+                this.RedesSociais = new RedesSociaisVM();
             }
         }
 
@@ -139,6 +142,23 @@ namespace GP01NS.Classes.ViewModels
             return false;
         }
 
+        private RedesSociaisVM GetRedesSociais()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var u = db.usuario.Single(x => x.ID == this.Usuario.ID);
+
+                    if (u.usuario_redes_sociais != null)
+                        return new RedesSociaisVM(u.usuario_redes_sociais);
+                }
+            }
+            catch { }
+
+            return new RedesSociaisVM();
+        }
+
         private usuario_musico GetMusicoByID(int id) 
         {
             try
@@ -154,7 +174,7 @@ namespace GP01NS.Classes.ViewModels
             }
         }
 
-        internal class AgendaJSON
+        internal class AgendaJSON 
         {
             public int ID { get; set; }
             public string Estabelecimento { get; set; }
@@ -172,7 +192,7 @@ namespace GP01NS.Classes.ViewModels
             }
         }
 
-        internal class ConviteJSON
+        internal class ConviteJSON 
         {
             public int IDEvento { get; set; }
             public string Estabelecimento { get; set; }

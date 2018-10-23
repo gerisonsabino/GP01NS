@@ -111,21 +111,14 @@ namespace GP01NS.Controllers
             return View(model);
         }
 
-        public ActionResult Perfil()
-        {
-            this.Musico = new MusicoVM(this.BaseUsuario);
-
-            return View(Musico);
-        }
-
         [HttpPost]
-        public ActionResult UploadProfile(HttpPostedFileBase Arquivo)
+        public ActionResult UploadProfile(HttpPostedFileBase Arquivo, string Href)
         {
             this.Musico = new MusicoVM(this.BaseUsuario);
 
             new ImagemVM(Arquivo, this.Musico.ID, int.MinValue, 1).Upload();
 
-            return Redirect("/inicio/musico/" + this.Musico.Username);
+            return Redirect(Href);
         }
 
         [HttpPost]
@@ -163,6 +156,32 @@ namespace GP01NS.Controllers
 
             return View(model);
         }
+
+        public ActionResult RedesSociais()
+        {
+            this.Musico = new MusicoVM(this.BaseUsuario);
+            
+            return View(this.Musico.RedesSociais);
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult RedesSociais(RedesSociaisVM model)
+        {
+            this.Musico = new MusicoVM(this.BaseUsuario);
+
+            if (model.SaveChanges(this.Musico))
+            {
+                ViewBag.Sucesso = "Os dados de redes sociais foram salvos.";
+            }
+            else
+            {
+                ViewBag.Erro = "Por favor, confira os dados informados e tente novamente.";
+            }
+
+            return View(model);
+        }
+
 
         public ActionResult Sair()
         {

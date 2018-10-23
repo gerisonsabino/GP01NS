@@ -20,8 +20,9 @@ namespace GP01NS.Classes.ViewModels
         public int Das { get; set; }
         public int As { get; set; }
         public int IDAmbientacao { get; set; }
+        public RedesSociaisVM RedesSociais { get; set; }
 
-        private usuario_estabelecimento Estabelecimento;
+        private readonly usuario_estabelecimento Estabelecimento;
 
         public EstabelecimentoVM(usuario usuario) : base(usuario)
         {
@@ -37,6 +38,7 @@ namespace GP01NS.Classes.ViewModels
                 this.CNPJ = this.Estabelecimento.CNPJ;
                 this.Razao = this.Estabelecimento.Razao;
                 this.IDAmbientacao = this.Estabelecimento.IDAmbientacao;
+                this.RedesSociais = this.GetRedesSociais();
             }
             else
             {
@@ -48,6 +50,7 @@ namespace GP01NS.Classes.ViewModels
                 this.CNPJ = string.Empty;
                 this.Razao = string.Empty;
                 this.IDAmbientacao = 1;
+                this.RedesSociais = new RedesSociaisVM();
             }
         }
 
@@ -101,6 +104,23 @@ namespace GP01NS.Classes.ViewModels
             catch { }
 
             return string.Empty;
+        }
+
+        private RedesSociaisVM GetRedesSociais()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var u = db.usuario.Single(x => x.ID == this.Usuario.ID);
+
+                    if (u.usuario_redes_sociais != null)
+                        return new RedesSociaisVM(u.usuario_redes_sociais);
+                }
+            }
+            catch { }
+
+            return null;
         }
 
         public bool SaveChanges() 

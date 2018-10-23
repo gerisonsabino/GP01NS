@@ -205,11 +205,19 @@ namespace GP01NS.Controllers
                 {
                     var u = db.usuario.First(x => x.Username == id && x.Tipo == 2);
 
-                    return View(new EstabelecimentoVM(u));
+                    var e = new EstabelecimentoVM(u);
+
+                    if (this.Usuario != null)
+                        if(this.Usuario.TipoUsuario == 3)
+                            ViewBag.Avaliacao = new AvaliacaoVM(this.Usuario, u);
+
+                    if (e.ValidarPerfil())
+                        return View(e);
                 }
             }
-            catch { return Redirect("/inicio/"); }
+            catch { }
 
+            return Redirect("/inicio/buscar/"); 
         }
 
         public ActionResult Evento(string id)
@@ -251,12 +259,21 @@ namespace GP01NS.Controllers
                 {
                     var u = db.usuario.First(x => x.Username == id && x.Tipo == 4);
 
-                    return View(new MusicoVM(u));
+                    var m = new MusicoVM(u);
+
+                    if (this.Usuario != null)
+                        if(this.Usuario.TipoUsuario == 3)
+                            ViewBag.Avaliacao = new AvaliacaoVM(this.Usuario, u);
+
+                    if (m.ValidarPerfil())
+                        return View(m);
                 }
             }
-            catch { return Redirect("/inicio/"); }
-        }
+            catch { }
 
+            return Redirect("/inicio/buscar/"); 
+        }
+        
         [HttpPost]
         public string ToggleSeguir(int ID)
         {
@@ -272,5 +289,52 @@ namespace GP01NS.Controllers
 
             return "erro";
         }
+
+        [HttpPost]
+        public string Avaliacao(string json, string href)
+        {
+            if (this.BaseUsuario != null)
+            {
+                this.Usuario = new UsuarioVM(this.BaseUsuario);
+
+                var model = JsonConvert.DeserializeObject<AvaliacaoVM>(json);
+
+                if (model.SaveChanges(this.Usuario))
+                    return "ok";
+            }
+
+            return "erro";
+        }
+
+        [HttpPost]
+        public string GetAvaliacoes(string id)
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    int i = int.Parse(id);
+
+                    var u = db.usuario.First(x => x.ID == i);
+
+                    if (u.Tipo == 4)
+                    {
+                        var m = new MusicoVM(u);
+
+                        return m.GetAvaliacoesJSON();
+                    }
+                    else
+                    {
+                        var e = new EstabelecimentoVM(u);
+
+                        return e.GetAvaliacoesJSON();
+                    }
+                }
+            }
+            catch { }
+
+            return string.Empty;
+        }
+
     }
 }

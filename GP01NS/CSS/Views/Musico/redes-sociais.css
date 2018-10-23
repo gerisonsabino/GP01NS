@@ -1,0 +1,44 @@
+﻿* {
+    transition: 0.3s;
+}
+
+input {
+text-align: center;
+height: 45px !important;
+}
+
+input:focus {
+background-color: #ffffff !important;
+color: #666 !important;
+border: 1px solid #6904b7 !important;
+box-shadow: 0 0 0 0.2rem rgba(105, 004, 183, 0.25) !important;
+}
+
+textarea:focus {
+background-color: #ffffff !important;
+color: #666 !important;
+border: 1px solid #6904b7 !important;
+box-shadow: 0 0 0 0.2rem rgba(105, 004, 183, 0.25) !important;
+}
+
+button {
+    background-color: #6904b7 !important;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    border: none !important;
+    height: 45px;
+}
+
+.btn-danger:focus, .btn-danger.focus {
+    box-shadow: 0 0 0 0.2rem rgba(105, 004, 183, 0.25);
+}
+
+.btn-danger:not(:disabled):not(.disabled):active:focus, .btn-danger:not(:disabled):not(.disabled).active:focus,
+.show > .btn-danger.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(105, 004, 183, 0.25);
+}
+
+.card{
+    margin-top: 50px;
+    box-shadow: none !important;
+}

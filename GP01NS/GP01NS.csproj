@@ -136,6 +136,7 @@
     <Compile Include="Classes\Util\Requisicao.cs" />
     <Compile Include="Classes\Util\UrlHifenizada.cs" />
     <Compile Include="Classes\ViewModels\AdministradorVM.cs" />
+    <Compile Include="Classes\ViewModels\AvaliacaoVM.cs" />
     <Compile Include="Classes\ViewModels\EnderecoVM.cs" />
     <Compile Include="Classes\ViewModels\Entrar\CadastroVM.cs" />
     <Compile Include="Classes\ViewModels\EstabelecimentoVM.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="Classes\ViewModels\ImagemVM.cs" />
     <Compile Include="Classes\ViewModels\MusicoVM.cs" />
     <Compile Include="Classes\ViewModels\Musico\ContaVM.cs" />
+    <Compile Include="Classes\ViewModels\RedesSociaisVM.cs" />
     <Compile Include="Classes\ViewModels\UsuarioVM.cs" />
     <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\EntrarController.cs" />
@@ -1742,11 +1744,13 @@
     <Content Include="CSS\icons-open-iconic-master\svg\yen.svg" />
     <Content Include="CSS\icons-open-iconic-master\svg\zoom-in.svg" />
     <Content Include="CSS\icons-open-iconic-master\svg\zoom-out.svg" />
+    <Content Include="CSS\Views\Administrador\layout_joel.css" />
     <Content Include="CSS\Views\Administrador\layout.css" />
     <Content Include="CSS\Views\Entrar\layout.css" />
     <Content Include="CSS\Views\Estabelecimento\conta.css" />
     <Content Include="CSS\Views\Fa\endereco.css" />
     <Content Include="CSS\Views\Fa\seguindo.css" />
+    <Content Include="CSS\Views\Inicio\Parciais\avaliacao.css" />
     <Content Include="CSS\Views\Inicio\resultados.css" />
     <Content Include="CSS\Views\Inicio\buscar.css" />
     <Content Include="CSS\Views\forms.css" />
@@ -1754,6 +1758,7 @@
     <Content Include="CSS\Views\Inicio\evento.css" />
     <Content Include="CSS\Views\Inicio\index.css" />
     <Content Include="CSS\Views\layout.css" />
+    <Content Include="CSS\Views\Musico\redes-sociais.css" />
     <Content Include="CSS\Views\Musico\index.css" />
     <Content Include="CSS\Views\Musico\perfil.css" />
     <Content Include="CSS\Views\Parciais\Load\load.css" />
@@ -1884,7 +1889,9 @@
     <Content Include="Scripts\DataTables\datatables.js" />
     <Content Include="Scripts\DataTables\datatables.min.css" />
     <Content Include="Scripts\DataTables\datatables.min.js" />
+    <Content Include="Scripts\demo.js" />
     <Content Include="Scripts\form_main.js" />
+    <Content Include="Scripts\mo.min.js" />
     <Content Include="Scripts\nota.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\jquery.js" />
@@ -1906,6 +1913,7 @@
     <Content Include="Scripts\Views\Estabelecimento\evento.js" />
     <Content Include="Scripts\Views\Estabelecimento\evento_table.js" />
     <Content Include="Scripts\Views\Fa\seguindo.js" />
+    <Content Include="Scripts\Views\Inicio\avaliacao.js" />
     <Content Include="Scripts\Views\Inicio\evento.js" />
     <Content Include="Scripts\Views\Inicio\estabelecimento.js" />
     <Content Include="Scripts\Views\Inicio\buscar.js" />
@@ -3431,10 +3439,28 @@
     <Content Include="Views\Entrar\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Inicio\Parciais\Musico\_Compartilhar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inicio\Parciais\Musico\_Avaliacao.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <EntityDeploy Include="Models\nosso_show.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inicio\Parciais\Estabelecimento\_Avaliacao.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inicio\Parciais\Estabelecimento\_Compartilhar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Musico\RedesSociais.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Estabelecimento\RedesSociais.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

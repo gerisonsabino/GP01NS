@@ -21,6 +21,8 @@ namespace GP01NS.Classes.ViewModels
         public string Telefone { get; set; }
         public int TipoUsuario { get; set; }
 
+        private bool TemPerfil { get; set; }
+
         public EnderecoVM Endereco { get; set; }
 
         protected usuario Usuario;
@@ -43,6 +45,8 @@ namespace GP01NS.Classes.ViewModels
             this.Username = usuario.Username;
 
             this.Endereco = new EnderecoVM(this.GetEnderecoByIDUsuario(this.ID));
+
+            this.TemPerfil = VerificarPerfil();
         }
 
         public bool ValidarEmail(UsuarioVM usuario)
@@ -113,7 +117,7 @@ namespace GP01NS.Classes.ViewModels
                     return "http://nossoshow.gerison.net" + db.usuario.First(x => x.ID == this.ID).imagem.Last(x => x.TipoImagem == 2).Diretorio;
                 }
             }
-            catch { return "/Imagens/Views/Estabelecimento/bg-estabelecimento.jpg"; }
+            catch { return "#"; }
         }
 
         public bool ToggleSeguir(int idUsuario)
@@ -157,6 +161,11 @@ namespace GP01NS.Classes.ViewModels
             return false;
         }
 
+        public bool ValidarPerfil()
+        {
+            return this.TemPerfil;
+        }
+
         private endereco GetEnderecoByIDUsuario(int id) 
         {
             try
@@ -193,6 +202,51 @@ namespace GP01NS.Classes.ViewModels
                     };
 
                     return JsonConvert.SerializeObject(s);
+                }
+            }
+            catch { }
+
+            return string.Empty;
+        }
+
+        public string GetAvaliacoesJSON()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var avs = db.usuario_avalia_usuario.Where(x => x.IDAvaliado == this.ID && x.TipoAvaliado == this.TipoUsuario).ToList();
+
+                    avs = avs.OrderByDescending(x => x.Data).ToList();
+
+                    var lista = new List<AvaliacaoJSON>();
+
+                    for (int i = 0; i < avs.Count; i++)
+                    {
+                        var av = avs[i];
+                        var u2 = av.usuario;
+                        AvaliacaoJSON a = new AvaliacaoJSON
+                        {
+                            Comentario = avs[i].Comentario,
+                            Elogio = avs[i].usuario_avaliacao_elogio.Descricao
+                        };
+
+                        try
+                        {
+                            a.ImagemPerfil = u2.imagem.Last(x => x.TipoImagem == 1).Diretorio;
+                        }
+                        catch
+                        {
+                            a.ImagemPerfil = "/Imagens/Views/user.svg";
+                        }
+
+                        a.Nota = av.Nota;
+                        a.Usuario = u2.Nome;
+
+                        lista.Add(a);
+                    }
+
+                    return JsonConvert.SerializeObject(lista);
                 }
             }
             catch { }
@@ -291,12 +345,12 @@ namespace GP01NS.Classes.ViewModels
 
                         try
                         {
-                            //   r.Imagem = evento.usuario.imagem.Last(x => x.TipoImagem == 1).Diretorio;/
-                            r.Imagem = "/Imagens/Views/user.svg";
+                            r.Imagem = evento.imagem.Last(x => x.TipoImagem == 4).Diretorio;
+
                         }
                         catch
                         {
-                            r.Imagem = string.Empty;
+                            r.Imagem = "/Imagens/Views/user.svg";
                         }
 
                         var usuario = new UsuarioVM(evento.usuario_estabelecimento.usuario);
@@ -310,11 +364,43 @@ namespace GP01NS.Classes.ViewModels
             return JsonConvert.SerializeObject(resultados);
         }
 
+        private bool VerificarPerfil()
+        {
+            if (this.GetEnderecoByIDUsuario(this.ID) != null)
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    switch (this.TipoUsuario)
+                    {
+                        case 2:
+                            return db.usuario_estabelecimento.Any(x => x.IDUsuario == this.ID);
+
+                        case 4:
+                            return db.usuario_musico.Any(x => x.IDUsuario == this.ID);
+
+                        default:
+                            return false;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         internal class SeguindoJSON
         {
             public string Estabelecimentos { get; set; }
             public string Eventos { get; set; }
             public string Musicos { get; set; }
+        }
+
+        internal class AvaliacaoJSON
+        {
+            public int Nota { get; set; }
+            public string Elogio { get; set; }
+            public string Comentario { get; set; }
+            public string Usuario { get; set; }
+            public string ImagemPerfil { get; set; }
         }
 
         internal class Resultado

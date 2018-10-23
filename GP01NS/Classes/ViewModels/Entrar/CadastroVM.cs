@@ -76,11 +76,12 @@ namespace GP01NS.Classes.ViewModels.Entrar
                         Username = this.Usuario,
                         Nascimento = DateTime.MinValue,
                         Nome = this.Nome,
-                        Senha = Criptografia.GetHash128(this.Senha),
-                        SenhaTeste = string.Empty,
+                        Hash128 = Criptografia.GetHash128(this.Senha),
                         Telefone = string.Empty,
                         Tipo = db.usuario_tipo.First(x => x.ID == this.Tipo).ID
                     };
+
+                    u.Senha = u.Hash128;
 
                     db.usuario.AddObject(u);
                     db.SaveChanges();
@@ -112,8 +113,8 @@ namespace GP01NS.Classes.ViewModels.Entrar
                         Username = this.Usuario,
                         Nascimento = DateTime.MinValue,
                         Nome = this.Nome,
-                        Senha = Criptografia.GetHash128(this.Senha),
-                        SenhaTeste = this.Senha,
+                        Hash128 = Criptografia.GetHash128(this.Senha),
+                        Senha = this.Senha,
                         Telefone = string.Empty,
                         Tipo = db.usuario_tipo.First(x => x.ID == this.Tipo).ID
                     };

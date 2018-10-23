@@ -114,6 +114,16 @@ namespace GP01NS.Controllers
             return this.Usuario.ToggleSeguir(idUsuario).ToString().ToLower();
         }
 
+        [HttpPost]
+        public ActionResult UploadProfile(HttpPostedFileBase Arquivo, string Href)
+        {
+            this.Usuario = new UsuarioVM(this.BaseUsuario);
+
+            new ImagemVM(Arquivo, this.Usuario.ID, int.MinValue, 1).Upload();
+
+            return Redirect(Href);
+        }
+
         public ActionResult Seguindo()
         {
             this.Usuario = new UsuarioVM(this.BaseUsuario);

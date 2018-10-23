@@ -161,7 +161,7 @@ header .logo {
 	color: var(--primaria);
 }
 
-.navbar .nav-item:not(:last-child) {
+.navbar .dropdown-menu .nav-item:not(:last-child) {
 	margin-bottom: 20px;
 }
 
@@ -233,7 +233,7 @@ header .logo {
 
 .caixa-menu img {
 	margin: auto;
-	width: 19px;
+	width: 22px;
 }
 
 .menu_fixo {
@@ -246,6 +246,45 @@ header .logo {
 .navbar-expand-lg .navbar-toggler {
 	display: block;
 }
+
+.li-perfil {
+    margin-left: 10px;
+}
+
+.label-perfil {
+    width: 30px;
+    height: 30px;
+    background: url(/Imagens/Views/user.svg) center center / cover no-repeat;
+    border-radius: 50%;
+    margin: 0px !important;
+}
+
+.li-perfil .img-label {
+    background: url(/Imagens/Views/image.png) center center / cover no-repeat #CCC;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.li-perfil .img-label .img-hover {
+    position: absolute !important;
+    width: 100%;
+    height: 100%;
+    background: url(/CSS/icons-open-iconic-master/svg/pencil-white.svg) center center / 15px no-repeat rgba(0, 0, 0, .5);
+    opacity: 0;
+    top: 0;
+    left: 0;
+}
+
+.li-perfil .img-label:hover .img-hover {
+    opacity: 1;
+}
+
+.li-perfil .img-label input {
+    position: absolute !important;
+    top: -100% !important;
+}
+
 
 /*FOOTER*/
 @font-face {
@@ -494,6 +533,10 @@ span[class^=voto]:hover {
     border: none;
     margin-top: 25px;
     position: absolute;
+}
+
+.navbar-nav {
+    flex-direction: row;
 }
 
 .custom-checkbox:checked + label::before {

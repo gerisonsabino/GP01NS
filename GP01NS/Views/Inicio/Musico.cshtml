@@ -11,11 +11,15 @@
     var Habilidades = Model.GetHabilidades();
     var Imagens = Model.GetImagens();
     var Perfil = Model.GetImagemPerfil();
-
+    var Avaliacao = (GP01NS.Classes.ViewModels.AvaliacaoVM)ViewBag.Avaliacao;
 }
 
 <link href="~/CSS/Views/Musico/perfil.css" rel="stylesheet" />
 
+@if (ViewBag.Avaliacao != null)
+{
+    @RenderPage("~/Views/Inicio/Parciais/Musico/_Avaliacao.cshtml")
+}
 
 <div class="card-body pt-0">
     <div class="card-body container-fluid">
@@ -23,20 +27,21 @@
             <div class="col-lg-8 col-sm-12">
                 <div class="row">
                     <div class="perfil">
-                        <label class="perfil-imagem foto-imagem" style="@(Perfil != "#" ? "background-image:url(" + Perfil + ");" : string.Empty)">
+                        <label class="perfil-imagem foto-imagem" style="@(Perfil != "#" ? "background-image:url(" + Perfil + ");" : string.Empty)" data-url="@Perfil">
                             @if (Usuario != null)
                             {
                                 if (Usuario.ID == Model.ID)
                                 {
                                     <form action="/Musico/UploadProfile/" method="post" enctype="multipart/form-data">
                                         <div class="foto-hover"></div>
+                                        @Html.Hidden("Href", this.Request.RawUrl)
                                         <input type="file" id="Arquivo" name="Arquivo" onchange="javascript:this.form.submit();">
                                     </form>
                                 }
                             }
                         </label>
                         <div class="perfil-texto">
-                            <h2 id="estabelecimento">
+                            <h2 id="musico" data-nome="@Model.NomeArtistico">
                                 @Model.NomeArtistico
                                 <span class="badge badge-secondary" style="font-size: 0.6rem; font-family: 'Segoe UI', sans-serif">Músico</span>
                             </h2>
@@ -78,7 +83,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-5">
+                <div class="row mt-5 mb-3">
                     <div class="habilidade">
                         <div class="mb-2">
                             <strong>Habilidade(s)</strong>
@@ -100,22 +105,22 @@
                         }
                     </div>
                 </div>
-                <div class="row mt-5 mb-4">
-                    <div class="portfolio col-12 no-padding">
-                        <div class="mb-2">Veja os trabalhos desse artista</div>
-                        <div class="portfolio-itens flex">
-                            <a href="javascript:void(0);" class="logo-soundcloud titleCustom" data-placement="top" title="Soundclick"></a>
-                            <a href="javascript:void(0);" class="logo-spotify titleCustom" data-placement="top" title="Spotify"></a>
-                            <a href="javascript:void(0);" class="logo-deezer titleCustom" data-placement="top" title="Deezer"></a>
-                            <a href="javascript:void(0);" class="logo-youtube titleCustom" data-placement="top" title="Youtube"></a>
-                        </div>
+                @if (Model.RedesSociais != null)
+                {
+                    <div class="row mb-3">
+                        @if (!string.IsNullOrEmpty(Model.RedesSociais.Embed))
+                        {
+                            @Html.Raw(Model.RedesSociais.Embed)
+                        }
                     </div>
-                </div>
+                }
             </div>
             <div class="col-lg-4 col-sm-12 lado-fotos">
                 <div class="bloco-participante shadow p-3 bg-white rounded border mb-4">
                     <div class="row mb-4 ">
-                        <div class="mb-3 text-center col-12">Veja as fotos deste artista</div>
+                        <div class="mb-3 text-center col-12">
+                            <strong>Veja as fotos deste artista</strong>
+                        </div>
                         <div class="foto-lista flex space-between">
                             @for (int i = 0; i < Imagens.Count; i++)
                             {
@@ -164,66 +169,41 @@
                         </div>
                     </div>
                     <div>
-                        <div class="mb-3 text-center col-12">Comentários recentes</div>
-                        <div class="comentario-lista mb-4">
-                            <div class="comentario-item mb-3 flex">
-                                <div class="comentario-foto" style="background-image: url(https://randomuser.me/api/portraits/men/12.jpg)"></div>
-                                <div class="comentario-nome">Harold King</div>
-                                <div class="comentario-mensagem text-center">
-                                    <div class="nota-4">
-                                        <span class="voto-1 oi oi-heart"></span>
-                                        <span class="voto-2 oi oi-heart"></span>
-                                        <span class="voto-3 oi oi-heart"></span>
-                                        <span class="voto-4 oi oi-heart"></span>
-                                        <span class="voto-5 oi oi-heart"></span>
-                                    </div>
-                                    Mussum Ipsum, cacilds vidis litro abertis.
+                        @if (Avaliacao != null)
+                        {
+                            <div class="mb-3 text-center col-12">
+                                <strong class="display-5">Clique para avaliar este artista</strong>
+                                <div class="nota @("nota-" + Avaliacao.Nota)" id="modal-avaliar">
+                                    <span class="voto-1 oi oi-heart"></span>
+                                    <span class="voto-2 oi oi-heart"></span>
+                                    <span class="voto-3 oi oi-heart"></span>
+                                    <span class="voto-4 oi oi-heart"></span>
+                                    <span class="voto-5 oi oi-heart"></span>
                                 </div>
                             </div>
-
-                            <div class="comentario-item mb-3 flex">
-                                <div class="comentario-foto" style="background-image: url(https://randomuser.me/api/portraits/women/12.jpg)"></div>
-                                <div class="comentario-nome">April Hughes</div>
-                                <div class="comentario-mensagem text-center">
-                                    <div class="nota-3">
-                                        <span class="voto-1 oi oi-heart"></span>
-                                        <span class="voto-2 oi oi-heart"></span>
-                                        <span class="voto-3 oi oi-heart"></span>
-                                        <span class="voto-4 oi oi-heart"></span>
-                                        <span class="voto-5 oi oi-heart"></span>
-                                    </div>
-                                    Per aumento de cachacis, eu reclamis.
-                                </div>
-                            </div>
-
-                            <div class="comentario-item mb-3 flex">
-                                <div class="comentario-foto" style="background-image: url(https://randomuser.me/api/portraits/men/11.jpg)"></div>
-                                <div class="comentario-nome">Ryan Miller</div>
-                                <div class="comentario-mensagem text-center">
-                                    <div class="nota-5">
-                                        <span class="voto-1 oi oi-heart"></span>
-                                        <span class="voto-2 oi oi-heart"></span>
-                                        <span class="voto-3 oi oi-heart"></span>
-                                        <span class="voto-4 oi oi-heart"></span>
-                                        <span class="voto-5 oi oi-heart"></span>
-                                    </div>
-                                    Mé faiz elementum girarzis, nisi eros vermeio.
-                                </div>
-
-                            </div>
+                        }
+                        <div class="mb-3 text-center col-12">
+                            <strong>Comentários recentes</strong>
+                        </div>
+                        <div class="comentario-lista mb-4" data-musico="@Model.ID">
+                            <div class="comentarios"></div>
+                            @RenderPage("~/Views/Layout/Parciais/Load/Load.cshtml")
                         </div>
                     </div>
                     @if (Usuario != null)
                     {
                         if (Usuario.ID != Model.ID)
                         {
-                            if (!Usuario.Seguindo(Model.ID))
+                            if (Usuario.TipoUsuario == 3)
                             {
-                                <button class="btn btn-primary" id="btn-seguir" data-musico="@Model.ID">Seguir</button>
-                            }
-                            else
-                            {
-                                <button class="btn btn-danger" id="btn-seguir" data-musico="@Model.ID">Deixar de Seguir</button>
+                                if (!Usuario.Seguindo(Model.ID))
+                                {
+                                    <button class="btn btn-primary" id="btn-seguir" data-musico="@Model.ID">Seguir</button>
+                                }
+                                else
+                                {
+                                   <button class="btn btn-danger" id="btn-seguir" data-musico="@Model.ID">Deixar de Seguir</button>
+                                }
                             }
                         }
                         else
@@ -240,28 +220,12 @@
             </div>
         </div>
         <div class="row card-compartilhar">
-            <div class="col-lg-8 col-sm-12 no-padding flex">
-                <div class="col-lg-7 col-sm-12 no-padding social-media">
-                    <strong class="display-5">Compartilhe o trabalho de @Model.NomeArtistico nas redes sociais</strong>
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><a href="javascript:void(0);"><i class="fab fa-twitter titleCustom" data-placement="top" title="Twitter" style="color: #55acee"></i></a></li>
-                        <li class="list-inline-item"><a href="javascript:void(0);"><i class="fab fa-instagram titleCustom" data-placement="top" title="Instagram" style="color: #55acee"></i></a></li>
-                        <li class="list-inline-item"><a href="javascript:void(0);"><i class="fab fa-facebook-square titleCustom" data-placement="top" title="Facebook" style="color: #3a589e"></i></a></li>
-                        <li class="list-inline-item"><a href="javascript:void(0);"><i class="fab fa-google titleCustom" data-placement="top" title="Google+" style="color: #dc4e41"></i></a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-5 col-sm-12 no-padding">
-                    <strong class="display-5">Avalie este artista</strong>
-                    <div class="nota-4">
-                        <span class="voto-1 oi oi-heart"></span>
-                        <span class="voto-2 oi oi-heart"></span>
-                        <span class="voto-3 oi oi-heart"></span>
-                        <span class="voto-4 oi oi-heart"></span>
-                        <span class="voto-5 oi oi-heart"></span>
-                    </div>
-                </div>
-            </div>
+            @if (Model.RedesSociais != null)
+            {
+                @RenderPage("~/Views/Inicio/Parciais/Musico/_Compartilhar.cshtml")
+            }
         </div>
     </div>
 </div>
+
 <script src="~/Scripts/Views/Inicio/musico.js"></script>

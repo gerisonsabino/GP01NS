@@ -1,0 +1,67 @@
+﻿@model GP01NS.Classes.ViewModels.EstabelecimentoVM
+
+<div class="col-lg-8 col-sm-12 no-padding flex">
+    <div class="col-lg-7 col-sm-12 no-padding social-media">
+        <strong class="display-5">Compartilhe @Model.Nome  nas redes sociais</strong>
+        <ul class="list-inline">
+
+            @if (!string.IsNullOrEmpty(Model.RedesSociais.Twitter))
+            {
+                <li class="list-inline-item">
+                    <a href="@Model.RedesSociais.Twitter" target="_blank">
+                        <i class="fab fa-twitter titleCustom" data-placement="top" title="Twitter" style="color: #55acee"></i>
+                    </a>
+                </li>
+            }
+            
+            @if (!string.IsNullOrEmpty(Model.RedesSociais.Instagram))
+            {
+                <li class="list-inline-item">
+                    <a href="@Model.RedesSociais.Instagram" target="_blank"><i class="fab fa-instagram titleCustom" data-placement="top" title="Instagram" style="color: #55acee"></i></a>
+                </li>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.RedesSociais.Facebook))
+            {
+                <li class="list-inline-item">
+                    <a href="@Model.RedesSociais.Facebook" target="_blank"><i class="fab fa-facebook-square titleCustom" data-placement="top" title="Facebook" style="color: #3a589e"></i></a>
+                </li>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.RedesSociais.GooglePlus))
+            {
+                <li class="list-inline-item">
+                    <a href="@Model.RedesSociais.GooglePlus" target="_blank"><i class="fab fa-google titleCustom" data-placement="top" title="Google+" style="color: #dc4e41"></i></a>
+                </li>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.RedesSociais.SoundCloud))
+            {
+                <li class="list-inline-item portfolio-itens">
+                    <a href="@Model.RedesSociais.SoundCloud" class="logo-soundcloud titleCustom" data-placement="top" title="Soundclick" target="_blank"></a>
+                </li>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.RedesSociais.Spotify))
+            {
+                <li class="list-inline-item portfolio-itens">
+                    <a href="@Model.RedesSociais.Spotify" class="logo-spotify titleCustom" data-placement="top" title="Spotify" target="_blank"></a>
+                </li>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.RedesSociais.Deezer))
+            {
+                <li class="list-inline-item portfolio-itens">
+                    <a href="@Model.RedesSociais.Deezer" class="logo-deezer titleCustom" data-placement="top" title="Deezer" target="_blank"></a>
+                </li>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.RedesSociais.Youtube))
+            {
+                <li class="list-inline-item portfolio-itens">
+                    <a href="@Model.RedesSociais.Youtube" class="logo-youtube titleCustom" data-placement="top" title="Youtube" target="_blank"></a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

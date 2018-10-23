@@ -29,10 +29,13 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_imagem_tipo1", "imagem_tipo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.imagem_tipo), "imagem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.imagem), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_requisicao_tipo", "requisicao_tipo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.requisicao_tipo), "requisicao", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.requisicao), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_requisicao_usuario", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario), "requisicao", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.requisicao), true)]
+[assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_avalia_usuario1", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario), "usuario_avalia_usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_avalia_usuario), true)]
+[assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_avalia_usuario2", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario), "usuario_avalia_usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_avalia_usuario), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_estabelecimento", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario), "usuario_estabelecimento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_estabelecimento), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_musico", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario), "usuario_musico", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_musico), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_rede_sociais", "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario), "usuario_redes_sociais", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GP01NS.Models.usuario_redes_sociais), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_tipo", "usuario_tipo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario_tipo), "usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario), true)]
+[assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_elogio", "usuario_avaliacao_elogio", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario_avaliacao_elogio), "usuario_avalia_usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_avalia_usuario), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_estabelecimento_dia_ate", "usuario_estabelecimento_dias", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario_estabelecimento_dias), "usuario_estabelecimento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_estabelecimento), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "FK_usuario_estabelecimento_dia_de", "usuario_estabelecimento_dias", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GP01NS.Models.usuario_estabelecimento_dias), "usuario_estabelecimento", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.usuario_estabelecimento), true)]
 [assembly: EdmRelationshipAttribute("nosso_showModel", "imagem_evento", "evento", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GP01NS.Models.evento), "imagem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GP01NS.Models.imagem))]
@@ -321,6 +324,38 @@ namespace GP01NS.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<usuario_avalia_usuario> usuario_avalia_usuario
+        {
+            get
+            {
+                if ((_usuario_avalia_usuario == null))
+                {
+                    _usuario_avalia_usuario = base.CreateObjectSet<usuario_avalia_usuario>("usuario_avalia_usuario");
+                }
+                return _usuario_avalia_usuario;
+            }
+        }
+        private ObjectSet<usuario_avalia_usuario> _usuario_avalia_usuario;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<usuario_avaliacao_elogio> usuario_avaliacao_elogio
+        {
+            get
+            {
+                if ((_usuario_avaliacao_elogio == null))
+                {
+                    _usuario_avaliacao_elogio = base.CreateObjectSet<usuario_avaliacao_elogio>("usuario_avaliacao_elogio");
+                }
+                return _usuario_avaliacao_elogio;
+            }
+        }
+        private ObjectSet<usuario_avaliacao_elogio> _usuario_avaliacao_elogio;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<usuario_estabelecimento> usuario_estabelecimento
         {
             get
@@ -512,6 +547,22 @@ namespace GP01NS.Models
         public void AddTousuario(usuario usuario)
         {
             base.AddObject("usuario", usuario);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the usuario_avalia_usuario EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTousuario_avalia_usuario(usuario_avalia_usuario usuario_avalia_usuario)
+        {
+            base.AddObject("usuario_avalia_usuario", usuario_avalia_usuario);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the usuario_avaliacao_elogio EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTousuario_avaliacao_elogio(usuario_avaliacao_elogio usuario_avaliacao_elogio)
+        {
+            base.AddObject("usuario_avaliacao_elogio", usuario_avaliacao_elogio);
         }
     
         /// <summary>
@@ -3403,10 +3454,10 @@ namespace GP01NS.Models
         /// <param name="nome">Initial value of the Nome property.</param>
         /// <param name="email">Initial value of the Email property.</param>
         /// <param name="senha">Initial value of the Senha property.</param>
-        /// <param name="senhaTeste">Initial value of the SenhaTeste property.</param>
+        /// <param name="hash128">Initial value of the Hash128 property.</param>
         /// <param name="telefone">Initial value of the Telefone property.</param>
         /// <param name="tipo">Initial value of the Tipo property.</param>
-        public static usuario Createusuario(global::System.Int32 id, global::System.Boolean ativo, global::System.Boolean confirmado, global::System.Boolean teste, global::System.DateTime cadastro, global::System.DateTime nascimento, global::System.String username, global::System.String nome, global::System.String email, global::System.String senha, global::System.String senhaTeste, global::System.String telefone, global::System.Int32 tipo)
+        public static usuario Createusuario(global::System.Int32 id, global::System.Boolean ativo, global::System.Boolean confirmado, global::System.Boolean teste, global::System.DateTime cadastro, global::System.DateTime nascimento, global::System.String username, global::System.String nome, global::System.String email, global::System.String senha, global::System.String hash128, global::System.String telefone, global::System.Int32 tipo)
         {
             usuario usuario = new usuario();
             usuario.ID = id;
@@ -3419,7 +3470,7 @@ namespace GP01NS.Models
             usuario.Nome = nome;
             usuario.Email = email;
             usuario.Senha = senha;
-            usuario.SenhaTeste = senhaTeste;
+            usuario.Hash128 = hash128;
             usuario.Telefone = telefone;
             usuario.Tipo = tipo;
             return usuario;
@@ -3677,24 +3728,24 @@ namespace GP01NS.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String SenhaTeste
+        public global::System.String Hash128
         {
             get
             {
-                return _SenhaTeste;
+                return _Hash128;
             }
             set
             {
-                OnSenhaTesteChanging(value);
-                ReportPropertyChanging("SenhaTeste");
-                _SenhaTeste = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("SenhaTeste");
-                OnSenhaTesteChanged();
+                OnHash128Changing(value);
+                ReportPropertyChanging("Hash128");
+                _Hash128 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Hash128");
+                OnHash128Changed();
             }
         }
-        private global::System.String _SenhaTeste;
-        partial void OnSenhaTesteChanging(global::System.String value);
-        partial void OnSenhaTesteChanged();
+        private global::System.String _Hash128;
+        partial void OnHash128Changing(global::System.String value);
+        partial void OnHash128Changed();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3792,6 +3843,50 @@ namespace GP01NS.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<requisicao>("nosso_showModel.FK_requisicao_usuario", "requisicao", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "FK_usuario_avalia_usuario1", "usuario_avalia_usuario")]
+        public EntityCollection<usuario_avalia_usuario> usuario_avalia_usuario
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<usuario_avalia_usuario>("nosso_showModel.FK_usuario_avalia_usuario1", "usuario_avalia_usuario");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<usuario_avalia_usuario>("nosso_showModel.FK_usuario_avalia_usuario1", "usuario_avalia_usuario", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "FK_usuario_avalia_usuario2", "usuario_avalia_usuario")]
+        public EntityCollection<usuario_avalia_usuario> usuario_avalia_usuario1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<usuario_avalia_usuario>("nosso_showModel.FK_usuario_avalia_usuario2", "usuario_avalia_usuario");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<usuario_avalia_usuario>("nosso_showModel.FK_usuario_avalia_usuario2", "usuario_avalia_usuario", value);
                 }
             }
         }
@@ -4088,6 +4183,507 @@ namespace GP01NS.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<usuario>("nosso_showModel.usuario_segue_usuario", "usuario", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="nosso_showModel", Name="usuario_avalia_usuario")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class usuario_avalia_usuario : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new usuario_avalia_usuario object.
+        /// </summary>
+        /// <param name="data">Initial value of the Data property.</param>
+        /// <param name="nota">Initial value of the Nota property.</param>
+        /// <param name="comentario">Initial value of the Comentario property.</param>
+        /// <param name="iDUsuario">Initial value of the IDUsuario property.</param>
+        /// <param name="tipoUsuario">Initial value of the TipoUsuario property.</param>
+        /// <param name="iDAvaliado">Initial value of the IDAvaliado property.</param>
+        /// <param name="tipoAvaliado">Initial value of the TipoAvaliado property.</param>
+        /// <param name="iDElogio">Initial value of the IDElogio property.</param>
+        public static usuario_avalia_usuario Createusuario_avalia_usuario(global::System.DateTime data, global::System.Int32 nota, global::System.String comentario, global::System.Int32 iDUsuario, global::System.Int32 tipoUsuario, global::System.Int32 iDAvaliado, global::System.Int32 tipoAvaliado, global::System.Int32 iDElogio)
+        {
+            usuario_avalia_usuario usuario_avalia_usuario = new usuario_avalia_usuario();
+            usuario_avalia_usuario.Data = data;
+            usuario_avalia_usuario.Nota = nota;
+            usuario_avalia_usuario.Comentario = comentario;
+            usuario_avalia_usuario.IDUsuario = iDUsuario;
+            usuario_avalia_usuario.TipoUsuario = tipoUsuario;
+            usuario_avalia_usuario.IDAvaliado = iDAvaliado;
+            usuario_avalia_usuario.TipoAvaliado = tipoAvaliado;
+            usuario_avalia_usuario.IDElogio = iDElogio;
+            return usuario_avalia_usuario;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Data
+        {
+            get
+            {
+                return _Data;
+            }
+            set
+            {
+                OnDataChanging(value);
+                ReportPropertyChanging("Data");
+                _Data = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Data");
+                OnDataChanged();
+            }
+        }
+        private global::System.DateTime _Data;
+        partial void OnDataChanging(global::System.DateTime value);
+        partial void OnDataChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Nota
+        {
+            get
+            {
+                return _Nota;
+            }
+            set
+            {
+                OnNotaChanging(value);
+                ReportPropertyChanging("Nota");
+                _Nota = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Nota");
+                OnNotaChanged();
+            }
+        }
+        private global::System.Int32 _Nota;
+        partial void OnNotaChanging(global::System.Int32 value);
+        partial void OnNotaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Comentario
+        {
+            get
+            {
+                return _Comentario;
+            }
+            set
+            {
+                OnComentarioChanging(value);
+                ReportPropertyChanging("Comentario");
+                _Comentario = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Comentario");
+                OnComentarioChanged();
+            }
+        }
+        private global::System.String _Comentario;
+        partial void OnComentarioChanging(global::System.String value);
+        partial void OnComentarioChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 IDUsuario
+        {
+            get
+            {
+                return _IDUsuario;
+            }
+            set
+            {
+                if (_IDUsuario != value)
+                {
+                    OnIDUsuarioChanging(value);
+                    ReportPropertyChanging("IDUsuario");
+                    _IDUsuario = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("IDUsuario");
+                    OnIDUsuarioChanged();
+                }
+            }
+        }
+        private global::System.Int32 _IDUsuario;
+        partial void OnIDUsuarioChanging(global::System.Int32 value);
+        partial void OnIDUsuarioChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TipoUsuario
+        {
+            get
+            {
+                return _TipoUsuario;
+            }
+            set
+            {
+                if (_TipoUsuario != value)
+                {
+                    OnTipoUsuarioChanging(value);
+                    ReportPropertyChanging("TipoUsuario");
+                    _TipoUsuario = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("TipoUsuario");
+                    OnTipoUsuarioChanged();
+                }
+            }
+        }
+        private global::System.Int32 _TipoUsuario;
+        partial void OnTipoUsuarioChanging(global::System.Int32 value);
+        partial void OnTipoUsuarioChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 IDAvaliado
+        {
+            get
+            {
+                return _IDAvaliado;
+            }
+            set
+            {
+                if (_IDAvaliado != value)
+                {
+                    OnIDAvaliadoChanging(value);
+                    ReportPropertyChanging("IDAvaliado");
+                    _IDAvaliado = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("IDAvaliado");
+                    OnIDAvaliadoChanged();
+                }
+            }
+        }
+        private global::System.Int32 _IDAvaliado;
+        partial void OnIDAvaliadoChanging(global::System.Int32 value);
+        partial void OnIDAvaliadoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TipoAvaliado
+        {
+            get
+            {
+                return _TipoAvaliado;
+            }
+            set
+            {
+                if (_TipoAvaliado != value)
+                {
+                    OnTipoAvaliadoChanging(value);
+                    ReportPropertyChanging("TipoAvaliado");
+                    _TipoAvaliado = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("TipoAvaliado");
+                    OnTipoAvaliadoChanged();
+                }
+            }
+        }
+        private global::System.Int32 _TipoAvaliado;
+        partial void OnTipoAvaliadoChanging(global::System.Int32 value);
+        partial void OnTipoAvaliadoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 IDElogio
+        {
+            get
+            {
+                return _IDElogio;
+            }
+            set
+            {
+                OnIDElogioChanging(value);
+                ReportPropertyChanging("IDElogio");
+                _IDElogio = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IDElogio");
+                OnIDElogioChanged();
+            }
+        }
+        private global::System.Int32 _IDElogio;
+        partial void OnIDElogioChanging(global::System.Int32 value);
+        partial void OnIDElogioChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "FK_usuario_avalia_usuario1", "usuario")]
+        public usuario usuario
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario>("nosso_showModel.FK_usuario_avalia_usuario1", "usuario").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario>("nosso_showModel.FK_usuario_avalia_usuario1", "usuario").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<usuario> usuarioReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario>("nosso_showModel.FK_usuario_avalia_usuario1", "usuario");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<usuario>("nosso_showModel.FK_usuario_avalia_usuario1", "usuario", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "FK_usuario_avalia_usuario2", "usuario")]
+        public usuario usuario1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario>("nosso_showModel.FK_usuario_avalia_usuario2", "usuario").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario>("nosso_showModel.FK_usuario_avalia_usuario2", "usuario").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<usuario> usuario1Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario>("nosso_showModel.FK_usuario_avalia_usuario2", "usuario");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<usuario>("nosso_showModel.FK_usuario_avalia_usuario2", "usuario", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "FK_usuario_elogio", "usuario_avaliacao_elogio")]
+        public usuario_avaliacao_elogio usuario_avaliacao_elogio
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario_avaliacao_elogio>("nosso_showModel.FK_usuario_elogio", "usuario_avaliacao_elogio").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario_avaliacao_elogio>("nosso_showModel.FK_usuario_elogio", "usuario_avaliacao_elogio").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<usuario_avaliacao_elogio> usuario_avaliacao_elogioReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<usuario_avaliacao_elogio>("nosso_showModel.FK_usuario_elogio", "usuario_avaliacao_elogio");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<usuario_avaliacao_elogio>("nosso_showModel.FK_usuario_elogio", "usuario_avaliacao_elogio", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="nosso_showModel", Name="usuario_avaliacao_elogio")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class usuario_avaliacao_elogio : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new usuario_avaliacao_elogio object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="descricao">Initial value of the Descricao property.</param>
+        /// <param name="tipo">Initial value of the Tipo property.</param>
+        public static usuario_avaliacao_elogio Createusuario_avaliacao_elogio(global::System.Int32 id, global::System.String descricao, global::System.Int32 tipo)
+        {
+            usuario_avaliacao_elogio usuario_avaliacao_elogio = new usuario_avaliacao_elogio();
+            usuario_avaliacao_elogio.ID = id;
+            usuario_avaliacao_elogio.Descricao = descricao;
+            usuario_avaliacao_elogio.Tipo = tipo;
+            return usuario_avaliacao_elogio;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Descricao
+        {
+            get
+            {
+                return _Descricao;
+            }
+            set
+            {
+                OnDescricaoChanging(value);
+                ReportPropertyChanging("Descricao");
+                _Descricao = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Descricao");
+                OnDescricaoChanged();
+            }
+        }
+        private global::System.String _Descricao;
+        partial void OnDescricaoChanging(global::System.String value);
+        partial void OnDescricaoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tipo
+        {
+            get
+            {
+                return _Tipo;
+            }
+            set
+            {
+                OnTipoChanging(value);
+                ReportPropertyChanging("Tipo");
+                _Tipo = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tipo");
+                OnTipoChanged();
+            }
+        }
+        private global::System.Int32 _Tipo;
+        partial void OnTipoChanging(global::System.Int32 value);
+        partial void OnTipoChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("nosso_showModel", "FK_usuario_elogio", "usuario_avalia_usuario")]
+        public EntityCollection<usuario_avalia_usuario> usuario_avalia_usuario
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<usuario_avalia_usuario>("nosso_showModel.FK_usuario_elogio", "usuario_avalia_usuario");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<usuario_avalia_usuario>("nosso_showModel.FK_usuario_elogio", "usuario_avalia_usuario", value);
                 }
             }
         }
