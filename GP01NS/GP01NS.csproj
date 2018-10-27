@@ -1918,6 +1918,7 @@
     <Content Include="Scripts\Views\Inicio\estabelecimento.js" />
     <Content Include="Scripts\Views\Inicio\buscar.js" />
     <Content Include="Scripts\Views\Inicio\musico.js" />
+    <Content Include="Scripts\Views\Inicio\sugestao.js" />
     <Content Include="Scripts\Views\Layout\layout.js" />
     <Content Include="Scripts\Views\Musico\agenda_table.js" />
     <Content Include="Scripts\Views\Musico\convites.js" />

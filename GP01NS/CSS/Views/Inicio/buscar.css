@@ -167,9 +167,13 @@ main, .container-fluid {
 	bottom: 20px;
 }
 
+.sugestao .load {
+	display: none;
+}
+
 .buscador-load {
-    border-top: 1px solid #f5f5f5;
-    display: none;
+	border-top: 1px solid #f5f5f5;
+	display: none;
 }
 
 .buscador-load .quadrado {
