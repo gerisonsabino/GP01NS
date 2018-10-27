@@ -46,6 +46,11 @@ namespace GP01NS.Classes.ViewModels
             }
         }
 
+        public override string ToString()
+        {
+            return this.Logradouro + ", " + this.Numero + " - " + this.Bairro + " - " + this.Cidade + ", " + this.UF + " - " + this.CEP.Insert(5, "-");
+        }
+
         public SelectList GetUFs()
         {
             try

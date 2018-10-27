@@ -25,9 +25,9 @@ namespace GP01NS.Controllers
                 ViewBag.Usuario = this.Usuario;
             }
 
-            string fas = new AdministradorVM().GetFasJSON();
-            string estab = new AdministradorVM().GetEstabelecimentosJSON();
-            string mus = new AdministradorVM().GetMusicosJSON();
+            //string fas = new AdministradorVM().GetFasJSON();
+            //string estab = new AdministradorVM().GetEstabelecimentosJSON();
+            //string mus = new AdministradorVM().GetMusicosJSON();
 
             return View();
         }
@@ -336,5 +336,12 @@ namespace GP01NS.Controllers
             return string.Empty;
         }
 
+        [HttpGet]
+        public JsonResult GetSugestoes(int page)
+        {
+            var resultados = Pesquisa.Sugestoes(--page);
+
+            return this.Json(resultados, JsonRequestBehavior.AllowGet);
+        }
     }
 }

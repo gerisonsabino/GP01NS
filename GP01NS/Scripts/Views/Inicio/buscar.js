@@ -22,6 +22,7 @@ function pesquisar() {
     var h = $("#h").val();
 
     $.post("/inicio/pesquisar/", { "q": q, "e": e, "g": g, "a": a, "h": h }, function (s) {
+        console.log(s);
         var json = eval(s);
 
         var html = "";

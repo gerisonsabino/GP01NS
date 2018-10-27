@@ -21,15 +21,16 @@
 					${item.Nome}
 				</div>
 				<div class="sugestao-item-endereco">
-					${item.Endereco}
+					${(item.Endereco != null ? item.Endereco : "")}
 				</div>
 				<div class="sugestao-item-tipo">
-					${item.Tipo}
+					${ item.Badges != null ? sugestao.badges(item.Badges) + "<br />" : "" }
+					<span class="badge badge-secondary">${item.Tipo.toUpperCase()}</span>
 				</div>
 			</div>
 		</a>`,
 
-	urlPerfil: function (item) {
+    urlPerfil: function (item) {
 		switch (item.Tipo.toLowerCase()) {
 			case 'evento':
 				return '/inicio/evento/' + item.ID;
@@ -40,7 +41,18 @@
 			default:
 				return '/inicio/estabelecimento/' + item.Username;
 		}
-	},
+    },
+
+    badges: function (str) {
+        const json = eval(str);
+        let html = "";
+
+        for (i of json) {
+            html += "<span class='badge bg-primary'>" + i.toUpperCase() + "</span>";
+        }
+
+        return html;
+    },
 
 	sugestoesAcabando: function() {
 		const win = $(window);
@@ -58,8 +70,9 @@
 		sugestao.loading = true;
 		$('.sugestao .load').toggle(sugestao.loading);
 
-		$.getJSON('https://my.api.mockaroo.com/sugest_es.json?key=164c6660&page=' + sugestao.pagina, function (resp) {
-			let itens = '';
+		$.getJSON("/inicio/getsugestoes/?page=" + sugestao.pagina, function (resp) {
+            let itens = '';
+            resp = JSON.parse(resp);
 
 			todosItensCarregados = resp.length === 0;
 
@@ -75,8 +88,11 @@
 	},
 
 	lazyLoad: function () {
-		$(document).on("scroll", function () {
-			!todosItensCarregados && !sugestao.loading && sugestao.sugestoesAcabando() && sugestao.lista();
+        $(document).on("scroll", function () {
+            try {
+                !todosItensCarregados && !sugestao.loading && sugestao.sugestoesAcabando() && sugestao.lista();
+            }
+            catch (e) { console.log(e); }
 		});
 	},
 

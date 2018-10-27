@@ -159,6 +159,11 @@ main, .container-fluid {
 	font-size: 13px;
 }
 
+.sugestao-item .badge {
+    color: var(--branco);
+    margin-right: 3px;
+}
+
 .sugestao-item-tipo {
 	color: #4CAF50;
 	font-size: 13px;
