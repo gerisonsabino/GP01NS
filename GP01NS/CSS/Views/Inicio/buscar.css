@@ -127,8 +127,10 @@ main, .container-fluid {
     position: relative;
     border: 1px solid #CED4DA;
 }
+
 .sugestao-item:hover {
 	transform: translateY(-5px);
+	text-decoration: none;
 }
 
 .sugestao-item-imagem {
@@ -145,7 +147,7 @@ main, .container-fluid {
 }
 
 .sugestao-item-texto {
-	padding: 20px 25px 45px 25px;
+	padding: 20px 25px 20px 25px;
 	border-top: none;
 }
 
@@ -168,8 +170,6 @@ main, .container-fluid {
 	color: #4CAF50;
 	font-size: 13px;
 	margin-top: 10px;
-	position: absolute;
-	bottom: 20px;
 }
 
 .sugestao .load {
