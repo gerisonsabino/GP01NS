@@ -74,7 +74,7 @@
             let itens = '';
             resp = JSON.parse(resp);
 
-			todosItensCarregados = resp.length === 0;
+			sugestao.todosItensCarregados = resp.length === 0;
 
 			for (item of resp) {
 				itens += sugestao.componente(item);
@@ -90,7 +90,7 @@
 	lazyLoad: function () {
         $(document).on("scroll", function () {
             try {
-                !todosItensCarregados && !sugestao.loading && sugestao.sugestoesAcabando() && sugestao.lista();
+				!sugestao.todosItensCarregados && !sugestao.loading && sugestao.sugestoesAcabando() && sugestao.lista();
             }
             catch (e) { console.log(e); }
 		});
