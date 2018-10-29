@@ -332,6 +332,23 @@ namespace GP01NS.Classes.ViewModels
             return false;
         }
 
+        public void ContarVisualizacao()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var e = db.evento.First(x => x.ID == this.ID);
+
+                    e.Visualizacoes += 1;
+
+                    db.ObjectStateManager.ChangeObjectState(e, System.Data.EntityState.Modified);
+                    db.SaveChanges();
+                }
+            }
+            catch { }
+        }
+
         private usuario GetEstabelecimentoByID(int id)
         {
             try

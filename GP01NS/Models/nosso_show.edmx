@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="nosso_showModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="nosso_showModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="nosso_showModelStoreContainer">
           <EntitySet Name="ambientacao" EntityType="nosso_showModel.Store.ambientacao" store:Type="Tables" Schema="nosso_show" />
           <EntitySet Name="autenticacao" EntityType="nosso_showModel.Store.autenticacao" store:Type="Tables" Schema="nosso_show" />
@@ -46,10 +46,6 @@
           <AssociationSet Name="FK_evento_estabelecimento" Association="nosso_showModel.Store.FK_evento_estabelecimento">
             <End Role="usuario_estabelecimento" EntitySet="usuario_estabelecimento" />
             <End Role="evento" EntitySet="evento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_evento_musico" Association="nosso_showModel.Store.FK_evento_musico">
-            <End Role="usuario_musico" EntitySet="usuario_musico" />
-            <End Role="evento_musico" EntitySet="evento_musico" />
           </AssociationSet>
           <AssociationSet Name="FK_evento_musico_evento" Association="nosso_showModel.Store.FK_evento_musico_evento">
             <End Role="evento" EntitySet="evento" />
@@ -233,6 +229,7 @@
           <Property Name="HoraAte" Type="int" Nullable="false" />
           <Property Name="MinutoDe" Type="int" Nullable="false" />
           <Property Name="MinutoAte" Type="int" Nullable="false" />
+          <Property Name="Visualizacoes" Type="bigint" Nullable="false" />
           <Property Name="Cadastro" Type="datetime" Nullable="false" />
           <Property Name="CNPJ" Type="varchar" Nullable="false" MaxLength="14" />
           <Property Name="IDUsuario" Type="int" Nullable="false" />
@@ -379,7 +376,7 @@
           </Key>
           <Property Name="Data" Type="datetime" Nullable="false" />
           <Property Name="Nota" Type="int" Nullable="false" />
-          <Property Name="Comentario" Type="varchar" Nullable="false" MaxLength="280" />
+          <Property Name="Comentario" Type="varchar" Nullable="false" MaxLength="200" />
           <Property Name="IDUsuario" Type="int" Nullable="false" />
           <Property Name="TipoUsuario" Type="int" Nullable="false" />
           <Property Name="IDAvaliado" Type="int" Nullable="false" />
@@ -413,6 +410,7 @@
           <Property Name="CNPJ" Type="varchar" Nullable="false" MaxLength="14" />
           <Property Name="Das" Type="int" Nullable="false" />
           <Property Name="As" Type="int" Nullable="false" />
+          <Property Name="Visualizacoes" Type="bigint" Nullable="false" />
           <Property Name="Razao" Type="varchar" Nullable="false" MaxLength="150" />
           <Property Name="Descricao" Type="varchar" Nullable="false" MaxLength="1500" />
           <Property Name="De" Type="int" Nullable="false" />
@@ -450,6 +448,9 @@
           <Property Name="IDHabilidade" Type="int" Nullable="false" />
           <Property Name="TipoHab" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+      warning 6035: The relationship 'FK_evento_musico' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+      -->
         <EntityType Name="usuario_musico">
           <Key>
             <PropertyRef Name="CPF" />
@@ -457,6 +458,7 @@
             <PropertyRef Name="TipoUsuario" />
           </Key>
           <Property Name="CPF" Type="varchar" Nullable="false" MaxLength="11" />
+          <Property Name="Visualizacoes" Type="bigint" Nullable="false" />
           <Property Name="NomeArtistico" Type="varchar" Nullable="false" MaxLength="45" />
           <Property Name="Descricao" Type="varchar" Nullable="false" MaxLength="500" />
           <Property Name="IDUsuario" Type="int" Nullable="false" />
@@ -547,22 +549,6 @@
               <PropertyRef Name="CNPJ" />
               <PropertyRef Name="IDUsuario" />
               <PropertyRef Name="TipoUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_evento_musico">
-          <End Role="usuario_musico" Type="nosso_showModel.Store.usuario_musico" Multiplicity="1" />
-          <End Role="evento_musico" Type="nosso_showModel.Store.evento_musico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="usuario_musico">
-              <PropertyRef Name="IDUsuario" />
-              <PropertyRef Name="TipoUsuario" />
-              <PropertyRef Name="CPF" />
-            </Principal>
-            <Dependent Role="evento_musico">
-              <PropertyRef Name="IDMusico" />
-              <PropertyRef Name="TipoMusico" />
-              <PropertyRef Name="CPF" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -976,8 +962,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="nosso_showModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -1183,6 +1168,7 @@
           <NavigationProperty Name="evento_musico" Relationship="nosso_showModel.FK_evento_musico_evento" FromRole="evento" ToRole="evento_musico" />
           <NavigationProperty Name="imagem" Relationship="nosso_showModel.imagem_evento" FromRole="evento" ToRole="imagem" />
           <NavigationProperty Name="usuario" Relationship="nosso_showModel.usuario_segue_evento" FromRole="evento" ToRole="usuario" />
+          <Property Type="Int64" Name="Visualizacoes" Nullable="false" />
         </EntityType>
         <EntityType Name="evento_musico">
           <Key>
@@ -1359,6 +1345,7 @@
           <NavigationProperty Name="usuario" Relationship="nosso_showModel.FK_usuario_estabelecimento" FromRole="usuario_estabelecimento" ToRole="usuario" />
           <NavigationProperty Name="usuario_estabelecimento_dias" Relationship="nosso_showModel.FK_usuario_estabelecimento_dia_ate" FromRole="usuario_estabelecimento" ToRole="usuario_estabelecimento_dias" />
           <NavigationProperty Name="usuario_estabelecimento_dias1" Relationship="nosso_showModel.FK_usuario_estabelecimento_dia_de" FromRole="usuario_estabelecimento" ToRole="usuario_estabelecimento_dias" />
+          <Property Type="Int64" Name="Visualizacoes" Nullable="false" />
         </EntityType>
         <EntityType Name="usuario_estabelecimento_dias">
           <Key>
@@ -1382,6 +1369,7 @@
           <Property Name="TipoUsuario" Type="Int32" Nullable="false" />
           <NavigationProperty Name="evento_musico" Relationship="nosso_showModel.FK_evento_musico" FromRole="usuario_musico" ToRole="evento_musico" />
           <NavigationProperty Name="usuario" Relationship="nosso_showModel.FK_usuario_musico" FromRole="usuario_musico" ToRole="usuario" />
+          <Property Type="Int64" Name="Visualizacoes" Nullable="false" />
         </EntityType>
         <EntityType Name="usuario_redes_sociais">
           <Key>
@@ -1744,6 +1732,7 @@
           <EntitySetMapping Name="evento">
             <EntityTypeMapping TypeName="nosso_showModel.evento">
               <MappingFragment StoreEntitySet="evento">
+                <ScalarProperty Name="Visualizacoes" ColumnName="Visualizacoes" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Ativo" ColumnName="Ativo" />
                 <ScalarProperty Name="Publicado" ColumnName="Publicado" />
@@ -1884,6 +1873,7 @@
           <EntitySetMapping Name="usuario_estabelecimento">
             <EntityTypeMapping TypeName="nosso_showModel.usuario_estabelecimento">
               <MappingFragment StoreEntitySet="usuario_estabelecimento">
+                <ScalarProperty Name="Visualizacoes" ColumnName="Visualizacoes" />
                 <ScalarProperty Name="CNPJ" ColumnName="CNPJ" />
                 <ScalarProperty Name="Das" ColumnName="Das" />
                 <ScalarProperty Name="As" ColumnName="As" />
@@ -1908,6 +1898,7 @@
           <EntitySetMapping Name="usuario_musico">
             <EntityTypeMapping TypeName="nosso_showModel.usuario_musico">
               <MappingFragment StoreEntitySet="usuario_musico">
+                <ScalarProperty Name="Visualizacoes" ColumnName="Visualizacoes" />
                 <ScalarProperty Name="CPF" ColumnName="CPF" />
                 <ScalarProperty Name="NomeArtistico" ColumnName="NomeArtistico" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />

@@ -38,13 +38,15 @@ namespace GP01NS.Classes.Servicos
             return JsonConvert.SerializeObject(r);
         }
 
-        public static string Sugestoes(int page)
+        public static string GetSugestoes(int page, int idUsuario)
         {
             List<Resultado> r = new List<Resultado>();
 
-            r.AddRange(EstabelecimentosSugestoes(page));
-            r.AddRange(EventosSugestoes(page));
-            r.AddRange(MusicosSugestoes(page));
+            r.AddRange(EstabelecimentosSugestoes(page, idUsuario));
+            r.AddRange(EventosSugestoes(page, idUsuario));
+            r.AddRange(MusicosSugestoes(page, idUsuario));
+
+            r = RandomizarLista(r);
 
             return JsonConvert.SerializeObject(r);
         }
@@ -221,7 +223,7 @@ namespace GP01NS.Classes.Servicos
             return resultados;
         }
 
-        private static List<Resultado> EstabelecimentosSugestoes(int page)
+        private static List<Resultado> EstabelecimentosSugestoes(int page, int idUsuario)
         {
             var resultados = new List<Resultado>();
 
@@ -229,11 +231,11 @@ namespace GP01NS.Classes.Servicos
             {
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
-                    var estabelecimentos = db.usuario_estabelecimento.Where(x => x.usuario.Ativo).OrderBy(x => x.IDUsuario).Skip(4 * page).Take(4).ToList();
+                    var estabelecimentos = db.usuario_estabelecimento.Where(x => x.usuario.Ativo).OrderByDescending(x => x.Visualizacoes).Skip(4 * page).Take(4).ToList();
 
                     for (int i = 0; i < estabelecimentos.Count; i++)
                     {
-                        var e = estabelecimentos[i];
+                        var e = estabelecimentos.ElementAt(i);
 
                         Resultado r = new Resultado
                         {
@@ -282,7 +284,7 @@ namespace GP01NS.Classes.Servicos
             return resultados;
         }
 
-        private static List<Resultado> MusicosSugestoes(int page)
+        private static List<Resultado> EventosSugestoes(int page, int idUsuario)
         {
             var resultados = new List<Resultado>();
 
@@ -290,59 +292,11 @@ namespace GP01NS.Classes.Servicos
             {
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
-                    var musicos = db.usuario_musico.Where(x => x.usuario.Ativo).OrderBy(x => x.IDUsuario).Skip(4 * page).Take(4).ToList();
+                    var eventos = db.evento.Where(x => x.usuario_estabelecimento.usuario.Ativo).OrderByDescending(x => x.Visualizacoes).Skip(4 * page).Take(4);
 
-                    for (int i = 0; i < musicos.Count; i++)
+                    for (int i = 0; i < eventos.Count(); i++)
                     {
-                        var m = musicos[i];
-
-                        Resultado r = new Resultado
-                        {
-                            ID = m.IDUsuario,
-                            Nome = m.NomeArtistico,
-                            Username = m.usuario.Username,
-                            Badges = m.usuario.genero_musical.Select(x => x.Descricao).ToList(),
-                            Endereco = string.Empty,
-                            Tipo = "Músico"
-                        };
-
-                        try
-                        {
-                            r.Imagem = "http://www.nossoshow.gerison.net" + m.usuario.imagem.Last(x => x.TipoImagem == 1).Diretorio;
-                        }
-                        catch
-                        {
-                            r.Imagem = "http://www.nossoshow.gerison.net/Imagens/Views/user.svg";
-                        }
-
-                        try
-                        {
-                            r.Nota = (int)m.usuario.usuario_avalia_usuario1.Average(x => x.Nota);
-                        }
-                        catch { r.Nota = 0; }
-
-                        resultados.Add(r);
-                    }
-                }
-            }
-            catch (Exception e) { }
-
-            return resultados;
-        }
-
-        private static List<Resultado> EventosSugestoes(int page)
-        {
-            var resultados = new List<Resultado>();
-
-            try
-            {
-                using (var db = new nosso_showEntities(Conexao.GetString()))
-                {
-                    var eventos = db.evento.Where(x => x.usuario_estabelecimento.usuario.Ativo).OrderBy(x => x.IDUsuario).Skip(4 * page).Take(4).ToList();
-
-                    for (int i = 0; i < eventos.Count; i++)
-                    {
-                        var evento = eventos[i];
+                        var evento = eventos.Skip(i).FirstOrDefault();
                         var u = evento.usuario_estabelecimento;
 
                         Resultado r = new Resultado
@@ -379,6 +333,74 @@ namespace GP01NS.Classes.Servicos
             catch (Exception e) { }
 
             return resultados;
+        }
+
+        private static List<Resultado> MusicosSugestoes(int page, int idUsuario)
+        {
+            var resultados = new List<Resultado>();
+
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var musicos = db.usuario_musico.Where(x => x.usuario.Ativo).OrderByDescending(x => x.Visualizacoes).Skip(4 * page).Take(4);
+
+                    for (int i = 0; i < musicos.Count(); i++)
+                    {
+                        var m = musicos.Skip(i).FirstOrDefault();
+
+                        Resultado r = new Resultado
+                        {
+                            ID = m.IDUsuario,
+                            Nome = m.NomeArtistico,
+                            Username = m.usuario.Username,
+                            Badges = m.usuario.genero_musical.Select(x => x.Descricao).ToList(),
+                            Endereco = string.Empty,
+                            Tipo = "Músico"
+                        };
+
+                        try
+                        {
+                            r.Imagem = "http://www.nossoshow.gerison.net" + m.usuario.imagem.Last(x => x.TipoImagem == 1).Diretorio;
+                        }
+                        catch
+                        {
+                            r.Imagem = "http://www.nossoshow.gerison.net/Imagens/Views/user.svg";
+                        }
+
+                        try
+                        {
+                            r.Nota = (int)m.usuario.usuario_avalia_usuario1.Average(x => x.Nota);
+                        }
+                        catch { r.Nota = 0; }
+
+                        resultados.Add(r);
+                    }
+                }
+            }
+            catch (Exception e) { }
+
+            return resultados;
+        }
+
+        private static List<Resultado> RandomizarLista(List<Resultado> lista)
+        {
+            Random r = new Random();
+
+            int n = lista.Count;
+
+            while (n > 1)
+            {
+                n--;
+
+                int k = r.Next(n + 1);
+
+                Resultado value = lista[k];
+                lista[k] = lista[n];
+                lista[n] = value;
+            }
+
+            return lista;
         }
 
         internal class Resultado 

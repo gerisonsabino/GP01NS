@@ -106,6 +106,23 @@ namespace GP01NS.Classes.ViewModels
             return string.Empty;
         }
 
+        public void ContarVisualizacao()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var u = db.usuario_estabelecimento.First(x => x.IDUsuario == this.ID);
+
+                    u.Visualizacoes += 1;
+
+                    db.ObjectStateManager.ChangeObjectState(u, System.Data.EntityState.Modified);
+                    db.SaveChanges();
+                }
+            }
+            catch { }
+        }
+
         private RedesSociaisVM GetRedesSociais()
         {
             try

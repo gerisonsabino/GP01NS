@@ -1471,7 +1471,8 @@ namespace GP01NS.Models
         /// <param name="cNPJ">Initial value of the CNPJ property.</param>
         /// <param name="iDUsuario">Initial value of the IDUsuario property.</param>
         /// <param name="tipoUsuario">Initial value of the TipoUsuario property.</param>
-        public static evento Createevento(global::System.Int32 id, global::System.Boolean ativo, global::System.Boolean publicado, global::System.String titulo, global::System.String descricao, global::System.DateTime dataDe, global::System.DateTime dataAte, global::System.Int32 horaDe, global::System.Int32 horaAte, global::System.Int32 minutoDe, global::System.Int32 minutoAte, global::System.DateTime cadastro, global::System.String cNPJ, global::System.Int32 iDUsuario, global::System.Int32 tipoUsuario)
+        /// <param name="visualizacoes">Initial value of the Visualizacoes property.</param>
+        public static evento Createevento(global::System.Int32 id, global::System.Boolean ativo, global::System.Boolean publicado, global::System.String titulo, global::System.String descricao, global::System.DateTime dataDe, global::System.DateTime dataAte, global::System.Int32 horaDe, global::System.Int32 horaAte, global::System.Int32 minutoDe, global::System.Int32 minutoAte, global::System.DateTime cadastro, global::System.String cNPJ, global::System.Int32 iDUsuario, global::System.Int32 tipoUsuario, global::System.Int64 visualizacoes)
         {
             evento evento = new evento();
             evento.ID = id;
@@ -1489,6 +1490,7 @@ namespace GP01NS.Models
             evento.CNPJ = cNPJ;
             evento.IDUsuario = iDUsuario;
             evento.TipoUsuario = tipoUsuario;
+            evento.Visualizacoes = visualizacoes;
             return evento;
         }
 
@@ -1858,6 +1860,30 @@ namespace GP01NS.Models
         private global::System.Int32 _TipoUsuario;
         partial void OnTipoUsuarioChanging(global::System.Int32 value);
         partial void OnTipoUsuarioChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 Visualizacoes
+        {
+            get
+            {
+                return _Visualizacoes;
+            }
+            set
+            {
+                OnVisualizacoesChanging(value);
+                ReportPropertyChanging("Visualizacoes");
+                _Visualizacoes = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Visualizacoes");
+                OnVisualizacoesChanged();
+            }
+        }
+        private global::System.Int64 _Visualizacoes;
+        partial void OnVisualizacoesChanging(global::System.Int64 value);
+        partial void OnVisualizacoesChanged();
 
         #endregion
 
@@ -4715,7 +4741,8 @@ namespace GP01NS.Models
         /// <param name="iDAmbientacao">Initial value of the IDAmbientacao property.</param>
         /// <param name="iDUsuario">Initial value of the IDUsuario property.</param>
         /// <param name="tipoUsuario">Initial value of the TipoUsuario property.</param>
-        public static usuario_estabelecimento Createusuario_estabelecimento(global::System.String cNPJ, global::System.Int32 das, global::System.Int32 @as, global::System.String razao, global::System.String descricao, global::System.Int32 de, global::System.Int32 ate, global::System.Int32 iDAmbientacao, global::System.Int32 iDUsuario, global::System.Int32 tipoUsuario)
+        /// <param name="visualizacoes">Initial value of the Visualizacoes property.</param>
+        public static usuario_estabelecimento Createusuario_estabelecimento(global::System.String cNPJ, global::System.Int32 das, global::System.Int32 @as, global::System.String razao, global::System.String descricao, global::System.Int32 de, global::System.Int32 ate, global::System.Int32 iDAmbientacao, global::System.Int32 iDUsuario, global::System.Int32 tipoUsuario, global::System.Int64 visualizacoes)
         {
             usuario_estabelecimento usuario_estabelecimento = new usuario_estabelecimento();
             usuario_estabelecimento.CNPJ = cNPJ;
@@ -4728,6 +4755,7 @@ namespace GP01NS.Models
             usuario_estabelecimento.IDAmbientacao = iDAmbientacao;
             usuario_estabelecimento.IDUsuario = iDUsuario;
             usuario_estabelecimento.TipoUsuario = tipoUsuario;
+            usuario_estabelecimento.Visualizacoes = visualizacoes;
             return usuario_estabelecimento;
         }
 
@@ -4983,6 +5011,30 @@ namespace GP01NS.Models
         private global::System.Int32 _TipoUsuario;
         partial void OnTipoUsuarioChanging(global::System.Int32 value);
         partial void OnTipoUsuarioChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 Visualizacoes
+        {
+            get
+            {
+                return _Visualizacoes;
+            }
+            set
+            {
+                OnVisualizacoesChanging(value);
+                ReportPropertyChanging("Visualizacoes");
+                _Visualizacoes = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Visualizacoes");
+                OnVisualizacoesChanged();
+            }
+        }
+        private global::System.Int64 _Visualizacoes;
+        partial void OnVisualizacoesChanging(global::System.Int64 value);
+        partial void OnVisualizacoesChanged();
 
         #endregion
 
@@ -5316,7 +5368,8 @@ namespace GP01NS.Models
         /// <param name="descricao">Initial value of the Descricao property.</param>
         /// <param name="iDUsuario">Initial value of the IDUsuario property.</param>
         /// <param name="tipoUsuario">Initial value of the TipoUsuario property.</param>
-        public static usuario_musico Createusuario_musico(global::System.String cPF, global::System.String nomeArtistico, global::System.String descricao, global::System.Int32 iDUsuario, global::System.Int32 tipoUsuario)
+        /// <param name="visualizacoes">Initial value of the Visualizacoes property.</param>
+        public static usuario_musico Createusuario_musico(global::System.String cPF, global::System.String nomeArtistico, global::System.String descricao, global::System.Int32 iDUsuario, global::System.Int32 tipoUsuario, global::System.Int64 visualizacoes)
         {
             usuario_musico usuario_musico = new usuario_musico();
             usuario_musico.CPF = cPF;
@@ -5324,6 +5377,7 @@ namespace GP01NS.Models
             usuario_musico.Descricao = descricao;
             usuario_musico.IDUsuario = iDUsuario;
             usuario_musico.TipoUsuario = tipoUsuario;
+            usuario_musico.Visualizacoes = visualizacoes;
             return usuario_musico;
         }
 
@@ -5459,6 +5513,30 @@ namespace GP01NS.Models
         private global::System.Int32 _TipoUsuario;
         partial void OnTipoUsuarioChanging(global::System.Int32 value);
         partial void OnTipoUsuarioChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 Visualizacoes
+        {
+            get
+            {
+                return _Visualizacoes;
+            }
+            set
+            {
+                OnVisualizacoesChanging(value);
+                ReportPropertyChanging("Visualizacoes");
+                _Visualizacoes = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Visualizacoes");
+                OnVisualizacoesChanged();
+            }
+        }
+        private global::System.Int64 _Visualizacoes;
+        partial void OnVisualizacoesChanging(global::System.Int64 value);
+        partial void OnVisualizacoesChanged();
 
         #endregion
 

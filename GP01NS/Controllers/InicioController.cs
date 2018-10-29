@@ -25,10 +25,6 @@ namespace GP01NS.Controllers
                 ViewBag.Usuario = this.Usuario;
             }
 
-            //string fas = new AdministradorVM().GetFasJSON();
-            //string estab = new AdministradorVM().GetEstabelecimentosJSON();
-            //string mus = new AdministradorVM().GetMusicosJSON();
-
             return View();
         }
 
@@ -212,7 +208,10 @@ namespace GP01NS.Controllers
                             ViewBag.Avaliacao = new AvaliacaoVM(this.Usuario, u);
 
                     if (e.ValidarPerfil())
+                    {
+                        e.ContarVisualizacao();
                         return View(e);
+                    }
                 }
             }
             catch { }
@@ -236,9 +235,10 @@ namespace GP01NS.Controllers
                     int idEvento = int.MinValue;
                     int.TryParse(id, out idEvento);
 
-                    var e = db.evento.First(x => x.ID == idEvento /*&& x.Ativo && x.Publicado*/);
+                    var e = new EventoVM(db.evento.First(x => x.ID == idEvento && x.Ativo && x.Publicado));
+                    e.ContarVisualizacao();
 
-                    return View(new EventoVM(e));
+                    return View(e);
                 }
             }
             catch { return Redirect("/inicio/"); }
@@ -266,7 +266,10 @@ namespace GP01NS.Controllers
                             ViewBag.Avaliacao = new AvaliacaoVM(this.Usuario, u);
 
                     if (m.ValidarPerfil())
+                    {
+                        m.ContarVisualizacao();
                         return View(m);
+                    }
                 }
             }
             catch { }
@@ -339,7 +342,7 @@ namespace GP01NS.Controllers
         [HttpGet]
         public JsonResult GetSugestoes(int page)
         {
-            var resultados = Pesquisa.Sugestoes(--page);
+            var resultados = Pesquisa.GetSugestoes(--page, (this.BaseUsuario != null ? this.BaseUsuario.ID : int.MinValue));
 
             return this.Json(resultados, JsonRequestBehavior.AllowGet);
         }

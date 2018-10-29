@@ -21,10 +21,10 @@
 					${item.Nome}
 				</div>
 				<div class="sugestao-item-endereco">
-					${(item.Endereco != null ? item.Endereco : "")}
+					${(item.Endereco != null && item.Endereco != "") ? item.Endereco : "&nbsp;" }
 				</div>
 				<div class="sugestao-item-tipo">
-					${ item.Badges != null ? sugestao.badges(item.Badges) + "<br />" : "" }
+					${ (item.Badges != null && item.Badges != "") ? sugestao.badges(item.Badges) + "<br />" : "" }
 					<span class="badge badge-secondary">${item.Tipo.toUpperCase()}</span>
 				</div>
 			</div>

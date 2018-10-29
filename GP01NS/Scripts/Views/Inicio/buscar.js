@@ -11,6 +11,10 @@
     });
 });
 
+$(document).ready(function () {
+    $("footer").remove();
+});
+
 function pesquisar() {
     $("#resultset").html("");
     $(".buscador-load").show();
