@@ -17,6 +17,15 @@ $(function () {
     getAvaliacoes();
 });
 
+$(function () {
+    $(".foto-imagem").click(function () {
+        var img = $(this).attr("data-img");
+
+        $("#img-modal").attr("src", img);
+        $("#modal-imagem").modal('show');
+    });
+});
+
 function toggleSeguir() {
     var a = $(this).attr("data-estabelecimento");
 
@@ -145,4 +154,6 @@ function getAvaliacoes() {
 
         $(".comentarios").html(html);
     });
+
+
 }

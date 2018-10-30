@@ -129,16 +129,36 @@
                                         @if (Usuario != null)
                                         {
                                             @*if (Usuario.ID == Model.ID)
-                                                {
-                                                    <form action="/Musico/UploadImagem" method="post" enctype="multipart/form-data">
-                                                        <div class="foto-hover"></div>
-                                                        <input type="file" name="Imagem" onchange="javascript:this.form.submit();">
-                                                    </form>
-                                                }*@
+                        {
+                            <form action="/Musico/UploadImagem" method="post" enctype="multipart/form-data">
+                                <div class="foto-hover"></div>
+                                <input type="file" name="Imagem" onchange="javascript:this.form.submit();">
+                            </form>
+                        }*@
                                         }
                                     </label>
                                 </div>
                             }
+
+                            <div class="modal hide fade" id="modal-imagem" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h6 class="modal-title" id="modal-avaliar-titulo">@Model.Nome</h6>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img id="img-modal" class="center">
+                                        </div>
+                                        <!--<div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Alterar</button>
+                                            <button type="button" class="btn btn-secondary">Salvar</button>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
 
                             @if (Usuario != null)
                             {

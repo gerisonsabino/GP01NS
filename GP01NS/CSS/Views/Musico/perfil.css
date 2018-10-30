@@ -183,6 +183,26 @@ main {
     font-size: 2rem;
 }
 
+#modal-imagem{
+    max-height: 800px;
+}
+
+#modal-imagem .modal-header {
+        background-color: #6904B7;
+}
+
+
+#modal-avaliar-titulo {
+    color: white;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
 
 @media (max-width:768px) {
     .card-body {
