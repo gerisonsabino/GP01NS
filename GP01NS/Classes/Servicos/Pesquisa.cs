@@ -1,10 +1,13 @@
-﻿using GP01NS.Classes.ViewModels;
+﻿using GP01NS.Classes.Util;
+using GP01NS.Classes.ViewModels;
 using GP01NS.Models;
 using GP01NSLibrary;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 
 namespace GP01NS.Classes.Servicos
 {
@@ -18,7 +21,6 @@ namespace GP01NS.Classes.Servicos
             idGeneros = JsonConvert.DeserializeObject<List<int>>(!string.IsNullOrEmpty(generos) ? generos : "[]");
             idHabilidades = JsonConvert.DeserializeObject<List<int>>(!string.IsNullOrEmpty(habilidades) ? habilidades : "[]");
             idAmbientacoes = JsonConvert.DeserializeObject<List<int>>(!string.IsNullOrEmpty(ambientacoes) ? ambientacoes : "[]");
-
 
             List<Resultado> r = new List<Resultado>();
 
@@ -172,7 +174,7 @@ namespace GP01NS.Classes.Servicos
                     }
                 }
             }
-            catch { }
+            catch (Exception e) { }
 
             return resultados;
         }

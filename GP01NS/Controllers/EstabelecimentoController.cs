@@ -1,4 +1,5 @@
-﻿using GP01NS.Classes.Util;
+﻿using GP01NS.Classes.Servicos;
+using GP01NS.Classes.Util;
 using GP01NS.Classes.ViewModels;
 using GP01NS.Classes.ViewModels.Estabelecimento;
 using GP01NS.Models;
@@ -264,6 +265,21 @@ namespace GP01NS.Controllers
             }
 
             return View(model);
+        }
+
+        public ActionResult Impulsionar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Checkout()
+        {
+            this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
+
+            string url = PagSeguro.Checkout(this.Estabelecimento);
+
+            return Redirect(url);
         }
 
         [HttpPost]

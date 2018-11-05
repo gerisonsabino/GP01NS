@@ -3,7 +3,7 @@
     $(".comentario-lista .load").hide();
 
     $("#modal-avaliar > span").click(function () {
-        $('.modal').modal('toggle');
+        $('#modal').modal('toggle');
 
         $(".avaliacao > div").removeAttr("class");
         $(".avaliacao > div").addClass($("#modal-avaliar").attr("class"));
@@ -16,10 +16,12 @@
 
 $(function () {
     $(".foto-imagem").click(function () {
-        var img = $(this).attr("data-img");
+        var img = $(this).attr("data-img").toString();
 
-        $("#img-modal").attr("src", img);
-        $("#modal-imagem").modal('show');
+        if (img != "") {
+            $("#img-modal").attr("src", img);
+            $("#modal-imagem").modal('show');
+        }
     });
 });
 

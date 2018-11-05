@@ -10,7 +10,7 @@
         av.IDAvaliado = parseInt($("#Avaliacao_IDAvaliado").val());
         av.TipoAvaliado = parseInt($("#Avaliacao_TipoAvaliado").val());
         av.IDElogio = parseInt($("#Avaliacao_IDElogio").val());
-        $('.modal').modal('toggle');
+        $('#modal').modal('toggle');
 
         $.post("/inicio/avaliacao/", { "json": JSON.stringify(av), "href": $("#Href").val() }, function (s) {
             getAvaliacoes();

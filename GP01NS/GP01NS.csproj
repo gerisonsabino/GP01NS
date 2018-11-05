@@ -130,11 +130,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Servicos\Auth.cs" />
+    <Compile Include="Classes\Servicos\PagSeguro.cs" />
     <Compile Include="Classes\Servicos\Pesquisa.cs" />
     <Compile Include="Classes\Util\Criptografia.cs" />
     <Compile Include="Classes\Util\MensagemEmail.cs" />
     <Compile Include="Classes\Util\Requisicao.cs" />
     <Compile Include="Classes\Util\UrlHifenizada.cs" />
+    <Compile Include="Classes\Util\Extensao.cs" />
     <Compile Include="Classes\ViewModels\AdministradorVM.cs" />
     <Compile Include="Classes\ViewModels\AvaliacaoVM.cs" />
     <Compile Include="Classes\ViewModels\EnderecoVM.cs" />
@@ -3446,12 +3448,6 @@
     <Content Include="Views\Inicio\Parciais\Musico\_Avaliacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\nosso_show.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Inicio\Parciais\Estabelecimento\_Avaliacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -3462,6 +3458,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Estabelecimento\RedesSociais.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\nosso_show.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>nosso_show.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Musico\Impulsionar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Estabelecimento\Impulsionar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

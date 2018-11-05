@@ -1305,7 +1305,7 @@
           </Key>
           <Property Name="Data" Type="DateTime" Nullable="false" />
           <Property Name="Nota" Type="Int32" Nullable="false" />
-          <Property Name="Comentario" Type="String" Nullable="false" MaxLength="280" Unicode="false" FixedLength="false" />
+          <Property Name="Comentario" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
           <Property Name="IDUsuario" Type="Int32" Nullable="false" />
           <Property Name="TipoUsuario" Type="Int32" Nullable="false" />
           <Property Name="IDAvaliado" Type="Int32" Nullable="false" />

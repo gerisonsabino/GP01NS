@@ -1,4 +1,5 @@
-﻿using GP01NS.Classes.Util;
+﻿using GP01NS.Classes.Servicos;
+using GP01NS.Classes.Util;
 using GP01NS.Classes.ViewModels;
 using GP01NS.Classes.ViewModels.Musico;
 using GP01NS.Models;
@@ -6,10 +7,14 @@ using GP01NSLibrary;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Dynamic;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
 
 namespace GP01NS.Controllers
 {
@@ -182,6 +187,20 @@ namespace GP01NS.Controllers
             return View(model);
         }
 
+        public ActionResult Impulsionar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Checkout()
+        {
+            this.Musico = new MusicoVM(this.BaseUsuario);
+
+            string url = PagSeguro.Checkout(this.Musico);
+
+            return Redirect(url);
+        }
 
         public ActionResult Sair()
         {
