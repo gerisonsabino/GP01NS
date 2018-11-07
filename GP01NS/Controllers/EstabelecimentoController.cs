@@ -4,6 +4,7 @@ using GP01NS.Classes.ViewModels;
 using GP01NS.Classes.ViewModels.Estabelecimento;
 using GP01NS.Models;
 using GP01NSLibrary;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -277,7 +278,23 @@ namespace GP01NS.Controllers
         {
             this.Estabelecimento = new EstabelecimentoVM(this.BaseUsuario);
 
-            string url = PagSeguro.Checkout(this.Estabelecimento);
+            NameValueCollection dados = new NameValueCollection
+            {
+                { "itemDescription1", "Impulsionar perfil - Nosso Show" },
+                { "itemAmount1", "10.00" },
+                { "senderName", this.Estabelecimento.Nome },
+                { "senderEmail", this.Estabelecimento.Email.Split('@')[0].ToString() + "@sandbox.pagseguro.com.br" }
+            };
+
+            if (!string.IsNullOrEmpty(this.Estabelecimento.Telefone))
+            {
+                string telefone = new string(this.Estabelecimento.Telefone.Where(c => char.IsDigit(c)).ToArray());
+
+                dados.Add("senderAreaCode", telefone.Substring(0, 2));
+                dados.Add("senderPhone", telefone.Substring(2, telefone.Count() - 2));
+            }
+
+            string url = PagSeguro.Checkout(dados);
 
             return Redirect(url);
         }

@@ -130,7 +130,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Servicos\Auth.cs" />
-    <Compile Include="Classes\Servicos\PagSeguro.cs" />
     <Compile Include="Classes\Servicos\Pesquisa.cs" />
     <Compile Include="Classes\Util\Criptografia.cs" />
     <Compile Include="Classes\Util\MensagemEmail.cs" />

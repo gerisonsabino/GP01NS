@@ -197,7 +197,23 @@ namespace GP01NS.Controllers
         {
             this.Musico = new MusicoVM(this.BaseUsuario);
 
-            string url = PagSeguro.Checkout(this.Musico);
+            NameValueCollection dados = new NameValueCollection
+            {
+                { "itemDescription1", "Impulsionar perfil - Nosso Show" },
+                { "itemAmount1", "10.00" },
+                { "senderName", this.Musico.Nome },
+                { "senderEmail", this.Musico.Email.Split('@')[0].ToString() + "@sandbox.pagseguro.com.br" }
+            };
+
+            if (!string.IsNullOrEmpty(this.Musico.Telefone))
+            {
+                string telefone = new string(this.Musico.Telefone.Where(c => char.IsDigit(c)).ToArray());
+
+                dados.Add("senderAreaCode", telefone.Substring(0, 2));
+                dados.Add("senderPhone", telefone.Substring(2, telefone.Count() - 2));
+            }
+
+            string url = PagSeguro.Checkout(dados);
 
             return Redirect(url);
         }

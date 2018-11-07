@@ -147,12 +147,18 @@ header .logo {
 	top: .8em;
 }
 
+.dropdown-menu .btn-success {
+    font-family: 'lemon-milk', sans-serif !important;
+    font-size: 0.85rem;
+}
+
 .dropdown-submenu .dropdown-menu {
     top: 0;
     left: 100%;
     margin-left: .1rem;
     margin-right: .1rem;
 }
+
 .dropdown-item{
     font-weight: 600 !important;
 }
