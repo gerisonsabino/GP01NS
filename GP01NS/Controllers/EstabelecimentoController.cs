@@ -294,9 +294,9 @@ namespace GP01NS.Controllers
                 dados.Add("senderPhone", telefone.Substring(2, telefone.Count() - 2));
             }
 
-            string url = PagSeguro.Checkout(dados);
+			//string url = PagSeguro.Checkout(dados);
 
-            return Redirect(url);
+			return Redirect("");
         }
 
         [HttpPost]
