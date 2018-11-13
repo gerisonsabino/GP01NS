@@ -253,6 +253,13 @@
                 @RenderPage("~/Views/Inicio/Parciais/Musico/_Compartilhar.cshtml")
             }
         </div>
+        <div class="row" id="row-agenda">
+            <div class="mb-3 text-left col-12 no-padding">
+                <strong>Agenda</strong>
+            </div>
+            <div class="list-group listaeventos"></div>
+            @Html.Hidden("JSON", Model.GetAgendaJSON())
+        </div>
     </div>
 </div>
 

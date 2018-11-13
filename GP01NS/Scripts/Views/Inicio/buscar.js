@@ -312,9 +312,13 @@ function setMark(j) {
 
             if (j != "" && j != null) {
                 c += "<h6>";
-                c += "<img style='width: 30px; height: 30px; border-radius: 50%;' src='http://nossoshow.gerison.net" + json.Imagem + "' />";
+                c += "<img style='width: 30px; height: 30px; border-radius: 50%;' src='" + json.Imagem + "' />";
                 c += "&nbsp;" + json.Nome + "&nbsp;";
                 c += "<span class=\"badge badge-secondary\" style=\"font-size: 0.6rem; font-family: 'Segoe UI', sans-serif !important;\">" + json.Tipo + "</span>";
+
+                if (json.Premium) 
+                    c += "<span class=\"badge badge-warning\" style=\"font-size: 0.6rem; font-family: 'Segoe UI', sans-serif !important;color: #000;\">PREMIUM</span>";
+
                 c += "</h6 > ";
                 c += "<p style='margin-bottom: 5px;'>" + json.Endereco + "</p>";
                 if (json.Badges != "" && json.Badges != null) {
@@ -340,6 +344,8 @@ function setMark(j) {
             });
 
             infowindow.open(marca.get('map'), marca);
+
+            window.scrollTo(0, 0);
         }
         else {
             var a = document.getElementById("mapa");

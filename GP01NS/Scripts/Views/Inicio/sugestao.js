@@ -5,8 +5,8 @@
 	loading: false,
 	todosItensCarregados: {},
 
-	componente: item => 
-		`<a class="sugestao-item" href="${sugestao.urlPerfil(item)}">
+    componente: item =>
+        `<a class="sugestao-item" href="${sugestao.urlPerfil(item)}" data-json='${JSON.stringify(item) }'>
 			<div class="sugestao-item-imagem" style="background-image: url(${item.Imagem})">
 				<div class="col-12 pb-2 flex">
 					<div class="nota-${item.Nota} sugestao-item-nota ml-auto">
@@ -22,12 +22,13 @@
 				<div class="sugestao-item-nome">
 					${item.Nome}
 				</div>
-				<div class="sugestao-item-endereco">
+				<div class="sugestao-item-endereco" ${(item.Endereco != null && item.Endereco != "") ? "onclick=\"setMark($(this).closest('.sugestao-item').attr('data-json')); return false;\"" : "" }>
 					${(item.Endereco != null && item.Endereco != "") ? item.Endereco : "&nbsp;" }
 				</div>
 				<div class="sugestao-item-tipo">
 					${ (item.Badges != null && item.Badges != "") ? sugestao.badges(item.Badges) + "<br />" : "" }
 					<span class="badge badge-secondary">${item.Tipo.toUpperCase()}</span>
+					${(item.Premium) ? sugestao.premium() : "" }
 				</div>
 			</div>
 		</a>`,
@@ -54,7 +55,11 @@
         }
 
         return html;
-	},
+    },
+
+    premium: function () {
+        return "<span class='badge bg-warning' style='color: #000;'>PREMIUM</span>";
+    },
 
 	verificaScroll: {
 		top: function (tipo) {

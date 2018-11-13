@@ -429,7 +429,6 @@ namespace GP01NS.Classes.ViewModels
 
             return false;
         }
-
         
         private bool IsPremium()
         {
@@ -437,14 +436,13 @@ namespace GP01NS.Classes.ViewModels
             {
                 using (var db = new nosso_showEntities(Conexao.GetString()))
                 {
-                    return db.usuario.First(x => x.ID == this.ID).usuario_premium.Any(x => x.Data <= DateTime.Now);
+                    return db.usuario.First(x => x.ID == this.ID).usuario_premium.Any(x => x.Aprovado && x.Vencimento >= DateTime.Now);
                 }
             }
             catch { }
 
             return false;
         }
-
 
         internal class SeguindoJSON
         {

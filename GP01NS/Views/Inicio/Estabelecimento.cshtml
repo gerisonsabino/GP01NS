@@ -63,6 +63,11 @@
                             <h2 id="estabelecimento" data-nome="@Model.Nome">
                                 @Model.Nome
                                 <span class="badge badge-secondary" style="font-size: 0.6rem; font-family: 'Segoe UI', sans-serif">Estabelecimento</span>
+                                
+                                @if (Model.Premium)
+	                            {
+		                            <span class="badge badge-warning" style="font-size: 0.6rem; font-family: 'Segoe UI', sans-serif">Premium</span>
+	                            }
                             </h2>
                             <small>
                                 <a href="javascript:void(0);">Denúnciar Estabelecimento</a>
@@ -209,6 +214,13 @@
                 @RenderPage("~/Views/Inicio/Parciais/Estabelecimento/_Compartilhar.cshtml")
             }
         </div>
+        <div class="row" id="row-agenda">
+            <div class="mb-3 text-left col-12 no-padding">
+                <strong>Agenda</strong>
+            </div>
+            <div class="list-group listaeventos"></div>
+            @Html.Hidden("JSON", Model.GetEventosJSON())
+        </div>
     </div>
 </div>
 <div style="width: 100%;">
@@ -217,3 +229,4 @@
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQOVgr1EKPU6Ygpb23qkWw4NqSUsFuEWY"></script>
 <script src="~/Scripts/Views/Inicio/estabelecimento.js"></script>
+<script src="~/Scripts/Views/Estabelecimento/lista_eventos.js"></script>

@@ -47,12 +47,6 @@
 							<li>
 								<a class="nav-link" href="/musico/agenda/">Agenda/Histórico</a>
 							</li>
-                            <li>
-                                <br />
-                                <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modal-premium">
-                                    Impulsionar Perfil
-                                </button>
-                            </li>
 						</ul>
 					</li>
 				</ul>
@@ -66,6 +60,20 @@
                             <strong>@("@" + Conta.Username)</strong>
                         </div>
 					</li>
+                    <li class="nav-item">
+                        @if (Conta.Premium)
+                        {
+                            <button type="button" class="btn btn-sm btn-warning w-100 font-weight-bold" style="text-transform: none !important;">
+                                Premium
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-sm btn-warning w-100 font-weight-bold" style="text-transform: none !important;" data-toggle="modal" data-target="#modal-premium">
+                                Assine o Premium
+                            </button>
+                        }
+                    </li>
 					<li class="nav-item">
                         <ul>
                             <h1>MÚSICO</h1>

@@ -203,7 +203,12 @@ namespace GP01NS.Classes.ViewModels
             {
                 this.ID = evento.ID;
                 this.Estabelecimento = evento.usuario_estabelecimento.usuario.Nome;
-                this.Data = evento.DataDe.ToShortDateString() + " - " + evento.DataAte.ToShortDateString();
+
+                if (evento.DataDe.ToShortDateString() == evento.DataAte.ToShortDateString())
+                    this.Data = evento.DataDe.ToShortDateString();
+                else
+                    this.Data = evento.DataDe.ToShortDateString() + " - " + evento.DataAte.ToShortDateString();
+
                 this.Evento = evento.Titulo;
                 this.Endereco = new UsuarioVM(evento.usuario_estabelecimento.usuario).GetEnderecoString();
             }

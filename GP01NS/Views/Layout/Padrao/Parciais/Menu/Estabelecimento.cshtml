@@ -46,11 +46,6 @@
                             <li>
                                 <a class="nav-link" href="/estabelecimento/evento/">Novo Evento</a>
                             </li>
-                            <li>
-                                <button class="btn btn-secondary">
-                                    Impulsionar Perfil
-                                </button>
-                            </li>
                         </ul>
 					</li>
 				</ul>
@@ -65,6 +60,20 @@
                                     <img src="@(ImgPerfil != "#" ? ImgPerfil : "/Imagens/Views/user.svg")" style="width: 25px; height: 25px; margin-right: 5px; border-radius: 25px" />
                                     <strong>@("@" + Conta.Username)</strong>
                                 </div>
+                            </li>
+                            <li class="nav-item">
+                                @if (Conta.Premium)
+                                {
+                                    <button type="button" class="btn btn-sm btn-warning w-100 font-weight-bold" style="text-transform: none !important;">
+                                        Premium
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-sm btn-warning w-100 font-weight-bold" style="text-transform: none !important;" data-toggle="modal" data-target="#modal-premium">
+                                        Assine o Premium
+                                    </button>
+                                }
                             </li>
                             <h1>ESTABELECIMENTO</h1>
                             <li>

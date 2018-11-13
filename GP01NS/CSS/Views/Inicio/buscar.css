@@ -193,6 +193,11 @@ main, .container-fluid {
 .sugestao-item-endereco {
 	color: #9E9E9E;
 	font-size: 13px;
+    font-weight: 600;
+}
+
+.sugestao-item-endereco:hover {
+    color: var(--primaria);
 }
 
 .sugestao-item .badge {

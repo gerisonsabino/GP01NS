@@ -198,18 +198,19 @@ namespace GP01NS.Controllers
         {
             this.Musico = new MusicoVM(this.BaseUsuario);
 
-            var pagamento = new Pagamento(this.BaseUsuario, 10.00m).GerarPagamento();
+            var pagamento = new Pagamento(this.BaseUsuario, 30.00m).GerarPagamento();
 
             NameValueCollection dados = new NameValueCollection
             {
                 { "reference", pagamento.REF },
-                { "itemDescription1", "Impulsionar perfil - Nosso Show" },
+                { "itemDescription1", "Conta Premium - Nosso Show" },
                 { "itemAmount1", pagamento.Valor.ToString().Replace(",", ".") },
                 { "senderName", this.Musico.Nome },
                 { "senderEmail", this.Musico.Email.Split('@')[0].ToString() + "@sandbox.pagseguro.com.br" }
             };
 
-            if (!string.IsNullOrEmpty(this.Musico.Telefone))
+            if (false)
+            //if (!string.IsNullOrEmpty(this.Musico.Telefone))
             {
                 string telefone = new string(this.Musico.Telefone.Where(c => char.IsDigit(c)).ToArray());
 
@@ -217,7 +218,7 @@ namespace GP01NS.Controllers
                 dados.Add("senderPhone", telefone.Substring(2, telefone.Count() - 2));
             }
 
-			string url = ""; //PagSeguro.Checkout(dados);
+			string url = PagSeguro.Checkout(dados);
 
             return Redirect(url);
         }

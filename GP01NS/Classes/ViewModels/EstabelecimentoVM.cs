@@ -225,7 +225,11 @@ namespace GP01NS.Classes.ViewModels
 
         public EventoJSON(evento evento)
         {
-            this.Data = evento.DataDe.ToShortDateString() + " - " + evento.DataAte.ToShortDateString();
+            if (evento.DataDe.ToShortDateString() == evento.DataAte.ToShortDateString())
+                this.Data = evento.DataDe.ToShortDateString();
+            else
+                this.Data = evento.DataDe.ToShortDateString() + " - " + evento.DataAte.ToShortDateString();
+
             this.ID = evento.ID;
             this.Status = evento.Publicado ? "Publicado" : "Não Publicado";
             this.Titulo = evento.Titulo;

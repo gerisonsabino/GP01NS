@@ -40,19 +40,6 @@ namespace GP01NS.Classes.Servicos
             return JsonConvert.SerializeObject(r);
         }
 
-        public static string GetSugestoes(int page, int idUsuario)
-        {
-            List<Resultado> r = new List<Resultado>();
-
-            r.AddRange(EstabelecimentosSugestoes(page, idUsuario));
-            r.AddRange(EventosSugestoes(page, idUsuario));
-            r.AddRange(MusicosSugestoes(page, idUsuario));
-
-            r = RandomizarLista(r);
-
-            return JsonConvert.SerializeObject(r);
-        }
-
         private static List<Resultado> Estabelecimentos(string termo, List<int> ambientacoes, bool endereco)
         {
             var resultados = new List<Resultado>();
@@ -83,12 +70,13 @@ namespace GP01NS.Classes.Servicos
                             ID = e.IDUsuario,
                             Nome = e.usuario.Nome,
                             Username = e.usuario.Username,
+                            Premium = e.usuario.usuario_premium.Any(x => x.Aprovado && x.Vencimento >= DateTime.Now),
                             Tipo = "Estabelecimento"
                         };
 
                         try
                         {
-                            r.Imagem = e.usuario.imagem.Last(x => x.TipoImagem == 1).Diretorio;
+                            r.Imagem = "http://www.nossoshow.gerison.net" + e.usuario.imagem.Last(x => x.TipoImagem == 1).Diretorio;
                         }
                         catch
                         {
@@ -150,13 +138,13 @@ namespace GP01NS.Classes.Servicos
                             ID = evento.ID,
                             Nome = evento.Titulo,
                             Username = u.usuario.Username,
-                            Premium = u.usuario.usuario_premium.Any(x => x.Data <= DateTime.Now),
+                            Premium = u.usuario.usuario_premium.Any(x => x.Aprovado && x.Vencimento >= DateTime.Now),
                             Tipo = "Evento"
                         };
 
                         try
                         {
-                            r.Imagem = evento.imagem.Last(x => x.TipoImagem == 4).Diretorio;
+                            r.Imagem = "http://www.nossoshow.gerison.net" + evento.imagem.Last(x => x.TipoImagem == 4).Diretorio;
                         }
                         catch
                         {
@@ -205,13 +193,13 @@ namespace GP01NS.Classes.Servicos
                             Nome = usuario_musico.NomeArtistico,
                             Username = usuario_musico.usuario.Username,
                             Badges = usuario_musico.usuario.genero_musical.Select(x => x.Descricao).ToList(),
-                            Premium = usuario_musico.usuario.usuario_premium.Any(x => x.Data <= DateTime.Now),
+                            Premium = usuario_musico.usuario.usuario_premium.Any(x => x.Aprovado && x.Vencimento >= DateTime.Now),
                             Tipo = "Músico"
                         };
 
                         try
                         {
-                            r.Imagem = usuario_musico.usuario.imagem.Last(x => x.TipoImagem == 1).Diretorio;
+                            r.Imagem = "http://www.nossoshow.gerison.net" + usuario_musico.usuario.imagem.Last(x => x.TipoImagem == 1).Diretorio;
                         }
                         catch
                         {
@@ -227,7 +215,7 @@ namespace GP01NS.Classes.Servicos
             return resultados;
         }
 
-        private static List<Resultado> EstabelecimentosSugestoes(int page, int idUsuario)
+        public static string GetEstabelecimentosSugestoes(int page, int idUsuario)
         {
             var resultados = new List<Resultado>();
 
@@ -246,7 +234,7 @@ namespace GP01NS.Classes.Servicos
                             ID = e.IDUsuario,
                             Nome = e.usuario.Nome,
                             Username = e.usuario.Username,
-                            Premium = e.usuario.usuario_premium.Any(x => x.Data <= DateTime.Now),
+                            Premium = e.usuario.usuario_premium.Any(x => x.Aprovado && x.Vencimento >= DateTime.Now),
                             Tipo = "Estabelecimento"
                         };
 
@@ -282,14 +270,16 @@ namespace GP01NS.Classes.Servicos
 
                         resultados.Add(r);
                     }
+
+                    resultados = RandomizarLista(resultados);
                 }
             }
             catch (Exception e) { }
 
-            return resultados;
+            return JsonConvert.SerializeObject(resultados);
         }
 
-        private static List<Resultado> EventosSugestoes(int page, int idUsuario)
+        public static string GetEventosSugestoes(int page, int idUsuario)
         {
             var resultados = new List<Resultado>();
 
@@ -309,6 +299,7 @@ namespace GP01NS.Classes.Servicos
                             ID = evento.ID,
                             Nome = evento.Titulo,
                             Username = u.usuario.Username,
+                            Premium = u.usuario.usuario_premium.Any(x => x.Aprovado && x.Vencimento >= DateTime.Now),
                             Tipo = "Evento"
                         };
 
@@ -333,14 +324,16 @@ namespace GP01NS.Classes.Servicos
 
                         resultados.Add(r);
                     }
+
+                    resultados = RandomizarLista(resultados);
                 }
             }
             catch (Exception e) { }
 
-            return resultados;
+            return JsonConvert.SerializeObject(resultados);
         }
 
-        private static List<Resultado> MusicosSugestoes(int page, int idUsuario)
+        public static string GetMusicosSugestoes(int page, int idUsuario)
         {
             var resultados = new List<Resultado>();
 
@@ -360,7 +353,7 @@ namespace GP01NS.Classes.Servicos
                             Nome = m.NomeArtistico,
                             Username = m.usuario.Username,
                             Badges = m.usuario.genero_musical.Select(x => x.Descricao).ToList(),
-                            Premium = m.usuario.usuario_premium.Any(x => x.Data <= DateTime.Now),
+                            Premium = m.usuario.usuario_premium.Any(x => x.Aprovado && x.Vencimento >= DateTime.Now),
                             Endereco = string.Empty,
                             Tipo = "Músico"
                         };
@@ -382,11 +375,13 @@ namespace GP01NS.Classes.Servicos
 
                         resultados.Add(r);
                     }
+
+                    resultados = RandomizarLista(resultados);
                 }
             }
             catch (Exception e) { }
 
-            return resultados;
+            return JsonConvert.SerializeObject(resultados);
         }
 
         private static List<Resultado> RandomizarLista(List<Resultado> lista)

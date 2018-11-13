@@ -22,7 +22,7 @@ namespace GP01NS.Classes.Servicos
         public decimal Valor { get; set; }
         public DateTime Vencimento { get; set; }
 
-        private readonly usuario Usuario;
+        public readonly usuario Usuario;
 
 
         public Pagamento() { }
@@ -32,6 +32,7 @@ namespace GP01NS.Classes.Servicos
             this.Aprovado = premium.Aprovado;
             this.Data = premium.Data;
             this.ID = premium.ID;
+            this.DtPagamento = premium.Pagamento;
             this.REF = premium.REF;
             this.Transacao = premium.Transacao;
             this.Usuario = premium.usuario;
@@ -63,6 +64,9 @@ namespace GP01NS.Classes.Servicos
                     if (u.usuario_premium.Any(x => !x.Aprovado && string.IsNullOrEmpty(x.Transacao)))
                     {
                         premium = u.usuario_premium.First(x => !x.Aprovado && string.IsNullOrEmpty(x.Transacao));
+                        premium.Data = DateTime.Now;
+
+                        db.ObjectStateManager.ChangeObjectState(premium, System.Data.EntityState.Modified);
                     }
                     else
                     {
@@ -77,9 +81,9 @@ namespace GP01NS.Classes.Servicos
                         premium.Vencimento = DateTime.MinValue;
 
                         db.usuario_premium.AddObject(premium);
-
-                        db.SaveChanges();
                     }
+
+                    db.SaveChanges();
 
                     return premium;
                 }

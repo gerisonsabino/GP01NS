@@ -371,11 +371,24 @@ namespace GP01NS.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetSugestoes(int page)
+        public JsonResult GetSugestoes(int page, string tipo)
         {
-            var resultados = Pesquisa.GetSugestoes(--page, (this.BaseUsuario != null ? this.BaseUsuario.ID : int.MinValue));
+            switch (tipo.RemoverAcentos().ToLower())
+            {
+                case "estabelecimento":
+                    return this.Json(Pesquisa.GetEstabelecimentosSugestoes(--page, (this.BaseUsuario != null ? this.BaseUsuario.ID : int.MinValue)), JsonRequestBehavior.AllowGet);
 
-            return this.Json(resultados, JsonRequestBehavior.AllowGet);
+                case "evento":
+                    return this.Json(Pesquisa.GetEventosSugestoes(--page, (this.BaseUsuario != null ? this.BaseUsuario.ID : int.MinValue)), JsonRequestBehavior.AllowGet);
+
+                case "musico":
+                    return this.Json(Pesquisa.GetMusicosSugestoes(--page, (this.BaseUsuario != null ? this.BaseUsuario.ID : int.MinValue)), JsonRequestBehavior.AllowGet);
+
+                case "enteresse":
+                    return this.Json("");
+            }
+
+            return this.Json("");
         }
     }
 }
