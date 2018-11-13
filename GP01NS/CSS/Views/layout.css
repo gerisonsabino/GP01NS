@@ -607,3 +607,16 @@ main h6 {
     border-color: var(--primaria);
     box-shadow: none;
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+	background: var(--primaria);
+}

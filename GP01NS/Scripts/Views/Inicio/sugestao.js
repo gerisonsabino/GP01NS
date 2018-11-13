@@ -1,7 +1,9 @@
 ﻿const sugestao = {
-	pagina: 0,
+	tipos: ['evento', 'musico', 'estabelecimento', 'enteresse'],
+	pagina: {},
+	quantidadeItens: {},
 	loading: false,
-	todosItensCarregados: false,
+	todosItensCarregados: {},
 
 	componente: item => 
 		`<a class="sugestao-item" href="${sugestao.urlPerfil(item)}">
@@ -26,7 +28,6 @@
 				<div class="sugestao-item-tipo">
 					${ (item.Badges != null && item.Badges != "") ? sugestao.badges(item.Badges) + "<br />" : "" }
 					<span class="badge badge-secondary">${item.Tipo.toUpperCase()}</span>
-                    ${ (item.Premium) ? sugestao.premium() + "<br />" : "" }
 				</div>
 			</div>
 		</a>`,
@@ -53,57 +54,92 @@
         }
 
         return html;
-    },
-
-    premium: function () {
-        return "<span class='badge bg-warning' style='color: #000 !important;'>PREMIUM</span>";
-    },
-
-	sugestoesAcabando: function() {
-		const win = $(window);
-		const screenTop = win.scrollTop();
-		const screenBottom = screenTop + win.height();
-
-		const elementTop = $('.sugestao-lista').offset().top;
-		const elementBottom = elementTop + $('.sugestao-lista').height();
-
-		return (elementBottom - 500) < screenBottom;
 	},
 
-	lista: function () {
-		sugestao.pagina++;
-		sugestao.loading = true;
-		$('.sugestao .load').toggle(sugestao.loading);
+	verificaScroll: {
+		top: function (tipo) {
+			const win = $(`.sugestao-lista-${tipo}`);
+			const screenTop = win.scrollTop();
 
-		$.getJSON("/inicio/getsugestoes/?page=" + sugestao.pagina, function (resp) {
-            let itens = '';
+			const elementBottom = $(`.sugestao-lista-${tipo} > .flex`).height();
+
+			return (elementBottom - 300) < screenTop;
+		},
+
+		left: function (tipo) {
+			const janela = $(`.sugestao-lista-${tipo}`);
+			const janelaLargura = janela.width();
+			const janelaScrollFim = janelaLargura + janela.scrollLeft();
+
+			const sugestoesLargura = $(`.sugestao-lista-${tipo} > .flex`).width();
+			return (sugestoesLargura - 200) < janelaScrollFim;
+		},
+	},
+
+	sugestoesAcabando: function(tipo) {
+		return $('body').width() <= 955 ? sugestao.verificaScroll.left(tipo) : sugestao.verificaScroll.top(tipo);
+	},
+
+	ajustarLarguraJanela: function (tipo) {
+		const larguraJanela = $('body').width();
+		const larguraSugestao = larguraJanela <= 955 ? 271 : 0;
+		$(`.sugestao-lista-${tipo} > .flex`).css({ 'min-width': sugestao.quantidadeItens[tipo] * larguraSugestao });
+	},
+
+	lista: function (tipo) {
+		sugestao.pagina[tipo]++;
+		sugestao.loading = true;
+		$(`.sugestao-lista-${tipo} .load`).toggle(sugestao.loading);
+
+		$.getJSON(`/inicio/getsugestoes/?page=${sugestao.pagina[tipo]}&tipo=${tipo}`, function (resp) {
+			let itens = '';
+			
             resp = JSON.parse(resp);
 
-			sugestao.todosItensCarregados = resp.length === 0;
+			sugestao.todosItensCarregados[tipo] = resp.length === 0;
+			sugestao.quantidadeItens[tipo] += resp.length;
 
 			for (item of resp) {
 				itens += sugestao.componente(item);
 			}
 
-			$('.sugestao-lista').append(itens);
+			$(`.sugestao-lista-${tipo} > .flex`).append(itens);
+			sugestao.ajustarLarguraJanela(tipo);
+
+			$(`.sugestao-lista-${tipo}`).prev('.sugestao-titulo').show();
 
 			sugestao.loading = false;
-			$('.sugestao .load').toggle(sugestao.loading);
+			$(`.sugestao-lista-${tipo} .load`).toggle(sugestao.loading);
 		});
 	},
 
 	lazyLoad: function () {
-        $(document).on("scroll", function () {
-            try {
-				!sugestao.todosItensCarregados && !sugestao.loading && sugestao.sugestoesAcabando() && sugestao.lista();
-            }
-            catch (e) { console.log(e); }
+		$('.sugestao-lista > .custom-scrollbar').on("scroll", function () {			
+			const tipo = $(this).data('tipo');
+			!sugestao.todosItensCarregados[tipo] && !sugestao.loading && sugestao.sugestoesAcabando(tipo) && sugestao.lista(tipo);
 		});
 	},
 
+	mudaTipo: function (tipo) {
+		$('.sugestao-lista').removeClass('show');
+		$(`.sugestao-lista-${tipo}`).parent().addClass('show');
+	},
+
 	inicio: function () {
-		sugestao.lista();
+		for (tipo of sugestao.tipos) {
+			sugestao.pagina[tipo] = 0;
+			sugestao.quantidadeItens[tipo] = 0;
+			sugestao.todosItensCarregados[tipo] = false;
+			sugestao.lista(tipo);
+		}
+
 		sugestao.lazyLoad();
+
+		$(window).resize(function () {
+			for (tipo of sugestao.tipos) {
+				sugestao.ajustarLarguraJanela(tipo);
+			}
+		});
 	}
 }
 

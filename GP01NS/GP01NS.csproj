@@ -1925,6 +1925,7 @@
     <Content Include="Scripts\Views\Layout\layout.js" />
     <Content Include="Scripts\Views\Musico\agenda_table.js" />
     <Content Include="Scripts\Views\Musico\convites.js" />
+    <Content Include="Scripts\Views\Musico\lista_eventos.js" />
     <Content Include="Scripts\Views\Util\inputmask_controller.js" />
     <Content Include="Scripts\Views\Util\viacep-endereco.js" />
     <Content Include="Web.config">
