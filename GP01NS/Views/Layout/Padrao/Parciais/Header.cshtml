@@ -1,6 +1,5 @@
 ﻿@{ 
     var Conta = (GP01NS.Models.usuario)ViewBag.BaseUsuario;
-    
 }
 
 <header>
@@ -41,3 +40,14 @@
         </nav>
     }
 </header>
+
+@if (Conta != null)
+{
+    switch (Conta.Tipo)
+    {
+        case 2:
+        case 4:
+            @RenderPage("~/Views/Layout/Parciais/Premium/_Modal.cshtml");
+            break;
+    }
+}

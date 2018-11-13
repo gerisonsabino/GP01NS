@@ -5,9 +5,9 @@
 });
 
 function toggleSeguir() {
-    var a = $(this).attr("data-musico");
+    var a = $(this).attr("data-evento");
 
-    $.post("/inicio/toggleseguir/", { "ID": a }, function (s) {
+    $.post("/inicio/toggleseguirevento/", { "ID": a }, function (s) {
         if (s == "ok") {
             var t = $("#btn-seguir").text();
 

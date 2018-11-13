@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Dynamic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -197,10 +198,13 @@ namespace GP01NS.Controllers
         {
             this.Musico = new MusicoVM(this.BaseUsuario);
 
+            var pagamento = new Pagamento(this.BaseUsuario, 10.00m).GerarPagamento();
+
             NameValueCollection dados = new NameValueCollection
             {
+                { "reference", pagamento.REF },
                 { "itemDescription1", "Impulsionar perfil - Nosso Show" },
-                { "itemAmount1", "10.00" },
+                { "itemAmount1", pagamento.Valor.ToString().Replace(",", ".") },
                 { "senderName", this.Musico.Nome },
                 { "senderEmail", this.Musico.Email.Split('@')[0].ToString() + "@sandbox.pagseguro.com.br" }
             };
@@ -218,7 +222,67 @@ namespace GP01NS.Controllers
             return Redirect(url);
         }
 
-        public ActionResult Sair()
+        [HttpPost]
+        public JsonResult ConsultarTransacao(string transacao)
+        {
+            //uri de consulta da transação.
+            string uri = "https://ws.sandbox.pagseguro.uol.com.br/v3/transactions/" +  transacao + "?email=gerison@outlook.com.br&token=71B2428070EE46F8A36DF9AFE435EC6E";
+
+            //Classe que irá fazer a requisição GET.
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(uri);
+
+            //Método do webrequest.
+            request.Method = "GET";
+
+            //String que vai armazenar o xml de retorno.
+            string xmlString = null;
+
+            //Obtém resposta do servidor.
+            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            {
+                //Cria stream para obter retorno.
+                using (Stream dataStream = response.GetResponseStream())
+                {
+                    //Lê stream.
+                    using (StreamReader reader = new StreamReader(dataStream))
+                    {
+                        //Xml convertido para string.
+                        xmlString = reader.ReadToEnd();
+
+                        //Cria xml document para facilitar acesso ao xml.
+                        XmlDocument xmlDoc = new XmlDocument();
+
+                        //Carrega xml document através da string com XML.
+                        xmlDoc.LoadXml(xmlString);
+
+                        //Busca elemento status do XML.
+                        var status = xmlDoc.GetElementsByTagName("status")[0];
+
+                        //Fecha reader.
+                        reader.Close();
+
+                        //Fecha stream.
+                        dataStream.Close();
+
+                        //Verifica status de retorno.
+                        //3 = Pago.
+                        if (status.InnerText == "3")
+                        {
+                            return Json("Pago.");
+                        }
+                        //Outros resultados diferentes de 3.
+                        else
+                        {
+                            return Json("Pendente.");
+                        }
+                    }
+                }
+            }
+
+            //return Json(PagSeguro.TransactionIsApproved(transacao).ToString());
+        }
+
+        public ActionResult Sair() 
         {
             try
             {

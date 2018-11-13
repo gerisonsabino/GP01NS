@@ -1,0 +1,105 @@
+﻿@{ 
+    var Conta = (GP01NS.Models.usuario)ViewBag.BaseUsuario;
+}
+
+<div id="div-premium">
+    <style type="text/css">
+        @@media (min-width: 576px){ #modal-premium .modal-dialog{max-width: 880px;}}
+
+        #modal-premium .modal-header {
+            justify-content: end;
+        }
+
+        #modal-premium .modal-footer {
+            justify-content: end;
+        }
+
+        #modal-premium .fas{
+            color: #6904b7;
+        }
+
+        #modal-premium .modal-header h6,
+        #modal-premium .modal-body h4,
+        #modal-premium .card-body h1 {
+            font-family: "lemon-milk",sans-serif;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            color: #6904b7 !important;
+        }
+
+        #modal-premium .card {
+            box-shadow: none !important;
+        }
+
+        #modal-premium .card-title {
+            font-weight: 700;
+            font-family: 'Segoe UI';
+            font-size: 15px;
+        }
+
+        #modal-premium .label-perfil {
+            width: 100px;
+            height: 100px;
+            background: url(/Imagens/Views/user.svg) center center / cover no-repeat;
+            border-radius: 50%;
+            margin: 0px !important;
+        }
+
+    </style>
+
+    <div class="modal fade" id="modal-premium" tabindex="-1" role="dialog" aria-labelledby="modal-premium" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">
+                        Promover Perfil
+                    </h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <h4 style="margin-top: 30px;">Que tal impulssionar seu perfil?</h4>
+                    <p style="margin-bottom: 50px;">Alcance maior visualização nas buscas com uma conta premium</p>
+
+                    <div class="card  ml-auto mx-auto" style="width: 18rem; margin-bottom: 50px ;">
+                        <div class="card-body">
+                            <label id="label-premium" class="label-perfil img-label" aria-expanded="true" data-toggle="dropdown"></label>
+                            <br />
+                            <h5 class="card-title badge badge-warning">Premium</h5>
+                            <br />
+                            <small>Assine e saia na frente, <br />ganhe vantagem!</small>
+                            <br /><br />
+                            <h1 style="margin-bottom: 30px ;">R$10<span style="font-size: 15px;">/mês</span></h1>
+                            @if (Conta.Tipo == 4)
+                            {
+                                <form action="/musico/checkout/" method="post">
+                                    <button class="btn btn-primary" type="submit">Assinar agora</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form action="/estabelecimento/checkout/" method="post">
+                                    <button class="btn btn-primary" type="submit">Assinar agora</button>
+                                </form>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mx-auto mr-auto" style="margin-bottom: 30px;">
+                    <ul>
+                        <li><i class="fas fa-check"></i> 30 dias (período de assinatura) no topo das buscas</li>
+                        <li><i class="fas fa-check"></i> Maior visibilidade em sugestões para usuários</li>
+                        <li><i class="fas fa-check"></i> Obtenha mais fãs/seguidores</li>
+                        <li><i class="fas fa-check"></i> Sem compromisso, cancele quando quiser</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $("#label-premium").attr("style", $("header .label-perfil").attr("style"));
+        });
+    </script>
+</div>

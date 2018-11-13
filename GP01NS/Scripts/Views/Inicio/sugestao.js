@@ -26,6 +26,7 @@
 				<div class="sugestao-item-tipo">
 					${ (item.Badges != null && item.Badges != "") ? sugestao.badges(item.Badges) + "<br />" : "" }
 					<span class="badge badge-secondary">${item.Tipo.toUpperCase()}</span>
+                    ${ (item.Premium) ? sugestao.premium() + "<br />" : "" }
 				</div>
 			</div>
 		</a>`,
@@ -52,6 +53,10 @@
         }
 
         return html;
+    },
+
+    premium: function () {
+        return "<span class='badge bg-warning' style='color: #000 !important;'>PREMIUM</span>";
     },
 
 	sugestoesAcabando: function() {

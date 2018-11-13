@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Servicos\Auth.cs" />
+    <Compile Include="Classes\Servicos\Pagamento.cs" />
     <Compile Include="Classes\Servicos\Pesquisa.cs" />
     <Compile Include="Classes\Util\Criptografia.cs" />
     <Compile Include="Classes\Util\MensagemEmail.cs" />
@@ -1905,6 +1906,7 @@
     <Content Include="Scripts\Plugins\inputmask-plugin\jquery.inputmask.bundle.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\Views\Administrador\administradores.js" />
+    <Content Include="Scripts\Views\Administrador\pagamentos.js" />
     <Content Include="Scripts\Views\Administrador\usuarios-de-teste.js" />
     <Content Include="Scripts\Views\Administrador\musicos.js" />
     <Content Include="Scripts\Views\Administrador\estabelecimentos.js" />
@@ -3469,6 +3471,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Estabelecimento\Impulsionar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Layout\Parciais\Premium\_Modal.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inicio\Premium.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Administrador\Pagamentos.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

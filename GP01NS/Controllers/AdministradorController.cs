@@ -1,4 +1,5 @@
-﻿using GP01NS.Classes.Util;
+﻿using GP01NS.Classes.Servicos;
+using GP01NS.Classes.Util;
 using GP01NS.Classes.ViewModels;
 using GP01NS.Classes.ViewModels.Entrar;
 using GP01NS.Classes.ViewModels.Estabelecimento;
@@ -95,6 +96,18 @@ namespace GP01NS.Controllers
             this.Administrador = new AdministradorVM(this.BaseUsuario);
 
             return View(this.Administrador);
+        }
+
+        public ActionResult Pagamentos()
+        {
+            ViewBag.JSON = Pagamento.GetPagamentosJSON();
+
+            return View();
+        }
+
+        public ActionResult Xml(string id)
+        {
+            return this.Content(PagSeguro.GetXmlTransacao(id).InnerXml, "text/xml");
         }
         
         public ActionResult Sair()

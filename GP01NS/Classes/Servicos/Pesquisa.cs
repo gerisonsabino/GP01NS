@@ -35,7 +35,7 @@ namespace GP01NS.Classes.Servicos
 
             r = r.GroupBy(x => x.ID).Select(y => y.First()).ToList();
 
-            r = r.OrderBy(x => x.Nome).ToList();
+            r = r.OrderBy(x => x.Nome).OrderByDescending(x => x.Premium).ToList();
 
             return JsonConvert.SerializeObject(r);
         }
@@ -150,6 +150,7 @@ namespace GP01NS.Classes.Servicos
                             ID = evento.ID,
                             Nome = evento.Titulo,
                             Username = u.usuario.Username,
+                            Premium = u.usuario.usuario_premium.Any(x => x.Data <= DateTime.Now),
                             Tipo = "Evento"
                         };
 
@@ -204,6 +205,7 @@ namespace GP01NS.Classes.Servicos
                             Nome = usuario_musico.NomeArtistico,
                             Username = usuario_musico.usuario.Username,
                             Badges = usuario_musico.usuario.genero_musical.Select(x => x.Descricao).ToList(),
+                            Premium = usuario_musico.usuario.usuario_premium.Any(x => x.Data <= DateTime.Now),
                             Tipo = "Músico"
                         };
 
@@ -244,6 +246,7 @@ namespace GP01NS.Classes.Servicos
                             ID = e.IDUsuario,
                             Nome = e.usuario.Nome,
                             Username = e.usuario.Username,
+                            Premium = e.usuario.usuario_premium.Any(x => x.Data <= DateTime.Now),
                             Tipo = "Estabelecimento"
                         };
 
@@ -357,6 +360,7 @@ namespace GP01NS.Classes.Servicos
                             Nome = m.NomeArtistico,
                             Username = m.usuario.Username,
                             Badges = m.usuario.genero_musical.Select(x => x.Descricao).ToList(),
+                            Premium = m.usuario.usuario_premium.Any(x => x.Data <= DateTime.Now),
                             Endereco = string.Empty,
                             Tipo = "Músico"
                         };
@@ -414,6 +418,7 @@ namespace GP01NS.Classes.Servicos
             public string Username { get; set; }
             public string Endereco { get; set; }
             public string Imagem { get; set; }
+            public bool Premium { get; set; }
             public List<string> Badges { get; set; }
         }
     }

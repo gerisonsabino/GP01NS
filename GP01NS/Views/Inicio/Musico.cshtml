@@ -67,6 +67,11 @@
                             <h2 id="musico" data-nome="@Model.NomeArtistico">
                                 @Model.NomeArtistico
                                 <span class="badge badge-secondary" style="font-size: 0.6rem; font-family: 'Segoe UI', sans-serif">Músico</span>
+
+                                @if (Model.Premium)
+	                            {
+		                             <span class="badge badge-warning" style="font-size: 0.6rem; font-family: 'Segoe UI', sans-serif">Premium</span>
+	                            }
                             </h2>
                             <small>
                                 <a href="javascript:void(0);">Denúnciar Músico</a>

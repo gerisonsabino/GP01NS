@@ -31,9 +31,11 @@ function setEstabelecimentos(s) {
             html += "        <div class='resultado-item-endereco'>" + json[i].Endereco + "</div>";
             html += "        <div class='resultado-item-endereco'>";
             var badges = eval(json[i].Badges);
+
             for (var j = 0; j < badges.length; j++) {
                 html += "        <span class='badge bg-primary' style='color: #FFF !important; margin-left: 3px;'>" + badges[j] + "</span>";
             }
+
             html += "        </div>";
             html += "    </div>";
             html += "</div>";

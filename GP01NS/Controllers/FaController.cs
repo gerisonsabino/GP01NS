@@ -107,14 +107,6 @@ namespace GP01NS.Controllers
         }
 
         [HttpPost]
-        public string Seguir(int idUsuario)
-        {
-            this.Usuario = new UsuarioVM(this.BaseUsuario);
-
-            return this.Usuario.ToggleSeguir(idUsuario).ToString().ToLower();
-        }
-
-        [HttpPost]
         public ActionResult UploadProfile(HttpPostedFileBase Arquivo, string Href)
         {
             this.Usuario = new UsuarioVM(this.BaseUsuario);
@@ -124,8 +116,10 @@ namespace GP01NS.Controllers
             return Redirect(Href);
         }
 
-        public ActionResult Seguindo()
+        public ActionResult Seguindo(string tab = "musicos")
         {
+            ViewBag.Tab = tab;
+
             this.Usuario = new UsuarioVM(this.BaseUsuario);
 
             return View(this.Usuario);

@@ -14,14 +14,14 @@
     <br />
     <div class="row">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link" data-toggle="pill" href="#tab-estabelecimentos" role="tab" aria-controls="v-pills-home" aria-selected="true">Estabelecimentos</a>
-            <a class="nav-link" data-toggle="pill" href="#tab-eventos" role="tab" aria-controls="v-pills-profile" aria-selected="false">Eventos</a>
-            <a class="nav-link active" data-toggle="pill" href="#tab-musicos" role="tab" aria-controls="v-pills-messages" aria-selected="false">Músicos</a>
+            <a class="nav-link @(ViewBag.Tab == "estabelecimentos" ? "active" : string.Empty)" data-toggle="pill" href="#tab-estabelecimentos" role="tab" aria-controls="v-pills-home" aria-selected="true">Estabelecimentos</a>
+            <a class="nav-link @(ViewBag.Tab == "eventos" ? "active" : string.Empty)" data-toggle="pill" href="#tab-eventos" role="tab" aria-controls="v-pills-profile" aria-selected="false">Eventos</a>
+            <a class="nav-link @(ViewBag.Tab == "musicos" ? "active" : string.Empty)" data-toggle="pill" href="#tab-musicos" role="tab" aria-controls="v-pills-messages" aria-selected="false">Músicos</a>
         </div>
         <div class="tab-content col">
-            <div class="tab-pane fade" id="tab-estabelecimentos" role="tabpanel" aria-labelledby="v-pills-home-tab"></div>
-            <div class="tab-pane fade" id="tab-eventos" role="tabpanel" aria-labelledby="v-pills-profile-tab"></div>
-            <div class="tab-pane fade active show" id="tab-musicos" role="tabpanel" aria-labelledby="v-pills-messages-tab"></div>
+            <div class="tab-pane fade @(ViewBag.Tab == "estabelecimentos" ? "active show" : string.Empty)" id="tab-estabelecimentos" role="tabpanel" aria-labelledby="v-pills-home-tab"></div>
+            <div class="tab-pane fade @(ViewBag.Tab == "eventos" ? "active show" : string.Empty)" id="tab-eventos" role="tabpanel" aria-labelledby="v-pills-profile-tab"></div>
+            <div class="tab-pane fade @(ViewBag.Tab == "musicos" ? "active show" : string.Empty)" id="tab-musicos" role="tabpanel" aria-labelledby="v-pills-messages-tab"></div>
         </div>
     </div>
 </div>

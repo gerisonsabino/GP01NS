@@ -20,6 +20,7 @@ namespace GP01NS.Classes.ViewModels
         public string Email { get; set; }
         public string Telefone { get; set; }
         public int TipoUsuario { get; set; }
+        public bool Premium { get; set; }
 
         private bool TemPerfil { get; set; }
 
@@ -43,6 +44,7 @@ namespace GP01NS.Classes.ViewModels
             this.Telefone = usuario.Telefone;
             this.TipoUsuario = usuario.Tipo;
             this.Username = usuario.Username;
+            this.Premium = this.IsPremium();
 
             this.Endereco = new EnderecoVM(this.GetEnderecoByIDUsuario(this.ID));
 
@@ -145,6 +147,31 @@ namespace GP01NS.Classes.ViewModels
             return false;
         }
 
+        public bool ToggleSeguirEvento(int idEvento)
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var u = db.usuario.Single(x => x.ID == this.ID);
+                    var e = db.evento.Single(x => x.ID == idEvento);
+
+                    if (u.evento.Any(x => x.ID == idEvento))
+                        u.evento.Remove(e);
+                    else
+                        u.evento.Add(e);
+
+                    db.ObjectStateManager.ChangeObjectState(u, System.Data.EntityState.Modified);
+                    db.SaveChanges();
+
+                    return true;
+                }
+            }
+            catch { }
+
+            return false;
+        }
+
         public bool Seguindo(int idUsuario)
         {
             try
@@ -154,6 +181,22 @@ namespace GP01NS.Classes.ViewModels
                     var u = db.usuario.Single(x => x.ID == this.ID);
 
                     return u.usuario2.Any(x => x.ID == idUsuario);
+                }
+            }
+            catch { }
+
+            return false;
+        }
+
+        public bool SeguindoEvento(int idEvento)
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    var u = db.usuario.Single(x => x.ID == this.ID);
+
+                    return u.evento.Any(x => x.ID == idEvento);
                 }
             }
             catch { }
@@ -191,13 +234,13 @@ namespace GP01NS.Classes.ViewModels
                     var l = u.usuario2.ToList();
 
                     var estabelecimentos = l.Where(x => x.Tipo == 2).Select(x => x.usuario_estabelecimento.FirstOrDefault()).ToList();
-                    //var eventos = l.Where(x => x.Tipo == 2).Select(x => x.usuario_estabelecimento.FirstOrDefault()).ToList();
+                    var eventos = u.evento.ToList();
                     var musicos = l.Where(x => x.Tipo == 4).Select(x => x.usuario_musico.FirstOrDefault()).ToList();
 
                     SeguindoJSON s = new SeguindoJSON
                     {
                         Estabelecimentos = GetSeguindoEstabelecimentosJSON(estabelecimentos),
-                        //Eventos = GetSeguindoEventosJSON(),
+                        Eventos = GetSeguindoEventosJSON(eventos),
                         Musicos = this.GetSeguindoMusicosJSON(musicos)
                     };
 
@@ -339,7 +382,7 @@ namespace GP01NS.Classes.ViewModels
                         {
                             ID = evento.ID,
                             Nome = evento.Titulo,
-                            Username = string.Empty,
+                            Username = evento.usuario_estabelecimento.usuario.Username,
                             Tipo = "Evento"
                         };
 
@@ -386,6 +429,22 @@ namespace GP01NS.Classes.ViewModels
 
             return false;
         }
+
+        
+        private bool IsPremium()
+        {
+            try
+            {
+                using (var db = new nosso_showEntities(Conexao.GetString()))
+                {
+                    return db.usuario.First(x => x.ID == this.ID).usuario_premium.Any(x => x.Data <= DateTime.Now);
+                }
+            }
+            catch { }
+
+            return false;
+        }
+
 
         internal class SeguindoJSON
         {

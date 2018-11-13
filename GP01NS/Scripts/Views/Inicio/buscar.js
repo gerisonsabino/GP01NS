@@ -43,7 +43,9 @@ function pesquisar() {
                         html += "            <a href='/inicio/estabelecimento/" + json[i].Username + "'>" + json[i].Nome + "</a>";
                         html += "            <div class='resultado-item-tipo ml-2'>";
                         html += "                <span style='color: #AAA;'>@" + json[i].Username + "</span>";
-                        html += "                <span class='badge badge-secondary'>Estabelecimento</span>";
+                        html += "                <span class='badge badge-secondary'>ESTABELECIMENTO</span>";
+                        if (json[i].Premium) 
+                            html += "                <span class='badge badge-warning'>PREMIUM</span>";
                         html += "            </div>";
                         html += "        </div>";
                         html += "        <div class='resultado-item-endereco'><span class='oi oi-map-marker'></span>" + json[i].Endereco + " - <a href='#'>Ver no Mapa</a></div>";
@@ -52,7 +54,7 @@ function pesquisar() {
                         var badges = eval(json[i].Badges);
 
                         for (var j = 0; j < badges.length; j++) {
-                            html += "        <span class='badge bg-primary' style='color: #FFF !important; margin-right: 3px;'>" + badges[j] + "</span>";
+                            html += "        <span class='badge bg-primary' style='color: #FFF !important; margin-right: 3px;'>" + badges[j].toUpperCase() + "</span>";
                         }
 
                         html += "        </div>";
@@ -76,7 +78,9 @@ function pesquisar() {
                         html += "            <a href='/inicio/musico/" + json[i].Username + "'>" + json[i].Nome + "</a>";
                         html += "            <div class='resultado-item-tipo ml-2'>";
                         html += "                <span style='color: #AAA;'>@" + json[i].Username + "</span>";
-                        html += "                <span class='badge badge-secondary'>Músico</span>";
+                        html += "                <span class='badge badge-secondary'>MÚSICO</span>";
+                        if (json[i].Premium)
+                            html += "                <span class='badge badge-warning'>PREMIUM</span>";
                         html += "            </div>";
                         html += "        </div>";
                         html += "        <div class='resultado-item-badges'>";

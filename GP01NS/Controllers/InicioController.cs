@@ -276,6 +276,21 @@ namespace GP01NS.Controllers
 
             return Redirect("/inicio/buscar/"); 
         }
+
+        public ActionResult Premium(string t)
+        {
+            var xml = PagSeguro.GetXmlTransacao(t);
+
+            if (xml != null)
+            {
+                Pagamento p = Pagamento.AtualizarPagamento(xml);
+                return View(p);
+            }
+            else
+            {
+                return Redirect("/inicio/buscar/");
+            }
+        }
         
         [HttpPost]
         public string ToggleSeguir(int ID)
@@ -286,6 +301,22 @@ namespace GP01NS.Controllers
                 ViewBag.Usuario = this.Usuario;
 
                 this.Usuario.ToggleSeguir(ID);
+
+                return "ok";
+            }
+
+            return "erro";
+        }
+
+        [HttpPost]
+        public string ToggleSeguirEvento(int ID)
+        {
+            if (this.BaseUsuario != null)
+            {
+                this.Usuario = new UsuarioVM(this.BaseUsuario);
+                ViewBag.Usuario = this.Usuario;
+
+                this.Usuario.ToggleSeguirEvento(ID);
 
                 return "ok";
             }

@@ -72,7 +72,7 @@
                 </div>
             </div>
             
-            <div class="row card-compartilhar" style="padding-top: 50px; padding-bottom: 50px;">
+            @*<div class="row card-compartilhar" style="padding-top: 50px; padding-bottom: 50px;">
                 <div class="col-lg-8 col-sm-12 no-padding flex">
                     <div class="col-lg-7 col-sm-12 no-padding social-media">
                         <strong class="display-5">Compartilhe @Model.Titulo nas redes sociais</strong>
@@ -94,7 +94,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
         </div>
         <div class="col-md-3">
             <div class="bloco-participante text-center shadow p-3 mb-5 bg-white rounded border">
@@ -117,7 +117,14 @@
                 {
                     if (Usuario.ID != Model.Estabelecimento.ID)
                     {
-                        <button class="btn btn-primary">Seguir</button>
+                        if (!Usuario.SeguindoEvento(Model.ID))
+                        {
+                            <button class="btn btn-primary" id="btn-seguir" data-evento="@Model.ID">Seguir</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-danger" id="btn-seguir" data-evento="@Model.ID">Deixar de Seguir</button>
+                        }
                     }
                     else
                     {
